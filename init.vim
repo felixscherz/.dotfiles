@@ -72,11 +72,14 @@ set background=dark
 
 " set which python environments to use
 " setup venvs for nvim python
-let g:python3_host_prog = '/usr/bin/python3'
-let g:python_host_prog = '/usr/bin/python3'
+let g:python3_host_prog = '~/nvim-python3/bin/python3'
+"let g:python_host_prog = '~/nvim-python3/bin/python3'
 
 " spacebar as leader key
 let mapleader=' '
+
+" quick sourcing of vimrc
+nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
  
 " easier movement across windows
 nnoremap <silent><leader>h :wincmd h<CR>
@@ -109,3 +112,6 @@ nnoremap <leader>pv :NERDTree <bar> :vertical resize 30<CR>
 
 " ripgrep customizations
 nnoremap <leader>ps :Rg<space>
+
+" jedi-vim customizations
+
