@@ -1,4 +1,4 @@
-" init.vim file for ubuntu created on 5.12.2020
+"init.vim file for ubuntu created on 5.12.2020
 " plug directory: ~/.local/share/nvim/site/autoload/plug.vim
 
 call plug#begin(stdpath('data') . '/plugged')
@@ -72,7 +72,7 @@ set background=dark
 
 " set which python environments to use
 " setup venvs for nvim python
-let g:python3_host_prog = '~/nvim-python3/bin/python3'
+let g:python3_host_prog = '~/.nvim-python3/bin/python3'
 "let g:python_host_prog = '~/nvim-python3/bin/python3'
 
 " spacebar as leader key
