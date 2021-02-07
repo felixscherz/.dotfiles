@@ -3,16 +3,17 @@
 
 call plug#begin(stdpath('data') . '/plugged')
 " appearance
-    Plug 'joshdick/onedark.vim'
+    Plug 'joshdick/onedark.vim' 
     Plug 'vim-airline/vim-airline'
     Plug 'terryma/vim-smooth-scroll'
     Plug 'mhinz/vim-startify'
     Plug 'Yggdroot/indentLine'
+    Plug 'wfxr/code-minimap'
 
 " navigation
     Plug 'preservim/nerdtree'
-    Plug 'Xuyuanp/nerdtree-git-plugin'
-    Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'Xuyuanp/nerdtree-git-plugin' 
+    Plug 'ctrlpvim/ctrlp.vim' 
     Plug 'jremmen/vim-ripgrep'
 
 " completion/templating
@@ -25,6 +26,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'SirVer/ultisnips'
     Plug 'vim-utils/vim-man'
     Plug 'dense-analysis/ale'
+    Plug 'mattn/emmet-vim'
 
 " command extention
     Plug 'tpope/vim-surround'
@@ -109,9 +111,22 @@ nnoremap <leader>u :UndotreeShow<CR>
 
 " NERDTree customizations
 nnoremap <leader>pv :NERDTree <bar> :vertical resize 30<CR>
+let NERDTreeShowLineNumbers=1
 
 " ripgrep customizations
 nnoremap <leader>ps :Rg<space>
 
 " jedi-vim customizations
+let g:jedi#completions_enabled = 0
+ 
+" deoplete customizations
+let g:deoplete#enable_at_startup = 1
+
+" emmet config
+ 
+" vimtex config
+let g:tex_flavor = 'latex'
+call deoplete#custom#var('omni', 'input_patterns', {
+      \ 'tex': g:vimtex#re#deoplete
+      \})
 
