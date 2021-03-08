@@ -15,6 +15,10 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'Xuyuanp/nerdtree-git-plugin' 
     Plug 'ctrlpvim/ctrlp.vim' 
     Plug 'jremmen/vim-ripgrep'
+    Plug 'mileszs/ack.vim'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    Plug 'ludovicchabant/vim-gutentags'
 
 " completion/templating
     Plug 'davidhalter/jedi-vim'
@@ -129,4 +133,9 @@ let g:tex_flavor = 'latex'
 call deoplete#custom#var('omni', 'input_patterns', {
       \ 'tex': g:vimtex#re#deoplete
       \})
+
+" Fugitive Conflict Resolution
+nnoremap <leader>gd :Gvdiffsplit!<CR>
+nnoremap gdh :diffget //2<CR>
+nnoremap gdl :diffget //3<CR>
 
