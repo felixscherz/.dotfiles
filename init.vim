@@ -6,7 +6,6 @@ call plug#begin(stdpath('data') . '/plugged')
 " appearance
     Plug 'joshdick/onedark.vim' 
     Plug 'vim-airline/vim-airline'
-    Plug 'terryma/vim-smooth-scroll'
     Plug 'mhinz/vim-startify'
     Plug 'Yggdroot/indentLine'
     Plug 'wfxr/code-minimap'
@@ -98,11 +97,6 @@ nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
 nnoremap <silent> <Leader>< :resize -5<CR>
 nnoremap <silent> <Leader>> :resize +5<CR>
-" hotkeys for smooth scroll plugin
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 10, 2)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 10, 2)<CR>
-noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 10, 4)<CR>
-noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 15, 4)<CR>
 
 " hotkeys to run python code
 nnoremap <leader><F2> :vsplit<CR>:terminal python %<CR> 
