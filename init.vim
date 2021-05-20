@@ -92,15 +92,20 @@ nnoremap <silent><leader>h :wincmd h<CR>
 nnoremap <silent><leader>j :wincmd j<CR>
 nnoremap <silent><leader>k :wincmd k<CR>
 nnoremap <silent><leader>l :wincmd l<CR>
-" easier resizing of windows
-nnoremap <silent> <Leader>+ :vertical resize +5<CR>
-nnoremap <silent> <Leader>- :vertical resize -5<CR>
-nnoremap <silent> <Leader>< :resize -5<CR>
-nnoremap <silent> <Leader>> :resize +5<CR>
 
+" easier resizing of windows
+nnoremap <silent><Leader>+ :vertical resize +5<CR>
+nnoremap <silent><Leader>- :vertical resize -5<CR>
+nnoremap <silent><Leader>< :resize -5<CR>
+nnoremap <silent><Leader>> :resize +5<CR>
+
+" fzf remaps
+nnoremap <leader>f :Files 
+nnoremap <leader>b :Buffers 
+"
 " hotkeys to run python code
-nnoremap <leader><F2> :vsplit<CR>:terminal python %<CR> 
-nnoremap <leader><F3> :vnew<CR>:terminal python<CR>
+nnoremap <leader><F2> :vsplit<CR>:terminal python3 %<CR> 
+nnoremap <leader><F3> :vnew<CR>:terminal python3<CR>
 
 " startify customizations
 nnoremap <leader>t :tabnew<CR>:Startify<CR>
