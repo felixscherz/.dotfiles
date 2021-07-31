@@ -31,6 +31,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'vim-utils/vim-man'
     Plug 'dense-analysis/ale'
     Plug 'mattn/emmet-vim'
+    Plug 'mrk21/yaml-vim'
 
 " command extention
     Plug 'tpope/vim-surround'
@@ -67,6 +68,10 @@ set hidden
 set incsearch
 set clipboard^=unnamed,unnamedplus
 
+" add yaml stuffs
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
 " appearance 
 syntax on
 set number
@@ -98,6 +103,13 @@ nnoremap <silent><Leader>+ :vertical resize +5<CR>
 nnoremap <silent><Leader>- :vertical resize -5<CR>
 nnoremap <silent><Leader>< :resize -5<CR>
 nnoremap <silent><Leader>> :resize +5<CR>
+
+" remapping yank rest of line
+nnoremap Y y$ 
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+
 
 " fzf remaps
 nnoremap <leader>f :Files 
