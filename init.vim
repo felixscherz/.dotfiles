@@ -41,8 +41,6 @@ call plug#begin(stdpath('data') . '/plugged')
 " git
     Plug 'tpope/vim-fugitive'
 
-" LaTeX
-    Plug 'lervag/vimtex'
 
 call plug#end()
 
@@ -84,7 +82,6 @@ set background=dark
 " set which python environments to use
 " setup venvs for nvim python
 let g:python3_host_prog = '~/.nvim-python3/bin/python3'
-"let g:python_host_prog = '~/nvim-python3/bin/python3'
 
 " spacebar as leader key
 let mapleader=' '
@@ -139,12 +136,6 @@ let g:jedi#completions_enabled = 0
 let g:deoplete#enable_at_startup = 1
 
 " emmet config
- 
-" vimtex config
-let g:tex_flavor = 'latex'
-call deoplete#custom#var('omni', 'input_patterns', {
-      \ 'tex': g:vimtex#re#deoplete
-      \})
 
 " Fugitive Conflict Resolution
 nnoremap <leader>gd :Gvdiffsplit!<CR>
