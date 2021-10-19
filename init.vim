@@ -8,7 +8,6 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'vim-airline/vim-airline'
     Plug 'mhinz/vim-startify'
     Plug 'Yggdroot/indentLine'
-    Plug 'wfxr/code-minimap'
 
 " navigation
     Plug 'preservim/nerdtree'
@@ -21,9 +20,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'ludovicchabant/vim-gutentags'
 
 " completion/templating
-    Plug 'davidhalter/jedi-vim'
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'deoplete-plugins/deoplete-jedi'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'ervandew/supertab'
     Plug 'jiangmiao/auto-pairs'
     Plug 'scrooloose/nerdcommenter'
@@ -35,7 +32,6 @@ call plug#begin(stdpath('data') . '/plugged')
 
 " command extention
     Plug 'tpope/vim-surround'
-    Plug 'terryma/vim-multiple-cursors'
     Plug 'mbbill/undotree'
 
 " git
@@ -65,6 +61,7 @@ set undofile
 set hidden
 set incsearch
 set clipboard^=unnamed,unnamedplus
+set conceallevel=0
 
 " add yaml stuffs
 au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
@@ -194,3 +191,6 @@ let g:gutentags_ctags_exclude = [
       \ '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2',
       \ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx',
       \ ]
+
+" disable quote conceal in json files
+let g:indentLine_conceallevel = 0
