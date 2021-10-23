@@ -1,85 +1,116 @@
 "init.vim file for ubuntu created on 5.12.2020
 " plug directory: ~/.local/share/nvim/site/autoload/plug.vim
-" TODO: split init.vim into multiple files and source them
 
 call plug#begin(stdpath('data') . '/plugged')
-" appearance
+    "theme for nvim
     Plug 'joshdick/onedark.vim' 
+    "airline plugin to display git branch etc
     Plug 'vim-airline/vim-airline'
+    "display homepage
     Plug 'mhinz/vim-startify'
+    "display vertical bars for line indentation
     Plug 'Yggdroot/indentLine'
-
-" navigation
+    "filetree navigation
     Plug 'preservim/nerdtree'
+    "git status flags for nerdtree
     Plug 'Xuyuanp/nerdtree-git-plugin' 
-    Plug 'ctrlpvim/ctrlp.vim' 
-    Plug 'jremmen/vim-ripgrep'
+    "replace ripgrep: search pattern in files
     Plug 'mileszs/ack.vim'
+    "command line fuzzy finder
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
+    "handle and generate tags 
     Plug 'ludovicchabant/vim-gutentags'
-
-" completion/templating
+    "completion and formatting engine, need to install language servers
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    "helps with suing tab completion
     Plug 'ervandew/supertab'
+    "automatically open/close brackets, put cursor in the middle
     Plug 'jiangmiao/auto-pairs'
+    "handle comments, <leader>cc comments highlighted lines
     Plug 'scrooloose/nerdcommenter'
-    Plug 'SirVer/ultisnips'
+    "view man pages in vim
     Plug 'vim-utils/vim-man'
-    Plug 'dense-analysis/ale'
+    "expand abbreviation (ex: html:5 <c-<>, -> create html template)    
     Plug 'mattn/emmet-vim'
-    Plug 'mrk21/yaml-vim'
-
-" command extention
+    "deal with surrounds
     Plug 'tpope/vim-surround'
+    "show undo history
     Plug 'mbbill/undotree'
-
-" git
+    "git plugin for vim
     Plug 'tpope/vim-fugitive'
-
-
 call plug#end()
 
-set fileencoding=utf-8
-set encoding=utf-8
-
-set relativenumber
-set smartindent
-set expandtab
-set tabstop=4 softtabstop=4
-set shiftwidth=4
-set nowrap
-set scrolloff=8
-set cmdheight=2
-set nohlsearch
-set ignorecase
-set smartcase
-set noswapfile
-set nobackup
-set undodir=~/.local/share/nvim/undodir
-set undofile
-set hidden
-set incsearch
-set clipboard^=unnamed,unnamedplus
-set conceallevel=0
-
-" add yaml stuffs
-au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-
-" appearance 
-syntax on
-set number
-set cursorline
-set colorcolumn=80
-highlight ColoColumn ctermbg=0 guibg=lightgrey
-colorscheme onedark
-set background=dark
-
-" set which python environments to use
+" #############################################################################
 " setup venvs for nvim python
 let g:python3_host_prog = '~/.nvim-python3/bin/python3'
 
+" #############################################################################
+" settings
+"encoding to be used when showing files
+set encoding=utf-8
+"encoding to be used when saving files
+set fileencoding=utf-8
+"turn on relative linenumbers
+set relativenumber
+"smart indents on new line
+set smartindent
+"use a number of spaces for tab
+set expandtab
+"number of spaces a tab accounts for
+set tabstop=4 softtabstop=4
+"spaces to shift
+set shiftwidth=4
+"don't wrap text
+set nowrap
+"minimum number of lines to keep below the cursor
+set scrolloff=8
+"number of lines for command window
+set cmdheight=2
+"stop highlighting for search
+set nohlsearch
+"only use case sensitive search if pattern includes upppercase characters
+set smartcase
+"don't create swapfiles
+set noswapfile
+"don't create backup beofre saving (use undotree)
+set nobackup
+"directory to save undo history
+set undodir=~/.local/share/nvim/undodir
+set undofile
+"buffers become hidden when abandoned
+set hidden
+"turn on incremental serach
+set incsearch
+"couple yank with clipboard
+set clipboard^=unnamed,unnamedplus
+"turn off concealing of text modifiers 
+set conceallevel=0
+" appearance 
+syntax on
+"turn on horizontal cursorline
+set cursorline
+"set vertical bar to guide line width
+set colorcolumn=80
+"change color of the bar
+highlight ColoColumn ctermbg=0 guibg=lightgrey
+"set colorscheme
+colorscheme onedark
+"set background
+set background=dark
+"time for CursorHold to take effect
+set updatetime=300
+
+" #############################################################################
+"  filetype plugins
+" add yaml stuffs
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType php setlocal ts=2 sts=2 sw=2 expandtab
+
+" #############################################################################
+" general remaps
 " spacebar as leader key
 let mapleader=' '
 
@@ -91,27 +122,25 @@ nnoremap <silent><leader>h :wincmd h<CR>
 nnoremap <silent><leader>j :wincmd j<CR>
 nnoremap <silent><leader>k :wincmd k<CR>
 nnoremap <silent><leader>l :wincmd l<CR>
-
 " easier resizing of windows
 nnoremap <silent><Leader>+ :vertical resize +5<CR>
 nnoremap <silent><Leader>- :vertical resize -5<CR>
 nnoremap <silent><Leader>< :resize -5<CR>
 nnoremap <silent><Leader>> :resize +5<CR>
-
 " remapping yank rest of line
 nnoremap Y y$ 
 nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap J mzJ`z
-
-
-" fzf remaps
-nnoremap <leader>f :Files 
-nnoremap <leader>b :Buffers 
-"
 " hotkeys to run python code
 nnoremap <leader><F2> :vsplit<CR>:terminal python3 %<CR> 
 nnoremap <leader><F3> :vnew<CR>:terminal python3<CR>
+
+" #############################################################################
+" plugin settings
+" fzf remaps
+nnoremap <leader>f :Files 
+nnoremap <leader>b :Buffers 
 
 " startify customizations
 nnoremap <leader>t :tabnew<CR>:Startify<CR>
@@ -123,19 +152,10 @@ nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>pv :NERDTree <bar> :vertical resize 30<CR>
 let NERDTreeShowLineNumbers=1
 
-" ripgrep customizations
-nnoremap <leader>ps :Rg<space>
-
-" jedi-vim customizations
-let g:jedi#completions_enabled = 0
- 
-" deoplete customizations
-let g:deoplete#enable_at_startup = 1
-
-" emmet config
+" ack customizations to search patterns
+nnoremap <leader>ps :Ack<space>
 
 " Fugitive Conflict Resolution
-nnoremap <leader>gd :Gvdiffsplit!<CR>
 nnoremap gdh :diffget //2<CR>
 nnoremap gdl :diffget //3<CR>
 
@@ -192,5 +212,41 @@ let g:gutentags_ctags_exclude = [
       \ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx',
       \ ]
 
-" disable quote conceal in json files
-let g:indentLine_conceallevel = 0
+" coc.nvim settings
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
