@@ -250,3 +250,6 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
+
+" disable quote conceal in json files
+let g:indentLine_conceallevel = 0
