@@ -53,6 +53,7 @@ set encoding=utf-8
 set fileencoding=utf-8
 "turn on relative linenumbers
 set relativenumber
+set number
 "smart indents on new line
 set smartindent
 "use a number of spaces for tab
@@ -106,8 +107,9 @@ set updatetime=300
 " add yaml stuffs
 au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType html,css,scss,js setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType php setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType scss setl iskeyword+=@-@
 
 " #############################################################################
 " general remaps
