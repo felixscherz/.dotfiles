@@ -41,7 +41,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -141,7 +141,7 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # open programs in specific workspaces
-assign [class="^Google-chrome"]          $workspace1
+assign [class="^Google-chrome"]    $ws1
 assign [class="^Gimp"]             $ws4
 assign [class="^Nautilus"]         $ws6
 assign [class="^Slack"]            $ws7
@@ -188,4 +188,3 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
-
