@@ -253,5 +253,9 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
 
+command! -nargs=0 SortImports :CocCommand python.sortImports
+
 " disable quote conceal in json files
 let g:indentLine_conceallevel = 0
+
+
