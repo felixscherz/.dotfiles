@@ -226,6 +226,9 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+" help pyright to find project root
+autocmd FileType python let b:coc_root_patterns = ['pyrightconfig.json']
+
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
@@ -257,5 +260,4 @@ command! -nargs=0 SortImports :CocCommand python.sortImports
 
 " disable quote conceal in json files
 let g:indentLine_conceallevel = 0
-
 
