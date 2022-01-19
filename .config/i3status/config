@@ -16,7 +16,7 @@ order += "disk /"
 order += "disk /home"
 #order += "ethernet enp1s0"
 order += "memory"
-order += "wireless wlp2s0"
+order += "wireless wlp4s0"
 order += "volume master"
 order += "battery 1"
 order += "tztime local"
@@ -49,8 +49,8 @@ ethernet enp1s0 {
         format_down = "<span background='#88c0d0'> eth: Disconnected </span>"
 }
 
-wireless wlp2s0 {
-        format_up = "<span background='#b48ead'> wifi: %essid </span>"
+wireless wlp4s0 {
+        format_up = "<span background='#b48ead'> wifi: %essid%quality </span>"
         format_down = "<span background='#b48ead'> wifi: Disconnected </span>"
 }
 

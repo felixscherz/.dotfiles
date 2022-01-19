@@ -191,9 +191,9 @@ bar {
         statusline #2f343f
         separator #4b5262
         # colour of border, background, and text
-        focused_workspace       #2f343f #bf616a #d8dee8
-        active_workspace        #2f343f #2f343f #d8dee8
-        inactive_workspace      #2f343f #2f343f #d8dee8
+        focused_workspace       #2f343f #88c0d0 #2f343f
+        # active_workspace        #2f343f #2f343f #d8dee8
+        inactive_workspace      #999999 #2f343f #d8dee8
         urgent_workspacei       #2f343f #ebcb8b #2f343f
     }
         status_command i3status
