@@ -10,7 +10,7 @@ mkdir ~/.local/share/nvim/plugged -p
 curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 # create symlink for init.vim file to use version control
-ln -sf ~/dotFiles/init.vim ~/.config/nvim/init.vim
+ln -sf ~/.dotfiles/init.vim ~/.config/nvim/init.vim
 # run plug install
 nvim +'PlugInstall --sync' +qa
 # install latest version of node for coc autocomplete
@@ -29,4 +29,4 @@ sudo apt install ctags
 
 ###############################################################################
 # install i3
-ln -sf ~/dotFiles/.config/i3/config ~/.config/i3/config
+ln -sf ~/.dotfiles/.config/i3/config ~/.config/i3/config

@@ -1,0 +1,11 @@
+# link nvim configs
+ln -sf ~/.dotfiles/init.vim ~/.config/nvim/init.vim
+# link i3 config
+if [ ! -d ~/.config/i3 ]; then mkdir -p ~/.config/i3; fi
+ln -sf ~/.dotfiles/.config/i3/config ~/.config/i3/config
+# link tmux config
+ln -sf ~/.dotfiles/.tmux.conf ~/.tmux.conf
+ln -sf ~/.dotfiles/.tmux.conf.local ~/.tmux.conf.local
+# link alacritty
+if [ ! -d ~/.config/alacritty ]; then mkdir -p ~/.config/alacritty; fi
+
