@@ -162,6 +162,7 @@ nnoremap gdh :diffget //2<CR>
 nnoremap gdl :diffget //3<CR>
 
 " gutentags config
+let g:gutentags_ctags_tagfile = '.tags'
 let g:gutentags_generate_on_new = 1
 let g:gutentags_generate_on_missing = 1
 let g:gutentags_generate_on_write = 1
@@ -201,7 +202,7 @@ let g:gutentags_ctags_exclude = [
       \ '*.csproj.user',
       \ '*.cache',
       \ '*.pdb',
-      \ 'tags*',
+      \ 'tags',
       \ 'cscope.*',
       \ '*.css',
       \ '*.less',
@@ -253,9 +254,11 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
+nmap <leader>nf :call CocAction('format')<CR>
+nmap <leader>ns :CocCommand python.sortImports<CR>
+
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
-
 command! -nargs=0 SortImports :CocCommand python.sortImports
 
 " disable quote conceal in json files
