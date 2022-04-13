@@ -41,6 +41,8 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'tpope/vim-fugitive'
     "highlight substitution
     Plug 'markonm/traces.vim'
+    "lightspeed search plugin
+    Plug 'ggandor/lightspeed.nvim'
     call plug#end()
 
 " #############################################################################
