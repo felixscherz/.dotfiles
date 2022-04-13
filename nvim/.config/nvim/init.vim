@@ -16,9 +16,9 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'Xuyuanp/nerdtree-git-plugin' 
     "replace ripgrep: search pattern in files
     Plug 'mileszs/ack.vim'
-    "command line fuzzy finder
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'
+    "fuzzy finder telescope + dependency
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
     "handle and generate tags 
     Plug 'ludovicchabant/vim-gutentags'
     "completion and formatting engine, need to install language servers
@@ -39,7 +39,9 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'mbbill/undotree'
     "git plugin for vim
     Plug 'tpope/vim-fugitive'
-call plug#end()
+    "highlight substitution
+    Plug 'markonm/traces.vim'
+    call plug#end()
 
 " #############################################################################
 " setup venvs for nvim python
@@ -140,9 +142,13 @@ nnoremap <leader><F3> :vnew<CR>:terminal python3<CR>
 
 " #############################################################################
 " plugin settings
-" fzf remaps
-nnoremap <leader>f :Files 
-nnoremap <leader>b :Buffers 
+" telescope
+
+" Using Lua functions
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 " startify customizations
 nnoremap <leader>t :tabnew<CR>:Startify<CR>
