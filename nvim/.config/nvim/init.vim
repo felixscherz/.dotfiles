@@ -43,6 +43,8 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'markonm/traces.vim'
     "lightspeed search plugin
     Plug 'ggandor/lightspeed.nvim'
+    "markdown viewer for nvim
+    Plug 'ellisonleao/glow.nvim'
     call plug#end()
 
 " #############################################################################
