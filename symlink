@@ -1,12 +1,15 @@
 #!/usr/bin/env zsh
-# link nvim configs
-ln -sf ~/.dotfiles/init.vim ~/.config/nvim/init.vim
-# link i3 config
-if [ ! -d ~/.config/i3 ]; then mkdir -p ~/.config/i3; fi
-ln -sf ~/.dotfiles/.config/i3/config ~/.config/i3/config
-# link tmux config
-ln -sf ~/.dotfiles/.tmux.conf ~/.tmux.conf
-ln -sf ~/.dotfiles/.tmux.conf.local ~/.tmux.conf.local
-# link alacritty
-if [ ! -d ~/.config/alacritty ]; then mkdir -p ~/.config/alacritty; fi
+if [[ -z $STOW_FOLDERS ]]; then
+    STOW_FOLDERS="i3,nvim,zsh,alacritty"
+fi
 
+if [[ -z $DOTFILES ]]; then
+    DOTFILES=$HOME/.dotfiles
+fi
+pushd $DOTFILES
+for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
+do
+    stow -D $folder
+    stow $folder
+done
+popd
