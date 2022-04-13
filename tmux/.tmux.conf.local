@@ -389,6 +389,11 @@ tmux_conf_uninstall_plugins_on_reload=true
 #set -g @plugin 'tmux-plugins/tmux-continuum'
 #set -g @continuum-restore 'on'
 
+#switch panels
+bind k selectp -U # switch to panel Up
+bind j selectp -D # switch to panel Down 
+bind h selectp -L # switch to panel Left
+bind l selectp -R # switch to panel Right
 
 # -- custom variables ----------------------------------------------------------
 
