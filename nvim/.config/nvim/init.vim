@@ -44,7 +44,7 @@ call plug#begin(stdpath('data') . '/plugged')
     "lightspeed search plugin
     Plug 'ggandor/lightspeed.nvim'
     "markdown viewer for nvim
-    Plug 'ellisonleao/glow.nvim'
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
     call plug#end()
 
 " #############################################################################
