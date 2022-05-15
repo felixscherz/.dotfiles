@@ -395,6 +395,8 @@ bind j selectp -D # switch to panel Down
 bind h selectp -L # switch to panel Left
 bind l selectp -R # switch to panel Right
 
+
+set-option -sg escape-time 10
 # -- custom variables ----------------------------------------------------------
 
 # to define a custom #{foo} variable, define a POSIX shell function between the
