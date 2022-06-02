@@ -90,7 +90,7 @@ tmux_conf_theme_window_bg="default"
 # highlight focused pane (tmux >= 2.1), possible values are:
 #   - true
 #   - false (default)
-tmux_conf_theme_highlight_focused_pane=false
+tmux_conf_theme_highlight_focused_pane=true
 
 # focused pane colours:
 tmux_conf_theme_focused_pane_bg="$tmux_conf_theme_colour_2"
@@ -345,7 +345,7 @@ tmux_conf_copy_to_os_clipboard=false
 # bind C-a send-prefix
 
 # move status line to top
-#set -g status-position top
+set -g status-position top
 
 
 # -- tpm -----------------------------------------------------------------------
