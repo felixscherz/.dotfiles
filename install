@@ -30,3 +30,6 @@ sudo apt install ctags
 ###############################################################################
 # install i3
 ln -sf ~/.dotfiles/.config/i3/config ~/.config/i3/config
+
+sudo add-apt-repository -y ppa:regolith-linux/stable
+sudo apt install i3-gaps
