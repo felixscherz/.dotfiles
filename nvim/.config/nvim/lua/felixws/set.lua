@@ -1,4 +1,3 @@
-vim.opt.guicursor = ""
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -29,3 +28,4 @@ vim.opt.hidden = true
 
 vim.g.indentLine_conceallevel = 0
 
+vim.opt.clipboard = vim.opt.clipboard ^ {"unnamed", "unnamedplus"}

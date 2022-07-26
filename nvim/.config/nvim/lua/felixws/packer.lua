@@ -6,7 +6,12 @@ return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
   use 'folke/tokyonight.nvim'
   use 'joshdick/onedark.vim'
-  --
+
+  -- vertical bars to show indentation
+  use 'Yggdroot/indentLine'
+
+  -- statusline
+  use 'vim-airline/vim-airline'
   -- filetree navigation
   use 'preservim/nerdtree'
   -- git status flags for nerdtree
@@ -36,5 +41,8 @@ return require('packer').startup(function()
 
   -- highlight substitution
   use 'markonm/traces.vim'
+
+  -- lightspeed navigation
+  use 'ggandor/lightspeed.nvim'
   end)
 
