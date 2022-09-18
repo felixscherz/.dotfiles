@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+alias asdf="setxkbmap us"
+alias hjkl="setxkbmap de"
