@@ -1,10 +1,8 @@
 {
   "python.pythonPath": "/home/felix/.nvim-python3/bin/python3",
-  "python.formatting.provider": "yapf",
+  "python.formatting.provider": "black",
   "python.formatting.yapfPath": "/home/felix/.nvim-python3/bin/yapf",
-  "java.project.referencedLibraries": [
-    "/home/felix/projects/coursera/algorithms1/algs4.jar"
-  ],
+  "python.formatting.blackPath": "/home/felix/.nvim-python3/bin/black",
   "Lua": {
     "diagnostics": {
       "globals": ["vim", "use"]
