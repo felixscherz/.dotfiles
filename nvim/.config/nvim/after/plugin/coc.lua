@@ -1,0 +1,5 @@
+vim.cmd("command! -nargs=0 Format :call CocAction('format')")
+vim.cmd("command! -nargs=0 SortImports :CocCommand python.sortImports")
+vim.cmd("xmap <leader>f  <Plug>(coc-format-selected)")
+vim.cmd("nmap <leader>f  <Plug>(coc-format-selected)")
+vim.cmd("command! -nargs=0 Prettier :CocCommand prettier.formatFile")
