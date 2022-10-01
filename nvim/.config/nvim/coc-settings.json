@@ -3,6 +3,8 @@
   "python.formatting.provider": "black",
   "python.formatting.yapfPath": "/home/felix/.nvim-python3/bin/yapf",
   "python.formatting.blackPath": "/home/felix/.nvim-python3/bin/black",
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Path": "/home/felix/.nvim-python3/bin/flake8",
   "Lua": {
     "diagnostics": {
       "globals": ["vim", "use"]
