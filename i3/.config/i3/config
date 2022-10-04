@@ -78,10 +78,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+odiaeresis move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -154,8 +154,8 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # move container (window) to different output (monitor)
 # move focused workspace between monitors
-bindsym $mod+Ctrl+greater move workspace to output right
-bindsym $mod+Ctrl+less move workspace to output left
+bindsym $mod+Ctrl+bracketleft move workspace to output right
+bindsym $mod+Ctrl+bracketright move workspace to output left
 
 # open programs in specific workspaces
 assign [class="^Google-chrome"]    $ws1
