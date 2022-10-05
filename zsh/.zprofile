@@ -7,4 +7,5 @@ for i in `find -L $PERSONAL`; do
     source $i
 done
 
-
+# Set PATH, MANPATH, etc., for Homebrew.
+eval "$(/opt/homebrew/bin/brew shellenv)"
