@@ -1,11 +1,17 @@
 {
-  "python.pythonPath": "Users/fesc1/.nvim-python3/bin/python3",
-  "python.formatting.provider": "black",
-  "python.linting.flake8Enabled": true,
-  "Lua": {
-    "diagnostics": {
-      "globals": ["vim", "use"]
+    "python.pythonPath": "Users/fesc1/.nvim-python3/bin/python3",
+    "python.formatting.provider": "yapf",
+    "python.formatting.yapfArgs": [
+        "--style",
+        "google"
+    ],
+    "python.linting.flake8Enabled": true,
+    "Lua": {
+        "diagnostics": {
+            "globals": [
+                "vim",
+                "use"
+            ]
+        }
     }
-  }
 }
-

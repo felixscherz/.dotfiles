@@ -61,6 +61,7 @@ yabai -m rule --add title='Settings$' manage=off
 yabai -m rule --add app="^Spotify" space=^5
 yabai -m rule --add app="^Microsoft Teams" space=^4
 yabai -m rule --add app="^Google Chrome" space=^1
+yabai -m rule --add app="^Microsoft Outlook" space=^4
 
 function setup_space {
   local idx="$1"
