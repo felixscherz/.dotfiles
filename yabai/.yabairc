@@ -33,6 +33,11 @@ yabai -m config window_opacity               off
 yabai -m config window_opacity_duration      0.0
 yabai -m config window_shadow                on
 
+yabai -m config window_border on | off
+yabai -m config window_border_width 1
+yabai -m config active_window_border_color 0xff7c4fef
+yabai -m config normal_window_border_color 0xff555555
+
 yabai -m config active_window_opacity        1.0
 yabai -m config normal_window_opacity        0.90
 yabai -m config split_ratio                  0.50
@@ -49,6 +54,9 @@ yabai -m config bottom_padding               0
 yabai -m config left_padding                 0
 yabai -m config right_padding                0
 yabai -m config window_gap                   0
+
+# ignore MS Teams popup window
+yabai -m rule --add label=ignoreTeamsNotification app="Microsoft Teams" title="Microsoft Teams Notification" manage=off
 
 # float system preferences
 yabai -m rule --add app='^System Information$' manage=off
