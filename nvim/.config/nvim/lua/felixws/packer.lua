@@ -43,6 +43,9 @@ return require('packer').startup(function()
   use 'markonm/traces.vim'
 
   -- lightspeed navigation
-  use 'ggandor/lightspeed.nvim'
+  -- use 'ggandor/lightspeed.nvim'
+
+  -- vimwiki for notetaking
+  use 'vimwiki/vimwiki'
   end)
 
