@@ -1,2 +1,3 @@
 tags
 .tags
+nvim/\.config/nvim/plugin/*
