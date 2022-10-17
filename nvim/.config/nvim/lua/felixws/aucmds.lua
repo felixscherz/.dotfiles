@@ -25,3 +25,8 @@ function! s:show_documentation()
   endif
 endfunction
 ]]
+
+
+cmd[[
+autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
+]]
