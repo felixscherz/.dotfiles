@@ -74,8 +74,11 @@ plugins=(
     git
     zsh-autosuggestions
     zsh-syntax-highlighting
+    zsh-vi-mode
     jsontools
-    web-search)
+    web-search
+    )
+
     
 source $ZSH/oh-my-zsh.sh
 
