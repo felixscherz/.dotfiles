@@ -72,10 +72,11 @@ yabai -m rule --add title='Preferences$' manage=off
 # float settings windows
 yabai -m rule --add title='Settings$' manage=off
 
-yabai -m rule --add app="^Spotify" space=^5
-yabai -m rule --add app="^Microsoft Teams" space=^4
-yabai -m rule --add app="^Google Chrome" space=^1
-yabai -m rule --add app="^Microsoft Outlook" space=^4
+# yabai -m rule --add app="^Spotify" space=^1
+yabai -m rule --add app="^Spotify" manage=off
+yabai -m rule --add app="^Microsoft Teams" space=^2
+# yabai -m rule --add app="^Google Chrome" space=^1
+yabai -m rule --add app="^Microsoft Outlook" space=^1
 
 function setup_space {
   local idx="$1"
