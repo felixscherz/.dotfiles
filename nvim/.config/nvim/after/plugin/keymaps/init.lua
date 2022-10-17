@@ -41,3 +41,10 @@ nnoremap("<leader>fh", builtin.help_tags)
 
 
 nmap("<leader>rn", "<Plug>(coc-rename)")
+
+
+-- resizing
+nnoremap("<leader>.", ":vertical resize +5<CR>", {silent = true})
+nnoremap("<leader>,", ":vertical resize -5<CR>", {silent = true})
+nnoremap("<leader>=", ":resize +5<CR>", {silent = true})
+nnoremap("<leader>-", ":resize -5<CR>", {silent = true})

@@ -23,6 +23,7 @@ vim.opt.colorcolumn = "120"
 vim.opt.cursorline = true
 
 vim.opt.wrap = false
+vim.opt.scrolloff = 5
 
 
 vim.g.mapleader = " "
