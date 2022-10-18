@@ -5,12 +5,20 @@
         "google"
     ],
     "python.linting.flake8Enabled": true,
-    "Lua": {
-        "diagnostics": {
-            "globals": [
-                "vim",
-                "use"
-            ]
-        }
-    }
+    "Lua.diagnostics.globals": [
+        "vim",
+        "use"
+    ],
+    "yaml.customTags": [
+        "!Equals sequence",
+        "!FindInMap sequence",
+        "!GetAtt",
+        "!GetAZs",
+        "!ImportValue",
+        "!Join sequence",
+        "!Ref",
+        "!Select sequence",
+        "!Split sequence",
+        "!Sub"
+    ]
 }
