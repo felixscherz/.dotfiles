@@ -13,6 +13,7 @@ vim.cmd[[nmap <silent> gr <Plug>(coc-references)]]
 local home = os.getenv("HOME")
 vim.cmd(string.format("call coc#config('python.pythonPath', '%s/.nvim-python3/bin/python3')", home))
 vim.cmd(string.format("call coc#config('python.formatting.yapfPath', '%s/.nvim-python3/bin/yapf')", home))
+vim.cmd(string.format("call coc#config('python.formatting.blackPath', '%s/.nvim-python3/bin/black')", home))
 
 vim.cmd[[
 " Use K to show documentation in preview window.
