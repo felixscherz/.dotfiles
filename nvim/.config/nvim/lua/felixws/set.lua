@@ -31,5 +31,12 @@ vim.g.mapleader = " "
 vim.opt.hidden = true
 
 vim.g.indentLine_conceallevel = 0
+vim.g.json_conceal = 0
+vim.g.markdown_syntax_conceal = 0
+vim.opt.conceallevel = 1
 
 vim.opt.clipboard = vim.opt.clipboard ^ {"unnamed", "unnamedplus"}
+
+vim.cmd[[
+set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+]]
