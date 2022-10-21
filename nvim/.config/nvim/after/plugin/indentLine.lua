@@ -1,1 +1,1 @@
-vim.g.indentLine_conceallevel = 0
+-- vim.g.indentLine_conceallevel = 0
