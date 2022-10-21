@@ -4,7 +4,11 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
-  use 'folke/tokyonight.nvim'
+
+  -- colorscheme
+  use 'ellisonleao/gruvbox.nvim'
+  use 'shinchu/lightline-gruvbox.vim'
+
 
   -- vertical bars to show indentation
   use 'Yggdroot/indentLine'
