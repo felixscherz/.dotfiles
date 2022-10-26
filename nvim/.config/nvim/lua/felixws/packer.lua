@@ -59,5 +59,8 @@ return require('packer').startup(function()
   -- show markdown in browser
   -- install without yarn or npm
   use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
+
+  -- coerce between different cases (camelCase snake_case)
+  use 'tpope/vim-abolish'
   end)
 
