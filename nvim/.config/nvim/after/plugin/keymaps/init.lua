@@ -26,6 +26,8 @@ nnoremap("<C-u>", "<C-u>zz")
 
 nmap("<leader>nf", ":call CocAction('format')<CR>")
 nmap("<leader>ns", ":CocCommand python.sortImports<CR>")
+nnoremap("<leader>u", ":call CocAction('diagnosticPrevious')<CR>")
+nnoremap("<leader>d", ":call CocAction('diagnosticNext')<CR>")
 
 nnoremap("gdh", ":diffget //2<CR>")
 nnoremap("gdl", ":diffget //3<CR>")

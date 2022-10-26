@@ -4,6 +4,10 @@
         "--style",
         "google"
     ],
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "120"
+    ],
     "python.linting.flake8Enabled": true,
     "Lua.diagnostics.globals": [
         "vim",
