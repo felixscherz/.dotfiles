@@ -90,5 +90,11 @@ return require('packer').startup(function()
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/mason.nvim" -- simple to use language server installer
   use "williamboman/mason-lspconfig.nvim" -- simple to use language server installer
+
+  -- treesitter
+  
+  use {  "nvim-treesitter/nvim-treesitter",
+     run = ":TSUpdate",
+  }
   end)
 
