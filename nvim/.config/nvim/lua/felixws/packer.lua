@@ -72,6 +72,8 @@ return require('packer').startup(function()
   -- coerce between different cases (camelCase snake_case)
   use 'tpope/vim-abolish'
 
+  -- cache lua for quicker startup
+  use 'lewis6991/impatient.nvim'
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
