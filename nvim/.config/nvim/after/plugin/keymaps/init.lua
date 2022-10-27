@@ -42,11 +42,11 @@ nnoremap("<leader>fb", builtin.buffers)
 nnoremap("<leader>fh", builtin.help_tags)
 
 
-nmap("<leader>rn", "<Plug>(coc-rename)")
+-- nmap("<leader>rn", "<Plug>(coc-rename)")
 
 
 -- resizing
-nnoremap("<leader>.", ":vertical resize +5<CR>", {silent = true})
-nnoremap("<leader>,", ":vertical resize -5<CR>", {silent = true})
-nnoremap("<leader>=", ":resize +5<CR>", {silent = true})
-nnoremap("<leader>-", ":resize -5<CR>", {silent = true})
+nnoremap("<leader>.", ':exe "vertical resize " . (winwidth(0) * 3/2)<CR>', {silent = true})
+nnoremap("<leader>,", ':exe "vertical resize " . (winwidth(0) * 2/3)<CR>', {silent = true})
+nnoremap("<leader>=", ':exe "resize " . (winheight(0) * 3/2)<CR>', {silent = true})
+nnoremap("<leader>-", ':exe "resize " . (winheight(0) * 2/3)<CR>', {silent = true})
