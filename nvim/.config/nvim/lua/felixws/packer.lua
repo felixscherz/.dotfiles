@@ -15,15 +15,17 @@ return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
   -- colorscheme
-  use 'ellisonleao/gruvbox.nvim'
-  use 'shinchu/lightline-gruvbox.vim'
+  use 'folke/tokyonight.nvim'
 
 
   -- vertical bars to show indentation
   use 'Yggdroot/indentLine'
 
   -- statusline (maybe use lualine in the future?)
-  use 'itchyny/lightline.vim'
+  use {
+  'nvim-lualine/lualine.nvim',
+  requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  }
 
   -- filetree navigation
   use 'preservim/nerdtree'
