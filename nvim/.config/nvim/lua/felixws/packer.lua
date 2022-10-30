@@ -100,5 +100,10 @@ return require('packer').startup(function()
   use {  "nvim-treesitter/nvim-treesitter",
      run = ":TSUpdate",
   }
+
+  -- icons (hopefully)
+  use "nvim-tree/nvim-web-devicons"
+  use "lewis6991/gitsigns.nvim"
+
   end)
 
