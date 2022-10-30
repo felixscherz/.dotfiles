@@ -1,3 +1,4 @@
 tags
 .tags
 nvim/\.config/nvim/plugin/*
+**/.DS_Store
