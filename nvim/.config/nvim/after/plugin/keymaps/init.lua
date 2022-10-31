@@ -50,3 +50,4 @@ nnoremap("<leader>.", ':exe "vertical resize " . (winwidth(0) * 3/2)<CR>', {sile
 nnoremap("<leader>,", ':exe "vertical resize " . (winwidth(0) * 2/3)<CR>', {silent = true})
 nnoremap("<leader>=", ':exe "resize " . (winheight(0) * 3/2)<CR>', {silent = true})
 nnoremap("<leader>-", ':exe "resize " . (winheight(0) * 2/3)<CR>', {silent = true})
+
