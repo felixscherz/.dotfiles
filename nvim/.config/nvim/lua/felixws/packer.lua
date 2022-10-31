@@ -107,5 +107,16 @@ return require('packer').startup(function()
   use "nvim-tree/nvim-web-devicons"
   use "lewis6991/gitsigns.nvim"
 
+  -- take screenshots of code
+  -- Lua
+  -- use {
+  --   "narutoxy/silicon.lua",
+  --   requires = { "nvim-lua/plenary.nvim" },
+  --   config = function()
+  --     require('silicon').setup({})
+  --   end
+  -- }
+  use 'segeljakt/vim-silicon'
+
   end)
 
