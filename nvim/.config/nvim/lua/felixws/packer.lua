@@ -1,6 +1,5 @@
 -- Only required if you have packer configured as `opt`
-vim.cmd [[packadd packer.nvim]]
-
+vim.cmd([[packadd packer.nvim]])
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
 vim.cmd([[
@@ -10,113 +9,106 @@ vim.cmd([[
   augroup end
 ]])
 
-return require('packer').startup(function()
-  -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
+return require("packer").startup(function()
+	-- Packer can manage itself
+	use("wbthomason/packer.nvim")
 
-  -- colorscheme
-  use 'folke/tokyonight.nvim'
+	-- colorscheme
+	use("folke/tokyonight.nvim")
 
+	-- vertical bars to show indentation
+	use("Yggdroot/indentLine")
 
-  -- vertical bars to show indentation
-  use 'Yggdroot/indentLine'
+	-- statusline (maybe use lualine in the future?)
+	use({
+		"nvim-lualine/lualine.nvim",
+		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+	})
 
-  -- statusline (maybe use lualine in the future?)
-  use {
-  'nvim-lualine/lualine.nvim',
-  requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-  }
+	-- filetree navigation
+	use("preservim/nerdtree")
+	-- git status flags for nerdtree
+	use("Xuyuanp/nerdtree-git-plugin")
 
-  -- filetree navigation
-  use 'preservim/nerdtree'
-  -- git status flags for nerdtree
-  use 'Xuyuanp/nerdtree-git-plugin'
+	use("jiangmiao/auto-pairs")
 
-  use 'jiangmiao/auto-pairs'
+	--use {'neoclide/coc.nvim', branch = 'release'}
+	--use 'folke/lsp-colors.nvim'
 
-  --use {'neoclide/coc.nvim', branch = 'release'}
-  --use 'folke/lsp-colors.nvim'
+	-- fuzzy finder telescope + plenary as dependency
+	use("nvim-lua/plenary.nvim")
+	use("nvim-telescope/telescope.nvim")
 
-  -- fuzzy finder telescope + plenary as dependency
-  use 'nvim-lua/plenary.nvim'
-  use 'nvim-telescope/telescope.nvim'
+	-- deal with surrounds
+	use("tpope/vim-surround")
 
+	-- show undo history
+	use("mbbill/undotree")
 
-  -- deal with surrounds
-  use 'tpope/vim-surround'
+	-- tab completion
+	use("ervandew/supertab")
 
+	-- git plugin
+	use("tpope/vim-fugitive")
 
-  -- show undo history
-  use 'mbbill/undotree'
+	-- highlight substitution
+	use("markonm/traces.vim")
 
-  -- tab completion
-  use 'ervandew/supertab'
+	-- lightspeed navigation
+	-- use 'ggandor/lightspeed.nvim'
 
-  -- git plugin
-  use 'tpope/vim-fugitive'
+	-- vimwiki for notetaking
+	use("vimwiki/vimwiki")
 
-  -- highlight substitution
-  use 'markonm/traces.vim'
+	-- spotify integration with vim
+	use("HendrikPetertje/vimify")
 
-  -- lightspeed navigation
-  -- use 'ggandor/lightspeed.nvim'
+	-- show markdown in browser
+	-- install without yarn or npm
+	use({ "iamcco/markdown-preview.nvim", run = "cd app && yarn install" })
 
-  -- vimwiki for notetaking
-  use 'vimwiki/vimwiki'
+	-- coerce between different cases (camelCase snake_case)
+	use("tpope/vim-abolish")
 
-  -- spotify integration with vim
-  use 'HendrikPetertje/vimify'
+	-- cache lua for quicker startup
+	use("lewis6991/impatient.nvim")
 
-  -- show markdown in browser
-  -- install without yarn or npm
-  use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
+	-- cmp plugins
+	use("hrsh7th/nvim-cmp") -- The completion plugin
+	use("hrsh7th/cmp-buffer") -- buffer completions
+	use("hrsh7th/cmp-path") -- path completions
+	use("hrsh7th/cmp-cmdline") -- cmdline completions
+	use("saadparwaiz1/cmp_luasnip") -- snippet completions
+	use("hrsh7th/cmp-nvim-lsp")
+	use("hrsh7th/cmp-nvim-lua")
 
-  -- coerce between different cases (camelCase snake_case)
-  use 'tpope/vim-abolish'
+	use("jose-elias-alvarez/null-ls.nvim")
 
-  -- cache lua for quicker startup
-  use 'lewis6991/impatient.nvim'
+	-- snippets
+	use("L3MON4D3/LuaSnip") --snippet engine
+	use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
-  -- cmp plugins
-  use "hrsh7th/nvim-cmp" -- The completion plugin
-  use "hrsh7th/cmp-buffer" -- buffer completions
-  use "hrsh7th/cmp-path" -- path completions
-  use "hrsh7th/cmp-cmdline" -- cmdline completions
-  use "saadparwaiz1/cmp_luasnip" -- snippet completions
-  use "hrsh7th/cmp-nvim-lsp"
-  use "hrsh7th/cmp-nvim-lua"
+	-- LSP
+	use("neovim/nvim-lspconfig") -- enable LSP
+	use("williamboman/mason.nvim") -- simple to use language server installer
+	use("williamboman/mason-lspconfig.nvim") -- simple to use language server installer
 
-  use   "jose-elias-alvarez/null-ls.nvim"
+	-- treesitter
 
-  -- snippets
-  use "L3MON4D3/LuaSnip" --snippet engine
-  use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
+	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 
-  -- LSP
-  use "neovim/nvim-lspconfig" -- enable LSP
-  use "williamboman/mason.nvim" -- simple to use language server installer
-  use "williamboman/mason-lspconfig.nvim" -- simple to use language server installer
+	-- icons (hopefully)
+	use("nvim-tree/nvim-web-devicons")
+	use("lewis6991/gitsigns.nvim")
 
-  -- treesitter
-  
-  use {  "nvim-treesitter/nvim-treesitter",
-     run = ":TSUpdate",
-  }
-
-  -- icons (hopefully)
-  use "nvim-tree/nvim-web-devicons"
-  use "lewis6991/gitsigns.nvim"
-
-  -- take screenshots of code
-  -- Lua
-  -- use {
-  --   "narutoxy/silicon.lua",
-  --   requires = { "nvim-lua/plenary.nvim" },
-  --   config = function()
-  --     require('silicon').setup({})
-  --   end
-  -- }
-  use 'segeljakt/vim-silicon'
-
-  end)
-
+	-- take screenshots of code
+	-- Lua
+	-- use {
+	--   "narutoxy/silicon.lua",
+	--   requires = { "nvim-lua/plenary.nvim" },
+	--   config = function()
+	--     require('silicon').setup({})
+	--   end
+	-- }
+	use("segeljakt/vim-silicon")
+end)

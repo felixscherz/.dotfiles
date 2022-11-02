@@ -14,6 +14,6 @@ null_ls.setup({
 		formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
 		formatting.black.with({ extra_args = { "--line-length", "120" } }),
 		formatting.stylua,
-        diagnostics.flake8.with({ extra_args = {"--max-line-length=120"} })
+		diagnostics.flake8.with({ extra_args = { "--max-line-length=120" } }),
 	},
 })

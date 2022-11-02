@@ -1,4 +1,3 @@
-
 vim.opt.nu = true
 vim.opt.relativenumber = true
 vim.opt.number = true
@@ -25,7 +24,6 @@ vim.opt.cursorline = true
 vim.opt.wrap = false
 vim.opt.scrolloff = 5
 
-
 vim.g.mapleader = " "
 
 vim.opt.hidden = true
@@ -33,9 +31,9 @@ vim.opt.hidden = true
 vim.g.json_conceal = 0
 vim.g.markdown_syntax_conceal = 0
 
-vim.opt.clipboard = vim.opt.clipboard ^ {"unnamed", "unnamedplus"}
+vim.opt.clipboard = vim.opt.clipboard ^ { "unnamed", "unnamedplus" }
 
 -- to show whitespace using :set list, disable with :set nolist
-vim.cmd[[
+vim.cmd([[
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
-]]
+]])

@@ -1,4 +1,3 @@
-
 local servers = {
 	"sumneko_lua",
 	"pyright",

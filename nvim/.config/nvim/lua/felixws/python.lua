@@ -1,1 +1,1 @@
-vim.g.python3_host_prog = '~/.nvim-python3/bin/python3'
+vim.g.python3_host_prog = "~/.nvim-python3/bin/python3"
