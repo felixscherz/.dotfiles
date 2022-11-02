@@ -32,8 +32,6 @@ nnoremap("<C-u>", "<C-u>zz")
 nnoremap("gdh", ":diffget //2<CR>")
 nnoremap("gdl", ":diffget //3<CR>")
 
-nnoremap("<leader>q", ":Spotify<CR>")
-
 
 local builtin = require('telescope.builtin')
 nnoremap("<leader>ff", builtin.find_files)
