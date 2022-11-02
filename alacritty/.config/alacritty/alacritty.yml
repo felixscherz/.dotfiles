@@ -22,4 +22,6 @@ font:
 mouse:
   hide_when_typing: true
 
-shell:
+window:
+  opacity: 0.92
+    # decorations: buttonless
