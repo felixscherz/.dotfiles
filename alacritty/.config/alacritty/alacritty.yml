@@ -24,4 +24,4 @@ mouse:
 
 window:
   opacity: 0.92
-    # decorations: buttonless
+  decorations: buttonless
