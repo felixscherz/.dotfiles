@@ -25,10 +25,6 @@ return require("packer").startup(function()
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	})
 
-	-- filetree navigation
-	use("preservim/nerdtree")
-	-- git status flags for nerdtree
-	use("Xuyuanp/nerdtree-git-plugin")
 
 	use("jiangmiao/auto-pairs")
 
