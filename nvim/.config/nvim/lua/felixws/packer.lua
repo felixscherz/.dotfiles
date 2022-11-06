@@ -26,10 +26,21 @@ return require("packer").startup(function()
 	})
 
 
-	use("jiangmiao/auto-pairs")
+    use {
+	"windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {} end
+    }
 
-	--use {'neoclide/coc.nvim', branch = 'release'}
-	--use 'folke/lsp-colors.nvim'
+    
+    use {
+  "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    requires = { 
+      "nvim-lua/plenary.nvim",
+      "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+    }
+    }
 
 	-- fuzzy finder telescope + plenary as dependency
 	use("nvim-lua/plenary.nvim")
