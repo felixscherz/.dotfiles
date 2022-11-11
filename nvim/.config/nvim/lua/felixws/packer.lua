@@ -25,26 +25,26 @@ return require("packer").startup(function(use)
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	})
 
+	use({
+		"windwp/nvim-autopairs",
+		config = function()
+			require("nvim-autopairs").setup({})
+		end,
+	})
 
-    use {
-	"windwp/nvim-autopairs",
-    config = function() require("nvim-autopairs").setup {} end
-    }
-
-    
-    use {
-  "nvim-neo-tree/neo-tree.nvim",
-    branch = "v2.x",
-    requires = { 
-      "nvim-lua/plenary.nvim",
-      "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
-    }
-    }
+	use({
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v2.x",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+			"MunifTanjim/nui.nvim",
+		},
+	})
 
 	-- fuzzy finder telescope + plenary as dependency
 	use("nvim-lua/plenary.nvim")
-	use {"nvim-telescope/telescope.nvim", requires = {'nvim-lua/plenary.nvim', 'BurntSushi/ripgrep'}}
+	use({ "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim", "BurntSushi/ripgrep" } })
 
 	-- deal with surrounds
 	use("tpope/vim-surround")
@@ -110,10 +110,10 @@ return require("packer").startup(function(use)
 
 	-- take screenshots of code
 	-- Lua
-    use {
-      "narutoxy/silicon.lua",
-      requires = { "nvim-lua/plenary.nvim" },
-    }
+	use({
+		"narutoxy/silicon.lua",
+		requires = { "nvim-lua/plenary.nvim" },
+	})
 
-    use("norcalli/nvim-colorizer.lua")
+	use("norcalli/nvim-colorizer.lua")
 end)
