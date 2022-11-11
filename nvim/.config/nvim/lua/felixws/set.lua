@@ -28,6 +28,8 @@ vim.g.mapleader = " "
 
 vim.opt.hidden = true
 
+vim.opt.termguicolors = true
+
 vim.g.json_conceal = 0
 vim.g.markdown_syntax_conceal = 0
 

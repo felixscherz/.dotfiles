@@ -110,15 +110,10 @@ return require("packer").startup(function(use)
 
 	-- take screenshots of code
 	-- Lua
-	-- use {
-	--   "narutoxy/silicon.lua",
-	--   requires = { "nvim-lua/plenary.nvim" },
-	--   config = function()
-	--     require('silicon').setup({})
-	--   end
-	-- }
-	use("segeljakt/vim-silicon")
-
+    use {
+      "narutoxy/silicon.lua",
+      requires = { "nvim-lua/plenary.nvim" },
+    }
 
     use("norcalli/nvim-colorizer.lua")
 end)
