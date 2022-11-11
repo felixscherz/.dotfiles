@@ -72,4 +72,16 @@ require("neo-tree").setup({
             }
           },
         },
+    event_handlers = {
+        {
+            event = "vim_buffer_enter",
+            handler = function()
+                if vim.bo.filetype == "neo-tree" then
+                    vim.cmd("setlocal number")
+                    vim.cmd("setlocal nu")
+                    vim.cmd("setlocal relativenumber")
+                end
+            end,
+        }
+    }
 })
