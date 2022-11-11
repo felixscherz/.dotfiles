@@ -53,7 +53,7 @@ return require("packer").startup(function(use)
 	use("mbbill/undotree")
 
 	-- tab completion
-	use("ervandew/supertab")
+	-- use("ervandew/supertab")
 
 	-- git plugin
 	use("tpope/vim-fugitive")
