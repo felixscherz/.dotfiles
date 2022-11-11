@@ -9,7 +9,7 @@ vim.cmd([[
   augroup end
 ]])
 
-return require("packer").startup(function()
+return require("packer").startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
 
@@ -44,7 +44,7 @@ return require("packer").startup(function()
 
 	-- fuzzy finder telescope + plenary as dependency
 	use("nvim-lua/plenary.nvim")
-	use("nvim-telescope/telescope.nvim")
+	use {"nvim-telescope/telescope.nvim", requires = {'nvim-lua/plenary.nvim', 'BurntSushi/ripgrep'}}
 
 	-- deal with surrounds
 	use("tpope/vim-surround")
@@ -118,4 +118,7 @@ return require("packer").startup(function()
 	--   end
 	-- }
 	use("segeljakt/vim-silicon")
+
+
+    use("norcalli/nvim-colorizer.lua")
 end)
