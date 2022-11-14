@@ -116,4 +116,6 @@ return require("packer").startup(function(use)
 	})
 
 	use("norcalli/nvim-colorizer.lua")
+
+    use("ThePrimeagen/harpoon")
 end)
