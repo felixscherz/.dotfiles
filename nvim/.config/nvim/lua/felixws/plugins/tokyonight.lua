@@ -10,7 +10,7 @@ require("tokyonight").setup({
 	on_highlights = function(hl, _)
 		hl.CursorLine = {
 			color = hl.CursorLine.color,
-			bold = true
+			bold = false
 		}
 	end
 })
