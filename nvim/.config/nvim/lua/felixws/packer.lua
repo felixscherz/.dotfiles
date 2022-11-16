@@ -120,4 +120,6 @@ return require("packer").startup(function(use)
     use("ThePrimeagen/harpoon")
 
     use("echasnovski/mini.nvim")
+
+    use("diepm/vim-rest-console")
 end)
