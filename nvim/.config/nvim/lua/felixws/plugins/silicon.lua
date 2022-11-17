@@ -1,8 +1,13 @@
 Silicon = require('silicon')
+local colors = require('tokyonight.colors').setup()
 Silicon.setup({
     theme = "TwoDark",
     windowControls = false,
-    padHoriz = 40,
-    padVert= 50
+    padHoriz = 10,
+    padVert = 12,
+    linePad = 1,
+    bgColor = colors.blue0,
+    shadowBlurRadius = 0,
 
 })
+
