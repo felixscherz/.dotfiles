@@ -47,7 +47,7 @@ cmp.setup({
 			end
 		end, {
 			"i",
-			"s",
+			"s"
 		}),
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
@@ -77,6 +77,8 @@ cmp.setup({
 		end,
 	},
 	sources = {
+		{ name = "nvim_lsp" },
+		{ name = "nvim_lsp_signature_help" },
 		{ name = "luasnip" },
 		{ name = "buffer" },
 		{ name = "path" },
@@ -93,3 +95,5 @@ cmp.setup({
 		native_menu = false,
 	},
 })
+
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
