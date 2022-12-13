@@ -17,5 +17,5 @@ augroup end
 ]])
 
 vim.cmd([[
-let g:markdown_fenced_languages = ['go','perl','sh', 'python', 'cpp', 'c', 'javascript', 'vim']
+let g:markdown_fenced_languages = ['go','perl','sh', 'python', 'cpp', 'c', 'javascript', 'vim', 'rust', 'java']
 ]])
