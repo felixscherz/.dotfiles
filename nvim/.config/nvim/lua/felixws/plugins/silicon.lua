@@ -1,7 +1,7 @@
 Silicon = require('silicon')
 local colors = require('tokyonight.colors').setup()
 Silicon.setup({
-    theme = "TwoDark",
+    theme = "Monokai Extended",
     windowControls = false,
     padHoriz = 10,
     padVert = 12,
