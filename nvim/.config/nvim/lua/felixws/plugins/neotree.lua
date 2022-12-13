@@ -14,6 +14,13 @@ require("neo-tree").setup({
 					show_path = "absolute", -- "none", "relative", "absolute"
 				},
 			},
+			["c"] = {
+				"copy",
+				-- some commands may take optional config options, see `:h neo-tree-mappings` for details
+				config = {
+					show_path = "absolute", -- "none", "relative", "absolute"
+				},
+			},
 		},
 	},
 	enable_git_status = true,
