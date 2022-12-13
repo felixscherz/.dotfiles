@@ -125,4 +125,7 @@ return require("packer").startup(function(use)
 
     -- run curl commands from inside vim
     use("diepm/vim-rest-console")
+
+    -- presentation in nvim
+    use("sotte/presenting.vim")
 end)

@@ -15,3 +15,7 @@ augroup vimwikigroup
     autocmd BufRead,BufNewFile diary.md VimwikiDiaryGenerateLinks
 augroup end
 ]])
+
+vim.cmd([[
+let g:markdown_fenced_languages = ['go','perl','sh', 'python', 'cpp', 'c', 'javascript', 'vim']
+]])
