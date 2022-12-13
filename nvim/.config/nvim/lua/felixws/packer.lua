@@ -120,7 +120,9 @@ return require("packer").startup(function(use)
 
     use("ThePrimeagen/harpoon")
 
+    -- collection of small plugins (highlight current word)
     use("echasnovski/mini.nvim")
 
+    -- run curl commands from inside vim
     use("diepm/vim-rest-console")
 end)
