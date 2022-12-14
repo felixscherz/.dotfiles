@@ -1,13 +1,37 @@
 Silicon = require('silicon')
 local colors = require('tokyonight.colors').setup()
 Silicon.setup({
-    theme = "Monokai Extended",
+    theme = "Visual Studio Dark+",
     windowControls = false,
-    padHoriz = 10,
-    padVert = 12,
+    padHoriz = 0,
+    padVert = 0,
     linePad = 1,
-    bgColor = colors.blue0,
+    bgColor = colors.bg,
     shadowBlurRadius = 0,
 
 })
 
+-- available themes in silicon.lua
+--  local default_themes = {
+-- "1337",
+-- "Coldark-Cold",
+-- "Coldark-Dark",
+-- "DarkNeon",
+-- "Dracula",
+-- "GitHub",
+-- "Monokai Extended",
+-- "Monokai Extended Bright",
+-- "Monokai Extended Light",
+-- "Monokai Extended Origin",
+-- "Nord",
+-- "OneHalfDark",
+-- "OneHalfLight",
+-- "Solarized (dark)",
+-- "Solarized (light)",
+-- "Sublime Snazzy",
+-- "TwoDark",
+-- "Visual Studio Dark+",
+-- "ansi",
+-- "base16",
+-- "base16-256"}
+--
