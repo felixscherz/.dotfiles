@@ -1,6 +1,5 @@
-require("impatient")
 require("felixws.set")
-require("felixws.packer")
+require("felixws.lazy")
 require("felixws.python")
 require("felixws.aucmds")
 require("felixws.lsp")
