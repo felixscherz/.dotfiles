@@ -1,19 +1,40 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
 end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	-- colorscheme
-	"folke/tokyonight.nvim",
+	-- "folke/tokyonight.nvim",
+	{
+		"folke/tokyonight.nvim",
+		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		priority = 1000, -- make sure to load this before all the other start plugins
+		opts = {
+			transparent = true,
+			styles = { sidebars = "transparent" },
+			dim_inactive = true,
+			on_colors = function(colors)
+				colors.border = colors.blue
+				colors.diff.delete = colors.git.delete
+				colors.bg_highlight = "NONE"
+			end,
+			on_highlights = function(hl, _)
+				hl.CursorLine = {
+					color = hl.CursorLine.color,
+					bold = false,
+				}
+			end,
+		},
+	},
 
 	-- vertical bars to show indentation
 	"Yggdroot/indentLine",
@@ -81,7 +102,7 @@ require("lazy").setup({
 	"saadparwaiz1/cmp_luasnip", -- snippet completions
 	"hrsh7th/cmp-nvim-lsp",
 	"hrsh7th/cmp-nvim-lua",
-    "hrsh7th/cmp-nvim-lsp-signature-help",
+	"hrsh7th/cmp-nvim-lsp-signature-help",
 
 	"jose-elias-alvarez/null-ls.nvim",
 
@@ -109,14 +130,14 @@ require("lazy").setup({
 
 	"norcalli/nvim-colorizer.lua",
 
-    "ThePrimeagen/harpoon",
+	"ThePrimeagen/harpoon",
 
-    -- collection of small plugins (highlight current word)
-    "echasnovski/mini.nvim",
+	-- collection of small plugins (highlight current word)
+	"echasnovski/mini.nvim",
 
-    -- run curl commands from inside vim
-    "diepm/vim-rest-console",
+	-- run curl commands from inside vim
+	"diepm/vim-rest-console",
 
-    -- presentation in nvim
-    "sotte/presenting.vim",
+	-- presentation in nvim
+	"sotte/presenting.vim",
 })
