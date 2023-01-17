@@ -79,14 +79,16 @@ require("lazy").setup({
 	"markonm/traces.vim",
 
 	-- vimwiki for notetaking
-	"vimwiki/vimwiki",
+    {"vimwiki/vimwiki", init = function ()
+        require("felixws.plugins.vimwiki")
+    end},
 
 	-- spotify integration with vim
 	-- "HendrikPetertje/vimify",
 
 	-- show markdown in browser
 	-- install without yarn or npm
-	{ "iamcco/markdown-preview.nvim", build = "cd app && yarn install" },
+	{ "iamcco/markdown-preview.nvim", build = "cd app && yarn install"},
 
 	-- coerce between different cases (camelCase snake_case)
 	"tpope/vim-abolish",
