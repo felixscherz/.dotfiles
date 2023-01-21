@@ -108,11 +108,6 @@ require("lazy").setup({
 
 	"jose-elias-alvarez/null-ls.nvim",
 
-	-- "mfussenegger/nvim-dap",
-	-- "mfussenegger/nvim-dap-python",
-	-- "rcarriga/nvim-dap-ui",
-	-- "theHamsta/nvim-dap-virtual-text",
-
 	{
 		"nvim-neotest/neotest",
 
