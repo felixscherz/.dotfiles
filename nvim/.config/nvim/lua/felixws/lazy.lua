@@ -153,7 +153,23 @@ require("lazy").setup({
 
 	-- treesitter
 
-	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				incremental_selection = {
+					enable = true,
+					keymaps = {
+						init_selection = "<CR>",
+						node_incremental = "<CR>",
+						scope_incremental = "<CR>",
+						node_decremental = "<BS>",
+					},
+				},
+			})
+		end,
+	},
 
 	-- icons (hopefully)
 	"lewis6991/gitsigns.nvim",
