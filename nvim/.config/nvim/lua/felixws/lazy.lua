@@ -33,6 +33,14 @@ require("lazy").setup({
 			end,
 		},
 	},
+	{
+		"folke/which-key.nvim",
+		config = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+			require("which-key").setup()
+		end,
+	},
 
 	-- vertical bars to show indentation
 	"Yggdroot/indentLine",
@@ -118,7 +126,6 @@ require("lazy").setup({
 			"nvim-neotest/neotest-python",
 			"nvim-neotest/neotest-plenary",
 			"nvim-neotest/neotest-vim-test",
-
 		},
 		config = function()
 			require("neotest").setup({

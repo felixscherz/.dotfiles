@@ -1,6 +1,11 @@
 local builtin = require("telescope.builtin")
-Nnoremap("<leader>ff", builtin.find_files)
-Nnoremap("<leader>fg", builtin.live_grep)
-Nnoremap("<leader>fb", builtin.buffers)
-Nnoremap("<leader>fh", builtin.help_tags)
+local wk = require("which-key")
 
+wk.register({
+	f = {
+		f = { builtin.find_files, "find files" },
+		g = { builtin.live_grep, "live grep" },
+		b = { builtin.buffers, "search buffers" },
+		h = { builtin.help_tags, "serach tags" },
+	},
+}, { prefix = "<leader>" })

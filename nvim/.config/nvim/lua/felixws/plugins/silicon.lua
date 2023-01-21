@@ -1,14 +1,12 @@
-Silicon = require('silicon')
-local colors = require('tokyonight.colors').setup()
-Silicon.setup({
-    theme = "Visual Studio Dark+",
-    windowControls = false,
-    padHoriz = 0,
-    padVert = 0,
-    linePad = 1,
-    bgColor = colors.bg,
-    shadowBlurRadius = 0,
-
+local colors = require("tokyonight.colors").setup()
+require("silicon").setup({
+	theme = "Visual Studio Dark+",
+	windowControls = false,
+	padHoriz = 0,
+	padVert = 0,
+	linePad = 1,
+	bgColor = colors.bg,
+	shadowBlurRadius = 0,
 })
 
 -- available themes in silicon.lua

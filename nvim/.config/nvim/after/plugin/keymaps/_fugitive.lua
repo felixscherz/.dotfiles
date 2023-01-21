@@ -1,3 +1,5 @@
-Nnoremap("gdh", ":diffget //2<CR>")
-Nnoremap("gdl", ":diffget //3<CR>")
-
+local wk = require("which-key")
+wk.register({
+	["gdh"] = { ":diffget //2<CR>", "get left diff" },
+	["gdl"] = { ":diffget //3<CR>", "get right diff" },
+})
