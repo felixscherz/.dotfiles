@@ -12,8 +12,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	-- colorscheme
-	-- "folke/tokyonight.nvim",
 	{
 		"folke/tokyonight.nvim",
 		lazy = false, -- make sure we load this during startup if it is your main colorscheme
@@ -39,7 +37,6 @@ require("lazy").setup({
 	-- vertical bars to show indentation
 	"Yggdroot/indentLine",
 
-	-- statusline (maybe use lualine in the future?)
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "kyazdani42/nvim-web-devicons", lazy = true },
@@ -79,16 +76,19 @@ require("lazy").setup({
 	"markonm/traces.vim",
 
 	-- vimwiki for notetaking
-    {"vimwiki/vimwiki", init = function ()
-        require("felixws.plugins.vimwiki")
-    end},
+	{
+		"vimwiki/vimwiki",
+		init = function()
+			require("felixws.plugins.vimwiki")
+		end,
+	},
 
 	-- spotify integration with vim
 	-- "HendrikPetertje/vimify",
 
 	-- show markdown in browser
 	-- install without yarn or npm
-	{ "iamcco/markdown-preview.nvim", build = "cd app && yarn install"},
+	{ "iamcco/markdown-preview.nvim", build = "cd app && yarn install" },
 
 	-- coerce between different cases (camelCase snake_case)
 	"tpope/vim-abolish",
@@ -107,6 +107,38 @@ require("lazy").setup({
 	"hrsh7th/cmp-nvim-lsp-signature-help",
 
 	"jose-elias-alvarez/null-ls.nvim",
+
+	-- "mfussenegger/nvim-dap",
+	-- "mfussenegger/nvim-dap-python",
+	-- "rcarriga/nvim-dap-ui",
+	-- "theHamsta/nvim-dap-virtual-text",
+
+	{
+		"nvim-neotest/neotest",
+
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"antoinemadec/FixCursorHold.nvim",
+			"nvim-neotest/neotest-python",
+			"nvim-neotest/neotest-plenary",
+			"nvim-neotest/neotest-vim-test",
+
+		},
+		config = function()
+			require("neotest").setup({
+				adapters = {
+					require("neotest-python")({
+						dap = { justMyCode = false },
+					}),
+					require("neotest-plenary"),
+					require("neotest-vim-test")({
+						ignore_file_types = { "python", "vim", "lua" },
+					}),
+				},
+			})
+		end,
+	},
 
 	-- snippets
 	"L3MON4D3/LuaSnip", --snippet engine
