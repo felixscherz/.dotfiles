@@ -172,7 +172,12 @@ require("lazy").setup({
 	},
 
 	-- icons (hopefully)
-	"lewis6991/gitsigns.nvim",
+	{
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("gitsigns").setup()
+		end,
+	},
 
 	-- take screenshots of code
 	{
@@ -180,9 +185,19 @@ require("lazy").setup({
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 
-	"norcalli/nvim-colorizer.lua",
+	{
+		"norcalli/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup()
+		end,
+	},
 
-	"ThePrimeagen/harpoon",
+	{
+		"ThePrimeagen/harpoon",
+		config = function()
+			require("harpoon").setup()
+		end,
+	},
 
 	-- collection of small plugins (highlight current word)
 	"echasnovski/mini.nvim",
