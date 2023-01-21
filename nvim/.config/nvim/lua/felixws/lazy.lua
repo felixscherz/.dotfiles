@@ -47,7 +47,7 @@ require("lazy").setup({
 
 	{
 		"nvim-lualine/lualine.nvim",
-		dependencies = { "kyazdani42/nvim-web-devicons", lazy = true },
+		dependencies = { "kyazdani42/nvim-web-devicons", "arkav/lualine-lsp-progress" },
 	},
 
 	{

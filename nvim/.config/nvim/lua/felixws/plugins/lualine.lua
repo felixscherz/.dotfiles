@@ -1,7 +1,12 @@
 require("lualine").setup({
 	options = {
-		-- ... your lualine config
 		theme = "tokyonight",
-		-- ... your lualine config
+		globalstatus = true,
+	},
+	sections = {
+		lualine_c = {
+			...,
+			"lsp_progress",
+		},
 	},
 })
