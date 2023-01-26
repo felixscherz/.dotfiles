@@ -399,6 +399,8 @@ bind l selectp -R # switch to panel Right
 
 
 set-option -sg escape-time 10
+
+set-option -s status-interval 1
 # -- custom variables ----------------------------------------------------------
 
 # to define a custom #{foo} variable, define a POSIX shell function between the
