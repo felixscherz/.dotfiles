@@ -23,7 +23,7 @@ require("lazy").setup({
 			on_colors = function(colors)
 				colors.border = colors.blue
 				colors.diff.delete = colors.git.delete
-                colors.gitSigns = colors.git
+				colors.gitSigns = colors.git
 				colors.bg_highlight = "NONE"
 			end,
 			on_highlights = function(hl, _)
@@ -43,12 +43,19 @@ require("lazy").setup({
 		end,
 	},
 
-    {
-        "alvarosevilla95/luatab.nvim",
-        config = function()
-            require('luatab').setup()
-        end,
-    },
+	{
+		"kdheepak/tabline.nvim",
+		dependencies = {
+			"kyazdani42/nvim-web-devicons",
+		},
+		config = function()
+			require("tabline").setup({
+				options = {
+					show_tabs_only = true,
+				},
+			})
+		end,
+	},
 
 	-- vertical bars to show indentation
 	"Yggdroot/indentLine",
@@ -145,7 +152,7 @@ require("lazy").setup({
 					require("neotest-vim-test")({
 						ignore_file_types = { "python", "vim", "lua" },
 					}),
-				}
+				},
 			})
 		end,
 	},
