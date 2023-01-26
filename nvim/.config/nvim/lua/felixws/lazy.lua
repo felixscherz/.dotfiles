@@ -23,6 +23,7 @@ require("lazy").setup({
 			on_colors = function(colors)
 				colors.border = colors.blue
 				colors.diff.delete = colors.git.delete
+                colors.gitSigns = colors.git
 				colors.bg_highlight = "NONE"
 			end,
 			on_highlights = function(hl, _)
@@ -137,7 +138,7 @@ require("lazy").setup({
 					require("neotest-vim-test")({
 						ignore_file_types = { "python", "vim", "lua" },
 					}),
-				},
+				}
 			})
 		end,
 	},
