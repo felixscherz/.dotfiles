@@ -43,6 +43,13 @@ require("lazy").setup({
 		end,
 	},
 
+    {
+        "alvarosevilla95/luatab.nvim",
+        config = function()
+            require('luatab').setup()
+        end,
+    },
+
 	-- vertical bars to show indentation
 	"Yggdroot/indentLine",
 
