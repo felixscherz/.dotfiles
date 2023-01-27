@@ -3,7 +3,8 @@ local servers = {
 	"pyright",
 	"jsonls",
     "rust_analyzer",
-    "sqlls"
+    "sqlls",
+    "ruff_lsp"
 }
 
 local settings = {
