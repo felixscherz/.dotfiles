@@ -2,9 +2,9 @@ local servers = {
 	"sumneko_lua",
 	"pyright",
 	"jsonls",
-    "rust_analyzer",
-    "sqlls",
-    "ruff_lsp"
+	"rust_analyzer",
+	"ruff_lsp",
+	"yamlls",
 }
 
 local settings = {
