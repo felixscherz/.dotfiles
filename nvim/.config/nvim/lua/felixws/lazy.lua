@@ -106,6 +106,12 @@ require("lazy").setup({
 			load = {
 				["core.defaults"] = {}, -- Loads default behaviour
 				["core.norg.concealer"] = {}, -- Adds pretty icons to your documents
+				["core.norg.journal"] = {},
+				["core.presenter"] = {
+                    config = {
+                        zen_mode = "zen-mode"
+                    }
+                },
 				["core.norg.dirman"] = { -- Manages Neorg workspaces
 					config = {
 						workspaces = {
@@ -115,7 +121,7 @@ require("lazy").setup({
 				},
 			},
 		},
-		dependencies = { { "nvim-lua/plenary.nvim" } },
+		dependencies = { { "nvim-lua/plenary.nvim" } , "folke/zen-mode.nvim"},
 	},
 
 	-- show markdown in browser
