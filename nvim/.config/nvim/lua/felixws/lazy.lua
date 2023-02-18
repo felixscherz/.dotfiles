@@ -107,6 +107,7 @@ require("lazy").setup({
 				["core.defaults"] = {}, -- Loads default behaviour
 				["core.norg.concealer"] = {}, -- Adds pretty icons to your documents
 				["core.norg.journal"] = {},
+				["core.norg.qol.toc"] = {},
 				["core.presenter"] = {
                     config = {
                         zen_mode = "zen-mode"
