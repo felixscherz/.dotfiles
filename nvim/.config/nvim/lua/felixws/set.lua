@@ -31,8 +31,8 @@ vim.opt.hidden = true
 
 vim.opt.termguicolors = true
 
-vim.g.json_conceal = 0
-vim.g.markdown_syntax_conceal = 1
+-- vim.g.json_conceal = 0
+-- vim.g.markdown_syntax_conceal = 1
 
 vim.opt.clipboard = vim.opt.clipboard ^ { "unnamed", "unnamedplus" }
 

@@ -5,7 +5,7 @@ if not vim.loop.fs_stat(lazypath) then
 		"clone",
 		"--filter=blob:none",
 		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable", -- latest stable release
+		"--branch=stable",
 		lazypath,
 	})
 end
@@ -98,28 +98,25 @@ require("lazy").setup({
 	-- highlight substitution
 	"markonm/traces.vim",
 
-    -- neorg
-    {
-        "nvim-neorg/neorg",
-        build = ":Neorg sync-parsers",
-        opts = {
-            load = {
-                ["core.defaults"] = {}, -- Loads default behaviour
-                ["core.norg.concealer"] = {}, -- Adds pretty icons to your documents
-                ["core.norg.dirman"] = { -- Manages Neorg workspaces
-                    config = {
-                        workspaces = {
-                            notes = "~/notes",
-                        },
-                    },
-                },
-            },
-        },
-        dependencies = { { "nvim-lua/plenary.nvim" } },
-    },
-
-	-- spotify integration with vim
-	-- "HendrikPetertje/vimify",
+	-- neorg
+	{
+		"nvim-neorg/neorg",
+		build = ":Neorg sync-parsers",
+		opts = {
+			load = {
+				["core.defaults"] = {}, -- Loads default behaviour
+				["core.norg.concealer"] = {}, -- Adds pretty icons to your documents
+				["core.norg.dirman"] = { -- Manages Neorg workspaces
+					config = {
+						workspaces = {
+							notes = "~/notes",
+						},
+					},
+				},
+			},
+		},
+		dependencies = { { "nvim-lua/plenary.nvim" } },
+	},
 
 	-- show markdown in browser
 	-- install without yarn or npm
