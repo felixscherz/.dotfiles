@@ -23,7 +23,7 @@ vim.opt.colorcolumn = "120"
 vim.opt.cursorline = true
 
 vim.opt.wrap = false
-vim.opt.scrolloff = 5
+vim.opt.scrolloff = 8
 
 vim.g.mapleader = " "
 
@@ -31,12 +31,4 @@ vim.opt.hidden = true
 
 vim.opt.termguicolors = true
 
--- vim.g.json_conceal = 0
--- vim.g.markdown_syntax_conceal = 1
-
 vim.opt.clipboard = vim.opt.clipboard ^ { "unnamed", "unnamedplus" }
-
--- to show whitespace using :set list, disable with :set nolist
-vim.cmd([[
-set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
-]])
