@@ -129,14 +129,18 @@ require("lazy").setup({
 	"lewis6991/impatient.nvim",
 
 	-- cmp plugins
-	"hrsh7th/nvim-cmp", -- The completion plugin
-	"hrsh7th/cmp-buffer", -- buffer completions
-	"hrsh7th/cmp-path", -- path completions
-	"hrsh7th/cmp-cmdline", -- cmdline completions
-	"saadparwaiz1/cmp_luasnip", -- snippet completions
-	"hrsh7th/cmp-nvim-lsp",
-	"hrsh7th/cmp-nvim-lua",
-	"hrsh7th/cmp-nvim-lsp-signature-help",
+	{
+		"hrsh7th/nvim-cmp", -- The completion plugin
+		dependencies = {
+			"hrsh7th/cmp-buffer", -- buffer completions
+			"hrsh7th/cmp-path", -- path completions
+			"hrsh7th/cmp-cmdline", -- cmdline completions
+			"saadparwaiz1/cmp_luasnip", -- snippet completions
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-nvim-lua",
+			"hrsh7th/cmp-nvim-lsp-signature-help",
+		},
+	},
 
 	"jose-elias-alvarez/null-ls.nvim",
 
@@ -211,7 +215,7 @@ require("lazy").setup({
 				},
 				highlight = {
 					enable = true,
-                    additional_vim_regex_highlighting = false,
+					additional_vim_regex_highlighting = false,
 				},
 			})
 		end,
