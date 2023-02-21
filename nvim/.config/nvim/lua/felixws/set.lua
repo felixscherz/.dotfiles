@@ -1,3 +1,12 @@
+local options = {
+	nu = true,
+	conceallevel = 0,
+}
+
+for k, v in pairs(options) do
+	vim.opt[k] = v
+end
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
 vim.opt.number = true
@@ -24,6 +33,7 @@ vim.opt.cursorline = true
 
 vim.opt.wrap = false
 vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 8
 
 vim.g.mapleader = " "
 
@@ -32,3 +42,5 @@ vim.opt.hidden = true
 vim.opt.termguicolors = true
 
 vim.opt.clipboard = vim.opt.clipboard ^ { "unnamed", "unnamedplus" }
+
+vim.opt.conceallevel = 0
