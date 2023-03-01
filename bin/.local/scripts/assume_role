@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+profile=$1;
+role_name=$2;
+role_arn=$(aws iam list-roles --profile $profile | jq -r -c ".Roles[] | select(.RoleName | contains(\"$role_name\")) | .Arn")
+resp=$(aws sts assume-role --role-arn $role_arn --role-session-name "${role_name}-session" --profile $profile);
+key=$(echo $resp | jq .Credentials.AccessKeyId);
+secret=$(echo $resp | jq .Credentials.SecretAccessKey);
+session_token=$(echo $resp | jq .Credentials.SessionToken);
+export AWS_ACCESS_KEY_ID=${key};
+export AWS_SECRET_ACCESS_KEY=${secret};
+export AWS_SESSION_TOKEN=${session_token};
+echo "assumed role ${role_arn}";
+

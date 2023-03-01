@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
 addToPath $HOME/.rd/bin
+addToPath $HOME/.local/scripts
