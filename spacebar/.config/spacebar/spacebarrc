@@ -2,7 +2,7 @@
 
 # Fixes a bug on the newest MacOS version, Thanks to Kamen Vakavchiev!
 # see: https://github.com/cmacrae/spacebar/issues/101#issuecomment-1083252227
-spacebar -m config right_shell off
+spacebar -m config right_shell                 off
 
 spacebar -m config position                    top
 spacebar -m config height                      26
@@ -31,9 +31,6 @@ spacebar -m config space_icon_strip            1 2 3 4 5 6 7 8 9 10
 spacebar -m config clock_icon                  
 spacebar -m config dnd_icon                    
 spacebar -m config clock_format                "%y/%m/%d %R"
-spacebar -m config right_shell                 on
-spacebar -m config right_shell_icon            
-spacebar -m config right_shell_command         "whoami"
 
 
 # debugging
