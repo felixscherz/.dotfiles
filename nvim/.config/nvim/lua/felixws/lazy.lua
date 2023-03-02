@@ -115,22 +115,30 @@ require("lazy").setup({
 				["core.defaults"] = {}, -- Loads default behaviour
 				["core.norg.concealer"] = {}, -- Adds pretty icons to your documents
 				["core.norg.journal"] = {},
+				["core.keybinds"] = {
+					config = {
+						default_keybinds = true,
+						neorg_leader = ",",
+					},
+				},
 				["core.norg.qol.toc"] = {},
+
 				["core.presenter"] = {
-                    config = {
-                        zen_mode = "zen-mode"
-                    }
-                },
+					config = {
+						zen_mode = "zen-mode",
+					},
+				},
 				["core.norg.dirman"] = { -- Manages Neorg workspaces
 					config = {
 						workspaces = {
-							notes = "~/notes",
+							exxeta = "~/notes/work",
+							personal = "~/notes/personal",
 						},
 					},
 				},
 			},
 		},
-		dependencies = { { "nvim-lua/plenary.nvim" } , "folke/zen-mode.nvim"},
+		dependencies = { { "nvim-lua/plenary.nvim" }, "folke/zen-mode.nvim" },
 	},
 
 	-- show markdown in browser
@@ -175,6 +183,7 @@ require("lazy").setup({
 				adapters = {
 					require("neotest-python")({
 						dap = { justMyCode = false },
+                        args={"-rP", "--log-level", "DEBUG"}
 					}),
 					require("neotest-plenary"),
 					require("neotest-vim-test")({
