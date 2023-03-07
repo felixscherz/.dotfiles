@@ -131,7 +131,7 @@ require("lazy").setup({
 				["core.norg.dirman"] = { -- Manages Neorg workspaces
 					config = {
 						workspaces = {
-							exxeta = "~/notes/work",
+							work = "~/notes/work",
 							personal = "~/notes/personal",
 						},
 					},
