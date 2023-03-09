@@ -9,5 +9,5 @@ cmd([[
 ]])
 
 cmd([[
-autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
+autocmd FileType make set noexpandtab
 ]])
