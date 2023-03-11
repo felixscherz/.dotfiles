@@ -124,9 +124,6 @@ require("lazy").setup({
 	-- coerce between different cases (camelCase snake_case)
 	"tpope/vim-abolish",
 
-	-- cache lua for quicker startup
-	"lewis6991/impatient.nvim",
-
 	-- cmp plugins
 	{
 		"hrsh7th/nvim-cmp", -- The completion plugin
