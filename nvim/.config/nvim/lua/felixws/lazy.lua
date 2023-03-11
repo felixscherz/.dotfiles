@@ -106,40 +106,16 @@ require("lazy").setup({
 	-- highlight substitution
 	"markonm/traces.vim",
 
-	-- neorg
+	--orgmode
 	{
-		"nvim-neorg/neorg",
-		build = ":Neorg sync-parsers",
-		opts = {
-			load = {
-				["core.defaults"] = {}, -- Loads default behaviour
-				["core.norg.concealer"] = {}, -- Adds pretty icons to your documents
-				["core.norg.journal"] = {},
-				["core.keybinds"] = {
-					config = {
-						default_keybinds = true,
-						neorg_leader = ",",
-					},
-				},
-				["core.norg.qol.toc"] = {},
-
-				["core.presenter"] = {
-					config = {
-						zen_mode = "zen-mode",
-					},
-				},
-				["core.norg.dirman"] = { -- Manages Neorg workspaces
-					config = {
-						workspaces = {
-							work = "~/notes/work",
-							personal = "~/notes/personal",
-						},
-					},
-				},
-			},
-		},
-		dependencies = { { "nvim-lua/plenary.nvim" }, "folke/zen-mode.nvim" },
+		"nvim-orgmode/orgmode",
+		lazy = false,
+		config = function()
+            require("orgmode").setup_ts_grammar()
+			require("orgmode").setup()
+		end,
 	},
+	-- neorg
 
 	-- show markdown in browser
 	-- install without yarn or npm
@@ -169,7 +145,6 @@ require("lazy").setup({
 
 	{
 		"nvim-neotest/neotest",
-
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
@@ -183,7 +158,7 @@ require("lazy").setup({
 				adapters = {
 					require("neotest-python")({
 						dap = { justMyCode = false },
-                        args={"-rP", "--log-level", "DEBUG"}
+						args = { "-rP", "--log-level", "DEBUG" },
 					}),
 					require("neotest-plenary"),
 					require("neotest-vim-test")({
