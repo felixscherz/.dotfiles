@@ -26,13 +26,20 @@ require("neo-tree").setup({
 	enable_git_status = true,
 	git_status_async = true,
 	filesystem = {
+        find_by_full_path_words = true,
 		hijack_netrw_behavior = "open_default",
 		filtered_items = {
+            hide_dotfiles = false,
 			hide_by_name = {
 				".DS_Store",
 				"thumbs.db",
 				"node_modules",
 			},
+            always_show = {
+                ".gitlab-ci.yml",
+                ".gitignore",
+                ".pre-commit-config.yaml"
+            }
 		},
 		use_libuv_file_watcher = true,
 	},
