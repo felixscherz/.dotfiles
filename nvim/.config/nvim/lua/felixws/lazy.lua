@@ -14,7 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     {
         "folke/tokyonight.nvim",
-        lazy = false, -- make sure we load this during startup if it is your main colorscheme
+        lazy = false,    -- make sure we load this during startup if it is your main colorscheme
         priority = 1000, -- make sure to load this before all the other start plugins
         opts = {
             transparent = true,
@@ -94,13 +94,28 @@ require("lazy").setup({
     "nvim-lua/plenary.nvim",
     {
         "nvim-telescope/telescope.nvim",
-        dependencies = { "nvim-lua/plenary.nvim", "BurntSushi/ripgrep" },
+        dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             require("telescope").setup({
+                defaults = {
+                    vimgrep_arguments = {
+                        'rg',
+                        '--color=never',
+                        '--no-heading',
+                        '--with-filename',
+                        '--line-number',
+                        '--column',
+                        '--smart-case',
+                        '--hidden'
+                    }
+                },
                 pickers = {
                     find_files = {
                         hidden = true,
                     },
+                    live_grep = {
+                        glob_pattern = {"!.git/"}
+                    }
                 },
             })
         end,
@@ -139,11 +154,11 @@ require("lazy").setup({
 
     -- cmp plugins
     {
-        "hrsh7th/nvim-cmp",    -- The completion plugin
+        "hrsh7th/nvim-cmp",             -- The completion plugin
         dependencies = {
-            "hrsh7th/cmp-buffer", -- buffer completions
-            "hrsh7th/cmp-path", -- path completions
-            "hrsh7th/cmp-cmdline", -- cmdline completions
+            "hrsh7th/cmp-buffer",       -- buffer completions
+            "hrsh7th/cmp-path",         -- path completions
+            "hrsh7th/cmp-cmdline",      -- cmdline completions
             "saadparwaiz1/cmp_luasnip", -- snippet completions
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-nvim-lua",
@@ -181,12 +196,12 @@ require("lazy").setup({
     },
 
     -- snippets
-    "L3MON4D3/LuaSnip",          --snippet engine
+    "L3MON4D3/LuaSnip",             --snippet engine
     "rafamadriz/friendly-snippets", -- a bunch of snippets to use
 
     -- LSP
-    "neovim/nvim-lspconfig",          -- enable LSP
-    "williamboman/mason.nvim",        -- simple to use language server installer
+    "neovim/nvim-lspconfig",             -- enable LSP
+    "williamboman/mason.nvim",           -- simple to use language server installer
     "williamboman/mason-lspconfig.nvim", -- simple to use language server installer
 
     -- treesitter
