@@ -1,19 +1,23 @@
 local wk = require("which-key")
-local neotest = require("neotest")
 
 wk.register({
 	["nt"] = {
 		name = "neotest",
-		o = { neotest.summary.open, "open summary" },
-		p = { neotest.output_panel.open, "open panel" },
-		r = { neotest.run.run, "run test" },
+		o = {
+			function()
+				require("neotest").summary.open()
+			end,
+			"open summary",
+		},
+		p = { function() require("neotest").output_panel.open() end, "open panel" },
+		r = { function() require("neotest").run.run() end , "run test" },
 		f = {
 			function()
-				neotest.run.run(vim.fn.expand("%"))
+				require("neotest").run.run(vim.fn.expand("%"))
 			end,
 			"run file",
 		},
-		s = { neotest.run.stop, "stop test" },
-		a = { neotest.run.attach, "attach to test" },
+		s = { function() require("neotest").run.stop() end, "stop test" },
+		a = { function() require("neotest").run.attach() end, "attach to test" },
 	},
 }, { prefix = "<leader>" })

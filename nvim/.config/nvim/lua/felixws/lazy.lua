@@ -109,10 +109,11 @@ require("lazy").setup({
 	--orgmode
 	{
 		"nvim-orgmode/orgmode",
-		lazy = false,
 		config = function()
             require("orgmode").setup_ts_grammar()
-			require("orgmode").setup()
+			require("orgmode").setup({
+                org_agenda_files = {'~/org/**/*'}
+            })
 		end,
 	},
 	-- neorg
@@ -150,6 +151,7 @@ require("lazy").setup({
 			"nvim-neotest/neotest-plenary",
 			"nvim-neotest/neotest-vim-test",
 		},
+        ft = {"python"},
 		config = function()
 			require("neotest").setup({
 				adapters = {
@@ -252,4 +254,8 @@ require("lazy").setup({
 
 	-- presentation in nvim
 	"sotte/presenting.vim",
+}, {
+    defaults = {
+        lazy = false
+    }
 })

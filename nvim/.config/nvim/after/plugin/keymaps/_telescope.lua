@@ -1,11 +1,10 @@
-local builtin = require("telescope.builtin")
 local wk = require("which-key")
 
 wk.register({
 	f = {
-		f = { builtin.find_files, "find files" },
-		g = { builtin.live_grep, "live grep" },
-		b = { builtin.buffers, "search buffers" },
-		h = { builtin.help_tags, "serach tags" },
+		f = { function() require("telescope.builtin").find_files() end, "find files" },
+		g = { function() require("telescope.builtin").live_grep() end, "live grep" },
+		b = { function() require("telescope.builtin").buffers() end, "search buffers" },
+		h = { function() require("telescope.builtin").help_tags() end, "serach tags" },
 	},
 }, { prefix = "<leader>" })
