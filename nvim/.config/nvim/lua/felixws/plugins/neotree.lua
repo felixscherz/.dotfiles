@@ -7,6 +7,7 @@ require("neo-tree").setup({
 	window = {
 		width = 35,
 		mappings = {
+            ["/"] = "noop",
 			["m"] = {
 				"move",
 				-- some commands may take optional config options, see `:h neo-tree-mappings` for details
