@@ -1,7 +1,7 @@
 local wk = require("which-key")
 wk.register({
 	name = "harpoon",
-	h = {
+	m = {
 		a = {
 			function()
 				require("harpoon.mark").add_file()
