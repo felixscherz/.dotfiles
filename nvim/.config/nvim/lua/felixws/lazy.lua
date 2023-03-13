@@ -136,6 +136,13 @@ require("lazy").setup({
 	-- highlight substitution
 	"markonm/traces.vim",
 
+    -- highlights for markdown and orgmode
+    {
+        'lukas-reineke/headlines.nvim',
+        dependencies = "nvim-treesitter/nvim-treesitter",
+        config = true, -- or `opts = {}`
+    },
+
 	--orgmode
 	{
 		"nvim-orgmode/orgmode",
@@ -244,7 +251,6 @@ require("lazy").setup({
 				},
 				highlight = {
 					enable = true,
-					additional_vim_regex_highlighting = true, -- enabled for orgmode
 				},
 			})
 		end,
