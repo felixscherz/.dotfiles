@@ -136,12 +136,13 @@ require("lazy").setup({
 	-- highlight substitution
 	"markonm/traces.vim",
 
-    -- highlights for markdown and orgmode
-    {
-        'lukas-reineke/headlines.nvim',
-        dependencies = "nvim-treesitter/nvim-treesitter",
-        config = true, -- or `opts = {}`
-    },
+	-- highlights for markdown and orgmode
+	{
+		"lukas-reineke/headlines.nvim",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		config = true, -- or `opts = {}`
+		enabled = false,
+	},
 
 	--orgmode
 	{
