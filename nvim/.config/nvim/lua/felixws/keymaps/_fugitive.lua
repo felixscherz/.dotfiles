@@ -13,7 +13,12 @@ wk.register({
 		["c"] = { ":Git commit<CR>", "git commit" },
 		["cm"] = {
 			function()
-				vim.api.nvim_feedkeys(":Git commit -m ", "n", {})
+                local keys = vim.api.nvim_replace_termcodes(':Git commit -m ""<Left>', false, false, true)
+				vim.api.nvim_feedkeys(
+					keys,
+					"n",
+					{}
+				)
 			end,
 			"git commit -m",
 		},
