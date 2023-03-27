@@ -11,9 +11,19 @@ wk.register({
 		["pu"] = { ":Git push<CR>", "git push" },
 		["pd"] = { ":Git pull<CR>", "git pull" },
 		["c"] = { ":Git commit<CR>", "git commit" },
-		["cm"] = { ":Git commit -m ", "git commit -m" },
+		["cm"] = {
+			function()
+				vim.api.nvim_feedkeys(":Git commit -m ", "n", {})
+			end,
+			"git commit -m",
+		},
 		["ca"] = { ":Git commit --amend --no-edit<CR>", "git commit amend" },
-		b = { ":Git switch ", "git switch" },
+		b = {
+			function()
+				vim.api.nvim_feedkeys(":Git switch ", "n", {})
+			end,
+			"git switch",
+		},
 		s = { ":Git<CR>", "git status" },
 	},
 }, { prefix = "<leader>" })
