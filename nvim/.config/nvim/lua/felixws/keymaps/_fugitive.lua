@@ -13,6 +13,7 @@ wk.register({
 		["c"] = { ":Git commit<CR>", "git commit" },
 		["cm"] = { ":Git commit -m ", "git commit -m" },
 		["ca"] = { ":Git commit --amend --no-edit<CR>", "git commit amend" },
-		s = { ":Git switch ", "git switch" },
+		b = { ":Git switch ", "git switch" },
+		s = { ":Git<CR>", "git status" },
 	},
 }, { prefix = "<leader>" })
