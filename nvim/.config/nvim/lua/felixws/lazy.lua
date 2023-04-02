@@ -67,7 +67,7 @@ require("lazy").setup({
 			})
 		end,
 		events = { "BufReadPre", "BufNewFile" },
-        lazy=true,
+		lazy = true,
 	},
 
 	{
@@ -234,7 +234,6 @@ require("lazy").setup({
 			"nvim-neotest/neotest-vim-test",
 			"rouge8/neotest-rust",
 		},
-		ft = { "python", "rust" },
 		config = function()
 			require("neotest").setup({
 				adapters = {
@@ -250,6 +249,8 @@ require("lazy").setup({
 				},
 			})
 		end,
+		keys = { "<leader>n" },
+		lazy = true,
 	},
 
 	-- snippets
@@ -304,7 +305,7 @@ require("lazy").setup({
 				},
 			})
 		end,
-		events = { "BufReadPre", "BufNewFile" },
+		events = { "BufReadPre", "BufNewFile" ,"BufWinEnter"},
 		lazy = true,
 	},
 
