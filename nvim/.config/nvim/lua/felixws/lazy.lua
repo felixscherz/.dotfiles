@@ -46,7 +46,7 @@ require("lazy").setup({
 	{
 		"kdheepak/tabline.nvim",
 		dependencies = {
-			"kyazdani42/nvim-web-devicons",
+			"nvim-tree/nvim-web-devicons",
 		},
 		config = function()
 			require("tabline").setup({
@@ -66,11 +66,13 @@ require("lazy").setup({
 				-- show_current_context_start = true,
 			})
 		end,
+		events = { "BufReadPre", "BufNewFile" },
+        lazy=true,
 	},
 
 	{
 		"nvim-lualine/lualine.nvim",
-		dependencies = { "kyazdani42/nvim-web-devicons", "arkav/lualine-lsp-progress" },
+		dependencies = { "nvim-tree/nvim-web-devicons", "arkav/lualine-lsp-progress" },
 	},
 
 	{
@@ -78,6 +80,8 @@ require("lazy").setup({
 		config = function()
 			require("nvim-autopairs").setup({})
 		end,
+		events = { "BufReadPre", "BufNewFile" },
+		lazy = true,
 	},
 
 	{
@@ -85,13 +89,14 @@ require("lazy").setup({
 		branch = "v2.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 			"MunifTanjim/nui.nvim",
 		},
+		keys = { "<leader>pv" },
+		lazy = true,
 	},
 
-	-- fuzzy finder telescope + plenary as dependency
-	"nvim-lua/plenary.nvim",
+	-- fuzzy finder telescope
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
@@ -119,10 +124,16 @@ require("lazy").setup({
 				},
 			})
 		end,
+		lazy = true,
+		keys = { "<leader>f" },
 	},
 
 	-- deal with surrounds
-	"tpope/vim-surround",
+	{
+		"tpope/vim-surround",
+		lazy = true,
+		event = "InsertEnter",
+	},
 
 	-- show undo history
 	"mbbill/undotree",
@@ -130,11 +141,16 @@ require("lazy").setup({
 	-- git plugin
 	{
 		"tpope/vim-fugitive",
-		lazy = false,
+		lazy = true,
+		event = { "BufReadPre", "BufNewFile" },
 	},
 
 	-- highlight substitution
-	"markonm/traces.vim",
+	{
+		"markonm/traces.vim",
+		lazy = true,
+		event = { "BufReadPre", "BufNewFile" },
+	},
 
 	-- highlights for markdown and orgmode
 	{
@@ -153,22 +169,41 @@ require("lazy").setup({
 				org_agenda_files = { "~/org/**/*", "~/org/refile.org" },
 				org_default_notes_file = "~/org/refile.org",
 				org_capture_templates = {
-					t = { description = "Task", template = "* TODO %?\n  %u\n  %a" , target='~/org/todos/todos.org'},
-					m = { description = "Meeting", template = "* MEETING %u %?:meeting:\n  %U", target='~/org/meetings/meetings.org' },
-					c = { description = "Code", template = "* CODE %?:code:\n  %U\n%a\n#+begin_src\n%x\n#+end_src", target='~/org/code/code.org' },
+					t = { description = "Task", template = "* TODO %?\n  %u\n  %a", target = "~/org/todos/todos.org" },
+					m = {
+						description = "Meeting",
+						template = "* MEETING %u %?:meeting:\n  %U",
+						target = "~/org/meetings/meetings.org",
+					},
+					c = {
+						description = "Code",
+						template = "* CODE %?:code:\n  %U\n%a\n#+begin_src\n%x\n#+end_src",
+						target = "~/org/code/code.org",
+					},
 				},
 			})
 		end,
-		lazy = false,
+		lazy = true,
+		keys = { "<leader>o" },
 	},
-	-- neorg
+
+	{ "stevearc/dressing.nvim", event = "VeryLazy", lazy = true },
 
 	-- show markdown in browser
 	-- install without yarn or npm
-	{ "iamcco/markdown-preview.nvim", build = "cd app && yarn install" },
+	{
+		"iamcco/markdown-preview.nvim",
+		build = "cd app && yarn install",
+		cmd = "MarkdownPreview",
+		lazy = true,
+	},
 
 	-- coerce between different cases (camelCase snake_case)
-	"tpope/vim-abolish",
+	{
+		"tpope/vim-abolish",
+		events = { "BufReadPre", "BufNewFile" },
+		lazy = true,
+	},
 
 	-- cmp plugins
 	{
@@ -182,6 +217,8 @@ require("lazy").setup({
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
 		},
+		event = { "BufReadPre", "BufNewFile" },
+		lazy = true,
 	},
 
 	"jose-elias-alvarez/null-ls.nvim",
@@ -195,8 +232,9 @@ require("lazy").setup({
 			"nvim-neotest/neotest-python",
 			"nvim-neotest/neotest-plenary",
 			"nvim-neotest/neotest-vim-test",
+			"rouge8/neotest-rust",
 		},
-		ft = { "python" },
+		ft = { "python", "rust" },
 		config = function()
 			require("neotest").setup({
 				adapters = {
@@ -208,19 +246,24 @@ require("lazy").setup({
 					require("neotest-vim-test")({
 						ignore_file_types = { "python", "vim", "lua" },
 					}),
+					require("neotest-rust")({}),
 				},
 			})
 		end,
 	},
 
 	-- snippets
-	"L3MON4D3/LuaSnip", --snippet engine
-	"rafamadriz/friendly-snippets", -- a bunch of snippets to use
+	{
+		"L3MON4D3/LuaSnip",
+		dependencies = { "rafamadriz/friendly-snippets" },
+		events = { "VeryLazy" },
+		lazy = true,
+	},
 
 	-- LSP
-	"neovim/nvim-lspconfig", -- enable LSP
-	"williamboman/mason.nvim", -- simple to use language server installer
-	"williamboman/mason-lspconfig.nvim", -- simple to use language server installer
+	{ "neovim/nvim-lspconfig", events = { "VeryLazy" }, lazy = true }, -- enable LSP
+	{ "williamboman/mason.nvim", events = { "VeryLazy" }, lazy = true }, -- simple to use language server installer
+	{ "williamboman/mason-lspconfig.nvim", events = { "VeryLazy" }, lazy = true }, -- simple to use language server installer
 
 	-- treesitter
 
@@ -261,6 +304,8 @@ require("lazy").setup({
 				},
 			})
 		end,
+		events = { "BufReadPre", "BufNewFile" },
+		lazy = true,
 	},
 
 	-- icons (hopefully)
@@ -269,6 +314,8 @@ require("lazy").setup({
 		config = function()
 			require("gitsigns").setup()
 		end,
+		event = "InsertEnter",
+		lazy = true,
 	},
 
 	-- take screenshots of code
@@ -282,6 +329,8 @@ require("lazy").setup({
 		config = function()
 			require("colorizer").setup()
 		end,
+		events = { "BufReadPre", "BufNewFile" },
+		lazy = true,
 	},
 
 	{
@@ -289,6 +338,8 @@ require("lazy").setup({
 		config = function()
 			require("harpoon").setup()
 		end,
+		keys = { "<leader>m" },
+		lazy = true,
 	},
 
 	-- collection of small plugins (highlight current word)
@@ -297,8 +348,14 @@ require("lazy").setup({
 	-- run curl commands from inside vim
 	"diepm/vim-rest-console",
 
-	-- presentation in nvim
-	"sotte/presenting.vim",
+	{
+		"goolord/alpha-nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("alpha").setup(require("alpha.themes.startify").config)
+		end,
+		lazy = false,
+	},
 }, {
 	defaults = {
 		lazy = false,
