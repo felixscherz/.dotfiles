@@ -217,7 +217,7 @@ require("lazy").setup({
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
 		},
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "InsertEnter" },
 		lazy = true,
 	},
 
@@ -257,7 +257,7 @@ require("lazy").setup({
 	{
 		"L3MON4D3/LuaSnip",
 		dependencies = { "rafamadriz/friendly-snippets" },
-		events = { "VeryLazy" },
+		events = { "InsertEnter" },
 		lazy = true,
 	},
 
@@ -305,7 +305,7 @@ require("lazy").setup({
 				},
 			})
 		end,
-		events = { "BufReadPre", "BufNewFile" ,"BufWinEnter"},
+		events = { "BufReadPre", "BufNewFile", "BufWinEnter" },
 		lazy = true,
 	},
 
