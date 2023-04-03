@@ -69,7 +69,6 @@ require("lazy").setup({
 			})
 		end,
 		event = { "BufReadPre", "BufNewFile" },
-		lazy = true,
 	},
 
 	{
@@ -94,10 +93,9 @@ require("lazy").setup({
 			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 			"MunifTanjim/nui.nvim",
 		},
-        config = function()
-            require("felixws.plugins.neotree")
-        end,
-
+		config = function()
+			require("felixws.plugins.neotree")
+		end,
 		keys = { "<leader>pv" },
 	},
 
@@ -337,6 +335,9 @@ require("lazy").setup({
 	-- collection of small plugins (highlight current word)
 	{
 		"echasnovski/mini.nvim",
+        config = function()
+            require("mini.comment").setup()
+        end,
 		lazy = false,
 	},
 
@@ -373,6 +374,11 @@ require("lazy").setup({
 		config = function()
 			require("twilight").setup()
 		end,
+	},
+	{
+		"sindrets/diffview.nvim",
+		dependencies = "nvim-lua/plenary.nvim",
+		lazy = false,
 	},
 }, {
 	defaults = {
