@@ -46,6 +46,7 @@ require("lazy").setup({
 
 	{
 		"kdheepak/tabline.nvim",
+		enabled = false,
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 		},
@@ -96,7 +97,7 @@ require("lazy").setup({
 		config = function()
 			require("felixws.plugins.neotree")
 		end,
-		keys = { "<leader>pv" },
+		keys = { { "<leader>pv", "<cmd>Neotree<CR>" } },
 	},
 
 	-- fuzzy finder telescope
@@ -335,9 +336,9 @@ require("lazy").setup({
 	-- collection of small plugins (highlight current word)
 	{
 		"echasnovski/mini.nvim",
-        config = function()
-            require("mini.comment").setup()
-        end,
+		config = function()
+			require("mini.comment").setup()
+		end,
 		lazy = false,
 	},
 
