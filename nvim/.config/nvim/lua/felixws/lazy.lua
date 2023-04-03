@@ -41,7 +41,7 @@ require("lazy").setup({
 			vim.o.timeoutlen = 900
 			require("which-key").setup()
 		end,
-        lazy=false,
+		lazy = false,
 	},
 
 	{
@@ -94,6 +94,10 @@ require("lazy").setup({
 			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 			"MunifTanjim/nui.nvim",
 		},
+        config = function()
+            require("felixws.plugins.neotree")
+        end,
+
 		keys = { "<leader>pv" },
 	},
 
@@ -193,6 +197,9 @@ require("lazy").setup({
 	-- cmp plugins
 	{
 		"hrsh7th/nvim-cmp", -- The completion plugin
+		config = function()
+			require("felixws.cmp")
+		end,
 		dependencies = {
 			"hrsh7th/cmp-buffer", -- buffer completions
 			"hrsh7th/cmp-path", -- path completions
@@ -244,7 +251,13 @@ require("lazy").setup({
 	},
 
 	-- LSP
-	{ "neovim/nvim-lspconfig", event = { "VeryLazy" } }, -- enable LSP
+	{
+		"neovim/nvim-lspconfig",
+		event = { "VeryLazy" },
+		config = function()
+			require("felixws.lsp")
+		end,
+	}, -- enable LSP
 	{ "williamboman/mason.nvim", event = { "VeryLazy" } }, -- simple to use language server installer
 	{ "williamboman/mason-lspconfig.nvim", event = { "VeryLazy" } }, -- simple to use language server installer
 
@@ -287,7 +300,7 @@ require("lazy").setup({
 				},
 			})
 		end,
-        event = { "BufReadPost", "BufNewFile" },
+		event = { "BufReadPost", "BufNewFile" },
 	},
 
 	-- icons (hopefully)
