@@ -103,7 +103,7 @@ require("lazy").setup({
 	-- fuzzy finder telescope
 	{
 		"nvim-telescope/telescope.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
+		dependencies = { "nvim-lua/plenary.nvim", "aaronhallaert/advanced-git-search.nvim" },
 		config = function()
 			require("telescope").setup({
 				defaults = {
@@ -126,8 +126,15 @@ require("lazy").setup({
 						glob_pattern = { "!.git/" },
 					},
 				},
+				extensions = {
+					advanced_git_search = {
+						diff_plugin = "fugitive",
+					},
+				},
 			})
+			require("telescope").load_extension("advanced_git_search")
 		end,
+		cmd = "Telescope",
 		keys = { "<leader>f" },
 	},
 
@@ -144,6 +151,8 @@ require("lazy").setup({
 	{
 		"tpope/vim-fugitive",
 		event = { "BufReadPre", "BufNewFile" },
+		cmd = "Git",
+		keys = { "<leader>g" },
 	},
 
 	-- highlight substitution
@@ -297,6 +306,8 @@ require("lazy").setup({
 					enable = true,
 					additional_vim_regex_highlighting = { "org" },
 				},
+				indent = { enable = true },
+				context_commentstring = { enable = true, enable_autocmd = false },
 			})
 		end,
 		event = { "BufReadPost", "BufNewFile" },
