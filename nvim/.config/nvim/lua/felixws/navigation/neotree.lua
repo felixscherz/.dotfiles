@@ -109,7 +109,7 @@ M.opts = {
 	},
 }
 
-M.setup = function(opts)
+M.config = function(plugin, opts)
 	vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 	require("neo-tree").setup(opts)
 end

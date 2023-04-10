@@ -73,7 +73,7 @@ local function register_keymaps()
 	}, { prefix = "<leader>" })
 end
 
-M.setup = function(opts)
+M.config = function(plugin, opts)
 	require("telescope").load_extension("advanced_git_search")
 	require("telescope").setup(opts)
 	register_keymaps()

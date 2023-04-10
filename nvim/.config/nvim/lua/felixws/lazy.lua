@@ -50,7 +50,7 @@ require("lazy").setup({
 			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 			"MunifTanjim/nui.nvim",
 		},
-		config = require("felixws.navigation.neotree").setup,
+		config = require("felixws.navigation.neotree").config,
 		opts = require("felixws.navigation.neotree").opts,
 		keys = { { "<leader>pv", "<cmd>Neotree<CR>" } },
 	},
@@ -59,7 +59,7 @@ require("lazy").setup({
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "aaronhallaert/advanced-git-search.nvim" },
-		config = require("felixws.navigation.telescope").setup,
+		config = require("felixws.navigation.telescope").config,
 		opts = require("felixws.navigation.telescope").opts,
 		cmd = "Telescope",
 		keys = { "<leader>f" },
