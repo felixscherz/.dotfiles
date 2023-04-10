@@ -157,52 +157,16 @@ require("lazy").setup({
 	{
 		"neovim/nvim-lspconfig",
 		event = { "VeryLazy" },
-		config = require("felixws.ide.lsp").config ,
+		config = require("felixws.ide.lsp").config,
 	},
-	{ "williamboman/mason.nvim", cmd = "Mason"}, -- simple to use language server installer
-	{ "williamboman/mason-lspconfig.nvim"}, -- simple to use language server installer
+	{ "williamboman/mason.nvim", cmd = "Mason" }, -- simple to use language server installer
+	{ "williamboman/mason-lspconfig.nvim" }, -- simple to use language server installer
 
 	-- treesitter
-
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
-		config = function()
-			require("nvim-treesitter.configs").setup({
-				ensure_installed = {
-					"lua",
-					"vim",
-					"help",
-					"python",
-					"markdown",
-					"markdown_inline",
-					"rust",
-					"yaml",
-					"org",
-					"mermaid",
-					"javascript",
-					"toml",
-					"bash",
-					"terraform",
-					"sql",
-				},
-				incremental_selection = {
-					enable = true,
-					keymaps = {
-						init_selection = "<CR>",
-						node_incremental = "<CR>",
-						scope_incremental = "<CR>",
-						node_decremental = "<BS>",
-					},
-				},
-				highlight = {
-					enable = true,
-					additional_vim_regex_highlighting = { "org" },
-				},
-				indent = { enable = true },
-				context_commentstring = { enable = true, enable_autocmd = false },
-			})
-		end,
+		config = require("felixws.ide.treesitter").config,
 		event = { "BufReadPost", "BufNewFile" },
 	},
 
