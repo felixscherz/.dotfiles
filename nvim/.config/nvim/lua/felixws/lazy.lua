@@ -173,9 +173,6 @@ require("lazy").setup({
 	-- icons (hopefully)
 	{
 		"lewis6991/gitsigns.nvim",
-		config = function()
-			require("gitsigns").setup()
-		end,
 		event = "InsertEnter",
 	},
 
@@ -187,17 +184,11 @@ require("lazy").setup({
 
 	{
 		"norcalli/nvim-colorizer.lua",
-		config = function()
-			require("colorizer").setup()
-		end,
 		event = { "BufReadPre", "BufNewFile" },
 	},
 
 	{
 		"ThePrimeagen/harpoon",
-		config = function()
-			require("harpoon").setup()
-		end,
 		keys = { "<leader>m" },
 	},
 
