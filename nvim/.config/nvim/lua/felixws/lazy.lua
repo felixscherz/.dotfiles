@@ -18,15 +18,26 @@ require("lazy").setup({
 		priority = 1000, -- make sure to load this before all the other start plugins
 		opts = {
 			transparent = true,
-			styles = { sidebars = "transparent" },
+			styles = { sidebars = "transparent" , floats="transparent"},
 			dim_inactive = true,
 			on_colors = function(colors)
 				colors.border = colors.blue
 				colors.diff.delete = colors.git.delete
 				colors.gitSigns = colors.git
 				colors.bg_highlight = "NONE"
+                colors.none = "NONE"
 			end,
-			on_highlights = function(hl, _)
+			on_highlights = function(hl, c)
+                hl.TelescopeNormal = {
+                    bg = c.none,
+                }
+                hl.TelescopeBorder = {
+                    bg = c.none,
+                }
+                hl.DiagnosticVirtualTextError.bg = c.none
+                hl.DiagnosticVirtualTextInfo.bg = c.none
+                hl.DiagnosticVirtualTextWarn.bg = c.none
+                hl.DiagnosticVirtualTextHint.bg = c.none
 				hl.CursorLine = {
 					color = hl.CursorLine.color,
 					bold = false,
@@ -186,7 +197,10 @@ require("lazy").setup({
 		keys = { "<leader>o" },
 	},
 
-	{ "stevearc/dressing.nvim", event = "VeryLazy" },
+	{
+		"stevearc/dressing.nvim",
+		event = "VeryLazy",
+	},
 
 	-- show markdown in browser
 	-- install without yarn or npm
@@ -245,6 +259,9 @@ require("lazy").setup({
 						ignore_file_types = { "python", "vim", "lua" },
 					}),
 					require("neotest-rust")({ args = { "--no-capture" } }),
+				},
+				quickfix = {
+					enabled = false,
 				},
 			})
 		end,
