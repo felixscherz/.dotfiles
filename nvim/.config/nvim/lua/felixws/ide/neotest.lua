@@ -18,3 +18,5 @@ M.config = function(plugin, opts)
 		},
 	})
 end
+
+return M

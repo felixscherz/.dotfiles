@@ -157,12 +157,10 @@ require("lazy").setup({
 	{
 		"neovim/nvim-lspconfig",
 		event = { "VeryLazy" },
-		config = function()
-			require("felixws.lsp")
-		end,
-	}, -- enable LSP
-	{ "williamboman/mason.nvim", event = { "VeryLazy" } }, -- simple to use language server installer
-	{ "williamboman/mason-lspconfig.nvim", event = { "VeryLazy" } }, -- simple to use language server installer
+		config = require("felixws.ide.lsp").config ,
+	},
+	{ "williamboman/mason.nvim", cmd = "Mason"}, -- simple to use language server installer
+	{ "williamboman/mason-lspconfig.nvim"}, -- simple to use language server installer
 
 	-- treesitter
 
