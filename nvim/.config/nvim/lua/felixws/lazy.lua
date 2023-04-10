@@ -50,9 +50,8 @@ require("lazy").setup({
             "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
             "MunifTanjim/nui.nvim",
         },
-        config = function()
-            require("felixws.plugins.neotree")
-        end,
+        config = require("felixws.navigation.neotree").setup,
+        opts = require("felixws.navigation.neotree").opts,
         keys = { { "<leader>pv", "<cmd>Neotree<CR>" } },
     },
 

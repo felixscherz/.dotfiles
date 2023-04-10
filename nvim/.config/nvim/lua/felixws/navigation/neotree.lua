@@ -1,13 +1,12 @@
--- Unless you are still migrating, remove the deprecated commands from v1.x
-vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+local M = {}
 
-require("neo-tree").setup({
+M.opts = {
 	close_if_last_window = false,
 	popup_border_style = "rounded",
 	window = {
 		width = 35,
 		mappings = {
-            ["/"] = "noop",
+			["/"] = "noop",
 			["m"] = {
 				"move",
 				-- some commands may take optional config options, see `:h neo-tree-mappings` for details
@@ -27,20 +26,20 @@ require("neo-tree").setup({
 	enable_git_status = true,
 	git_status_async = true,
 	filesystem = {
-        find_by_full_path_words = true,
+		find_by_full_path_words = true,
 		hijack_netrw_behavior = "open_default",
 		filtered_items = {
-            hide_dotfiles = false,
+			hide_dotfiles = false,
 			hide_by_name = {
 				".DS_Store",
 				"thumbs.db",
 				"node_modules",
 			},
-            always_show = {
-                ".gitlab-ci.yml",
-                ".gitignore",
-                ".pre-commit-config.yaml"
-            }
+			always_show = {
+				".gitlab-ci.yml",
+				".gitignore",
+				".pre-commit-config.yaml",
+			},
 		},
 		use_libuv_file_watcher = true,
 	},
@@ -108,4 +107,11 @@ require("neo-tree").setup({
 			end,
 		},
 	},
-})
+}
+
+M.setup = function(opts)
+	vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+	require("neo-tree").setup(opts)
+end
+
+return M
