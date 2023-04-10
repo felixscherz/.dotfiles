@@ -115,7 +115,7 @@ require("lazy").setup({
 	{
 		"hrsh7th/nvim-cmp", -- The completion plugin
 		config = function()
-			require("felixws.cmp")
+			require("felixws.ide.cmp")
 		end,
 		dependencies = {
 			"hrsh7th/cmp-buffer", -- buffer completions
