@@ -75,7 +75,7 @@ end
 
 M.config = function(plugin, opts)
 	require("telescope").load_extension("advanced_git_search")
-	require("telescope").setup(opts)
+	require("telescope").setup(M.opts)
 	register_keymaps()
 end
 
