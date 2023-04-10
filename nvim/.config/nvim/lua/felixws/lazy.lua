@@ -24,22 +24,6 @@ require("lazy").setup({
 		lazy = false,
 	},
 
-	{
-		"kdheepak/tabline.nvim",
-		enabled = false,
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-		},
-		config = function()
-			require("tabline").setup({
-				options = {
-					show_tabs_only = true,
-				},
-			})
-		end,
-		lazy = false,
-	},
-
 	-- vertical bars to show indentation
 	{
 		"lukas-reineke/indent-blankline.nvim",
