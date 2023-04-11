@@ -159,7 +159,10 @@ require("lazy").setup({
 		event = { "VeryLazy" },
 		config = require("felixws.ide.lsp").config,
 	},
-	{ "williamboman/mason.nvim", cmd = "Mason" }, -- simple to use language server installer
+	{
+		"williamboman/mason.nvim",
+		cmd = "Mason",
+	}, -- simple to use language server installer
 	{ "williamboman/mason-lspconfig.nvim" }, -- simple to use language server installer
 
 	-- treesitter
@@ -243,5 +246,8 @@ require("lazy").setup({
 }, {
 	defaults = {
 		lazy = true,
+	},
+	ui = {
+		border = "rounded",
 	},
 })
