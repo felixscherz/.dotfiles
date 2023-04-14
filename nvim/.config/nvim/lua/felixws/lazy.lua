@@ -20,14 +20,14 @@ require("lazy").setup({
 	},
 	{
 		"folke/which-key.nvim",
-		config = require("felixws.keymaps.whichkey").setup,
+		config = require("felixws.keymaps.whichkey").config,
 		lazy = false,
 	},
 
 	-- vertical bars to show indentation
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		config = require("felixws.appearance.indent_blankline").setup,
+		config = require("felixws.appearance.indent_blankline").config,
 		event = { "BufReadPre", "BufNewFile" },
 	},
 

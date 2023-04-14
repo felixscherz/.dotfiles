@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function()
+M.config = function()
 	require("indent_blankline").setup({
 		show_current_context = true,
 	})
