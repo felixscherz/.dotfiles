@@ -1,7 +1,6 @@
 require("felixws.options")
 require("felixws.lazy")
 require("felixws.color")
-require("felixws.python")
 require("felixws.aucmds")
 require("felixws.plugins")
 require("felixws.commands")
