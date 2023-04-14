@@ -1,4 +1,4 @@
-require("felixws.set")
+require("felixws.options")
 require("felixws.lazy")
 require("felixws.color")
 require("felixws.python")
