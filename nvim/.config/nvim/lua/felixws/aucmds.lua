@@ -7,7 +7,3 @@ cmd([[
     autocmd TextYankPost * silent! lua vim.highlight.on_yank()
   augroup end
 ]])
-
-cmd([[
-autocmd FileType make set noexpandtab
-]])
