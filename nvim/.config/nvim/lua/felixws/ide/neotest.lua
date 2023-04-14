@@ -60,7 +60,13 @@ M.config = function(plugin, opts)
 			require("neotest-rust")({ args = { "--no-capture" } }),
 		},
 		quickfix = {
-			enabled = false,
+			enabled = true,
+			open = false,
+		},
+		status = {
+			enabled = true,
+			signs = true,
+			virtual_text = false,
 		},
 	})
 	register_keymaps()
