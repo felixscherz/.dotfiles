@@ -5,6 +5,10 @@ wk.register({
 	["gdl"] = { ":diffget //3<CR>", "get right diff" },
 })
 
+local function branch_name()
+    return vim.fn.system("git branch --show-current | tr -d '\n'")
+end
+
 wk.register({
 	name = "git",
 	g = {
@@ -13,12 +17,8 @@ wk.register({
 		["c"] = { ":Git commit<CR>", "git commit" },
 		["cm"] = {
 			function()
-                local keys = vim.api.nvim_replace_termcodes(':Git commit -m ""<Left>', false, false, true)
-				vim.api.nvim_feedkeys(
-					keys,
-					"n",
-					{}
-				)
+				local keys = vim.api.nvim_replace_termcodes(':Git commit -m ""<Left>', false, false, true)
+				vim.api.nvim_feedkeys(keys, "n", {})
 			end,
 			"git commit -m",
 		},
@@ -30,5 +30,11 @@ wk.register({
 			"git switch",
 		},
 		s = { ":Git<CR>", "git status" },
+		u = {
+			function()
+				vim.api.nvim_feedkeys(string.format(":Git push -u origin %s", branch_name()), "n", {})
+			end,
+            "git set upstream",
+		},
 	},
 }, { prefix = "<leader>" })
