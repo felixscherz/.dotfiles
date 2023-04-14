@@ -4,8 +4,9 @@ M.opts = {
 	ensure_installed = {
 		"lua",
 		"vim",
-		"help",
+		"vimdoc",
 		"python",
+        "rst",
 		"markdown",
 		"markdown_inline",
 		"rust",
@@ -17,6 +18,10 @@ M.opts = {
 		"bash",
 		"terraform",
 		"sql",
+        "diff",
+        "comment",
+        "gitattributes",
+        "luadoc",
 	},
 	incremental_selection = {
 		enable = true,
@@ -32,7 +37,6 @@ M.opts = {
 		additional_vim_regex_highlighting = { "org" },
 	},
 	indent = { enable = true },
-	context_commentstring = { enable = true, enable_autocmd = false },
 }
 
 M.config = function(plugin, opts)
