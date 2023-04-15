@@ -34,15 +34,15 @@ require("lazy").setup({
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons", "arkav/lualine-lsp-progress" },
-        config = require("felixws.appearance.lualine").config,
+		config = require("felixws.appearance.lualine").config,
 		lazy = false,
 	},
 
 	{
 		"windwp/nvim-autopairs",
-        config = function()
-            require("nvim-autopairs").setup()
-        end,
+		config = function()
+			require("nvim-autopairs").setup()
+		end,
 		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 	},
 
@@ -98,6 +98,13 @@ require("lazy").setup({
 
 	{
 		"stevearc/dressing.nvim",
+		opts = {
+			input = {
+				win_options = {
+					winblend = 0,
+				},
+			},
+		},
 		event = "VeryLazy",
 	},
 
