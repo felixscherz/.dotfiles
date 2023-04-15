@@ -80,8 +80,8 @@ cmp.setup({
 		{ name = "nvim_lsp_signature_help" },
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
-		{ name = "buffer" },
 		{ name = "path" },
+		{ name = "buffer" },
 		{ name = "orgmode" },
 	},
 	confirm_opts = {
@@ -96,6 +96,8 @@ cmp.setup({
 		native_menu = false,
 	},
 })
+
+
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
