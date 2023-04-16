@@ -80,6 +80,7 @@ require("lazy").setup({
 	{
 		"tpope/vim-fugitive",
 		event = { "BufReadPre", "BufNewFile" },
+		enabled = true,
 		cmd = "Git",
 		keys = { "<leader>g" },
 	},
@@ -98,13 +99,7 @@ require("lazy").setup({
 
 	{
 		"stevearc/dressing.nvim",
-		opts = {
-			input = {
-				win_options = {
-					winblend = 0,
-				},
-			},
-		},
+		opts = require("felixws.appearance.dressing").opts,
 		event = "VeryLazy",
 	},
 
