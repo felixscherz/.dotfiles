@@ -17,5 +17,5 @@ export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 export CC=/opt/homebrew/opt/llvm/bin/clang
 
-
-
+export MANPAGER='nvim +Man!'
+export MANWIDTH=999
