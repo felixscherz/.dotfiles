@@ -8,7 +8,6 @@ M.opts = {
 		colors.border = colors.blue
 		colors.diff.delete = colors.git.delete
 		colors.gitSigns = colors.git
-		colors.bg_highlight = "NONE"
 		colors.none = "NONE"
 	end,
 	on_highlights = function(hl, c)
