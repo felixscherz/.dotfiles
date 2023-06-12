@@ -81,7 +81,7 @@ plugins=(
 
     
 source $ZSH/oh-my-zsh.sh
-
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
