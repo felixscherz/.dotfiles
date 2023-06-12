@@ -3,3 +3,4 @@ alias asdf="setxkbmap us"
 alias hjkl="setxkbmap de"
 alias python="python3"
 alias pip="pip3"
+alias cdfd='cd $(find * -type d -maxdepth 4 | fzf)'
