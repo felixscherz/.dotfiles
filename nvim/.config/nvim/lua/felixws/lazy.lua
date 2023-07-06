@@ -178,7 +178,21 @@ require("lazy").setup({
 		config = require("felixws.ide.treesitter").config,
 		event = { "BufReadPost", "BufNewFile" },
 	},
-
+	{
+		"mfussenegger/nvim-dap",
+		event = "BufReadPre",
+		dependencies = {
+			"theHamsta/nvim-dap-virtual-text",
+			"rcarriga/nvim-dap-ui",
+			"mfussenegger/nvim-dap-python",
+			"nvim-telescope/telescope-dap.nvim",
+			{ "leoluz/nvim-dap-go", module = "dap-go" },
+			{ "jbyuki/one-small-step-for-vimkind", module = "osv" },
+		},
+		config = function()
+			require("felixws.ide.dap.dap").setup()
+		end,
+	},
 	-- icons (hopefully)
 	{
 		"lewis6991/gitsigns.nvim",
@@ -237,9 +251,9 @@ require("lazy").setup({
 			require("zen-mode").setup({
 				window = {
 					height = 0.8,
-                    options = {
-                        number = true,
-                    }
+					options = {
+						number = true,
+					},
 				},
 				plugins = {
 					twilight = { enabled = false },

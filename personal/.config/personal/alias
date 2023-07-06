@@ -5,3 +5,4 @@ alias python="python3"
 alias pip="pip3"
 alias cdfd='cd $(find * -type d -maxdepth 4 | fzf)'
 alias gitroot='cd $(git rev-parse --show-toplevel)'
+alias ibrew='arch -x86_64 /usr/local/bin/brew'
