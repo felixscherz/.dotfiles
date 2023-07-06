@@ -30,6 +30,7 @@ function M.setup()
       t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
       x = { "<cmd>lua require'dap'.terminate()<cr>", "Terminate" },
       u = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
+      M = { "<cmd>lua require'dap-python'.test_method()<cr>", "Test method"}
     },
   }
 
