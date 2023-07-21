@@ -163,7 +163,7 @@ require("lazy").setup({
 	-- LSP
 	{
 		"neovim/nvim-lspconfig",
-		event = { "VeryLazy" },
+		event = { "BufReadPost" },
 		config = require("felixws.ide.lsp").config,
 	},
 	{
