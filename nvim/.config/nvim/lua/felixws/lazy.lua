@@ -194,14 +194,14 @@ require("lazy").setup({
 			require("felixws.ide.dap.dap").setup()
 		end,
 	},
-    {
-        "ThePrimeagen/refactoring.nvim",
-        dependencies = {"nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter"},
-        config = function()
-            require("felixws.ide.refactoring").setup()
-        end,
-        event = "BufReadPre"
-    },
+	{
+		"ThePrimeagen/refactoring.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
+		config = function()
+			require("felixws.ide.refactoring").setup()
+		end,
+		event = "BufReadPre",
+	},
 	-- icons (hopefully)
 	{
 		"lewis6991/gitsigns.nvim",
