@@ -5,12 +5,14 @@ M.config = function()
 		show_current_context = true,
 		filetype_exclude = {
 			"fugitive",
+            "zsh",
 			"git",
 			"neo-tree",
 			"lspinfo",
 			"checkhealth",
 			"help",
 			"man",
+            "conf",
 			"",
 		},
 	})
