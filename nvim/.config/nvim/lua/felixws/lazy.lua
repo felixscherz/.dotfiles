@@ -95,6 +95,7 @@ require("lazy").setup({
 		"nvim-orgmode/orgmode",
 		config = require("felixws.navigation.orgmode").config,
 		keys = { "<leader>o" },
+		lazy = false,
 	},
 
 	{
