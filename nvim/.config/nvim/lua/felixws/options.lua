@@ -23,6 +23,7 @@ local options = {
 	incsearch = true,
 	ignorecase = true,
 	smartcase = true,
+	winminwidth = 5,
 }
 
 for k, v in pairs(options) do
