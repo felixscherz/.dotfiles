@@ -3,7 +3,7 @@ return {
 		yaml = {
 			schemaStore = {
 				enable = true,
-                url = "https://www.schemastore.org/api/json/catalog.json"
+				url = "https://www.schemastore.org/api/json/catalog.json",
 			},
 			customTags = {
 				"!Base64 scalar",
@@ -28,6 +28,7 @@ return {
 			},
 			hover = true,
 			validate = true,
+			completion = true,
 		},
 	},
 }
