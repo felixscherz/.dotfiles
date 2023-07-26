@@ -7,3 +7,9 @@ cmd([[
     autocmd TextYankPost * silent! lua vim.highlight.on_yank()
   augroup end
 ]])
+
+vim.filetype.add({
+	filename = {
+		[".envrc"] = "bash",
+	},
+})
