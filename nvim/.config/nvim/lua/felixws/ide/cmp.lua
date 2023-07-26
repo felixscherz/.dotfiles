@@ -64,16 +64,48 @@ cmp.setup({
 	},
 	formatting = {
 		fields = { "kind", "abbr", "menu" },
-		format = function(entry, vim_item)
-			-- Kind icons
-			--vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-			-- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-			vim_item.menu = ({
-				luasnip = "[Snippet]",
-				buffer = "[Buffer]",
-				path = "[Path]",
-			})[entry.source.name]
-			return vim_item
+		format = function(_, item)
+			local icons = {
+				Array = " ",
+				Boolean = " ",
+				Class = " ",
+				Color = " ",
+				Constant = " ",
+				Constructor = " ",
+				Copilot = " ",
+				Enum = " ",
+				EnumMember = " ",
+				Event = " ",
+				Field = " ",
+				File = " ",
+				Folder = " ",
+				Function = " ",
+				Interface = " ",
+				Key = " ",
+				Keyword = " ",
+				Method = " ",
+				Module = " ",
+				Namespace = " ",
+				Null = " ",
+				Number = " ",
+				Object = " ",
+				Operator = " ",
+				Package = " ",
+				Property = " ",
+				Reference = " ",
+				Snippet = " ",
+				String = " ",
+				Struct = " ",
+				Text = " ",
+				TypeParameter = " ",
+				Unit = " ",
+				Value = " ",
+				Variable = " ",
+			}
+			if icons[item.kind] then
+				item.kind = icons[item.kind] .. item.kind
+			end
+			return item
 		end,
 	},
 	sources = {
@@ -97,7 +129,4 @@ cmp.setup({
 	},
 })
 
-
-
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
