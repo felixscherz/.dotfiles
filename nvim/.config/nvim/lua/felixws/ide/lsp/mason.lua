@@ -5,6 +5,7 @@ local servers = {
 	"rust_analyzer",
 	"ruff_lsp",
 	"yamlls",
+    "bashls",
 }
 
 require("mason-lspconfig").setup({
