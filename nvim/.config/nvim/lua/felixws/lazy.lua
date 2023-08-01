@@ -108,8 +108,13 @@ require("lazy").setup({
 	-- install without yarn or npm
 	{
 		"iamcco/markdown-preview.nvim",
-		build = "cd app && yarn install",
+		build = "cd app && npm install",
 		cmd = "MarkdownPreview",
+		config = function()
+			vim.fn.stdpath("data")
+			vim.g.mkdp_highlight_css = vim.fn.stdpath("config") .. "/assets/tokyo-night-dark.css"
+		end,
+		ft = { "markdown" },
 	},
 
 	-- coerce between different cases (camelCase snake_case)
