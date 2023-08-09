@@ -4,7 +4,7 @@ M.opts = {
 	org_agenda_files = { "~/org/**/*", "~/org/refile.org" },
 	org_default_notes_file = "~/org/refile.org",
 	org_capture_templates = {
-		t = { description = "Task", template = "* TODO %?\n  %u\n  %a", target = "~/org/todos/todos.org" },
+		t = { description = "Task", template = "* TODO %?\n  %u", target = "~/org/todos/todos.org" },
 		m = {
 			description = "Meeting",
 			template = "* MEETING %u %?:meeting:\n  %U",
