@@ -277,7 +277,7 @@ require("lazy").setup({
 		config = function()
 			require("zen-mode").setup({
 				window = {
-					height = 0.8,
+					height = 1.0,
 					options = {
 						number = true,
 					},
@@ -287,7 +287,7 @@ require("lazy").setup({
 					tmux = { enabled = true },
 					alacritty = {
 						enabled = true,
-						font = "24.0",
+						font = "14.0",
 					},
 				},
 			})
