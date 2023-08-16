@@ -7,7 +7,7 @@ M.opts = {
 		t = { description = "Task", template = "* TODO %?\n  %u", target = "~/org/todos/todos.org" },
 		m = {
 			description = "Meeting",
-			template = "* MEETING %u %?:meeting:\n  %U",
+			template = "* MEETING %? :meeting:\n  %u",
 			target = "~/org/meetings/meetings.org",
 		},
 		c = {
