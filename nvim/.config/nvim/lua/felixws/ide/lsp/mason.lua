@@ -6,6 +6,7 @@ local servers = {
 	"ruff_lsp",
 	"yamlls",
     "bashls",
+    "clangd"
 }
 
 require("mason-lspconfig").setup({
