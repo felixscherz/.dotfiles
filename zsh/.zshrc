@@ -82,7 +82,7 @@ antigen bundle jsontools
 antigen bundle web-search
 
 antigen apply
-    
+
 source $ZSH/oh-my-zsh.sh
 # User configuration
 

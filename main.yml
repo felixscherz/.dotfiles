@@ -27,6 +27,3 @@
       ansible.builtin.command:
         cmd: ./symlink
         chdir: "{{ ansible_user_dir }}/.dotfiles"
-
-
-

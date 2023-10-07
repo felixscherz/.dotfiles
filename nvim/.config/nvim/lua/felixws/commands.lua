@@ -2,4 +2,3 @@
 vim.cmd([[
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 ]])
-

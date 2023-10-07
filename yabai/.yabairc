@@ -109,5 +109,3 @@ yabai -m config external_bar all:$SPACEBAR_HEIGHT:0
 
 
 echo "yabai configuration loaded.."
-
-
