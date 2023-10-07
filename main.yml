@@ -18,6 +18,7 @@
           - pyenv
           - neovim
           - direnv
+          - jq
         roles_macos:
           - yabai
           - spacebar
