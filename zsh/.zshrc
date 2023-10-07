@@ -23,3 +23,5 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
 if [ "$TMUX" = "" ]; then tmux; fi
+
+source $HOME/.config/personal/alias

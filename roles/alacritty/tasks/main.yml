@@ -1,12 +1,11 @@
 - name: Install stow
   ansible.builtin.package:
     state: present
-    name:
-      - stow
+    name: stow
   become: "{{ use_sudo }}"
-- name: Stow neovim config
+- name: Stow alacritty
   ansible.builtin.command:
-    cmd: stow  nvim --target=$HOME --verbose=2
+    cmd: stow tmux --target=$HOME --verbose=2
     chdir: "{{ ansible_user_dir }}/.dotfiles"
   register: result
   changed_when: 'result.stderr is search("LINK: ")'

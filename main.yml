@@ -5,24 +5,34 @@
     community.general.homebrew:
       path: /opt/homebrew/bin
   tasks:
-    - name: Set roles
+    - name: Set common roles
       ansible.builtin.set_fact:
         use_sudo: "{{ 'false' if ansible_system == 'Darwin' else 'true' }}"
         roles:
           - zsh
+          - tmux
+          - environment
+          - alacritty
           - pyenv
           - neovim
+        roles_macos:
+          - yabai
+          - spacebar
+          - skhd
     - name: Set facts for MacOS
       ansible.builtin.set_fact:
         use_sudo: no
       when: ansible_system == 'Darwin'
-    - name: Run roles
+    - name: Run common roles
       ansible.builtin.include_role:
         name: "{{ roles_item }}"
       loop_control:
         loop_var: roles_item
       with_items: "{{ roles }}"
-    - name: Run symlink
-      ansible.builtin.command:
-        cmd: ./symlink
-        chdir: "{{ ansible_user_dir }}/.dotfiles"
+    - name: Run MacOS roles
+      ansible.builtin.include_role:
+        name: "{{ roles_item }}"
+      loop_control:
+        loop_var: roles_item
+      with_items: "{{ roles_macos }}"
+      when: ansible_system == 'Darwin'

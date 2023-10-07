@@ -30,3 +30,9 @@
     dest: "{{ ansible_user_dir }}/.oh-my-zsh/antigen.zsh"
     url: https://git.io/antigen
   when: not antigen_install.stat.exists
+- name: Stow zsh
+  ansible.builtin.command:
+    cmd: stow zsh --target=$HOME --verbose=2
+    chdir: "{{ ansible_user_dir }}/.dotfiles"
+  register: result
+  changed_when: 'result.stderr is search("LINK: ")'

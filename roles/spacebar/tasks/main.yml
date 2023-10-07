@@ -1,12 +1,15 @@
+- name: Install spacebar
+  ansible.builtin.package:
+    state: present
+    name: spacebar
 - name: Install stow
   ansible.builtin.package:
     state: present
-    name:
-      - stow
+    name: stow
   become: "{{ use_sudo }}"
-- name: Stow neovim config
+- name: Stow spacebar
   ansible.builtin.command:
-    cmd: stow  nvim --target=$HOME --verbose=2
+    cmd: stow spacebar --target=$HOME --verbose=2
     chdir: "{{ ansible_user_dir }}/.dotfiles"
   register: result
   changed_when: 'result.stderr is search("LINK: ")'
