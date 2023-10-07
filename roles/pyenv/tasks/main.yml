@@ -1,0 +1,8 @@
+---
+- name: Install pyenv
+  ansible.builtin.package:
+    state: present
+    name: 
+      - pyenv
+      - pyenv-virtualenv
+

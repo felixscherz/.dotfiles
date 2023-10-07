@@ -1,0 +1,32 @@
+---
+- name: Install development setup
+  hosts: localhost
+  connection: local
+  module_defaults:
+    community.general.homebrew:
+      path: /opt/homebrew/bin
+  tasks:
+    - name: Set roles
+      ansible.builtin.set_fact:
+        use_sudo: "{{ 'false' if ansible_system == 'Darwin' else 'true' }}"
+        roles:
+          - zsh
+          - pyenv
+          - neovim
+    - name: Set facts for MacOS
+      ansible.builtin.set_fact:
+        use_sudo: no
+      when: ansible_system == 'Darwin'
+    - name: Run roles
+      ansible.builtin.include_role:
+        name: "{{ roles_item }}"
+      loop_control:
+        loop_var: roles_item
+      with_items: "{{ roles }}"
+    - name: Run symlink
+      ansible.builtin.command:
+        cmd: ./symlink
+        chdir: "{{ ansible_user_dir }}/.dotfiles"
+
+
+
