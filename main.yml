@@ -17,6 +17,7 @@
           - alacritty
           - pyenv
           - neovim
+          - direnv
         roles_macos:
           - yabai
           - spacebar
