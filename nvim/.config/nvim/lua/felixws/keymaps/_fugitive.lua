@@ -6,7 +6,7 @@ wk.register({
 })
 
 local function branch_name()
-    return vim.fn.system("git branch --show-current | tr -d '\n'")
+	return vim.fn.system("git branch --show-current | tr -d '\n'")
 end
 
 wk.register({
@@ -34,7 +34,7 @@ wk.register({
 			function()
 				vim.api.nvim_feedkeys(string.format(":Git push -u origin %s", branch_name()), "n", {})
 			end,
-            "git set upstream",
+			"git set upstream",
 		},
 	},
 }, { prefix = "<leader>" })

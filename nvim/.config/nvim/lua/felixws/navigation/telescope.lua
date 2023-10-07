@@ -33,10 +33,10 @@ local function register_keymaps()
 
 	wk.register({
 		f = {
-            t = {
-                ":Telescope<CR>",
-                "run telescope"
-            },
+			t = {
+				":Telescope<CR>",
+				"run telescope",
+			},
 			f = {
 				function()
 					require("telescope.builtin").find_files()

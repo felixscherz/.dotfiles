@@ -3,9 +3,9 @@ return {
 		python = {
 			analysis = {
 				typeCheckingMode = "on",
-                autoSearchPaths = true,
-                diagnosticMode = 'openFilesOnly',
-                useLibraryCodeForTypes = true
+				autoSearchPaths = true,
+				diagnosticMode = "openFilesOnly",
+				useLibraryCodeForTypes = true,
 			},
 		},
 	},
