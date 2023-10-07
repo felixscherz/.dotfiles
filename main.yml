@@ -10,6 +10,7 @@
         use_sudo: "{{ 'false' if ansible_system == 'Darwin' else 'true' }}"
         roles:
           - zsh
+          - oh-my-zsh
           - tmux
           - environment
           - alacritty
