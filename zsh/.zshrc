@@ -80,6 +80,8 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle jeffreytse/zsh-vi-mode
 antigen bundle jsontools
 antigen bundle web-search
+
+antigen apply
     
 source $ZSH/oh-my-zsh.sh
 # User configuration

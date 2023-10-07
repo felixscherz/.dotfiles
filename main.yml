@@ -1,0 +1,30 @@
+---
+- name: Install development setup
+  hosts: localhost
+  connection: local
+  module_defaults:
+    community.general.homebrew:
+      path: /opt/homebrew/bin
+  tasks:
+    - name: Set roles
+      ansible.builtin.set_fact:
+        roles:
+          - zsh
+          - pyenv
+
+    - name: Set facts for MacOS
+      ansible.builtin.set_fact:
+        use_sudo: no
+    - name: Print all available facts
+      ansible.builtin.debug:
+        var: ansible_facts
+    - name: Print the package manager
+      ansible.builtin.debug:
+        msg: using {{ ansible_pkg_mgr }}
+    - name: Run roles
+      ansible.builtin.include_role:
+        name: "{{ roles_item }}"
+      loop_control:
+        loop_var: roles_item
+      with_items: "{{ roles }}"
+
