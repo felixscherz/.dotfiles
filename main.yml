@@ -24,6 +24,11 @@
       ansible.builtin.set_fact:
         use_sudo: no
       when: ansible_system == 'Darwin'
+    - name: Install stow
+      ansible.builtin.package:
+        state: present
+        name: stow
+      become: "{{ use_sudo }}"
     - name: Run common roles
       ansible.builtin.include_role:
         name: "{{ roles_item }}"

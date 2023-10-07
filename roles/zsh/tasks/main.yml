@@ -1,9 +1,3 @@
-- name: Install zsh
-  ansible.builtin.package:
-    state: present
-    name:
-      - zsh
-  become: "{{ use_sudo }}"
 - name: Stow zsh
   ansible.builtin.command:
     cmd: stow zsh --target=$HOME --verbose=2

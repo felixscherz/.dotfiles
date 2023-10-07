@@ -2,11 +2,6 @@
   ansible.builtin.package:
     state: present
     name: spacebar
-- name: Install stow
-  ansible.builtin.package:
-    state: present
-    name: stow
-  become: "{{ use_sudo }}"
 - name: Stow spacebar
   ansible.builtin.command:
     cmd: stow spacebar --target=$HOME --verbose=2

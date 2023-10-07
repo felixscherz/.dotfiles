@@ -1,8 +1,3 @@
-- name: Install stow
-  ansible.builtin.package:
-    state: present
-    name: stow
-  become: "{{ use_sudo }}"
 - name: Stow alacritty
   ansible.builtin.command:
     cmd: stow tmux --target=$HOME --verbose=2

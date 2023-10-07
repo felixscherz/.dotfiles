@@ -2,11 +2,6 @@
   ansible.builtin.package:
     state: present
     name: skhd
-- name: Install stow
-  ansible.builtin.package:
-    state: present
-    name: stow
-  become: "{{ use_sudo }}"
 - name: Stow skhd
   ansible.builtin.command:
     cmd: stow skhd --target=$HOME --verbose=2

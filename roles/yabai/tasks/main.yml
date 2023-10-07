@@ -2,11 +2,6 @@
   ansible.builtin.package:
     state: present
     name: yabai
-- name: Install stow
-  ansible.builtin.package:
-    state: present
-    name: stow
-  become: "{{ use_sudo }}"
 - name: Stow yabai
   ansible.builtin.command:
     cmd: stow yabai --target=$HOME --verbose=2
