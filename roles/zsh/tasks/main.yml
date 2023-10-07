@@ -1,37 +1,30 @@
----
 - name: Install zsh
   ansible.builtin.package:
     state: present
     name:
       - zsh
   become: "{{ use_sudo }}"
-
 - name: Existing oh-my-zsh installation
   ansible.builtin.stat:
     path: "{{ ansible_user_dir }}/.oh-my-zsh"
   register: install
-
 - name: Download oh-my-zsh
   get_url:
     dest: /tmp/zsh-install.sh
     mode: 0755
     url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
   when: not install.stat.exists
-
 - name: Execute zsh-install.sh
   shell: /tmp/zsh-install.sh
   when: not install.stat.exists
-
 - name: Remove zsh-install.sh
   file:
     path: /tmp/zsh-install.sh
     state: absent
-
 - name: Existing antigen installation
   ansible.builtin.stat:
     path: "{{ ansible_user_dir }}/.oh-my-zsh/antigen.zsh"
   register: antigen_install
-
 - name: Download antigen.zsh
   get_url:
     dest: "{{ ansible_user_dir }}/.oh-my-zsh/antigen.zsh"

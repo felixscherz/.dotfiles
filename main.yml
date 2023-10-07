@@ -1,4 +1,3 @@
----
 - name: Install development setup
   hosts: localhost
   connection: local
