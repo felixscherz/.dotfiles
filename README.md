@@ -4,10 +4,13 @@ configuration for the tools I use
 
 ## install
 
-I use `stow` to symlink the dotfiles in this repository with the home directory.
-Installation requires the env variable `DOTFILES` to point to the directory containing this repository.
-Install by running `./symlink` script.
+Install the configuration by running
 
+```sh
+./install.sh
+```
+
+which will bootstrap [ansible](https://ansible.com) and install everything.
 
 ## open issues
 
