@@ -8,6 +8,10 @@ for i in `find -L $PERSONAL`; do
 done
 
 # Set PATH, MANPATH, etc., for Homebrew.
-eval "$(/opt/homebrew/bin/brew shellenv)"
+if ! [ -x "$(command -v brew)" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
-eval "$(direnv hook zsh)"
+if ! [ -x "$(command -v direnv)" ]; then
+    eval "$(direnv hook zsh)"
+fi
