@@ -1,7 +1,13 @@
 - name: Install llvm
   ansible.builtin.package:
-    name: 
+    name:
       - llvm
+    state: present
+  become: "{{ use_sudo }}"
+- name: Install clang
+  ansible.builtin.package:
+    name:
       - clang
     state: present
   become: "{{ use_sudo }}"
+  when: ansible_system == 'Linux'
