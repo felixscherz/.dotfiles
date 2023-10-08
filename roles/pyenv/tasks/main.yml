@@ -1,6 +1,24 @@
-- name: Install pyenv
-  ansible.builtin.package:
-    state: present
-    name:
-      - pyenv
-      - pyenv-virtualenv
+- name: Check pyenv installed
+  ansible.builtin.stat:
+    path: "{{ ansible_user_dir }}/.pyenv"
+  register: pyenv_install
+- name: Download pyenv installer
+  ansible.builtin.get_url:
+    mode: 0755
+    url: https://pyenv.run
+    dest: /tmp/pyenv_install.sh
+  when: not pyenv_install.stat.exists
+- name: Install pyenv with installer
+  shell: /tmp/pyenv_install.sh
+  when: not pyenv_install.stat.exists
+- name: Remove pyenv installer
+  file:
+    path: /tmp/pyenv_install.sh
+    state: absent
+- name: Install pyenv-virtualenv
+  ansible.builtin.git:
+    repo: https://github.com/pyenv/pyenv-virtualenv.git
+    dest: "{{ ansible_user_dir }}/.pyenv/plugins/pyenv-virtualenv"
+- name: Set pyenv path
+  set_fact:
+    felixws_pyenv: "{{ ansible_user_dir }}/.pyenv/bin/pyenv"

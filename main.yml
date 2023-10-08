@@ -20,10 +20,9 @@
           - yabai
           - spacebar
           - skhd
-    - name: Set facts for MacOS
+    - name: Determine whether to use sudo
       ansible.builtin.set_fact:
-        use_sudo: no
-      when: ansible_system == 'Darwin'
+        use_sudo: "{{ 'no' if ansible_system=='Darwin' else 'yes' }}"
     - name: Install stow
       ansible.builtin.package:
         state: present
@@ -42,3 +41,5 @@
         loop_var: roles_item
       with_items: "{{ roles_macos }}"
       when: ansible_system == 'Darwin'
+    - debug:
+        var: felixws_pyenv
