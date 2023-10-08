@@ -9,6 +9,7 @@
       ansible.builtin.set_fact:
         use_sudo: "{{ 'false' if ansible_system == 'Darwin' else 'true' }}"
         roles:
+          - llvm
           - zsh
           - oh-my-zsh
           - tmux

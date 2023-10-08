@@ -1,0 +1,7 @@
+- name: Install llvm
+  ansible.builtin.package:
+    name: 
+      - llvm
+      - clang
+    state: present
+  become: "{{ use_sudo }}"
