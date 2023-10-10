@@ -1,0 +1,4 @@
+- name: Install parallel
+  ansible.builtin.package:
+    name: parallel
+  become: "{{ use_sudo }}"
