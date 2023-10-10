@@ -17,6 +17,7 @@
           - environment
           - alacritty
           - pyenv
+          - pre-commit
           - neovim
           - direnv
           - jq
