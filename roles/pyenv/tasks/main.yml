@@ -9,8 +9,9 @@
     dest: /tmp/pyenv_install.sh
   when: not pyenv_install.stat.exists
 - name: Install pyenv with installer
-  ansible.builtin.shell: /tmp/pyenv_install.sh
+  ansible.builtin.command: /tmp/pyenv_install.sh
   when: not pyenv_install.stat.exists
+  changed_when: not pyenv_install.stat.exists
 - name: Remove pyenv installer
   ansible.builtin.file:
     path: /tmp/pyenv_install.sh
@@ -18,6 +19,7 @@
 - name: Install pyenv-virtualenv
   ansible.builtin.git:
     repo: https://github.com/pyenv/pyenv-virtualenv.git
+    version: v1.2.1
     dest: "{{ ansible_user_dir }}/.pyenv/plugins/pyenv-virtualenv"
 - name: Set pyenv path
   ansible.builtin.set_fact:
