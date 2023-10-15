@@ -49,3 +49,9 @@
   loop_control:
     loop_var: version
   with_items: "{{ python_versions }}"
+- name: Install pipx
+  ansible.builtin.pip:
+    name: pipx
+- name: Set global python interpreter
+  ansible.builtin.set_fact:
+    python_interpreter: "{{ ansible_user_dir }}/.pyenv/versions/3.10.7/bin/pipx"
