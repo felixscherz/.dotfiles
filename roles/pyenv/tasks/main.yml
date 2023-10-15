@@ -27,16 +27,17 @@
 - name: Set python versions
   ansible.builtin.set_fact:
     python_versions:
-      - '3.9'
-      - '3.10'
-      - '3.11'
+      - '3.9.14'
+      - '3.10.7'
+      - '3.11.3'
 - name: Install python
   ansible.builtin.command:
     cmd: pyenv install {{ version }}
-    creates: "{{ ansible_user_dir }}/.pyenv/versions/{{ version }}.*"
+    creates: "{{ ansible_user_dir }}/.pyenv/versions/{{ version }}"
   loop_control:
     loop_var: version
   with_items: "{{ python_versions }}"
+  register: install_python
 - name: Set pyenv versions
   ansible.builtin.copy:
     mode: '0644'
@@ -45,10 +46,6 @@
 - name: Install virtualenv
   ansible.builtin.pip:
     name: virtualenv
-    executable: pip{{ version }}
-  loop_control:
-    loop_var: version
-  with_items: "{{ python_versions }}"
 - name: Install pipx
   ansible.builtin.pip:
     name: pipx
