@@ -8,7 +8,7 @@ for i in `find -L $PERSONAL`; do
 done
 
 # Set PATH, MANPATH, etc., for Homebrew.
-if ! [ -x "$(command -v brew)" ]; then
+if ! [ -f "/opt/homebrew/bin/brew)" ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
