@@ -22,6 +22,12 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+# initiate direnv to source files properly
+if [ -x "$(command -v direnv)" ]; then
+    eval "$(direnv hook zsh)"
+fi
+
 if [ "$TMUX" = "" ]; then tmux; fi
+
 
 source $HOME/.config/personal/alias
