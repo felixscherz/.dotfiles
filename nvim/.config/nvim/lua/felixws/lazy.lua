@@ -27,6 +27,7 @@ require("lazy").setup({
 	-- vertical bars to show indentation
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
 		config = require("felixws.appearance.indent_blankline").config,
 		event = { "BufReadPre", "BufNewFile" },
 	},
@@ -160,6 +161,7 @@ require("lazy").setup({
 
 	-- snippets
 	{
+		enabled = false,
 		"L3MON4D3/LuaSnip",
 		dependencies = { "rafamadriz/friendly-snippets" },
 		event = { "InsertEnter" },
