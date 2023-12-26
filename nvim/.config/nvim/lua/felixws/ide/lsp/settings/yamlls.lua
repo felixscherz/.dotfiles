@@ -5,6 +5,15 @@ return {
 				enable = true,
 				url = "https://www.schemastore.org/api/json/catalog.json",
 			},
+			schemas = {
+				["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = {
+					"ci/*.yml",
+					".gitlab-ci.yml",
+				},
+				["https://raw.githubusercontent.com/softprops/serverless-yml-schema/master/serverless-schema.json"] = {
+					"serverless.yml",
+				},
+			},
 			customTags = {
 				"!Base64 scalar",
 				"!Cidr scalar",
