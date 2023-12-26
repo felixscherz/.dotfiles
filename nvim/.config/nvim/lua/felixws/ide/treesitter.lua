@@ -25,6 +25,7 @@ M.opts = {
 	},
 	incremental_selection = {
 		enable = true,
+		disable = { "markdown" },
 		keymaps = {
 			init_selection = "<CR>",
 			node_incremental = "<CR>",
@@ -34,7 +35,6 @@ M.opts = {
 	},
 	highlight = {
 		enable = true,
-		additional_vim_regex_highlighting = { "org" },
 	},
 	indent = { enable = true },
 }
