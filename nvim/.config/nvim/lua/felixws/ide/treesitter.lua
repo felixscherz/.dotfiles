@@ -36,7 +36,7 @@ M.opts = {
 	highlight = {
 		enable = true,
 	},
-	indent = { enable = true },
+	indent = { enable = true, disable = { "yaml" } },
 }
 
 M.config = function(plugin, opts)
