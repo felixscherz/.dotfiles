@@ -8,6 +8,8 @@ local servers = {
 	"bashls",
 	"clangd",
 	"ansiblels",
+	"jdtls",
+	"clangd",
 }
 
 require("mason-lspconfig").setup({
