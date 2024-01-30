@@ -18,7 +18,7 @@ font:
 mouse:
   hide_when_typing: true
 window:
-  opacity: 0.90
+  opacity: 0.99
   decorations: buttonless
 # TokyoNight Alacritty Colors
 colors:
