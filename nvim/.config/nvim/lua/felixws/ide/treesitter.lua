@@ -22,6 +22,7 @@ M.opts = {
 		"comment",
 		"gitattributes",
 		"luadoc",
+		"make",
 	},
 	incremental_selection = {
 		enable = true,
