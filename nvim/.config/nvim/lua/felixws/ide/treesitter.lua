@@ -23,6 +23,13 @@ M.opts = {
 		"gitattributes",
 		"luadoc",
 		"make",
+		"http",
+		"jq",
+		"html",
+		"css",
+		"htmldjango",
+		"pymanifest",
+		"cmake",
 	},
 	incremental_selection = {
 		enable = true,
