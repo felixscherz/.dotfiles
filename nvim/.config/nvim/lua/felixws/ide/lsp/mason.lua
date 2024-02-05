@@ -10,6 +10,8 @@ local servers = {
 	"ansiblels",
 	"jdtls",
 	"clangd",
+	"terraformls",
+	"autotools_ls",
 }
 
 require("mason-lspconfig").setup({
