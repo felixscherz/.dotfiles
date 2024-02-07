@@ -13,9 +13,9 @@ antigen bundle jeffreytse/zsh-vi-mode
 antigen bundle jsontools
 antigen bundle web-search
 
-antigen apply
+antigen theme robbyrussell/oh-my-zsh
 
-source $ZSH/oh-my-zsh.sh
+antigen apply
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
