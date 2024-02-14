@@ -23,6 +23,7 @@
           - direnv
           - jq
           - fd
+          - fzf
           - ripgrep
         roles_macos:
           - yabai
