@@ -1,7 +1,7 @@
 - name: Install spacebar
   ansible.builtin.package:
     state: present
-    name: spacebar
+    name: cmacrae/formulae/spacebar
 - name: Stow spacebar
   ansible.builtin.command:
     cmd: stow spacebar --target=$HOME --verbose=2

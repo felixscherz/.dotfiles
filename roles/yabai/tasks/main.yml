@@ -1,7 +1,7 @@
 - name: Install yabai
   ansible.builtin.package:
     state: present
-    name: yabai
+    name: koekeishiya/formulae/yabai
 - name: Stow yabai
   ansible.builtin.command:
     cmd: stow yabai --target=$HOME --verbose=2

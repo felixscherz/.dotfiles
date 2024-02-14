@@ -18,10 +18,12 @@
           - alacritty
           - pyenv
           - pre-commit
+          - npm
           - neovim
           - direnv
           - jq
           - fd
+          - ripgrep
         roles_macos:
           - yabai
           - spacebar
