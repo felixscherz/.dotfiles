@@ -1,6 +1,6 @@
 - name: Stow alacritty
   ansible.builtin.command:
-    cmd: stow tmux --target=$HOME --verbose=2
+    cmd: stow alacritty --target=$HOME --verbose=2
     chdir: "{{ ansible_user_dir }}/.dotfiles"
   register: result
   changed_when: 'result.stderr is search("LINK: ")'
