@@ -7,6 +7,7 @@ SSH_DIR="$HOME/.ssh"
 setup_macos() {
     if ! [ -x "$(command -v brew)" ]; then
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	eval "$(/opt/homebrew/bin/brew shellenv)"
     fi
     if ! [ -x "$(command -v ansible)" ]; then
         brew install ansible
