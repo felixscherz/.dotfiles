@@ -1,0 +1,5 @@
+- name: Install fd
+  ansible.builtin.package:
+    state: present
+    name:
+      - fd

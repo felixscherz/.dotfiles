@@ -21,6 +21,7 @@
           - neovim
           - direnv
           - jq
+          - fd
         roles_macos:
           - yabai
           - spacebar
