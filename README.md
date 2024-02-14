@@ -25,3 +25,5 @@ which will bootstrap [ansible](https://ansible.com) and install everything.
 ### spacebar
 
 Regarding accessiblity features abort: https://github.com/koekeishiya/yabai/issues/867#issuecomment-1070721122
+
+Install rosetta `softwareupdate --install-rosetta` to fix Bad CPU Type error.
