@@ -91,14 +91,6 @@ require("lazy").setup({
 		"markonm/traces.vim",
 		event = { "BufReadPre", "BufNewFile" },
 	},
-	--orgmode
-	{
-		"nvim-orgmode/orgmode",
-		config = require("felixws.navigation.orgmode").config,
-		keys = { "<leader>o" },
-		lazy = false,
-	},
-
 	{
 		"stevearc/dressing.nvim",
 		opts = require("felixws.appearance.dressing").opts,

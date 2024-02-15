@@ -61,12 +61,6 @@ local function register_keymaps()
 				end,
 				"serach tags",
 			},
-			o = {
-				function()
-					require("telescope.builtin").live_grep({ cwd = "~/org" })
-				end,
-				"live grep orgmode",
-			},
 			G = {
 				function()
 					require("telescope").extensions.advanced_git_search.show_custom_functions()
