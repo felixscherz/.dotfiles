@@ -4,3 +4,8 @@
     chdir: "{{ ansible_user_dir }}/.dotfiles"
   register: result
   changed_when: 'result.stderr is search("LINK: ")'
+- name: Copy .gitignore
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/.gitignore"
+    dest: "{{ ansible_user_dir }}/.gitignore"
+    state: link
