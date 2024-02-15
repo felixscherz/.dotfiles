@@ -25,6 +25,8 @@
           - fd
           - fzf
           - ripgrep
+          - aws
+          - git
         roles_macos:
           - yabai
           - spacebar

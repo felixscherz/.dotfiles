@@ -1,0 +1,6 @@
+- name: Stow git
+  ansible.builtin.command:
+    cmd: stow git --target=$HOME --verbose=2
+    chdir: "{{ ansible_user_dir }}/.dotfiles"
+  register: result
+  changed_when: 'result.stderr is search("LINK: ")'
