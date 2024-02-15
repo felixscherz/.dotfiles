@@ -40,6 +40,7 @@ M.opts = {
 				".gitlab-ci.yml",
 				".gitignore",
 				".pre-commit-config.yaml",
+				".cz.toml",
 			},
 		},
 		use_libuv_file_watcher = true,
