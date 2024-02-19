@@ -14,3 +14,5 @@
   wordRegex = .
   # Display submodule-related information (commit listings)
   submodule = log
+[core]
+    excludesFile = ~/.gitignore

@@ -1,2 +1,5 @@
 .DS_Store
 .node_repl_history
+.envrc
+__pycache__
+node_modules/
