@@ -35,3 +35,4 @@ if [ "$TMUX" = "" ]; then tmux; fi
 
 
 source $HOME/.config/personal/alias
+export WATSON_DIR=$XDG_CONFIG_HOME/watson

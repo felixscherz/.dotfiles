@@ -27,6 +27,7 @@
           - ripgrep
           - aws
           - git
+          - watson
         roles_macos:
           - yabai
           - spacebar

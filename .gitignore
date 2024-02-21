@@ -4,3 +4,5 @@ nvim/\.config/nvim/plugin/*
 **/.DS_Store
 bin/.local/share/*
 bin/.local/state/*
+watson/.config/watson/frames*
+watson/.config/watson/state*
