@@ -28,6 +28,7 @@
           - aws
           - git
           - watson
+          - rust
         roles_macos:
           - yabai
           - spacebar
