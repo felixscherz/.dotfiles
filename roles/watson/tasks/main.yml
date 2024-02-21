@@ -1,0 +1,6 @@
+- name: Stow watson
+  ansible.builtin.command:
+    cmd: stow watson --target=$HOME --verbose=2
+    chdir: "{{ ansible_user_dir }}/.dotfiles"
+  register: result
+  changed_when: 'result.stderr is search("LINK: ")'
