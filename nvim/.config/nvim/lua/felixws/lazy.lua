@@ -163,6 +163,7 @@ require("lazy").setup({
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPost" },
 		config = require("felixws.ide.lsp").config,
+		dependencies = { "b0o/schemastore.nvim" },
 	},
 	{
 		"williamboman/mason.nvim",
