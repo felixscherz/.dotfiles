@@ -134,7 +134,7 @@ require("lazy").setup({
 		event = { "InsertEnter" },
 	},
 
-	{ "jose-elias-alvarez/null-ls.nvim", event = { "VeryLazy" } },
+	{ "nvimtools/none-ls.nvim", event = { "VeryLazy" } },
 
 	{
 		"nvim-neotest/neotest",
