@@ -189,6 +189,7 @@ require("lazy").setup({
 		build = ":TSUpdate",
 		config = require("felixws.ide.treesitter").config,
 		event = { "BufReadPost", "BufNewFile" },
+		lazy = false,
 	},
 	{
 		"mfussenegger/nvim-dap",
@@ -200,6 +201,7 @@ require("lazy").setup({
 			"nvim-telescope/telescope-dap.nvim",
 			{ "leoluz/nvim-dap-go", module = "dap-go" },
 			{ "jbyuki/one-small-step-for-vimkind", module = "osv" },
+			"nvim-neotest/nvim-nio",
 		},
 		config = function()
 			require("felixws.ide.dap.dap").setup()
