@@ -1,7 +1,12 @@
 return {
 	init_options = {
 		settings = {
-			args = { "--line-length=120" },
+			format = {
+				args = { "--line-length=120" },
+			},
+			lint = {
+				args = { "--line-length=120" },
+			},
 		},
 	},
 }
