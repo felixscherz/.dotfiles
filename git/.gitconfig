@@ -16,3 +16,5 @@
   submodule = log
 [core]
     excludesFile = ~/.gitignore
+[include]
+    path = ~/.config/git/.gitconfig.work
