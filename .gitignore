@@ -6,3 +6,4 @@ bin/.local/share/*
 bin/.local/state/*
 watson/.config/watson/frames*
 watson/.config/watson/state*
+bin/.local/bin/*
