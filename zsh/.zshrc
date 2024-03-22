@@ -34,6 +34,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 if [ "$TMUX" = "" ]; then tmux; fi
 
 
+source $HOME/.config/personal/functions
 source $HOME/.config/personal/alias
 export WATSON_DIR=$XDG_CONFIG_HOME/watson
 [ -f ~/.cargo/env ] && source $HOME/.cargo/env
