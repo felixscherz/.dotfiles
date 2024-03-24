@@ -30,6 +30,11 @@ M.opts = {
 		"htmldjango",
 		"pymanifest",
 		"cmake",
+		"ini",
+		"dockerfile",
+		"git_config",
+		"gitcommit",
+		"gitignore",
 	},
 	incremental_selection = {
 		enable = true,
