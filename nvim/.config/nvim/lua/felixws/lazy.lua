@@ -246,10 +246,6 @@ require("lazy").setup({
 		end,
 		lazy = false,
 	},
-
-	-- run curl commands from inside vim
-	"diepm/vim-rest-console",
-
 	{
 		"goolord/alpha-nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
