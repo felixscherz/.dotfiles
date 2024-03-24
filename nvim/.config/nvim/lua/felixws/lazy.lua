@@ -23,7 +23,6 @@ require("lazy").setup({
 		config = require("felixws.keymaps.whichkey").config,
 		lazy = false,
 	},
-
 	-- vertical bars to show indentation
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -31,14 +30,12 @@ require("lazy").setup({
 		config = require("felixws.appearance.indent_blankline").config,
 		event = { "BufReadPre", "BufNewFile" },
 	},
-
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons", "arkav/lualine-lsp-progress" },
 		config = require("felixws.appearance.lualine").config,
 		lazy = false,
 	},
-
 	{
 		"windwp/nvim-autopairs",
 		config = function()
@@ -46,7 +43,6 @@ require("lazy").setup({
 		end,
 		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 	},
-
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v3.x",
@@ -58,7 +54,6 @@ require("lazy").setup({
 		config = require("felixws.navigation.neotree").config,
 		keys = { { "<leader>pv", "<cmd>Neotree<CR>" } },
 	},
-
 	-- fuzzy finder telescope
 	{
 		"nvim-telescope/telescope.nvim",
@@ -67,13 +62,11 @@ require("lazy").setup({
 		cmd = "Telescope",
 		keys = { "<leader>f" },
 	},
-
 	-- deal with surrounds
 	{
 		"tpope/vim-surround",
 		event = "InsertEnter",
 	},
-
 	-- show undo history
 	{ "mbbill/undotree", lazy = false },
 
