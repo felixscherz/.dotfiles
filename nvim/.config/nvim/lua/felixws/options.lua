@@ -24,6 +24,9 @@ local options = {
 	ignorecase = true,
 	smartcase = true,
 	winminwidth = 5,
+	splitright = true,
+	splitbelow = true,
+	showmatch = true,
 }
 
 for k, v in pairs(options) do
