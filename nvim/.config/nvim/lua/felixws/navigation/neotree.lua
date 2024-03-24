@@ -29,7 +29,7 @@ M.opts = {
 		find_by_full_path_words = true,
 		hijack_netrw_behavior = "open_default",
 		filtered_items = {
-			hide_dotfiles = true,
+			hide_dotfiles = false,
 			hide_gitignored = true,
 			hide_by_name = {
 				".DS_Store",
@@ -41,6 +41,7 @@ M.opts = {
 				".gitignore",
 				".pre-commit-config.yaml",
 				".cz.toml",
+				".github",
 			},
 		},
 		use_libuv_file_watcher = true,
