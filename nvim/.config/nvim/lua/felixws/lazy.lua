@@ -351,6 +351,7 @@ require("lazy").setup({
 			"nvim-tree/nvim-web-devicons",
 		},
 	},
+	{ "github/copilot.vim", event = "VeryLazy", enable = false },
 }, {
 	defaults = {
 		lazy = true,
