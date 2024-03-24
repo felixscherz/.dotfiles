@@ -21,7 +21,13 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 vim.filetype.add({
 	filename = {
 		[".envrc"] = "bash",
+		[".flake8"] = "ini",
+		[".importlinter"] = "ini",
 	},
+})
+
+vim.filetype.add({
+	pattern = { [".*/tasks/.*.yml"] = "yaml.ansible", [".*\\.dotfiles/main.yml"] = "yaml.ansible" },
 })
 
 --fix terraform and hcl comment string
