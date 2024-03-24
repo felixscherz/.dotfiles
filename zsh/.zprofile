@@ -1,3 +1,4 @@
+# .zprofile gets sourced at startup
 export XDG_CONFIG_HOME=$HOME/.config
 VIM="nvim"
 
@@ -6,8 +7,3 @@ source $PERSONAL/env
 for i in `find -L $PERSONAL`; do
     source $i
 done
-
-# Set PATH, MANPATH, etc., for Homebrew.
-if ! [ -f "/opt/homebrew/bin/brew)" ]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
