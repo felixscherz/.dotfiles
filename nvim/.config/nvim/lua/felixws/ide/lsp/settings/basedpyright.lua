@@ -1,12 +1,10 @@
 return {
 	settings = {
-		python = {
-			analysis = {
-				typeCheckingMode = "basic",
-				autoSearchPaths = true,
-				diagnosticMode = "openFilesOnly",
-				useLibraryCodeForTypes = true,
-			},
+		basedpyright = {
+			typeCheckingMode = "standard",
+			autoSearchPaths = true,
+			diagnosticMode = "openFilesOnly",
+			useLibraryCodeForTypes = true,
 		},
 	},
 }
