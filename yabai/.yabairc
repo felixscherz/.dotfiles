@@ -15,8 +15,7 @@ sudo yabai --load-sa
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 
 #!/usr/bin/env sh
-yabai -m config debug_output on
-
+yabai -m config debug_output off
 
 # global settings
 yabai -m config mouse_follows_focus          off
@@ -29,11 +28,8 @@ yabai -m config window_opacity               off
 yabai -m config window_opacity_duration      0.0
 yabai -m config window_shadow                on
 
-yabai -m config window_border on
-yabai -m config window_border_width 1
 yabai -m config active_window_border_color 0xff7c4fef
 yabai -m config normal_window_border_color 0xff555555
-# yabai -m config window_border_radius 0
 
 yabai -m config active_window_opacity        1.0
 yabai -m config normal_window_opacity        0.90
@@ -56,11 +52,6 @@ yabai -m config window_gap                   5
 
 # ignore MS Teams popup window
 yabai -m rule --add label=ignoreTeamsNotification app="Microsoft Teams" title="Microsoft Teams Notification" manage=off
-# disable the border on the MS teams window
-yabai -m rule --add \
-    app='^Microsoft Teams$' \
-    title='^Microsoft Teams Notification$' \
-    border=off
 
 # float system preferences
 yabai -m rule --add app='^System Information$' manage=off
@@ -70,11 +61,7 @@ yabai -m rule --add title='Preferences$' manage=off
 # float settings windows
 yabai -m rule --add title='Settings$' manage=off
 
-# yabai -m rule --add app="^Spotify" space=^1
 yabai -m rule --add app="^Spotify" manage=off
-# yabai -m rule --add app="^Microsoft Teams" space=^2
-# yabai -m rule --add app="^Google Chrome" space=^1
-# yabai -m rule --add app="^Microsoft Outlook" space=^1
 
 function setup_space {
   local idx="$1"
@@ -90,18 +77,14 @@ function setup_space {
   yabai -m space "$idx" --label "$name"
 }
 
-setup_space 1 google
-setup_space 2 web
+setup_space 1 mail
+setup_space 2 chat
 setup_space 3 code
-setup_space 4 social
-setup_space 5 media
-setup_space 6 other
+setup_space 4 notes
+setup_space 5 browser1
+setup_space 6 browser2
 
-# focus window after active space changes
-yabai -m signal --add event=space_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
-
-# focus window after active display changes
-yabai -m signal --add event=display_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
+yabai -m config focus_follows_mouse autoraise
 
 # spacebar padding on top screen
 SPACEBAR_HEIGHT=$(spacebar -m config height)
