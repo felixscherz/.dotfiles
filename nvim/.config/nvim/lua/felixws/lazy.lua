@@ -351,7 +351,16 @@ require("lazy").setup({
 			"nvim-tree/nvim-web-devicons",
 		},
 	},
-	{ "github/copilot.vim", event = "VeryLazy", enabled = false },
+	{
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
+		enabled = true,
+
+		config = function()
+			require("copilot").setup({})
+		end,
+	},
 }, {
 	defaults = {
 		lazy = true,
