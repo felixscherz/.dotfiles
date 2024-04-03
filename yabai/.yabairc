@@ -28,9 +28,6 @@ yabai -m config window_opacity               off
 yabai -m config window_opacity_duration      0.0
 yabai -m config window_shadow                on
 
-yabai -m config active_window_border_color 0xff7c4fef
-yabai -m config normal_window_border_color 0xff555555
-
 yabai -m config active_window_opacity        1.0
 yabai -m config normal_window_opacity        0.90
 yabai -m config split_ratio                  0.50
@@ -49,19 +46,6 @@ yabai -m config bottom_padding               5
 yabai -m config left_padding                 5
 yabai -m config right_padding                5
 yabai -m config window_gap                   5
-
-# ignore MS Teams popup window
-yabai -m rule --add label=ignoreTeamsNotification app="Microsoft Teams" title="Microsoft Teams Notification" manage=off
-
-# float system preferences
-yabai -m rule --add app='^System Information$' manage=off
-yabai -m rule --add app='^System Preferences$' manage=off
-yabai -m rule --add title='Preferences$' manage=off
-
-# float settings windows
-yabai -m rule --add title='Settings$' manage=off
-
-yabai -m rule --add app="^Spotify" manage=off
 
 function setup_space {
   local idx="$1"
@@ -89,6 +73,5 @@ yabai -m config focus_follows_mouse on
 # spacebar padding on top screen
 SPACEBAR_HEIGHT=$(spacebar -m config height)
 yabai -m config external_bar all:$SPACEBAR_HEIGHT:0
-
 
 echo "yabai configuration loaded.."
