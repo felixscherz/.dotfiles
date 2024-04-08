@@ -49,7 +49,7 @@
   "one-small-step-for-vimkind": { "branch": "main", "commit": "cd2500ab74addeed6ac260a008dd649c01d3ba12" },
   "plenary.nvim": { "branch": "master", "commit": "f7adfc4b3f4f91aab6caebf42b3682945fbc35be" },
   "refactoring.nvim": { "branch": "master", "commit": "d2786877c91aa409c824f27b4ce8a9f560dda60a" },
-  "schemastore.nvim": { "branch": "main", "commit": "9ad2209d3fe54f99e3df2c26fadd6f4a3ecae44c" },
+  "schemastore.nvim": { "branch": "main", "commit": "80d701841487f72bf9d3fa56b25146b95e190502" },
   "silicon.lua": { "branch": "main", "commit": "b742773c2dd4a13dc7ecbda97ae45fad07e2a7c6" },
   "telescope-dap.nvim": { "branch": "master", "commit": "8c88d9716c91eaef1cdea13cb9390d8ef447dbfe" },
   "telescope.nvim": { "branch": "master", "commit": "221778e93bfaa58bce4be4e055ed2edecc26f799" },
