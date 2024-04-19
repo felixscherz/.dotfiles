@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 addToPath $HOME/.rd/bin
 addToPath $HOME/.local/scripts
-addToPath $HOME/.local/bin
+addToPathFront $HOME/.local/bin  # should this be in zshrc since it is user related?
