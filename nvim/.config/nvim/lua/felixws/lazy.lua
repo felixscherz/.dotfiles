@@ -32,7 +32,11 @@ require("lazy").setup({
 	},
 	{
 		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons", "arkav/lualine-lsp-progress" },
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			"arkav/lualine-lsp-progress",
+			"nvim-telescope/telescope-symbols.nvim",
+		},
 		config = require("felixws.appearance.lualine").config,
 		lazy = false,
 	},

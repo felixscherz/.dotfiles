@@ -51,6 +51,7 @@
   "schemastore.nvim": { "branch": "main", "commit": "2ef728ff7e790431f1f71052bfd4c5568157e110" },
   "silicon.lua": { "branch": "main", "commit": "b742773c2dd4a13dc7ecbda97ae45fad07e2a7c6" },
   "telescope-dap.nvim": { "branch": "master", "commit": "8c88d9716c91eaef1cdea13cb9390d8ef447dbfe" },
+  "telescope-symbols.nvim": { "branch": "master", "commit": "a6d0127a53d39b9fc2af75bd169d288166118aec" },
   "telescope.nvim": { "branch": "master", "commit": "fac83a556e7b710dc31433dec727361ca062dbe9" },
   "tokyonight.nvim": { "branch": "main", "commit": "67afeaf7fd6ebba000633e89f63c31694057edde" },
   "traces.vim": { "branch": "master", "commit": "9663fcf84de5776bee71b6c816c25ccb6ea11d1a" },
