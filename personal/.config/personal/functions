@@ -1,4 +1,16 @@
 #!/usr/bin/env bash
+addToPath() {
+    if [[ "$PATH" != *"$1"* ]]; then
+        export PATH=$PATH:$1
+    fi
+}
+
+addToPathFront() {
+    if [[ "$PATH" != *"$1"* ]]; then
+        export PATH=$1:$PATH
+    fi
+}
+
 change_directory_fuzzy() {
     new_dir=$(find * -type d -maxdepth 4 | fzf)
     if [ -z "${new_dir}" ]; then new_dir=$(PWD); fi

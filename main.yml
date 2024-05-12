@@ -12,7 +12,6 @@
           - llvm
           - zsh
           - parallel
-          - oh-my-zsh
           - tmux
           - environment
           - kitty
