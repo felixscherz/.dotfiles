@@ -1,0 +1,12 @@
+- name: Install kitty
+  ansible.builtin.shell: >
+    set -o pipefail && curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n
+
+  args:
+    creates: "{{ ansible_env.HOME }}/Applications/kitty.app"
+- name: Stow kitty
+  ansible.builtin.command:
+    cmd: stow kitty --target=$HOME --verbose=2
+    chdir: "{{ ansible_user_dir }}/.dotfiles"
+  register: result
+  changed_when: 'result.stderr is search("LINK: ")'

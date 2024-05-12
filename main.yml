@@ -15,7 +15,7 @@
           - oh-my-zsh
           - tmux
           - environment
-          - alacritty
+          - kitty
           - pyenv
           - pre-commit
           - npm

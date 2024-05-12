@@ -274,9 +274,9 @@ require("lazy").setup({
 				plugins = {
 					twilight = { enabled = false },
 					tmux = { enabled = true },
-					alacritty = {
+					kitty = {
 						enabled = true,
-						font = "14.0",
+						font = "+4",
 					},
 				},
 			})

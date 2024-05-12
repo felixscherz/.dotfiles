@@ -55,7 +55,7 @@ alt - f : yabai -m window --toggle zoom-fullscreen
 alt + shift - f : yabai -m window --toggle native-fullscreen
 
 # open terminal
-alt - return : open -n /Applications/Alacritty.app
+alt - return : open -n /Applications/kitty.app
 
 # create desktop, move window and follow focus - uses jq for parsing json (brew install jq)
 shift + cmd - n : yabai -m space --create && \
