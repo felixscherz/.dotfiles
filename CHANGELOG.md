@@ -1,3 +1,16 @@
+## 0.3.0 (2024-05-12)
+
+### Feat
+
+- antigen in favor of oh-my-zsh manually
+- use kitty in favor of alacritty
+- add telescope-symbols
+- move ~/.local/bin to PATH front
+
+### Fix
+
+- downgrade nvim-nio because of issue #16
+
 ## 0.2.0 (2024-04-02)
 
 ### Feat
