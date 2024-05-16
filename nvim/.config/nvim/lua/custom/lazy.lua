@@ -15,24 +15,6 @@ require("lazy").setup({
 	spec = {
 		{ import = "custom/plugins" },
 
-		-- cmp plugins
-		{
-			"hrsh7th/nvim-cmp", -- The completion plugin
-			config = function()
-				require("custom.ide.cmp")
-			end,
-			dependencies = {
-				"hrsh7th/cmp-buffer", -- buffer completions
-				"hrsh7th/cmp-path", -- path completions
-				"hrsh7th/cmp-cmdline", -- cmdline completions
-				"saadparwaiz1/cmp_luasnip", -- snippet completions
-				"hrsh7th/cmp-nvim-lsp",
-				"hrsh7th/cmp-nvim-lua",
-				"hrsh7th/cmp-nvim-lsp-signature-help",
-			},
-			event = { "InsertEnter" },
-		},
-
 		{ "nvimtools/none-ls.nvim", event = { "VeryLazy" } },
 
 		{
