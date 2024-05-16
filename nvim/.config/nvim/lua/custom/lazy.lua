@@ -20,16 +20,6 @@ require("lazy").setup({
 			lazy = false,
 		},
 		{
-			"nvim-lualine/lualine.nvim",
-			dependencies = {
-				"nvim-tree/nvim-web-devicons",
-				"arkav/lualine-lsp-progress",
-				"nvim-telescope/telescope-symbols.nvim",
-			},
-			config = require("custom.appearance.lualine").config,
-			lazy = false,
-		},
-		{
 			"windwp/nvim-autopairs",
 			config = function()
 				require("nvim-autopairs").setup()
