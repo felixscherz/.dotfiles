@@ -12,361 +12,338 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	{
-		"folke/tokyonight.nvim",
-		lazy = false, -- make sure we load this during startup if it is your main colorscheme
-		priority = 1000, -- make sure to load this before all the other start plugins
-		opts = require("custom.appearance.tokyonight").opts,
-	},
-	{
-		"folke/which-key.nvim",
-		config = require("custom.keymaps.whichkey").config,
-		lazy = false,
-	},
-	-- vertical bars to show indentation
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
-		config = require("custom.appearance.indent_blankline").config,
-		event = { "BufReadPre", "BufNewFile" },
-	},
-	{
-		"nvim-lualine/lualine.nvim",
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-			"arkav/lualine-lsp-progress",
-			"nvim-telescope/telescope-symbols.nvim",
+	spec = {
+		{ import = "custom/plugins" },
+		{
+			"folke/which-key.nvim",
+			config = require("custom.keymaps.whichkey").config,
+			lazy = false,
 		},
-		config = require("custom.appearance.lualine").config,
-		lazy = false,
-	},
-	{
-		"windwp/nvim-autopairs",
-		config = function()
-			require("nvim-autopairs").setup()
-		end,
-		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
-	},
-	{
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v3.x",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-			"MunifTanjim/nui.nvim",
+		-- vertical bars to show indentation
+		{
+			"lukas-reineke/indent-blankline.nvim",
+			main = "ibl",
+			config = require("custom.appearance.indent_blankline").config,
+			event = { "BufReadPre", "BufNewFile" },
 		},
-		config = require("custom.navigation.neotree").config,
-		keys = { { "<leader>pv", "<cmd>Neotree<CR>" } },
-	},
-	-- fuzzy finder telescope
-	{
-		"nvim-telescope/telescope.nvim",
-		dependencies = { "nvim-lua/plenary.nvim", "aaronhallaert/advanced-git-search.nvim" },
-		config = require("custom.navigation.telescope").config,
-		cmd = "Telescope",
-		keys = { "<leader>f" },
-	},
-	-- deal with surrounds
-	{
-		"tpope/vim-surround",
-		event = "InsertEnter",
-	},
-	-- show undo history
-	{ "mbbill/undotree", lazy = false },
-
-	-- git plugin
-	{
-		"tpope/vim-fugitive",
-		event = { "BufReadPre", "BufNewFile" },
-		enabled = true,
-		cmd = "Git",
-		keys = { "<leader>g" },
-	},
-
-	-- highlight substitution
-	{
-		"markonm/traces.vim",
-		event = { "BufReadPre", "BufNewFile" },
-	},
-	{
-		"stevearc/dressing.nvim",
-		opts = require("custom.appearance.dressing").opts,
-		event = "VeryLazy",
-	},
-
-	-- show markdown in browser
-	-- install without yarn or npm
-	{
-		"iamcco/markdown-preview.nvim",
-		build = "cd app && npm install",
-		cmd = "MarkdownPreview",
-		config = function()
-			vim.fn.stdpath("data")
-			vim.g.mkdp_highlight_css = vim.fn.stdpath("config") .. "/assets/tokyo-night-dark.css"
-		end,
-		ft = { "markdown" },
-	},
-
-	-- coerce between different cases (camelCase snake_case)
-	{
-		"tpope/vim-abolish",
-		event = { "BufReadPre", "BufNewFile" },
-	},
-
-	-- cmp plugins
-	{
-		"hrsh7th/nvim-cmp", -- The completion plugin
-		config = function()
-			require("custom.ide.cmp")
-		end,
-		dependencies = {
-			"hrsh7th/cmp-buffer", -- buffer completions
-			"hrsh7th/cmp-path", -- path completions
-			"hrsh7th/cmp-cmdline", -- cmdline completions
-			"saadparwaiz1/cmp_luasnip", -- snippet completions
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-nvim-lua",
-			"hrsh7th/cmp-nvim-lsp-signature-help",
-		},
-		event = { "InsertEnter" },
-	},
-
-	{ "nvimtools/none-ls.nvim", event = { "VeryLazy" } },
-
-	{
-		"nvim-neotest/neotest",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-			"antoinemadec/FixCursorHold.nvim",
-			"nvim-neotest/neotest-python",
-			"nvim-neotest/neotest-plenary",
-			"nvim-neotest/neotest-vim-test",
-			"rouge8/neotest-rust",
-		},
-		config = require("custom.ide.neotest").config,
-		keys = { "<leader>n" },
-	},
-
-	-- snippets
-	{
-		"L3MON4D3/LuaSnip",
-		dependencies = { "rafamadriz/friendly-snippets" },
-		event = { "InsertEnter" },
-	},
-
-	-- LSP
-	{
-		"neovim/nvim-lspconfig",
-		event = { "BufReadPost" },
-		config = require("custom.ide.lsp").config,
-		dependencies = { "b0o/schemastore.nvim" },
-	},
-	{
-		"williamboman/mason.nvim",
-		cmd = "Mason",
-		config = function(_, opts)
-			require("mason").setup(opts)
-		end,
-		opts = {
-			ui = {
-				border = "rounded",
-				icons = {
-					package_installed = "◍",
-					package_pending = "◍",
-					package_uninstalled = "◍",
-				},
+		{
+			"nvim-lualine/lualine.nvim",
+			dependencies = {
+				"nvim-tree/nvim-web-devicons",
+				"arkav/lualine-lsp-progress",
+				"nvim-telescope/telescope-symbols.nvim",
 			},
-			log_level = vim.log.levels.INFO,
-			max_concurrent_installers = 4,
+			config = require("custom.appearance.lualine").config,
+			lazy = false,
 		},
-	}, -- simple to use language server installer
-	{ "williamboman/mason-lspconfig.nvim" },
-	{
-		"nvim-treesitter/nvim-treesitter",
-		build = ":TSUpdate",
-		config = require("custom.ide.treesitter").config,
-		event = { "BufReadPost", "BufNewFile" },
-		lazy = false,
-	},
-	{
-		"mfussenegger/nvim-dap",
-		event = "BufReadPre",
-		dependencies = {
-			"theHamsta/nvim-dap-virtual-text",
-			"rcarriga/nvim-dap-ui",
-			"mfussenegger/nvim-dap-python",
-			"nvim-telescope/telescope-dap.nvim",
-			{ "leoluz/nvim-dap-go", module = "dap-go" },
-			{ "jbyuki/one-small-step-for-vimkind", module = "osv" },
-			{ "nvim-neotest/nvim-nio", commit = "7fa5545299fc7a48d5ec74d27f414b862060095f" },
-		},
-		config = function()
-			require("custom.ide.dap.dap").setup()
-		end,
-	},
-	{
-		"ThePrimeagen/refactoring.nvim",
-		dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
-		config = function()
-			require("custom.ide.refactoring").setup()
-		end,
-		event = "BufReadPre",
-	},
-	-- icons (hopefully)
-	{
-		"lewis6991/gitsigns.nvim",
-		event = "InsertEnter",
-	},
-
-	-- take screenshots of code
-	{
-		"narutoxy/silicon.lua",
-		dependencies = { "nvim-lua/plenary.nvim" },
-	},
-
-	{
-		"norcalli/nvim-colorizer.lua",
-		event = { "BufReadPre", "BufNewFile" },
-	},
-
-	{
-		"ThePrimeagen/harpoon",
-		keys = { "<leader>m" },
-	},
-
-	-- collection of small plugins (highlight current word)
-	{
-		"echasnovski/mini.nvim",
-		config = function()
-			require("mini.comment").setup()
-		end,
-		lazy = false,
-	},
-	{
-		"goolord/alpha-nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		config = function()
-			require("alpha").setup(require("alpha.themes.startify").config)
-		end,
-		lazy = false,
-	},
-	{
-		"folke/trouble.nvim",
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
+		{
+			"windwp/nvim-autopairs",
 			config = function()
-				require("trouble").setup()
+				require("nvim-autopairs").setup()
 			end,
-			ft = { "qf" },
+			event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		},
-	},
-	{
-		"folke/zen-mode.nvim",
-		config = function()
-			require("zen-mode").setup({
-				window = {
-					height = 1.0,
-					options = {
-						number = true,
+		{
+			"nvim-neo-tree/neo-tree.nvim",
+			branch = "v3.x",
+			dependencies = {
+				"nvim-lua/plenary.nvim",
+				"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+				"MunifTanjim/nui.nvim",
+			},
+			config = require("custom.navigation.neotree").config,
+			keys = { { "<leader>pv", "<cmd>Neotree<CR>" } },
+		},
+		-- fuzzy finder telescope
+		{
+			"nvim-telescope/telescope.nvim",
+			dependencies = { "nvim-lua/plenary.nvim", "aaronhallaert/advanced-git-search.nvim" },
+			config = require("custom.navigation.telescope").config,
+			cmd = "Telescope",
+			keys = { "<leader>f" },
+		},
+		-- deal with surrounds
+		{
+			"tpope/vim-surround",
+			event = "InsertEnter",
+		},
+		-- show undo history
+		{ "mbbill/undotree", lazy = false },
+
+		-- git plugin
+		{
+			"tpope/vim-fugitive",
+			event = { "BufReadPre", "BufNewFile" },
+			enabled = true,
+			cmd = "Git",
+			keys = { "<leader>g" },
+		},
+
+		-- highlight substitution
+		{
+			"markonm/traces.vim",
+			event = { "BufReadPre", "BufNewFile" },
+		},
+		{
+			"stevearc/dressing.nvim",
+			opts = require("custom.appearance.dressing").opts,
+			event = "VeryLazy",
+		},
+
+		-- coerce between different cases (camelCase snake_case)
+		{
+			"tpope/vim-abolish",
+			event = { "BufReadPre", "BufNewFile" },
+		},
+
+		-- cmp plugins
+		{
+			"hrsh7th/nvim-cmp", -- The completion plugin
+			config = function()
+				require("custom.ide.cmp")
+			end,
+			dependencies = {
+				"hrsh7th/cmp-buffer", -- buffer completions
+				"hrsh7th/cmp-path", -- path completions
+				"hrsh7th/cmp-cmdline", -- cmdline completions
+				"saadparwaiz1/cmp_luasnip", -- snippet completions
+				"hrsh7th/cmp-nvim-lsp",
+				"hrsh7th/cmp-nvim-lua",
+				"hrsh7th/cmp-nvim-lsp-signature-help",
+			},
+			event = { "InsertEnter" },
+		},
+
+		{ "nvimtools/none-ls.nvim", event = { "VeryLazy" } },
+
+		{
+			"nvim-neotest/neotest",
+			dependencies = {
+				"nvim-lua/plenary.nvim",
+				"nvim-treesitter/nvim-treesitter",
+				"antoinemadec/FixCursorHold.nvim",
+				"nvim-neotest/neotest-python",
+				"nvim-neotest/neotest-plenary",
+				"nvim-neotest/neotest-vim-test",
+				"rouge8/neotest-rust",
+			},
+			config = require("custom.ide.neotest").config,
+			keys = { "<leader>n" },
+		},
+
+		-- snippets
+		{
+			"L3MON4D3/LuaSnip",
+			dependencies = { "rafamadriz/friendly-snippets" },
+			event = { "InsertEnter" },
+		},
+
+		-- LSP
+		{
+			"neovim/nvim-lspconfig",
+			event = { "BufReadPost" },
+			config = require("custom.ide.lsp").config,
+			dependencies = { "b0o/schemastore.nvim" },
+		},
+		{
+			"williamboman/mason.nvim",
+			cmd = "Mason",
+			config = function(_, opts)
+				require("mason").setup(opts)
+			end,
+			opts = {
+				ui = {
+					border = "rounded",
+					icons = {
+						package_installed = "◍",
+						package_pending = "◍",
+						package_uninstalled = "◍",
 					},
 				},
-				plugins = {
-					twilight = { enabled = false },
-					tmux = { enabled = true },
-					kitty = {
-						enabled = true,
-						font = "+4",
-					},
-				},
-			})
-		end,
-		cmd = "ZenMode",
-	},
-	{
-		"folke/twilight.nvim",
-		config = function()
-			require("twilight").setup()
-		end,
-	},
-	{
-		"sindrets/diffview.nvim",
-		dependencies = "nvim-lua/plenary.nvim",
-		lazy = false,
-	},
-	{
-		"jackMort/ChatGPT.nvim",
-		event = "VeryLazy",
-		config = function()
-			if os.getenv("OPENAI_API_KEY") ~= nil then
-				require("chatgpt").setup({
-					openai_params = { max_tokens = 1000 },
-					chat = {
-						keymaps = {
-							close = { "<C-c>" },
-							yank_last = "<C-y>",
-							yank_last_code = "<C-k>",
-							scroll_up = "<C-u>",
-							scroll_down = "<C-d>",
-							toggle_settings = "<C-o>",
-							new_session = "<C-n>",
-							cycle_windows = "<Tab>",
-							select_session = "<Enter>",
-							rename_session = "r",
-							delete_session = "d",
+				log_level = vim.log.levels.INFO,
+				max_concurrent_installers = 4,
+			},
+		}, -- simple to use language server installer
+		{ "williamboman/mason-lspconfig.nvim" },
+		{
+			"nvim-treesitter/nvim-treesitter",
+			build = ":TSUpdate",
+			config = require("custom.ide.treesitter").config,
+			event = { "BufReadPost", "BufNewFile" },
+			lazy = false,
+		},
+		{
+			"mfussenegger/nvim-dap",
+			event = "BufReadPre",
+			dependencies = {
+				"theHamsta/nvim-dap-virtual-text",
+				"rcarriga/nvim-dap-ui",
+				"mfussenegger/nvim-dap-python",
+				"nvim-telescope/telescope-dap.nvim",
+				{ "leoluz/nvim-dap-go", module = "dap-go" },
+				{ "jbyuki/one-small-step-for-vimkind", module = "osv" },
+				{ "nvim-neotest/nvim-nio", commit = "7fa5545299fc7a48d5ec74d27f414b862060095f" },
+			},
+			config = function()
+				require("custom.ide.dap.dap").setup()
+			end,
+		},
+		{
+			"ThePrimeagen/refactoring.nvim",
+			dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
+			config = function()
+				require("custom.ide.refactoring").setup()
+			end,
+			event = "BufReadPre",
+		},
+		-- icons (hopefully)
+		{
+			"lewis6991/gitsigns.nvim",
+			event = "InsertEnter",
+		},
+		{
+			"norcalli/nvim-colorizer.lua",
+			event = { "BufReadPre", "BufNewFile" },
+		},
+
+		{
+			"ThePrimeagen/harpoon",
+			keys = { "<leader>m" },
+		},
+
+		-- collection of small plugins (highlight current word)
+		{
+			"echasnovski/mini.nvim",
+			config = function()
+				require("mini.comment").setup()
+			end,
+			lazy = false,
+		},
+		{
+			"goolord/alpha-nvim",
+			dependencies = { "nvim-tree/nvim-web-devicons" },
+			config = function()
+				require("alpha").setup(require("alpha.themes.startify").config)
+			end,
+			lazy = false,
+		},
+		{
+			"folke/trouble.nvim",
+			dependencies = {
+				"nvim-tree/nvim-web-devicons",
+				config = function()
+					require("trouble").setup()
+				end,
+				ft = { "qf" },
+			},
+		},
+		{
+			"folke/zen-mode.nvim",
+			config = function()
+				require("zen-mode").setup({
+					window = {
+						height = 1.0,
+						options = {
+							number = true,
 						},
 					},
-					popup_input = {
-						submit = "<C-s>",
+					plugins = {
+						twilight = { enabled = false },
+						tmux = { enabled = true },
+						kitty = {
+							enabled = true,
+							font = "+4",
+						},
 					},
 				})
-			end
-		end,
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
+			end,
+			cmd = "ZenMode",
 		},
-	},
-	{
-		"linux-cultist/venv-selector.nvim",
-		dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap-python" },
-		opts = {
-			name = { "venv", ".venv" },
+		{
+			"folke/twilight.nvim",
+			config = function()
+				require("twilight").setup()
+			end,
 		},
-		event = "VeryLazy",
-		keys = {
-			{
-				"<leader>vs",
-				"<cmd>:VenvSelect<cr>",
+		{
+			"sindrets/diffview.nvim",
+			dependencies = "nvim-lua/plenary.nvim",
+			lazy = false,
+		},
+		{
+			"jackMort/ChatGPT.nvim",
+			event = "VeryLazy",
+			config = function()
+				if os.getenv("OPENAI_API_KEY") ~= nil then
+					require("chatgpt").setup({
+						openai_params = { max_tokens = 1000 },
+						chat = {
+							keymaps = {
+								close = { "<C-c>" },
+								yank_last = "<C-y>",
+								yank_last_code = "<C-k>",
+								scroll_up = "<C-u>",
+								scroll_down = "<C-d>",
+								toggle_settings = "<C-o>",
+								new_session = "<C-n>",
+								cycle_windows = "<Tab>",
+								select_session = "<Enter>",
+								rename_session = "r",
+								delete_session = "d",
+							},
+						},
+						popup_input = {
+							submit = "<C-s>",
+						},
+					})
+				end
+			end,
+			dependencies = {
+				"MunifTanjim/nui.nvim",
+				"nvim-lua/plenary.nvim",
+				"nvim-telescope/telescope.nvim",
 			},
-			{
-				"<leader>vc",
-				"<cmd>:VenvSelectCached<cr>",
+		},
+		{
+			"linux-cultist/venv-selector.nvim",
+			dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap-python" },
+			opts = {
+				name = { "venv", ".venv" },
+			},
+			event = "VeryLazy",
+			keys = {
+				{
+					"<leader>vs",
+					"<cmd>:VenvSelect<cr>",
+				},
+				{
+					"<leader>vc",
+					"<cmd>:VenvSelectCached<cr>",
+				},
 			},
 		},
-	},
-	{
-		"nvimdev/lspsaga.nvim",
-		opts = { lightbulb = { enable = false } },
-		event = "LspAttach",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"nvim-tree/nvim-web-devicons",
+		{
+			"nvimdev/lspsaga.nvim",
+			opts = { lightbulb = { enable = false } },
+			event = "LspAttach",
+			dependencies = {
+				"nvim-treesitter/nvim-treesitter",
+				"nvim-tree/nvim-web-devicons",
+			},
 		},
-	},
-	{
-		"CopilotC-Nvim/CopilotChat.nvim",
-		branch = "canary",
-		dependencies = {
-			{ "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-			{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+		{
+			"CopilotC-Nvim/CopilotChat.nvim",
+			branch = "canary",
+			dependencies = {
+				{ "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+				{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+			},
+			opts = {
+				debug = true, -- Enable debugging
+				-- See Configuration section for rest
+			},
+			cmd = { "CopilotChatOpen", "CopilotChatToggle" },
 		},
-		opts = {
-			debug = true, -- Enable debugging
-			-- See Configuration section for rest
-		},
-		cmd = { "CopilotChatOpen", "CopilotChatToggle" },
 	},
 }, {
 	defaults = {
