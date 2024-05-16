@@ -14,11 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	spec = {
 		{ import = "custom/plugins" },
-		{
-			"folke/which-key.nvim",
-			config = require("custom.keymaps.whichkey").config,
-			lazy = false,
-		},
 
 		-- cmp plugins
 		{
@@ -128,11 +123,6 @@ require("lazy").setup({
 		{
 			"norcalli/nvim-colorizer.lua",
 			event = { "BufReadPre", "BufNewFile" },
-		},
-
-		{
-			"ThePrimeagen/harpoon",
-			keys = { "<leader>m" },
 		},
 
 		-- collection of small plugins (highlight current word)
