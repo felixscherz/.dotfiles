@@ -20,13 +20,6 @@ require("lazy").setup({
 			lazy = false,
 		},
 		{
-			"windwp/nvim-autopairs",
-			config = function()
-				require("nvim-autopairs").setup()
-			end,
-			event = { "BufReadPre", "BufNewFile", "InsertEnter" },
-		},
-		{
 			"nvim-neo-tree/neo-tree.nvim",
 			branch = "v3.x",
 			dependencies = {
