@@ -19,13 +19,6 @@ require("lazy").setup({
 			config = require("custom.keymaps.whichkey").config,
 			lazy = false,
 		},
-		-- vertical bars to show indentation
-		{
-			"lukas-reineke/indent-blankline.nvim",
-			main = "ibl",
-			config = require("custom.appearance.indent_blankline").config,
-			event = { "BufReadPre", "BufNewFile" },
-		},
 		{
 			"nvim-lualine/lualine.nvim",
 			dependencies = {
