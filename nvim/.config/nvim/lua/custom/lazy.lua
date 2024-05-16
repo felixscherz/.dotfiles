@@ -19,17 +19,6 @@ require("lazy").setup({
 			config = require("custom.keymaps.whichkey").config,
 			lazy = false,
 		},
-		{
-			"nvim-neo-tree/neo-tree.nvim",
-			branch = "v3.x",
-			dependencies = {
-				"nvim-lua/plenary.nvim",
-				"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-				"MunifTanjim/nui.nvim",
-			},
-			config = require("custom.navigation.neotree").config,
-			keys = { { "<leader>pv", "<cmd>Neotree<CR>" } },
-		},
 		-- fuzzy finder telescope
 		{
 			"nvim-telescope/telescope.nvim",
