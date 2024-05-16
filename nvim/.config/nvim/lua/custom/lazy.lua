@@ -20,12 +20,6 @@ require("lazy").setup({
 			lazy = false,
 		},
 
-		-- coerce between different cases (camelCase snake_case)
-		{
-			"tpope/vim-abolish",
-			event = { "BufReadPre", "BufNewFile" },
-		},
-
 		-- cmp plugins
 		{
 			"hrsh7th/nvim-cmp", -- The completion plugin
