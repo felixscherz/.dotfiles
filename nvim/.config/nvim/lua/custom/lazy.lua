@@ -15,13 +15,6 @@ require("lazy").setup({
 	spec = {
 		{ import = "custom/plugins" },
 		{
-			"nvim-treesitter/nvim-treesitter",
-			build = ":TSUpdate",
-			config = require("custom.ide.treesitter").config,
-			event = { "BufReadPost", "BufNewFile" },
-			lazy = false,
-		},
-		{
 			"lewis6991/gitsigns.nvim",
 			event = "InsertEnter",
 		},
