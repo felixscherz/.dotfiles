@@ -19,11 +19,6 @@ require("lazy").setup({
 			config = require("custom.keymaps.whichkey").config,
 			lazy = false,
 		},
-		-- deal with surrounds
-		{
-			"tpope/vim-surround",
-			event = "InsertEnter",
-		},
 		-- show undo history
 		{ "mbbill/undotree", lazy = false },
 
