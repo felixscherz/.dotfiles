@@ -17,21 +17,6 @@ require("lazy").setup({
 
 		{ "nvimtools/none-ls.nvim", event = { "VeryLazy" } },
 
-		{
-			"nvim-neotest/neotest",
-			dependencies = {
-				"nvim-lua/plenary.nvim",
-				"nvim-treesitter/nvim-treesitter",
-				"antoinemadec/FixCursorHold.nvim",
-				"nvim-neotest/neotest-python",
-				"nvim-neotest/neotest-plenary",
-				"nvim-neotest/neotest-vim-test",
-				"rouge8/neotest-rust",
-			},
-			config = require("custom.ide.neotest").config,
-			keys = { "<leader>n" },
-		},
-
 		-- snippets
 		{
 			"L3MON4D3/LuaSnip",
