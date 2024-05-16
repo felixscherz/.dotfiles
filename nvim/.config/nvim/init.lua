@@ -1,3 +1,3 @@
 vim.g.mapleader = " "
 
-require("felixws")
+require("custom")

@@ -1,6 +1,0 @@
-require("felixws.lazy")
-require("felixws.color")
-require("felixws.aucmds")
-require("felixws.plugins")
-require("felixws.commands")
-require("felixws.keymaps")

@@ -1,6 +1,0 @@
-require("felixws.keymaps._general")
-require("felixws.keymaps._fugitive")
-require("felixws.keymaps._harpoon")
-require("felixws.keymaps._silicon")
-require("felixws.keymaps._undotree")
-require("felixws.keymaps._copilot")

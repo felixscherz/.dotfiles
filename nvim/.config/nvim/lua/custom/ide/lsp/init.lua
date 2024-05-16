@@ -6,9 +6,9 @@ M.config = function(plugin, opts)
 		return
 	end
 
-	require("felixws.ide.lsp.mason")
-	require("felixws.ide.lsp.handlers").setup()
-	require("felixws.ide.lsp.null-ls")
+	require("custom.ide.lsp.mason")
+	require("custom.ide.lsp.handlers").setup()
+	require("custom.ide.lsp.null-ls")
 end
 
 return M

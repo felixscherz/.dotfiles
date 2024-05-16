@@ -46,14 +46,14 @@ local function configure_exts()
 end
 
 local function configure_debuggers()
-	require("felixws.ide.dap.python").setup()
+	require("custom.ide.dap.python").setup()
 end
 
 function M.setup()
 	configure() -- Configuration
 	configure_exts() -- Extensions
 	configure_debuggers() -- Debugger
-	require("felixws.ide.dap.keymaps").setup() -- Keymaps
+	require("custom.ide.dap.keymaps").setup() -- Keymaps
 end
 
 configure_debuggers()

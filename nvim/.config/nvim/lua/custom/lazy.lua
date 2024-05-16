@@ -16,18 +16,18 @@ require("lazy").setup({
 		"folke/tokyonight.nvim",
 		lazy = false, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
-		opts = require("felixws.appearance.tokyonight").opts,
+		opts = require("custom.appearance.tokyonight").opts,
 	},
 	{
 		"folke/which-key.nvim",
-		config = require("felixws.keymaps.whichkey").config,
+		config = require("custom.keymaps.whichkey").config,
 		lazy = false,
 	},
 	-- vertical bars to show indentation
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
-		config = require("felixws.appearance.indent_blankline").config,
+		config = require("custom.appearance.indent_blankline").config,
 		event = { "BufReadPre", "BufNewFile" },
 	},
 	{
@@ -37,7 +37,7 @@ require("lazy").setup({
 			"arkav/lualine-lsp-progress",
 			"nvim-telescope/telescope-symbols.nvim",
 		},
-		config = require("felixws.appearance.lualine").config,
+		config = require("custom.appearance.lualine").config,
 		lazy = false,
 	},
 	{
@@ -55,14 +55,14 @@ require("lazy").setup({
 			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 			"MunifTanjim/nui.nvim",
 		},
-		config = require("felixws.navigation.neotree").config,
+		config = require("custom.navigation.neotree").config,
 		keys = { { "<leader>pv", "<cmd>Neotree<CR>" } },
 	},
 	-- fuzzy finder telescope
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "aaronhallaert/advanced-git-search.nvim" },
-		config = require("felixws.navigation.telescope").config,
+		config = require("custom.navigation.telescope").config,
 		cmd = "Telescope",
 		keys = { "<leader>f" },
 	},
@@ -90,7 +90,7 @@ require("lazy").setup({
 	},
 	{
 		"stevearc/dressing.nvim",
-		opts = require("felixws.appearance.dressing").opts,
+		opts = require("custom.appearance.dressing").opts,
 		event = "VeryLazy",
 	},
 
@@ -117,7 +117,7 @@ require("lazy").setup({
 	{
 		"hrsh7th/nvim-cmp", -- The completion plugin
 		config = function()
-			require("felixws.ide.cmp")
+			require("custom.ide.cmp")
 		end,
 		dependencies = {
 			"hrsh7th/cmp-buffer", -- buffer completions
@@ -144,7 +144,7 @@ require("lazy").setup({
 			"nvim-neotest/neotest-vim-test",
 			"rouge8/neotest-rust",
 		},
-		config = require("felixws.ide.neotest").config,
+		config = require("custom.ide.neotest").config,
 		keys = { "<leader>n" },
 	},
 
@@ -159,7 +159,7 @@ require("lazy").setup({
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPost" },
-		config = require("felixws.ide.lsp").config,
+		config = require("custom.ide.lsp").config,
 		dependencies = { "b0o/schemastore.nvim" },
 	},
 	{
@@ -185,7 +185,7 @@ require("lazy").setup({
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
-		config = require("felixws.ide.treesitter").config,
+		config = require("custom.ide.treesitter").config,
 		event = { "BufReadPost", "BufNewFile" },
 		lazy = false,
 	},
@@ -202,14 +202,14 @@ require("lazy").setup({
 			{ "nvim-neotest/nvim-nio", commit = "7fa5545299fc7a48d5ec74d27f414b862060095f" },
 		},
 		config = function()
-			require("felixws.ide.dap.dap").setup()
+			require("custom.ide.dap.dap").setup()
 		end,
 	},
 	{
 		"ThePrimeagen/refactoring.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
 		config = function()
-			require("felixws.ide.refactoring").setup()
+			require("custom.ide.refactoring").setup()
 		end,
 		event = "BufReadPre",
 	},

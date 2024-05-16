@@ -1,0 +1,6 @@
+require("custom.keymaps._general")
+require("custom.keymaps._fugitive")
+require("custom.keymaps._harpoon")
+require("custom.keymaps._silicon")
+require("custom.keymaps._undotree")
+require("custom.keymaps._copilot")
