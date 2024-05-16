@@ -19,14 +19,6 @@ require("lazy").setup({
 			config = require("custom.keymaps.whichkey").config,
 			lazy = false,
 		},
-		-- fuzzy finder telescope
-		{
-			"nvim-telescope/telescope.nvim",
-			dependencies = { "nvim-lua/plenary.nvim", "aaronhallaert/advanced-git-search.nvim" },
-			config = require("custom.navigation.telescope").config,
-			cmd = "Telescope",
-			keys = { "<leader>f" },
-		},
 		-- deal with surrounds
 		{
 			"tpope/vim-surround",
