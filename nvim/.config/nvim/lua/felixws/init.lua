@@ -1,4 +1,3 @@
-require("felixws.options")
 require("felixws.lazy")
 require("felixws.color")
 require("felixws.aucmds")
