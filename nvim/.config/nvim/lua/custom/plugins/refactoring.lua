@@ -1,8 +1,14 @@
 return {
 	"ThePrimeagen/refactoring.nvim",
+	keys = { { "<leader>rr", mode = "v" } },
 	dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
-	config = function()
-		require("custom.ide.refactoring").setup()
+	config = function(_, opts)
+		require("refactoring").setup(opts)
+		local wk = require("which-key")
+
+		wk.register({
+			["rr"] = { ":lua require('refactoring').select_refactor()<CR>", "Refactor" },
+		}, { mode = "v", prefix = "<leader>", silent = true, noremap = true, expr = false })
 	end,
 	event = "BufReadPre",
 }
