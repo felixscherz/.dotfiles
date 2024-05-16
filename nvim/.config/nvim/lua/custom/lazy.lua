@@ -19,28 +19,6 @@ require("lazy").setup({
 			config = require("custom.keymaps.whichkey").config,
 			lazy = false,
 		},
-		-- show undo history
-		{ "mbbill/undotree", lazy = false },
-
-		-- git plugin
-		{
-			"tpope/vim-fugitive",
-			event = { "BufReadPre", "BufNewFile" },
-			enabled = true,
-			cmd = "Git",
-			keys = { "<leader>g" },
-		},
-
-		-- highlight substitution
-		{
-			"markonm/traces.vim",
-			event = { "BufReadPre", "BufNewFile" },
-		},
-		{
-			"stevearc/dressing.nvim",
-			opts = require("custom.appearance.dressing").opts,
-			event = "VeryLazy",
-		},
 
 		-- coerce between different cases (camelCase snake_case)
 		{
