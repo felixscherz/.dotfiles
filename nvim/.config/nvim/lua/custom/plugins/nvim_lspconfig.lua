@@ -137,5 +137,5 @@ return {
 			lspconfig[server].setup(opts)
 		end
 	end,
-	dependencies = { "b0o/schemastore.nvim" },
+	dependencies = { "b0o/schemastore.nvim", "williamboman/mason-lspconfig.nvim" },
 }
