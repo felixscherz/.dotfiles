@@ -14,17 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	spec = {
 		{ import = "custom/plugins" },
-
-		{ "nvimtools/none-ls.nvim", event = { "VeryLazy" } },
-
-		-- snippets
-		{
-			"L3MON4D3/LuaSnip",
-			dependencies = { "rafamadriz/friendly-snippets" },
-			event = { "InsertEnter" },
-		},
-
-		-- LSP
 		{
 			"neovim/nvim-lspconfig",
 			event = { "BufReadPost" },
