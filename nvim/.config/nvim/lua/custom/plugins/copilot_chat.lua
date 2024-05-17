@@ -10,7 +10,7 @@ return {
 		-- See Configuration section for rest
 	},
 	cmd = { "CopilotChatOpen", "CopilotChatToggle" },
-	kyes = { "<leader>cp" },
+	keys = { "<leader>cp" },
 	config = function(_, opts)
 		require("CopilotChat").setup(opts)
 		require("which-key").register({
