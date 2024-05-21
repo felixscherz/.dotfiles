@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
+export PATH=$(getconf PATH)
+
 addToPath $HOME/.rd/bin
-addToPathFront /Applications/kitty.app/Contents/MacOS
-#
+addToPath /Applications/kitty.app/Contents/MacOS
+
 # Set PATH, MANPATH, etc., for Homebrew.
 if ! [ -f "/opt/homebrew/bin/brew)" ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
