@@ -8,7 +8,7 @@ return {
 		"nvim-telescope/telescope-dap.nvim",
 		{ "leoluz/nvim-dap-go", module = "dap-go" },
 		{ "jbyuki/one-small-step-for-vimkind", module = "osv" },
-		{ "nvim-neotest/nvim-nio", commit = "7fa5545299fc7a48d5ec74d27f414b862060095f" },
+		{ "nvim-neotest/nvim-nio" },
 	},
 	config = function()
 		local dap_breakpoint = {
