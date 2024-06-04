@@ -6,3 +6,5 @@ if [[ $(uname -s) == "Darwin" ]]; then
     export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
     export CC=/opt/homebrew/opt/llvm/bin/clang
 fi
+
+export PIP_REQUIRE_VIRTUALENV=true
