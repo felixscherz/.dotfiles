@@ -8,3 +8,4 @@ if [[ $(uname -s) == "Darwin" ]]; then
 fi
 
 export PIP_REQUIRE_VIRTUALENV=true
+export DOCKER_HOST=unix://${HOME}/.rd/docker.sock
