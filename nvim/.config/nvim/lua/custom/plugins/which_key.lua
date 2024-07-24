@@ -6,31 +6,29 @@ return {
 		require("which-key").setup()
 
 		local wk = require("which-key")
-		wk.register({
-			name = "window movement",
-			h = { ":wincmd h<CR>", "move left" },
-			j = { ":wincmd j<CR>", "move right" },
-			k = { ":wincmd k<CR>", "move up" },
-			l = { ":wincmd l<CR>", "move down" },
-			["."] = { ':exe "vertical resize " . (winwidth(0) * 3/2)<CR>', "increase window width" },
-			[","] = { ':exe "vertical resize " . (winwidth(0) * 2/3)<CR>', "decrease window width" },
-			["="] = { ':exe "resize " . (winheight(0) * 3/2)<CR>', "increase window height" },
-			["-"] = { ':exe "resize " . (winheight(0) * 2/3)<CR>', "decrease window height" },
-			["<C-d"] = { "<C-d>zz", "move down" },
-			["<C-u"] = { "<C-u>zz", "move up" },
-		}, { prefix = "<leader>" })
-
-		wk.register({
-			name = "yank/delete",
-			["Y"] = { "yg$", "cmd" },
-			["n"] = { "nzzzv", "cmd" },
-			["N"] = { "Nzzzv", "cmd" },
-			["J"] = { "mzJ`z", "cmd" },
+		wk.add({
+			{
+				name = "window movement",
+				{ "<leader>h", ":wincmd h<CR>", desc = "move left" },
+				{ "<leader>j", ":wincmd j<CR>", desc = "move right" },
+				{ "<leader>k", ":wincmd k<CR>", desc = "move up" },
+				{ "<leader>l", ":wincmd l<CR>", desc = "move down" },
+				{ "<leader>.", ':exe "vertical resize " . (winwidth(0) * 3/2)<CR>', desc = "increase window width" },
+				{ "<leader>,", ':exe "vertical resize " . (winwidth(0) * 2/3)<CR>', desc = "decrease window width" },
+				{ "<leader>=", ':exe "resize " . (winheight(0) * 3/2)<CR>', desc = "increase window height" },
+				{ "<leader>-", ':exe "resize " . (winheight(0) * 2/3)<CR>', desc = "decrease window height" },
+				{ "<C-d>", "<C-d>zz", desc = "move down" },
+				{ "<C-u>", "<C-u>zz", desc = "move up" },
+			},
+			{
+				name = "yank/delete/paste",
+				{ "Y", "yg$" },
+				{ "n", "nzzzv" },
+				{ "N", "Nzzzv" },
+				{ "J", "mzJ`z" },
+				{ "<leader>p", '"_dP', desc = "delete to black hole register before pasting", mode = "x" },
+			},
 		})
-
-		wk.register({
-			["<leader>p"] = { '"_dP', "delete to black hole register before pasting" },
-		}, { mode = "x" })
 	end,
 	lazy = false,
 }
