@@ -6,44 +6,45 @@ return {
 	keys = { "<leader>g" },
 	config = function()
 		local wk = require("which-key")
-		wk.register({
+		wk.add({
 			name = "diffget",
-			["gdh"] = { ":diffget //2<CR>", "get left diff" },
-			["gdl"] = { ":diffget //3<CR>", "get right diff" },
+			{ "gdh", ":diffget //2<CR>", desc = "get left diff" },
+			{ "gdl", ":diffget //3<CR>", desc = "get right diff" },
 		})
 
 		local function branch_name()
 			return vim.fn.system("git branch --show-current | tr -d '\n'")
 		end
 
-		wk.register({
+		wk.add({
 			name = "git",
-			g = {
-				["pu"] = { ":Git push<CR>", "git push" },
-				["pd"] = { ":Git pull<CR>", "git pull" },
-				["c"] = { ":Git commit<CR>", "git commit" },
-				["cm"] = {
-					function()
-						local keys = vim.api.nvim_replace_termcodes(':Git commit -m ""<Left>', false, false, true)
-						vim.api.nvim_feedkeys(keys, "n", {})
-					end,
-					"git commit -m",
-				},
-				["ca"] = { ":Git commit --amend --no-edit<CR>", "git commit amend" },
-				b = {
-					function()
-						vim.api.nvim_feedkeys(":Git switch ", "n", {})
-					end,
-					"git switch",
-				},
-				s = { ":Git<CR>", "git status" },
-				u = {
-					function()
-						vim.api.nvim_feedkeys(string.format(":Git push -u origin %s", branch_name()), "n", {})
-					end,
-					"git set upstream",
-				},
+			{ "gpu", ":Git push<CR>", desc = "git push" },
+			{ "gpd", ":Git pull<CR>", desc = "git pull" },
+			{ "gc", ":Git commit<CR>", desc = "git commit" },
+			{
+				"gcm",
+				function()
+					local keys = vim.api.nvim_replace_termcodes(':Git commit -m ""<Left>', false, false, true)
+					vim.api.nvim_feedkeys(keys, "n", {})
+				end,
+				desc = "git commit -m",
 			},
-		}, { prefix = "<leader>" })
+			{ "gca", ":Git commit --amend --no-edit<CR>", desc = "git commit amend" },
+			{
+				"gb",
+				function()
+					vim.api.nvim_feedkeys(":Git switch ", "n", {})
+				end,
+				desc = "git switch",
+			},
+			{ "gs", ":Git<CR>", desc = "git status" },
+			{
+				"gu",
+				function()
+					vim.api.nvim_feedkeys(string.format(":Git push -u origin %s", branch_name()), "n", {})
+				end,
+				desc = "git set upstream",
+			},
+		})
 	end,
 }
