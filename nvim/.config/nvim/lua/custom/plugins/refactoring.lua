@@ -6,9 +6,16 @@ return {
 		require("refactoring").setup(opts)
 		local wk = require("which-key")
 
-		wk.register({
-			["rr"] = { ":lua require('refactoring').select_refactor()<CR>", "Refactor" },
-		}, { mode = "v", prefix = "<leader>", silent = true, noremap = true, expr = false })
+		wk.add({
+			{
+				"<leader>rr",
+				":lua require('refactoring').select_refactor()<CR>",
+				mode = "v",
+				silent = true,
+				noremap = true,
+				expr = false,
+			},
+		})
 	end,
 	event = "BufReadPre",
 }
