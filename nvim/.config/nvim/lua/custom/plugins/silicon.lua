@@ -25,16 +25,16 @@ return {
 			require("silicon").visualise_api({ to_clip = true })
 		end
 
-		wk.register({
+		wk.add({
 			name = "silicon",
-			s = { clip_buffer, "clip buffer" },
-		}, { prefix = "<leader>" })
-
-		wk.register({
-			name = "silicon",
-			s = { clip_selection, "clip highlight" },
-			bs = { clip_buffer_with_highlight, "clip buffer with highlight" },
-		}, { mode = "v", prefix = "<leader>" })
+			{
+				"<leader>s",
+				clip_buffer,
+				desc = "clip buffer",
+			},
+			{ "<leader>s", clip_selection, desc = "clip highlight", mode = "v" },
+			{ "<leader>bs", clip_buffer_with_highlight, desc = "clip buffer with highlight", mode = "v" },
+		})
 	end,
 }
 

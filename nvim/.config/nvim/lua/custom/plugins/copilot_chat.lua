@@ -13,9 +13,11 @@ return {
 	keys = { "<leader>cp" },
 	config = function(_, opts)
 		require("CopilotChat").setup(opts)
-		require("which-key").register({
+		require("which-key").add({
+			"<leader>cp",
+			":CopilotChatToggle<CR>",
+			desc = "toggle copilot chat window",
 			name = "copilot",
-			["cp"] = { ":CopilotChatToggle<CR>", "toggle copilot chat window" },
-		}, { prefix = "<leader>" })
+		})
 	end,
 }

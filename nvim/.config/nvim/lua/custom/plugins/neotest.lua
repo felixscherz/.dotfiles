@@ -35,47 +35,51 @@ return {
 
 		local wk = require("which-key")
 
-		wk.register({
-			["nt"] = {
-				name = "neotest",
-				o = {
-					function()
-						require("neotest").summary.open()
-					end,
-					"open summary",
-				},
-				p = {
-					function()
-						require("neotest").output_panel.open()
-					end,
-					"open panel",
-				},
-				r = {
-					function()
-						require("neotest").run.run()
-					end,
-					"run test",
-				},
-				f = {
-					function()
-						require("neotest").run.run(vim.fn.expand("%"))
-					end,
-					"run file",
-				},
-				s = {
-					function()
-						require("neotest").run.stop()
-					end,
-					"stop test",
-				},
-				a = {
-					function()
-						require("neotest").run.attach()
-					end,
-					"attach to test",
-				},
+		wk.add({
+			name = "neotest",
+			{
+				"<leader>nto",
+				function()
+					require("neotest").summary.open()
+				end,
+				desc = "open summary",
 			},
-		}, { prefix = "<leader>" })
+			{
+				"<leader>ntp",
+				function()
+					require("neotest").output_panel.open()
+				end,
+				desc = "open panel",
+			},
+			{
+				"<leader>ntr",
+				function()
+					require("neotest").run.run()
+				end,
+				desc = "run test",
+			},
+			{
+				"<leader>ntf",
+				function()
+					require("neotest").run.run(vim.fn.expand("%"))
+				end,
+				desc = "run file",
+			},
+			{
+				"<leader>nts",
+				function()
+					require("neotest").run.stop()
+				end,
+				desc = "stop test",
+			},
+			{
+				"<leader>nta",
+				function()
+					require("neotest").run.attach()
+				end,
+				desc = "attach to test",
+			},
+		})
 	end,
 	keys = { "<leader>n" },
 }

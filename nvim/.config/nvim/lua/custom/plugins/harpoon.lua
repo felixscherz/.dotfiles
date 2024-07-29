@@ -4,22 +4,22 @@ return {
 	config = function()
 		require("harpoon").setup()
 		local wk = require("which-key")
-		wk.register({
+		wk.add({
 			name = "harpoon",
-			m = {
-				a = {
-					function()
-						require("harpoon.mark").add_file()
-					end,
-					"add harpoon mark",
-				},
-				w = {
-					function()
-						require("harpoon.ui").toggle_quick_menu()
-					end,
-					"harpoon ui",
-				},
+			{
+				"<leader>ma",
+				function()
+					require("harpoon.mark").add_file()
+				end,
+				desc = "add harpoon mark",
 			},
-		}, { prefix = "<leader>" })
+			{
+				"<leader>mw",
+				function()
+					require("harpoon.ui").toggle_quick_menu()
+				end,
+				desc = "harpoon ui",
+			},
+		})
 	end,
 }
