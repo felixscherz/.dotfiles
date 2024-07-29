@@ -18,30 +18,30 @@ return {
 
 		wk.add({
 			name = "git",
-			{ "gpu", ":Git push<CR>", desc = "git push" },
-			{ "gpd", ":Git pull<CR>", desc = "git pull" },
-			{ "gc", ":Git commit<CR>", desc = "git commit" },
+			{ "<leader>gpu", ":Git push<CR>", desc = "git push" },
+			{ "<leader>gpd", ":Git pull<CR>", desc = "git pull" },
+			{ "<leader>gc", ":Git commit<CR>", desc = "git commit" },
 			{
-				"gcm",
+				"<leader>gcm",
 				function()
 					local keys = vim.api.nvim_replace_termcodes(':Git commit -m ""<Left>', false, false, true)
-					vim.api.nvim_feedkeys(keys, "n", {})
+					vim.api.nvim_feedkeys(keys, "n", false)
 				end,
 				desc = "git commit -m",
 			},
-			{ "gca", ":Git commit --amend --no-edit<CR>", desc = "git commit amend" },
+			{ "<leader>gca", ":Git commit --amend --no-edit<CR>", desc = "git commit amend" },
 			{
-				"gb",
+				"<leader>gb",
 				function()
-					vim.api.nvim_feedkeys(":Git switch ", "n", {})
+					vim.api.nvim_feedkeys(":Git switch ", "n", false)
 				end,
 				desc = "git switch",
 			},
-			{ "gs", ":Git<CR>", desc = "git status" },
+			{ "<leader>gs", ":Git<CR>", desc = "git status" },
 			{
-				"gu",
+				"<leader>gu",
 				function()
-					vim.api.nvim_feedkeys(string.format(":Git push -u origin %s", branch_name()), "n", {})
+					vim.api.nvim_feedkeys(string.format(":Git push -u origin %s", branch_name()), "n", false)
 				end,
 				desc = "git set upstream",
 			},
