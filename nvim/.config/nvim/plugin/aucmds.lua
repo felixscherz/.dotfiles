@@ -38,3 +38,9 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 	pattern = { "terraform", "hcl" },
 })
+
+vim.filetype.add({
+	extension = {
+		http = "http",
+	},
+})
