@@ -9,3 +9,4 @@ fi
 
 export PIP_REQUIRE_VIRTUALENV=true
 export DOCKER_HOST=unix://${HOME}/.rd/docker.sock
+export PIPX_HOME=${HOME}/.local/share/pipx
