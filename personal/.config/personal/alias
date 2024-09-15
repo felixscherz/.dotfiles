@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-alias python="python3"
-alias pip="pip3"
-alias cdfd='change_directory_fuzzy'
-alias gitroot='cd $(git rev-parse --show-toplevel)'
-alias ibrew='arch -x86_64 /usr/local/bin/brew'
-alias man='MANWIDTH=$((COLUMNS > 120 ? 120 : COLUMNS)) man'
-alias curlsigv4='curl -H "x-amz-security-token: $AWS_SESSION_TOKEN" --user "$AWS_ACCESS_KEY_ID":"$AWS_SECRET_ACCESS_KEY" --aws-sigv4 "aws:amz:eu-central-1:execute-api"'
-alias watch-citrix="watch find ~/Downloads/ -type f -name 'Q*.ica' -exec open {} '\;'"

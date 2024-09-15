@@ -17,4 +17,9 @@ antigen apply
 # make sure to start a tmux session
 if [ "$TMUX" = "" ]; then tmux; fi
 
-source $HOME/.config/personal/alias
+alias man='MANWIDTH=$((COLUMNS > 120 ? 120 : COLUMNS)) man'
+alias cdfd='change_directory_fuzzy'
+alias gitroot='cd $(git rev-parse --show-toplevel)'
+alias watch-citrix="watch find ~/Downloads/ -type f -name 'Q*.ica' -exec open {} '\;'"
+alias python="python3"
+alias pip="pip3"
