@@ -20,7 +20,7 @@ addToPathFront() {
 
 # source specific configuration
 PERSONAL=$XDG_CONFIG_HOME/personal
-for f in $PERSONAL/*; do source $f; done
+for f in $PERSONAL/zprofile.d/*; do source $f; done
 
 addToPathFront $HOME/.local/scripts
 addToPathFront $HOME/.local/bin
