@@ -8,7 +8,7 @@
     - name: Set common roles
       ansible.builtin.set_fact:
         use_sudo: "{{ 'false' if ansible_system == 'Darwin' else 'true' }}"
-        roles:
+        components:
           - llvm
           - zsh
           - parallel
@@ -28,13 +28,13 @@
           - git
           - watson
           - rust
-        roles_macos:
+        components_macos:
           - yabai
           - spacebar
           - skhd
     - name: Determine whether to use sudo
       ansible.builtin.set_fact:
-        use_sudo: "{{ 'no' if ansible_system=='Darwin' else 'yes' }}"
+        use_sudo: "{{ 'no' if ansible_system == 'Darwin' else 'yes' }}"
     - name: Install stow
       ansible.builtin.package:
         state: present
@@ -42,16 +42,14 @@
       become: "{{ use_sudo }}"
     - name: Run common roles
       ansible.builtin.include_role:
-        name: "{{ roles_item }}"
+        name: "{{ component }}"
       loop_control:
-        loop_var: roles_item
-      with_items: "{{ roles }}"
+        loop_var: component
+      with_items: "{{ components }}"
     - name: Run MacOS roles
       ansible.builtin.include_role:
-        name: "{{ roles_item }}"
+        name: "{{ component }}"
       loop_control:
-        loop_var: roles_item
-      with_items: "{{ roles_macos }}"
+        loop_var: component
+      with_items: "{{ components_macos }}"
       when: ansible_system == 'Darwin'
-    - debug:
-        var: felixws_pyenv
