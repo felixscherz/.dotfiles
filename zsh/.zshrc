@@ -17,6 +17,10 @@ antigen apply
 # make sure to start a tmux session
 if [ "$TMUX" = "" ]; then tmux; fi
 
+# initiate direnv to source files properly
+if [ -x "$(command -v direnv)" ]; then
+    eval "$(direnv hook zsh)"
+fi
 alias man='MANWIDTH=$((COLUMNS > 120 ? 120 : COLUMNS)) man'
 alias cdfd='change_directory_fuzzy'
 alias gitroot='cd $(git rev-parse --show-toplevel)'
