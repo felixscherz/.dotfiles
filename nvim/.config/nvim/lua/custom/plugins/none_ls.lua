@@ -4,22 +4,6 @@ return {
 	config = function()
 		local null_ls = require("null-ls")
 		local formatting = null_ls.builtins.formatting
-		local docformat_source = {
-			name = "docformat",
-			filetypes = { "python" },
-			method = null_ls.methods.FORMATTING,
-			generator = {
-				fn = function(params)
-					local obj = vim.system(
-						{ "docformatter", "--style", "numpy", "--pre-summary-newline", "-" },
-						{ stdin = params.content }
-					):wait()
-					return { {
-						text = obj.stdout,
-					} }
-				end,
-			},
-		}
 		null_ls.setup({
 			debug = false,
 			sources = {
@@ -29,8 +13,11 @@ return {
 				formatting.black.with({ extra_args = { "--line-length", "120" } }),
 				formatting.stylua,
 				formatting.isort.with({ extra_args = { "--sl", "-l 120" } }),
-				docformat_source,
+				formatting.buildifier,
 			},
 		})
 	end,
 }
+
+-- if a none-ls source is not associated with an existing lsp server, there won't be any keymaps available
+-- since the keymaps are set as part of an `on_attach` function that is only set for lsps
