@@ -100,6 +100,7 @@ return {
 			"clangd",
 			"terraformls",
 			"autotools_ls",
+			"bzl",
 		}
 
 		require("mason-lspconfig").setup({
