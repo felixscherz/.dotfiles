@@ -101,6 +101,7 @@ return {
 			"terraformls",
 			"autotools_ls",
 			"bzl",
+			"gopls",
 		}
 
 		require("mason-lspconfig").setup({
