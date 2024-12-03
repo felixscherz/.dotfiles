@@ -3,3 +3,4 @@
 .envrc
 __pycache__
 node_modules/
+.python-version
