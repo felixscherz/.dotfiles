@@ -17,6 +17,7 @@ return {
 					luasnip.lsp_expand(args.body) -- For `luasnip` users.
 				end,
 			},
+			preselect = cmp.PreselectMode.None,
 			mapping = {
 				["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
 				["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
