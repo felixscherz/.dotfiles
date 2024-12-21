@@ -55,7 +55,7 @@ alt - f : yabai -m window --toggle zoom-fullscreen
 alt + shift - f : yabai -m window --toggle native-fullscreen
 
 # open terminal
-alt - return : open -n /Applications/kitty.app
+# alt - return : open -n /Applications/kitty.app
 
 # open todo app
 alt - o : open /Applications/Microsoft\ To\ Do.app
