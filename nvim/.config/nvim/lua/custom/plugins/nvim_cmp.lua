@@ -100,8 +100,6 @@ return {
 				native_menu = false,
 			},
 		})
-
-		local capabilities = require("cmp_nvim_lsp").default_capabilities()
 	end,
 	dependencies = {
 		"hrsh7th/cmp-buffer", -- buffer completions
