@@ -12,13 +12,15 @@ Install the configuration by running
 
 which will bootstrap [ansible](https://ansible.com) and install everything.
 
-## open issues
 
-### nvim
+## building neovim from source
 
-* automatic installation of virtualenv required for `debugpy`
-* startuptime when including updating of mason registry
-* getting rid of hardcoded python paths
+Clone the repo at https://github.com/neovim/neovim and install it to a custom prefix.
+```sh
+rm -r build/  # clear the CMake cache
+make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/.local"
+make install
+```
 
 ## troubleshooting
 
