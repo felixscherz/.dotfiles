@@ -39,6 +39,17 @@ local function lsp_keymaps(bufnr)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ic", "<cmd>lua vim.lsp.buf.incoming_calls()<CR>", opts)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ws", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", opts)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>re", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+	vim.api.nvim_buf_set_keymap(
+		bufnr,
+		"n",
+		"<leader>ih",
+		"",
+		vim.tbl_extend("keep", opts, {
+			callback = function()
+				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
+			end,
+		})
+	)
 end
 local on_attach = function(client, bufnr)
 	if client.name == "tsserver" then
@@ -122,15 +133,10 @@ return {
 
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-		local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-		if not status_ok then
-			return
-		end
-
 		for _, server in pairs(servers) do
 			opts = {
 				on_attach = on_attach,
-				capabilities = cmp_nvim_lsp.default_capabilities(capabilities),
+				capabilities = require("blink.cmp").get_lsp_capabilities(capabilities),
 			}
 
 			server = vim.split(server, "@")[1]
