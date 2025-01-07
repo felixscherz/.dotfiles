@@ -70,7 +70,7 @@ return {
 				function()
 					require("telescope.builtin").help_tags()
 				end,
-				desc = "serach tags",
+				desc = "search tags",
 			},
 			{ "<leader>ft", ":Telescope<CR>", desc = "run telescope" },
 		})
