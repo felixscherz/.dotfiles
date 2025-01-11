@@ -81,6 +81,9 @@ return {
 					-- make lazydev completions top priority (see `:h blink.cmp`)
 					score_offset = 100,
 				},
+				buffer = {
+					min_keyword_length = 3,
+				},
 			},
 		},
 	},
