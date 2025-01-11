@@ -72,6 +72,13 @@ return {
 				end,
 				desc = "search tags",
 			},
+			{
+				"<leader>fds",
+				function()
+					require("telescope.builtin").lsp_document_symbols()
+				end,
+				desc = "search lsp document symbols",
+			},
 			{ "<leader>ft", ":Telescope<CR>", desc = "run telescope" },
 		})
 	end,
