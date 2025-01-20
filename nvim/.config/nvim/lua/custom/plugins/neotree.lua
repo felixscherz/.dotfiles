@@ -10,7 +10,7 @@ return {
 		vim.g.neo_tree_remove_legacy_commands = 1
 		require("neo-tree").setup(opts)
 	end,
-	keys = { { "<leader>pv", "<cmd>Neotree<CR>" } },
+	keys = { { "<leader>pv", "<cmd>Neotree<CR>" }, { "<leader>pf", "<cmd>Neotree reveal<CR>" } },
 	opts = {
 		close_if_last_window = false,
 		popup_border_style = "rounded",
