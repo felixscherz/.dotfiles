@@ -1,2 +1,3 @@
 [options]
 log_current = True
+confirm_new_tag = True
