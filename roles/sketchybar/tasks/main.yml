@@ -1,0 +1,10 @@
+- name: Install sketchybar
+  ansible.builtin.package:
+    state: present
+    name: FelixKratz/formulae/sketchybar
+- name: Stow sketchybar
+  ansible.builtin.command:
+    cmd: stow sketchybar --target=$HOME --verbose=2
+    chdir: "{{ ansible_user_dir }}/.dotfiles"
+  register: result
+  changed_when: 'result.stderr is search("LINK: ")'

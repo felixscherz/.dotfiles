@@ -15,6 +15,7 @@
           - tmux
           - environment
           - kitty
+          - ghostty
           - pyenv
           - pre-commit
           - npm
@@ -31,6 +32,8 @@
         components_macos:
           - yabai
           - spacebar
+          - sketchybar
+          - aerospace
           - skhd
     - name: Determine whether to use sudo
       ansible.builtin.set_fact:

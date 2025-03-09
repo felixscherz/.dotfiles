@@ -1,0 +1,10 @@
+# - name: Install aerospace
+#   ansible.builtin.package:
+#     state: present
+#     name: FelixKratz/formulae/aerospace
+- name: Stow aerospace
+  ansible.builtin.command:
+    cmd: stow aerospace --target=$HOME --verbose=2
+    chdir: "{{ ansible_user_dir }}/.dotfiles"
+  register: result
+  changed_when: 'result.stderr is search("LINK: ")'
