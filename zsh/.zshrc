@@ -27,3 +27,6 @@ alias gitroot='cd $(git rev-parse --show-toplevel)'
 alias watch-citrix="watch find ~/Downloads/ -type f -name 'Q*.ica' -exec open {} '\;'"
 alias python="python3"
 alias pip="pip3"
+
+fpath+=~/.zfunc
+autoload -Uz compinit && compinit
