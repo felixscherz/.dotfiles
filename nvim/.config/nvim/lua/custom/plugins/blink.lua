@@ -20,7 +20,7 @@ return {
 		keymap = { preset = "default" },
 
 		completion = {
-			list = { selection = "preselect" },
+			list = { selection = { preselect = false } },
 			menu = {
 				-- Don't automatically show the completion menu
 				auto_show = true,
