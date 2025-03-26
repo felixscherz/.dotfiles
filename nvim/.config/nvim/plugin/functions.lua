@@ -1,5 +1,5 @@
 local function insertFullPath()
-	local filepath = vim.fn.expand("%")
+	local filepath = vim.fn.expand("%:.")
 	vim.fn.setreg("+", filepath) -- write to clippoard
 end
 
