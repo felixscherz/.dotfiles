@@ -20,7 +20,7 @@ return {
 				"--hidden",
 			},
 			preview = {
-				filesize_limit = 0.5,
+				filesize_limit = 5,
 			},
 		},
 		pickers = {
