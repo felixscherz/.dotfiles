@@ -63,6 +63,7 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPost" },
 	config = function()
+		require("neoconf").setup()
 		local signs = {
 			{ name = "DiagnosticSignError", text = "" },
 			{ name = "DiagnosticSignWarn", text = "" },
