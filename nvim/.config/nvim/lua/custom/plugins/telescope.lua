@@ -1,6 +1,10 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	dependencies = { "nvim-lua/plenary.nvim", "aaronhallaert/advanced-git-search.nvim" },
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"aaronhallaert/advanced-git-search.nvim",
+		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+	},
 	cmd = "Telescope",
 	keys = { "<leader>f" },
 	opts = {
@@ -15,6 +19,9 @@ return {
 				"--smart-case",
 				"--hidden",
 			},
+			preview = {
+				filesize_limit = 0.5,
+			},
 		},
 		pickers = {
 			find_files = {
@@ -27,6 +34,13 @@ return {
 		extensions = {
 			advanced_git_search = {
 				diff_plugin = "fugitive",
+			},
+			fzf = {
+				fuzzy = true, -- false will only do exact matching
+				override_generic_sorter = true, -- override the generic sorter
+				override_file_sorter = true, -- override the file sorter
+				case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+				-- the default case_mode is "smart_case"
 			},
 		},
 	},
@@ -81,5 +95,6 @@ return {
 			},
 			{ "<leader>ft", ":Telescope<CR>", desc = "run telescope" },
 		})
+		require("telescope").load_extension("fzf")
 	end,
 }
