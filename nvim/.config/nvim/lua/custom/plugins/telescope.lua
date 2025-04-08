@@ -93,6 +93,13 @@ return {
 				end,
 				desc = "search lsp document symbols",
 			},
+			{
+				"<leader>cs",
+				function()
+					require("telescope.builtin").lsp_document_symbols()
+				end,
+				desc = "search lsp document symbols",
+			},
 			{ "<leader>ft", ":Telescope<CR>", desc = "run telescope" },
 		})
 		require("telescope").load_extension("fzf")
