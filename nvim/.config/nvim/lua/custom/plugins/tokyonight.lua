@@ -14,7 +14,6 @@ return {
 			dim_inactive = true,
 			on_colors = function(colors)
 				colors.border = colors.blue
-				colors.diff.delete = colors.git.delete
 				colors.gitSigns = colors.git
 				colors.none = "NONE"
 			end,

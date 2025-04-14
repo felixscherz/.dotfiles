@@ -36,7 +36,3 @@ end
 vim.g.mapleader = " "
 
 vim.g.python3_host_prog = "~/.nvim-python3/bin/python3"
-
-vim.api.nvim_set_hl(0, "diffRemoved", {
-	fg = "#e26a75",
-})
