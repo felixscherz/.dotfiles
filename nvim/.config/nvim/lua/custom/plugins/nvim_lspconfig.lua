@@ -119,6 +119,7 @@ return {
 			"bzl",
 			"gopls",
 			"cmake",
+			"ts_ls",
 		}
 
 		-- silence Server cancelled the request warning that happens with rust_analyzer: https://github.com/neovim/neovim/issues/30985#issuecomment-2447329525
