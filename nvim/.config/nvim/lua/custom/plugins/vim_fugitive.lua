@@ -6,11 +6,6 @@ return {
 	keys = { "<leader>g" },
 	config = function()
 		local wk = require("which-key")
-		wk.add({
-			name = "diffget",
-			{ "gdh", ":diffget //2<CR>", desc = "get left diff" },
-			{ "gdl", ":diffget //3<CR>", desc = "get right diff" },
-		})
 
 		local function branch_name()
 			return vim.fn.system("git branch --show-current | tr -d '\n'")
