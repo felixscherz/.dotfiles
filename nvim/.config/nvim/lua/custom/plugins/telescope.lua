@@ -65,20 +65,20 @@ return {
 				end,
 				desc = "search buffers",
 			},
-			-- {
-			-- 	"<leader>ff",
-			-- 	function()
-			-- 		require("telescope.builtin").find_files()
-			-- 	end,
-			-- 	desc = "find files",
-			-- },
-			-- {
-			-- 	"<leader>fg",
-			-- 	function()
-			-- 		require("telescope.builtin").live_grep()
-			-- 	end,
-			-- 	desc = "live grep",
-			-- },
+			{
+				"<leader>ff",
+				function()
+					require("telescope.builtin").find_files()
+				end,
+				desc = "find files",
+			},
+			{
+				"<leader>fg",
+				function()
+					require("telescope.builtin").live_grep()
+				end,
+				desc = "live grep",
+			},
 			{
 				"<leader>fh",
 				function()
