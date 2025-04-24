@@ -10,6 +10,6 @@ macos_hide_from_tasks no
 background_opacity 0.98
 
 # BEGIN_KITTY_THEME
-# Tokyo Night Storm
+# Tokyo Night
 include current-theme.conf
 # END_KITTY_THEME
