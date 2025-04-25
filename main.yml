@@ -29,6 +29,7 @@
           - git
           - watson
           - rust
+          - aider
         components_macos:
           - yabai
           - spacebar
