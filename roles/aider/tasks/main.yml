@@ -1,6 +1,5 @@
 - name: Stow aider
-  ansible.builtin.command:
-    cmd: stow aider --target=$HOME --verbose=2
-    chdir: "{{ ansible_user_dir }}/.dotfiles"
-  register: result
-  changed_when: 'result.stderr is search("LINK: ")'
+  ansible.builtin.include_role:
+    name: stow
+  vars:
+    stow_package: aider
