@@ -1,24 +1,17 @@
+local data = assert(vim.fn.stdpath("data")) --[[@as string]]
 return {
 	"nvim-telescope/telescope.nvim",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"aaronhallaert/advanced-git-search.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+		"davvid/telescope-git-grep.nvim",
+		"nvim-telescope/telescope-smart-history.nvim",
 	},
 	cmd = "Telescope",
 	keys = { "<leader>f" },
 	opts = {
 		defaults = {
-			vimgrep_arguments = {
-				"rg",
-				"--color=never",
-				"--no-heading",
-				"--with-filename",
-				"--line-number",
-				"--column",
-				"--smart-case",
-				"--hidden",
-			},
 			preview = {
 				filesize_limit = 5,
 			},
@@ -27,28 +20,28 @@ return {
 			find_files = {
 				hidden = true,
 			},
-			live_grep = {
-				glob_pattern = { "!.git/" },
-			},
 		},
 		extensions = {
 			advanced_git_search = {
 				diff_plugin = "fugitive",
 			},
-			fzf = {
-				fuzzy = true, -- false will only do exact matching
-				override_generic_sorter = true, -- override the generic sorter
-				override_file_sorter = true, -- override the file sorter
-				case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-				-- the default case_mode is "smart_case"
+			fzf = {},
+			history = {
+				path = vim.fs.joinpath(data, "telescope_history.sqlite3"),
+				limit = 100,
+			},
+			git_grep = {
+				regex = "extended",
 			},
 		},
 	},
 	config = function(_, opts)
 		require("telescope").load_extension("advanced_git_search")
 		require("telescope").setup(opts)
+		require("telescope").load_extension("fzf")
+		require("telescope").load_extension("smart_history")
+		require("telescope").load_extension("git_grep")
 		local wk = require("which-key")
-
 		wk.add({
 
 			{
@@ -75,7 +68,7 @@ return {
 			{
 				"<leader>fg",
 				function()
-					require("telescope.builtin").live_grep()
+					require("git_grep").live_grep()
 				end,
 				desc = "live grep",
 			},
@@ -100,8 +93,14 @@ return {
 				end,
 				desc = "search lsp document symbols",
 			},
+			{
+				"<leader>gf",
+				function()
+					require("git_grep").live_grep()
+				end,
+				desc = "live git grep",
+			},
 			{ "<leader>ft", ":Telescope<CR>", desc = "run telescope" },
 		})
-		require("telescope").load_extension("fzf")
 	end,
 }
