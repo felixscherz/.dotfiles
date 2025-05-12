@@ -7,6 +7,7 @@ return {
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		"davvid/telescope-git-grep.nvim",
 		"nvim-telescope/telescope-smart-history.nvim",
+		"kkharji/sqlite.lua",
 	},
 	cmd = "Telescope",
 	keys = { "<leader>f" },
@@ -39,7 +40,7 @@ return {
 		require("telescope").load_extension("advanced_git_search")
 		require("telescope").setup(opts)
 		require("telescope").load_extension("fzf")
-		require("telescope").load_extension("smart_history")
+		-- require("telescope").load_extension("smart_history")
 		require("telescope").load_extension("git_grep")
 		local wk = require("which-key")
 		wk.add({
