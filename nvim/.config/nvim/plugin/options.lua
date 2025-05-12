@@ -28,6 +28,7 @@ local options = {
 	splitbelow = true,
 	showmatch = true,
 	modeline = false,
+	winborder = "rounded",
 }
 
 for k, v in pairs(options) do
