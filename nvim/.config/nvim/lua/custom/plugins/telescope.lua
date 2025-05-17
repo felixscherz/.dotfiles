@@ -69,7 +69,7 @@ return {
 			{
 				"<leader>fg",
 				function()
-					require("git_grep").live_grep()
+					require("telescope.builtin").live_grep()
 				end,
 				desc = "live grep",
 			},
