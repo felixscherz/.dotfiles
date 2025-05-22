@@ -44,3 +44,12 @@ vim.filetype.add({
 		http = "http",
 	},
 })
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	group = vim.api.nvim_create_augroup("Jinja2PythonDetect", { clear = true }),
+	pattern = { "*.py.j2" },
+	callback = function(args)
+		vim.opt_local.filetype = "py.j2"
+		vim.diagnostic.enable(false, { bufnr = args.buf })
+	end,
+})
