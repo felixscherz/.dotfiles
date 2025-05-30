@@ -1,5 +1,5 @@
 dark-mode: true
-model: openai/4.1
+model: openai/gpt-4.1
 multiline: true
 gitignore: false
 vim: true
