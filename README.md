@@ -18,6 +18,7 @@ which will bootstrap [ansible](https://ansible.com) and install everything.
 Clone the repo at https://github.com/neovim/neovim and install it to a custom prefix.
 ```sh
 rm -r build/  # clear the CMake cache
+rm -r .deps # only sometimes required
 make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/.local"
 make install
 ```
