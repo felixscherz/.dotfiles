@@ -27,7 +27,7 @@ local options = {
 	splitright = true,
 	splitbelow = true,
 	showmatch = true,
-	modeline = false,
+	modeline = true,
 }
 
 for k, v in pairs(options) do
