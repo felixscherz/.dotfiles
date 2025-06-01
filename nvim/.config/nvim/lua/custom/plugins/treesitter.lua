@@ -61,6 +61,9 @@ return {
 				return file_size > 256 * 1024
 			end,
 		},
-		indent = { enable = true, disable = { "yaml" } },
+		indent = {
+			enable = true,
+			-- disable = { "yaml" }
+		},
 	},
 }
