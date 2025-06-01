@@ -1,8 +1,9 @@
 return {
 	{
 		"folke/lazydev.nvim",
-		ft = "lua", -- only load on lua files
-		enabled = false,
+		-- ft = "lua", -- disabled this since it was causing issues when opening lua files
+		enabled = true,
+		event = { "VeryLazy" },
 		opts = {
 			library = {
 				-- See the configuration section for more details
