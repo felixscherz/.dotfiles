@@ -1,7 +1,7 @@
 - name: Stow git
   ansible.builtin.command:
     cmd: stow git --target=$HOME --verbose=2
-    chdir: "{{ ansible_user_dir }}/.dotfiles"
+    chdir: "{{ ansible_user_dir }}/.dotfiles/private"
   register: result
   changed_when: 'result.stderr is search("LINK: ")'
 - name: Copy .gitignore
