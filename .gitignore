@@ -7,3 +7,6 @@ watson/.config/watson/frames*
 watson/.config/watson/state*
 bin/.local/bin/*
 bin/.local/lib
+.aider.tags.cache*
+.aider.chat.history*
+.aider.input.history*
