@@ -5,16 +5,20 @@ return {
 	config = function()
 		local opts = {
 			provider = vim.env.OPENAI_API_BASE and "openai" or "copilot",
-			copilot = {
-				timeout = 60000,
-			},
-			openai = {
-				endpoint = vim.env.OPENAI_API_BASE or "https://api.openai.com/v1",
-				model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
-				timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
-				temperature = 0,
-				max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
-				--reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+			providers = {
+				copilot = {
+					timeout = 60000,
+				},
+				openai = {
+					endpoint = vim.env.OPENAI_API_BASE or "https://api.openai.com/v1",
+					model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
+					timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
+					extra_request_body = {
+						temperature = 0,
+						max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+					},
+					--reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+				},
 			},
 			behaviour = {
 				use_cwd_as_project_root = true,
