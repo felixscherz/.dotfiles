@@ -9,3 +9,4 @@ node_modules/
 .aider.chat.history*
 .aider.input.history*
 .aider.*
+.opencode
