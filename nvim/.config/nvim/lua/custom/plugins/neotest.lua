@@ -7,7 +7,7 @@ return {
 		"nvim-neotest/neotest-python",
 		"nvim-neotest/neotest-plenary",
 		"nvim-neotest/neotest-vim-test",
-		"nvim-neotest/neotest-vim-test",
+		"codymikol/neotest-kotlin",
 		"rouge8/neotest-rust",
 	},
 	config = function()
@@ -22,6 +22,7 @@ return {
 					ignore_file_types = { "python", "vim", "lua" },
 				}),
 				require("neotest-rust")({ args = { "--no-capture" } }),
+				require("neotest-kotlin"),
 			},
 			quickfix = {
 				enabled = true,
