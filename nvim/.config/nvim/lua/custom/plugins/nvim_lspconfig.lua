@@ -156,23 +156,23 @@ return {
 			on_attach = on_attach,
 			capabilities = require("blink.cmp").get_lsp_capabilities(capabilities),
 		}
-		vim.api.nvim_create_autocmd("FileType", {
-			group = vim.api.nvim_create_augroup("PythonLSP", { clear = true }),
-			pattern = "python",
-			callback = function()
-				vim.lsp.start({
-					cmd = {
-						vim.fn.expand("$HOME/repositories/personal/lsplay/.venv/bin/python3"),
-						vim.fn.expand("$HOME/repositories/personal/lsplay/main.py"),
-					},
-					filetypes = { "python" },
-					root_dir = lspconfig.util.root_pattern(".git", "."),
-					single_file_support = true,
-					capabilities = capabilities,
-					on_attach = on_attach,
-				})
-			end,
-		})
+		-- vim.api.nvim_create_autocmd("FileType", {
+		-- 	group = vim.api.nvim_create_augroup("PythonLSP", { clear = true }),
+		-- 	pattern = "python",
+		-- 	callback = function()
+		-- 		vim.lsp.start({
+		-- 			cmd = {
+		-- 				vim.fn.expand("$HOME/repositories/personal/lsplay/.venv/bin/python3"),
+		-- 				vim.fn.expand("$HOME/repositories/personal/lsplay/main.py"),
+		-- 			},
+		-- 			filetypes = { "python" },
+		-- 			root_dir = lspconfig.util.root_pattern(".git", "."),
+		-- 			single_file_support = true,
+		-- 			capabilities = capabilities,
+		-- 			on_attach = on_attach,
+		-- 		})
+		-- 	end,
+		-- })
 	end,
 	dependencies = { "b0o/schemastore.nvim", "williamboman/mason-lspconfig.nvim" },
 }
