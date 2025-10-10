@@ -3,7 +3,6 @@ return {
 	-- optional: provides snippets for the snippet source
 	dependencies = {
 		"rafamadriz/friendly-snippets",
-		"Kaiser-Yang/blink-cmp-avante",
 	},
 
 	-- use a release tag to download pre-built binaries
@@ -82,8 +81,6 @@ return {
 					return { "lsp", "path", "lazydev", "snippets" }
 				elseif node and vim.tbl_contains({ "comment", "line_comment", "block_comment" }, node:type()) then
 					return { "buffer" }
-				elseif vim.bo.filetype == "AvanteInput" then
-					return { "avante" }
 				else
 					return { "lsp", "path", "buffer", "snippets" }
 				end
@@ -97,10 +94,6 @@ return {
 				},
 				buffer = {
 					min_keyword_length = 3,
-				},
-				avante = {
-					module = "blink-cmp-avante",
-					name = "Avante",
 				},
 				snippets = {
 					min_keyword_length = 3,
