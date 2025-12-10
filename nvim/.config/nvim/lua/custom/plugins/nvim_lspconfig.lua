@@ -62,7 +62,7 @@ end
 
 return {
 	"neovim/nvim-lspconfig",
-	event = { "BufReadPost" },
+	event = { "BufReadPost", "BufNewFile" },
 	config = function()
 		require("neoconf").setup()
 
