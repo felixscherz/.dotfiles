@@ -1,0 +1,68 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "autoupdate": false,
+  "model": "github-copilot/claude-haiku-4.5",
+  "share": "disabled",
+  "disabled_providers": ["openai", "anthropic", "gemini", "amazon-bedrock"],
+  "provider": {
+    "exxeta": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Exxeta",
+      "options": {
+        "baseURL": "{env:OPENAI_API_BASE}",
+        "apiKey": "{env:OPENAI_API_KEY}",
+        "includeUsage": true
+      },
+      "models": {
+        "gpt-4o": {
+          "name": "Exxeta GPT 4o",
+          "cost": {
+            "input": 2.5,
+            "output": 10,
+            "cache_read": 1.25
+          },
+          "limit": {
+            "context": 128000,
+            "output": 16384
+          }
+        },
+        "gpt-4.1-mini": {
+          "name": "Exxeta GPT 4.1 Mini",
+          "cost": {
+            "input": 0.4,
+            "output": 1.6,
+            "cache_read": 0.10
+          },
+          "limit": {
+            "context": 1047576,
+            "output": 32768
+          }
+        },
+        "eu.anthropic.claude-sonnet-4-20250514-v1:0": {
+          "name": "Exxeta Anthropic Claude 4 Sonnet",
+          "cost": {
+            "input": 3.0,
+            "output": 15,
+            "cache_read": 0.30
+          },
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          }
+        },
+        "xai/grok-4": {
+          "name": "Exxeta XAI Grok-4",
+          "cost": {
+            "input": 3.0,
+            "output": 15,
+            "cache_read": 0.75
+          },
+          "limit": {
+            "context": 256000,
+            "output": 64000
+          }
+        }
+      }
+    }
+  }
+}
