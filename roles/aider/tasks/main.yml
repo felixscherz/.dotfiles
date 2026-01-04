@@ -1,5 +1,0 @@
-- name: Stow aider
-  ansible.builtin.include_role:
-    name: stow
-  vars:
-    stow_package: aider
