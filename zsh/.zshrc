@@ -16,9 +16,6 @@ antigen theme robbyrussell
 antigen apply
 antigen bundle-q
 
-# make sure to start a tmux session
-if [ "$TMUX" = "" ]; then tmux; fi
-
 # initiate direnv to source files properly
 if [ -x "$(command -v direnv)" ]; then
     eval "$(direnv hook zsh)"
