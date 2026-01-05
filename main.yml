@@ -15,7 +15,6 @@
           - tmux
           - environment
           - kitty
-          - ghostty
           - pyenv
           - pre-commit
           - npm
@@ -29,10 +28,8 @@
           - git
           - watson
           - rust
-          - aider
+          - opencode
         components_macos:
-          - yabai
-          - spacebar
           - sketchybar
           - aerospace
           - skhd

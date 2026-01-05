@@ -1,0 +1,6 @@
+- name: Stow opencode configuration
+  ansible.builtin.command:
+    cmd: stow opencode --target=$HOME/.config/opencode --verbose=2
+    chdir: "{{ ansible_user_dir }}/.dotfiles"
+  register: result
+  changed_when: 'result.stderr is search("LINK: ")'
