@@ -1,5 +1,6 @@
 # .zshrc gets source by interactive shells
-source $(brew --prefix)/share/antigen/antigen.zsh
+# Use hardcoded brew prefix to avoid subshell (~20-50ms savings)
+source /opt/homebrew/share/antigen/antigen.zsh
 
 antigen use oh-my-zsh
 antigen bundle git
@@ -37,15 +38,16 @@ zstyle ':history-substring-search:highlight' found 'fg=green,bold'
 fpath+=~/.zfunc
 
 # COMPLETIONS
-
-autoload -Uz compinit && compinit
-# Only run compinit if the dump file doesn't exist or is outdated (e.g., older than 24 hours)
+# Only regenerate completion dump if it's older than 24 hours
+# This avoids expensive compinit on every shell start (~200-400ms savings)
 ZSH_COMPDUMP="$HOME/.cache/zsh/zcompdump-${ZSH_VERSION}"
+mkdir -p "$HOME/.cache/zsh"
 
-if [[ -f "$ZSH_COMPDUMP" && -n "$ZSH_COMPDUMP"(Nm+24) ]]; then
-  # If the dump file exists and is less than 24 hours old, load from it
-  compinit -d "$ZSH_COMPDUMP"
+autoload -Uz compinit
+if [[ -f "$ZSH_COMPDUMP" && -n "$ZSH_COMPDUMP"(Nm-24) ]]; then
+    # Dump file exists and is less than 24 hours old - skip regeneration
+    compinit -C -d "$ZSH_COMPDUMP"
 else
-  # Otherwise, generate a new dump file and save it
-  compinit -C -d "$ZSH_COMPDUMP"
+    # Dump file missing or stale - regenerate
+    compinit -d "$ZSH_COMPDUMP"
 fi

@@ -1,3 +1,4 @@
+zmodload zsh/zprof
 # .zprofile gets sourced at startup
 export XDG_CONFIG_HOME=$HOME/.config
 export EDITOR="nvim"
