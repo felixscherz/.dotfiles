@@ -27,6 +27,7 @@ alias gitroot='cd $(git rev-parse --show-toplevel)'
 alias watch-citrix="watch find ~/Downloads/ -type f -name 'Q*.ica' -exec open {} '\;'"
 alias python="python3"
 alias pip="pip3"
+alias opencode-work='XDG_DATA_HOME=~/.local/share/opencode-work opencode'
 
 
 # zsh-history-substring-search configuration
