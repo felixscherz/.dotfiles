@@ -52,3 +52,6 @@ else
     # Dump file missing or stale - regenerate
     compinit -d "$ZSH_COMPDUMP"
 fi
+
+# opencode
+export PATH=/Users/felixscherz/.opencode/bin:$PATH

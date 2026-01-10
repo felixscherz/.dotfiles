@@ -50,6 +50,17 @@
             "output": 64000
           }
         },
+        "claude-sonnet-4.5": {
+          "name": "Exxeta Claude Sonnet 4.5",
+          "cost": {
+            "input": 3.3,
+            "output": 16.5,
+          },
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          }
+        },
         "xai/grok-4": {
           "name": "Exxeta XAI Grok-4",
           "cost": {
