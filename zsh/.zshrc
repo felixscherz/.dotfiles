@@ -55,3 +55,6 @@ fi
 
 # opencode
 export PATH=/Users/felixscherz/.opencode/bin:$PATH
+
+
+unsetopt autocd
