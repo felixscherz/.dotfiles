@@ -5,7 +5,6 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		"nvim-neotest/neotest-python",
 		"nvim-neotest/neotest-plenary",
-		"nvim-neotest/neotest-vim-test",
 		"codymikol/neotest-kotlin",
 		"rouge8/neotest-rust",
 	},
@@ -17,9 +16,6 @@ return {
 					args = { "-rP" },
 				}),
 				require("neotest-plenary"),
-				require("neotest-vim-test")({
-					ignore_file_types = { "python", "vim", "lua" },
-				}),
 				require("neotest-rust")({ args = { "--no-capture" } }),
 				require("neotest-kotlin"),
 			},
