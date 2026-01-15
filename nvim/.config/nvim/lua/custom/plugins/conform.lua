@@ -26,10 +26,5 @@ return {
 			markdown = { "prettier" },
 			bzl = { "buildifier" },
 		},
-		formatters = {
-			prettier = {
-				prepend_args = { "--no-semi", "--single-quote", "--jsx-single-quote", "--tab-width", "2" },
-			},
-		},
 	},
 }
