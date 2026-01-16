@@ -11,22 +11,12 @@ enable-normalization-opposite-orientation-for-nested-containers = false
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
 
-# Run Sketchybar together with AeroSpace
-# sketchbar has a built-in detection of already running process,
-# so it won't be run twice on AeroSpace restart
-after-startup-command = ['exec-and-forget sketchybar']
-#
-# # Notify Sketchybar about workspace change
-exec-on-workspace-change = ['/bin/bash', '-c',
-    'sketchybar --trigger aerospace_workspace_change FOCUSED=$AEROSPACE_FOCUSED_WORKSPACE PREVIOUS=$AEROSPACE_PREV_WORKSPACE'
-]
-
 [gaps]
     inner.horizontal = 3
     inner.vertical =   3
     outer.left =       3
     outer.bottom =     3
-    outer.top =        [{ monitor.main = 3 }, 29]
+    outer.top =        3
     outer.right =      3
 
 [mode.main.binding]
