@@ -5,37 +5,6 @@
     community.general.homebrew:
       path: /opt/homebrew/bin
   tasks:
-    - name: Set common roles
-      ansible.builtin.set_fact:
-        use_sudo: "{{ 'false' if ansible_system == 'Darwin' else 'true' }}"
-        components:
-          - llvm
-          - zsh
-          - parallel
-          - tmux
-          - environment
-          - kitty
-          - pyenv
-          - pre-commit
-          - npm
-          - neovim
-          - direnv
-          - jq
-          - fd
-          - fzf
-          - ripgrep
-          - aws
-          - git
-          - watson
-          - rust
-          - opencode
-        components_macos:
-          - sketchybar
-          - aerospace
-          - skhd
-    - name: Determine whether to use sudo
-      ansible.builtin.set_fact:
-        use_sudo: "{{ 'no' if ansible_system == 'Darwin' else 'yes' }}"
     - name: Install stow
       ansible.builtin.package:
         state: present

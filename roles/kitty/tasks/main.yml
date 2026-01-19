@@ -4,9 +4,7 @@
 
   args:
     creates: "{{ ansible_env.HOME }}/Applications/kitty.app"
-- name: Stow kitty
-  ansible.builtin.command:
-    cmd: stow kitty --target=$HOME --verbose=2
-    chdir: "{{ ansible_user_dir }}/.dotfiles"
-  register: result
-  changed_when: 'result.stderr is search("LINK: ")'
+- name: Stow kitty configuration
+  ansible.builtin.include_tasks: ../../tasks/stow_package.yml
+  vars:
+    stow_package: kitty

@@ -1,0 +1,31 @@
+# Common paths
+stow_base_dir: "{{ ansible_user_dir }}/.dotfiles"
+stow_private_dir: "{{ ansible_user_dir }}/.dotfiles/private"
+# Privilege escalation
+use_sudo: "{{ 'no' if ansible_system == 'Darwin' else 'yes' }}"
+# Component lists
+components:
+  - llvm
+  - zsh
+  - parallel
+  - tmux
+  - environment
+  - kitty
+  - pyenv
+  - pre-commit
+  - npm
+  - neovim
+  - direnv
+  - jq
+  - fd
+  - fzf
+  - ripgrep
+  - aws
+  - git
+  - watson
+  - rust
+  - opencode
+components_macos:
+  - sketchybar
+  - aerospace
+  - skhd

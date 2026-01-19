@@ -7,9 +7,7 @@
   ansible.builtin.package:
     name: neovim
   become: "{{ use_sudo }}"
-- name: Stow neovim config
-  ansible.builtin.command:
-    cmd: stow  nvim --target=$HOME --verbose=2
-    chdir: "{{ ansible_user_dir }}/.dotfiles"
-  register: result
-  changed_when: 'result.stderr is search("LINK: ")'
+- name: Stow neovim configuration
+  ansible.builtin.include_tasks: ../../tasks/stow_package.yml
+  vars:
+    stow_package: nvim

@@ -1,0 +1,43 @@
+# See https://ansible.readthedocs.io/projects/lint/configuring/
+profile: production
+# Exclude paths from linting
+exclude_paths:
+  - .git/
+  - bin/
+  - nvim/
+  - private/
+  - personal/
+  - kitty/
+  - tmux/
+  - zsh/
+  - sketchybar/
+  - skhd/
+  - aerospace/
+  - watson/
+  - opencode/
+  - .cache/
+# Enable checking of loop variable prefixes in roles
+loop_var_prefix: "{role}_"
+# Enforce variable naming patterns
+var_naming_pattern: "^[a-z_][a-z0-9_]*$"
+# Skip specific rules if needed
+skip_list:
+  - yaml[line-length] # Allow longer lines for readability
+  - no-handler # We don't use handlers in this simple setup
+# Enable offline mode (don't fetch galaxy roles)
+offline: true
+# Use default rules with production profile
+use_default_rules: true
+# Mock modules and roles for testing
+mock_modules: []
+mock_roles: []
+# Minimum required Ansible version
+# ansible_version_min: "2.14"
+
+# Additional configuration
+kinds:
+  - yaml: "*.yaml"
+  - yaml: "*.yml"
+  - tasks: "**/tasks/*.yml"
+  - vars: "**/vars/*.yml"
+  - meta: "**/meta/*.yml"
