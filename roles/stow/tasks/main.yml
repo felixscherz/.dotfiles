@@ -1,6 +1,0 @@
-- name: Stow files
-  ansible.builtin.command:
-    cmd: "stow {{ stow_package }} --target=$HOME"
-    chdir: "{{ stow_base_dir }}"
-  register: result
-  changed_when: 'result.stderr is search("LINK: ")'

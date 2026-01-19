@@ -2,9 +2,7 @@
   ansible.builtin.package:
     state: present
     name: tmux
-- name: Stow tmux
-  ansible.builtin.command:
-    cmd: stow tmux --target=$HOME --verbose=2
-    chdir: "{{ ansible_user_dir }}/.dotfiles"
-  register: result
-  changed_when: 'result.stderr is search("LINK: ")'
+- name: Stow tmux configuration
+  ansible.builtin.include_tasks: ../../tasks/stow_package.yml
+  vars:
+    stow_package: tmux

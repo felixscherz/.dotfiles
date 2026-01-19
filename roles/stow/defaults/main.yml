@@ -1,1 +1,0 @@
-stow_base_dir: "{{ ansible_env.HOME }}/.dotfiles"

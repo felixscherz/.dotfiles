@@ -41,4 +41,4 @@ if [[ -f "$DOTFILES_DIR/requirements.yml" ]]; then
     popd
 fi
 
-ansible-playbook --diff "$DOTFILES_DIR/main.yml"
+ansible-playbook -i "$DOTFILES_DIR/inventory.yml" --diff "$DOTFILES_DIR/main.yml"

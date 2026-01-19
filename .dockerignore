@@ -1,0 +1,49 @@
+# Git directory
+.git/
+.gitignore
+
+# Dotfile directories (stow packages)
+bin/
+nvim/
+personal/
+private/
+kitty/
+tmux/
+zsh/
+sketchybar/
+skhd/
+aerospace/
+watson/
+opencode/
+
+# Documentation
+docs/
+README.md
+
+# Cache and build artifacts
+.cache/
+*.pyc
+__pycache__/
+.pytest_cache/
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Pre-commit
+.pre-commit-config.yaml
+
+# Only include Ansible files needed for testing
+!main.yml
+!inventory.yml
+!group_vars/
+!roles/
+!tasks/
+!.ansible-lint

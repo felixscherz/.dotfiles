@@ -2,9 +2,7 @@
   ansible.builtin.package:
     state: present
     name: koekeishiya/formulae/skhd
-- name: Stow skhd
-  ansible.builtin.command:
-    cmd: stow skhd --target=$HOME --verbose=2
-    chdir: "{{ ansible_user_dir }}/.dotfiles"
-  register: result
-  changed_when: 'result.stderr is search("LINK: ")'
+- name: Stow skhd configuration
+  ansible.builtin.include_tasks: ../../tasks/stow_package.yml
+  vars:
+    stow_package: skhd

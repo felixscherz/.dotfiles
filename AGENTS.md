@@ -1,10 +1,12 @@
 # AGENTS.md
 
 ## Build/Install/Lint Commands
-- **Install**: `./install.sh` (bootstrap) or `ansible-playbook --diff main.yml`
-- **Lint/Format**: `pre-commit run --all-files` (runs stylua, yamlfmt, yaml/whitespace checks)
+- **Install**: `./install.sh` (bootstrap) or `ansible-playbook -i inventory.yml --diff main.yml`
+- **Lint/Format**: `pre-commit run --all-files` (runs stylua, yamlfmt, ansible-lint, yaml/whitespace checks)
 - **Format Lua only**: `stylua nvim/`
 - **Format YAML only**: `yamlfmt roles/ main.yml`
+- **Lint Ansible only**: `ansible-lint`
+- **Test in Docker**: `./test-playbook.sh` (tests playbook in Ubuntu container)
 
 ## Code Style
 
