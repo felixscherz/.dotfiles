@@ -1,9 +1,14 @@
 - name: Install nvm
   ansible.builtin.shell: >
-    PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash'
+    set -o pipefail && PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash'
+
   args:
+    executable: /bin/bash
     creates: "{{ ansible_env.HOME }}/.config/nvm/nvm.sh"
 - name: Install node and set version
-  shell: >
+  ansible.builtin.shell: >
     /bin/bash -c "source {{ ansible_env.HOME }}/.config/nvm/nvm.sh && nvm install 20.11.0 && nvm alias default"
+
+  args:
     creates: "{{ ansible_env.HOME }}/.config/nvm/alias"
+  changed_when: false

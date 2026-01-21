@@ -12,7 +12,7 @@ components:
   - environment
   - kitty
   - pyenv
-  - pre-commit
+  - precommit
   - npm
   - neovim
   - direnv
