@@ -25,6 +25,7 @@ return {
 			yaml = { "prettier" },
 			markdown = { "prettier" },
 			bzl = { "buildifier" },
+			rust = { "rustfmt" },
 		},
 	},
 }
