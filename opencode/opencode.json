@@ -4,6 +4,11 @@
   "model": "github-copilot/claude-sonnet-4.5",
   "share": "disabled",
   "disabled_providers": ["openai", "anthropic", "gemini", "amazon-bedrock"],
+  "permission": {
+    "github_*": "deny",
+    "grafana_*": "deny",
+    "atlassian_*": "deny",
+  },
   "provider": {
     "exxeta": {
       "npm": "@ai-sdk/openai-compatible",
