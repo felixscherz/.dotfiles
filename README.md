@@ -19,7 +19,7 @@ Clone the repo at https://github.com/neovim/neovim and install it to a custom pr
 ```sh
 rm -r build/  # clear the CMake cache
 rm -r .deps # only sometimes required
-make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/.local"
+make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/.local" CMAKE_BUILD_TYPE=Release
 make install
 ```
 
