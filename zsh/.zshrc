@@ -36,6 +36,15 @@ bindkey '^[[B' history-substring-search-down # or '\eOB'
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 zstyle ':history-substring-search:highlight' found 'fg=green,bold'
 
+
+# bun completions
+[ -s "/Users/felixscherz/.bun/_bun" ] && source "/Users/felixscherz/.bun/_bun"
+#
+# # bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# this is where tools can store completions
 fpath+=~/.zfunc
 
 # COMPLETIONS
