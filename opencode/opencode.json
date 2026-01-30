@@ -7,7 +7,7 @@
   "permission": {
     "github_*": "deny",
     "grafana_*": "deny",
-    "atlassian_*": "deny",
+    "atlassian_*": "deny"
   },
   "provider": {
     "exxeta": {
@@ -36,7 +36,7 @@
           "cost": {
             "input": 0.4,
             "output": 1.6,
-            "cache_read": 0.10
+            "cache_read": 0.1
           },
           "limit": {
             "context": 1047576,
@@ -48,7 +48,7 @@
           "cost": {
             "input": 3.0,
             "output": 15,
-            "cache_read": 0.30
+            "cache_read": 0.3
           },
           "limit": {
             "context": 200000,
@@ -59,22 +59,10 @@
           "name": "Exxeta Claude Sonnet 4.5",
           "cost": {
             "input": 3.3,
-            "output": 16.5,
+            "output": 16.5
           },
           "limit": {
             "context": 200000,
-            "output": 64000
-          }
-        },
-        "xai/grok-4": {
-          "name": "Exxeta XAI Grok-4",
-          "cost": {
-            "input": 3.0,
-            "output": 15,
-            "cache_read": 0.75
-          },
-          "limit": {
-            "context": 256000,
             "output": 64000
           }
         }
