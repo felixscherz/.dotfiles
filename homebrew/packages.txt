@@ -214,6 +214,7 @@ python-packaging 24.2
 python@3.12 3.12.10 3.12.8
 python@3.13 3.13.2 3.13.3
 qrencode 4.1.1
+qsv 15.0.1
 qt 6.9.0
 rav1e 0.8.1
 re2 20240702_1
