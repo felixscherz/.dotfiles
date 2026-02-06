@@ -20,6 +20,7 @@ return {
 			"org",
 			"mermaid",
 			"javascript",
+			"typescript",
 			"toml",
 			"bash",
 			"terraform",
