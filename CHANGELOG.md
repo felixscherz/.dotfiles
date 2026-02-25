@@ -1,3 +1,9 @@
+## 0.4.0 (2025-02-24)
+
+### Feat
+
+- replace pyenv with uv for Python management
+
 ## 0.3.0 (2024-05-12)
 
 ### Feat

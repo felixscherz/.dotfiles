@@ -11,7 +11,7 @@ components:
   - tmux
   - environment
   - kitty
-  - pyenv
+  - uv
   - precommit
   - npm
   - neovim

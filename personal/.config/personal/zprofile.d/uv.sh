@@ -1,0 +1,1 @@
+addToPathFront "$HOME/.local/bin"

@@ -1,0 +1,14 @@
+- name: Check if uv installed
+  ansible.builtin.stat:
+    path: "{{ ansible_user_dir }}/.local/bin/uv"
+  register: uv_install
+- name: Download uv installer
+  ansible.builtin.get_url:
+    url: https://astral.sh/uv/install.sh
+    dest: /tmp/uv_install.sh
+    mode: '0755'
+  when: not uv_install.stat.exists
+- name: Install uv
+  ansible.builtin.command: /tmp/uv_install.sh
+  when: not uv_install.stat.exists
+  changed_when: not uv_install.stat.exists

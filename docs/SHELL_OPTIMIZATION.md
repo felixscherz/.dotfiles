@@ -20,15 +20,7 @@ This document tracks shell startup time optimizations, current trade-offs, and f
 **Disabled features**:
 - Automatic `.nvmrc` detection (`nvm_auto`) - use `nvm use` manually when entering a project with `.nvmrc`
 
-### 2. Pyenv Lazy Loading (~50-100ms savings)
-
-**File**: `personal/.config/personal/zprofile.d/pyenv.sh`
-
-**Change**: Pyenv shims are added to PATH immediately, but full `pyenv init` is deferred until first `pyenv` command.
-
-**Trade-off**: Python and pip work immediately via shims. Only `pyenv` subcommands (like `pyenv install`, `pyenv shell`) trigger the full init.
-
-### 3. Hardcoded Homebrew Prefix (~20-50ms savings)
+### 2. Hardcoded Homebrew Prefix (~20-50ms savings)
 
 **File**: `zsh/.zshrc`
 
@@ -55,7 +47,6 @@ rm ~/.cache/zsh/zcompdump-* && exec zsh
 | Optimization | Savings | Trade-off |
 |-------------|---------|-----------|
 | NVM lazy-load | ~800ms | First node/npm call is slow; no auto .nvmrc |
-| Pyenv lazy-load | ~50-100ms | First `pyenv` command is slow |
 | Hardcoded brew path | ~20-50ms | Not portable to Intel Macs |
 | Compinit caching | ~200-400ms | New completions delayed up to 24h |
 
@@ -133,11 +124,4 @@ To revert to non-lazy NVM loading:
 # nvm.sh
 export NVM_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-```
-
-To revert to non-lazy pyenv loading:
-```bash
-# pyenv.sh
-addToPathFront $HOME/.pyenv/bin
-eval "$(pyenv init -)"
 ```
