@@ -104,7 +104,7 @@ return {
 			"clangd",
 			"terraformls",
 			"autotools_ls",
-			"bzl",
+			"starpls",
 			"gopls",
 			"cmake",
 			"ts_ls",
