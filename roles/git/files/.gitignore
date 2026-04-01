@@ -10,3 +10,5 @@ node_modules/
 .aider.input.history*
 .aider.*
 .opencode
+pyrightconfig.json
+.neoconf.json
