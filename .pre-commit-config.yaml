@@ -20,6 +20,7 @@ repos:
       - id: ansible-lint
         files: \.(yaml|yml)$
         args: []
+        always_run: false
   - hooks:
       - id: commitizen
       - id: commitizen-branch
