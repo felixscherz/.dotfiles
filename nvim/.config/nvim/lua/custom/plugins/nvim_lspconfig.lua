@@ -108,7 +108,7 @@ return {
 			"gopls",
 			"cmake",
 			"ts_ls",
-			"kotlin_language_server",
+			"kotlin_lsp",
 			"svelte",
 		}
 
