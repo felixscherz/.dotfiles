@@ -3,11 +3,16 @@
   "autoupdate": false,
   "model": "github-copilot/claude-sonnet-4.6",
   "share": "disabled",
-  "disabled_providers": ["openai", "anthropic", "gemini", "amazon-bedrock"],
+  "disabled_providers": [
+    "openai",
+    "anthropic",
+    "gemini",
+    "amazon-bedrock"
+  ],
   "permission": {
-    "github_*": "deny",
-    "grafana_*": "deny",
-    "atlassian_*": "deny"
+    "github*": "deny",
+    "grafana*": "deny",
+    "atlassian*": "deny"
   },
   "provider": {
     "exxeta": {
