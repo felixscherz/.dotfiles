@@ -12,3 +12,4 @@ node_modules/
 .opencode
 pyrightconfig.json
 .neoconf.json
+kls_database.db
