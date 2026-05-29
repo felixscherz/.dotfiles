@@ -1,8 +1,0 @@
-# - name: Install aerospace
-#   ansible.builtin.package:
-#     state: present
-#     name: FelixKratz/formulae/aerospace
-- name: Stow aerospace configuration
-  ansible.builtin.include_tasks: ../../tasks/stow_package.yml
-  vars:
-    stow_package: aerospace

@@ -1,3 +1,0 @@
-- name: Install pre-commit
-  community.general.pipx:
-    name: pre-commit

@@ -1,44 +1,20 @@
 #!/usr/bin/env bash
 set -e
 
-DOTFILES_DIR="$HOME/.dotfiles"
-SSH_DIR="$HOME/.ssh"
+DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
+source "$DOTFILES_DIR/lib.sh"
 
-setup_macos() {
-    if ! [ -x "$(command -v brew)" ]; then
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	eval "$(/opt/homebrew/bin/brew shellenv)"
-    fi
-    if ! [ -x "$(command -v ansible)" ]; then
-        brew install ansible
-    fi
-}
+bootstrap
 
-setup_ubuntu() {
-    sudo apt update -y
-    if ! [ -x "$(command -v ansible)" ]; then
-        sudo apt install ansible -y
-    fi
-}
-
-case $(uname -s) in
-    Darwin) setup_macos;;
-    Linux) setup_ubuntu;;
-    *) exit 1;;
-esac
-
-if ! [[ -f  "$SSH_DIR/id_rsa" ]]; then
-    mkdir -p "$SSH_DIR"
-    chmod 700 "$SSH_DIR"
-    ssh-keygen -b 4096 -t rsa -f "$SSH_DIR/id_rsa" -N "" -C "$USER@$HOSTNAME"
-    cat "$SSH_DIR/id_rsa.pub" >> "$SSH_DIR/authorized_keys"
-    chmod 600 "$SSH_DIR/authorized_keys"
+if [[ $# -eq 0 ]]; then
+    while IFS= read -r pkg; do
+        [[ -z "$pkg" || "$pkg" == \#* ]] && continue
+        echo "==> Installing $pkg"
+        "$DOTFILES_DIR/packages/$pkg/install.sh"
+    done < "$DOTFILES_DIR/packages.txt"
+else
+    for pkg in "$@"; do
+        echo "==> Installing $pkg"
+        "$DOTFILES_DIR/packages/$pkg/install.sh"
+    done
 fi
-
-if [[ -f "$DOTFILES_DIR/requirements.yml" ]]; then
-    pushd "$DOTFILES_DIR"
-    ansible-galaxy install -r requirements.yml
-    popd
-fi
-
-ansible-playbook -i "$DOTFILES_DIR/inventory.yml" --diff "$DOTFILES_DIR/main.yml"

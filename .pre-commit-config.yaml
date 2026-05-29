@@ -14,13 +14,6 @@ repos:
     rev: v0.14.0
     hooks:
       - id: yamlfmt
-  - repo: https://github.com/ansible/ansible-lint
-    rev: v26.1.1
-    hooks:
-      - id: ansible-lint
-        files: \.(yaml|yml)$
-        args: []
-        always_run: false
   - hooks:
       - id: commitizen
       - id: commitizen-branch

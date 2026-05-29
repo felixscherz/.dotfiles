@@ -1,8 +1,0 @@
-- name: Install sketchybar
-  ansible.builtin.package:
-    state: present
-    name: FelixKratz/formulae/sketchybar
-- name: Stow sketchybar configuration
-  ansible.builtin.include_tasks: ../../tasks/stow_package.yml
-  vars:
-    stow_package: sketchybar

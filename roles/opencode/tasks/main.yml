@@ -1,5 +1,0 @@
-- name: Stow opencode configuration
-  ansible.builtin.include_tasks: ../../tasks/stow_package.yml
-  vars:
-    stow_package: opencode
-    stow_target: $HOME/.config/opencode

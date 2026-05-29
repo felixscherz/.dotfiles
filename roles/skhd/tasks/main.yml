@@ -1,8 +1,0 @@
-- name: Install skhd
-  ansible.builtin.package:
-    state: present
-    name: koekeishiya/formulae/skhd
-- name: Stow skhd configuration
-  ansible.builtin.include_tasks: ../../tasks/stow_package.yml
-  vars:
-    stow_package: skhd

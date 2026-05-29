@@ -1,8 +1,0 @@
-- name: Install tmux
-  ansible.builtin.package:
-    state: present
-    name: tmux
-- name: Stow tmux configuration
-  ansible.builtin.include_tasks: ../../tasks/stow_package.yml
-  vars:
-    stow_package: tmux

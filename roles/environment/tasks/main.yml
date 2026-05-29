@@ -1,8 +1,0 @@
-- name: Stow scripts
-  ansible.builtin.include_tasks: ../../tasks/stow_package.yml
-  vars:
-    stow_package: bin
-- name: Stow environment
-  ansible.builtin.include_tasks: ../../tasks/stow_package.yml
-  vars:
-    stow_package: personal
