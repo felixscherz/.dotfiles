@@ -17,7 +17,6 @@ return {
 			"markdown_inline",
 			"rust",
 			"yaml",
-			"org",
 			"mermaid",
 			"javascript",
 			"typescript",
