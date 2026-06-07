@@ -13,7 +13,6 @@ opencode
 watson
 bin
 personal
-private
 aerospace
 skhd
 sketchybar
