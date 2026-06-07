@@ -1,0 +1,19 @@
+# Font Configuration
+font-family = "JetBrainsMono Nerd Font"
+font-size = 15
+
+# Tighten the line spacing (negative numbers decrease the vertical gap)
+adjust-cell-height = -14%
+
+# Ligatures (always disabled via OpenType features)
+font-feature = ["-liga", "-calt", "-dlig"]
+
+# Window & macOS Behavior
+macos-titlebar-style = hidden
+macos-non-native-fullscreen = true
+
+# Opacity
+background-opacity = 0.98
+
+# Theme
+theme = "TokyoNight Storm"
