@@ -1,6 +1,5 @@
-# .zshrc gets source by interactive shells
-# Use hardcoded brew prefix to avoid subshell (~20-50ms savings)
-source /opt/homebrew/share/antigen/antigen.zsh
+# .zshrc gets sourced by interactive shells
+source $HOME/.local/bin/antigen.zsh
 
 antigen use oh-my-zsh
 antigen bundle git
