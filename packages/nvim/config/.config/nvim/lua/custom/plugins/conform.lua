@@ -21,11 +21,12 @@ return {
 			typescriptreact = { "prettier" },
 			html = { "prettier" },
 			css = { "prettier" },
-			json = { "prettier" },
 			yaml = { "prettier" },
 			markdown = { "prettier" },
 			bzl = { "buildifier" },
 			rust = { "rustfmt" },
+			json = { "prettierd", "prettier", "jq" },
+			jsonc = { "prettierd", "prettier" },
 		},
 	},
 }

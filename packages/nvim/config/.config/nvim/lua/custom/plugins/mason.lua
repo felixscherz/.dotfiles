@@ -19,4 +19,22 @@ return {
 		},
 	}, -- simple to use language server installer
 	{ "williamboman/mason-lspconfig.nvim" },
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    dependencies = { "williamboman/mason.nvim" },
+    event = "VimEnter",
+    config = function()
+      require("mason-tool-installer").setup({
+        ensure_installed = {
+          "prettier",
+          "jq",
+          "yamlfmt",
+          "stylua",
+          "ktfmt",
+        },
+        auto_update = false,
+        run_on_start = true,
+      })
+    end,
+  },
 }
