@@ -21,7 +21,7 @@ return {
 			typescriptreact = { "prettier" },
 			html = { "prettier" },
 			css = { "prettier" },
-			yaml = { "prettier" },
+			yaml = { "yamlfmt", "prettier" },
 			markdown = { "prettier" },
 			bzl = { "buildifier" },
 			rust = { "rustfmt" },
