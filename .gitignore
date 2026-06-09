@@ -10,3 +10,5 @@ bin/.local/lib
 .aider.tags.cache*
 .aider.chat.history*
 .aider.input.history*
+packages/karabiner/config/.config/karabiner/**
+!.config/karabiner/karabiner.json
