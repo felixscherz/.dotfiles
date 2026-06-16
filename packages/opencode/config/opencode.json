@@ -19,12 +19,11 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "Exxeta",
       "options": {
-        "baseURL": "{env:OPENAI_API_BASE}",
-        "apiKey": "{env:OPENAI_API_KEY}",
+        "baseURL": "https://ai.exxeta.info/v1",
         "includeUsage": true
       },
       "models": {
-        "eu.anthropic.claude-sonnet-4-6": {
+        "claude-sonnet-4.6": {
           "name": "Exxeta Claude Sonnet 4.6",
           "cost": {
             "input": 3.3,
@@ -35,7 +34,7 @@
             "output": 64000
           }
         },
-        "eu.anthropic.claude-opus-4-6-v1": {
+        "claude-opus-4.6": {
           "name": "Exxeta Claude Opus 4.6",
           "cost": {
             "input": 5.5,
@@ -44,6 +43,28 @@
           "limit": {
             "context": 1000000,
             "output": 128000
+          }
+        },
+        "gpt-5-mini": {
+          "name": "Exxeta GPT-5 Mini",
+          "cost": {
+            "input": 0.15,
+            "output": 0.6
+          },
+          "limit": {
+            "context": 128000,
+            "output": 4096
+          }
+        },
+        "gpt-5.4": {
+          "name": "Exxeta GPT-5.4 Pro",
+          "cost": {
+            "input": 5,
+            "output": 15
+          },
+          "limit": {
+            "context": 200000,
+            "output": 64000
           }
         }
       }
@@ -57,6 +78,9 @@
       "models": {
         "gemma4:local-64k": {
           "name": "Gemma4 64k"
+        },
+        "gemma4:12b-mlx-64k": {
+          "name": "Gemma4 64k (MLX)"
         }
       }
     }
