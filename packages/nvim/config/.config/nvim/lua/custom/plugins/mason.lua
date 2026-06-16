@@ -31,6 +31,7 @@ return {
           "yamlfmt",
           "stylua",
           "ktfmt",
+          "yamllint",
         },
         auto_update = false,
         run_on_start = true,

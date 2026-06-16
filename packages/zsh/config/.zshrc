@@ -27,6 +27,7 @@ alias watch-citrix="watch find ~/Downloads/ -type f -name 'Q*.ica' -exec open {}
 alias python="python3"
 alias pip="pip3"
 alias opencode-work='XDG_DATA_HOME=~/.local/share/opencode-work opencode'
+alias nvimty='NVIM_USE_TY=1 nvim'
 
 
 # zsh-history-substring-search configuration

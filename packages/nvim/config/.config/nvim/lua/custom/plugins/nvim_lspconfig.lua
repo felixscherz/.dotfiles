@@ -90,9 +90,12 @@ return {
 
 		vim.diagnostic.config(config)
 
+		local use_ty = vim.env.NVIM_USE_TY == "1"
+
 		local servers = {
 			"lua_ls",
 			"basedpyright",
+			"ty",
 			"jsonls",
 			"rust_analyzer",
 			"ruff",
@@ -133,6 +136,9 @@ return {
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 		for _, server in pairs(servers) do
+			if server == "basedpyright" and use_ty then goto continue end
+			if server == "ty" and not use_ty then goto continue end
+
 			opts = {
 				on_attach = on_attach,
 				capabilities = require("blink.cmp").get_lsp_capabilities(capabilities),
@@ -146,6 +152,7 @@ return {
 
 			vim.lsp.config(server, opts)
 			vim.lsp.enable(server)
+			::continue::
 		end
 
 		opts = {
