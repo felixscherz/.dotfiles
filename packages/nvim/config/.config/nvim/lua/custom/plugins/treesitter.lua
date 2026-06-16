@@ -65,28 +65,28 @@ return {
 			"starlark",
 			"tmux",
 		},
-		incremental_selection = {
-			enable = true,
-			disable = { "markdown" },
-			keymaps = {
-				init_selection = "<CR>",
-				node_incremental = "<CR>",
-				scope_incremental = "<CR>",
-				node_decremental = "<BS>",
-			},
-		},
-		highlight = {
-			additional_vim_regex_highlighting = false,
-			enable = true,
-			disable = function(_, bufnr)
-				local buf_name = vim.api.nvim_buf_get_name(bufnr)
-				local file_size = vim.api.nvim_call_function("getfsize", { buf_name })
-				return file_size > 256 * 1024
-			end,
-		},
-		indent = {
-			enable = true,
-			-- disable = { "yaml" }
-		},
 	},
+	config = function(_, opts)
+		require("nvim-treesitter").setup(opts)
+
+		vim.api.nvim_create_autocmd("FileType", {
+			group = vim.api.nvim_create_augroup("custom_treesitter_highlight", { clear = true }),
+			pattern = "*",
+			callback = function(ev)
+				local buf_name = vim.api.nvim_buf_get_name(ev.buf)
+				local file_size = vim.api.nvim_call_function("getfsize", { buf_name })
+				if file_size <= 256 * 1024 then
+					pcall(vim.treesitter.start, ev.buf)
+				end
+			end,
+		})
+
+		vim.api.nvim_create_autocmd("FileType", {
+			group = vim.api.nvim_create_augroup("custom_treesitter_indent", { clear = true }),
+			pattern = "*",
+			callback = function()
+				vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+			end,
+		})
+	end,
 }
