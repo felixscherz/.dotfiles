@@ -27,6 +27,3 @@ unset PERSONAL
 
 addToPathFront $HOME/.local/scripts
 addToPathFront $HOME/.local/bin
-
-# Added by Obsidian
-export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
