@@ -80,13 +80,5 @@ return {
 				end
 			end,
 		})
-
-		vim.api.nvim_create_autocmd("FileType", {
-			group = vim.api.nvim_create_augroup("custom_treesitter_indent", { clear = true }),
-			pattern = "*",
-			callback = function()
-				vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-			end,
-		})
 	end,
 }
