@@ -104,3 +104,7 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 8 = [3, 2, 1]
 9 = [3, 2, 1]
 10 = 'main'
+
+[[on-window-detected]]
+if.app-id = 'com.pais.handy'
+run = 'layout floating'
