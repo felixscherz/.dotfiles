@@ -1,0 +1,8 @@
+# Pull the standard quantized base (Swap to qwen3.6:35b if you want more RAM headroom)
+FROM qwen3-coder-next:q4_K_M
+
+# Cap context to 16k tokens to balance codebase awareness with RAM safety
+PARAMETER num_ctx 32768
+
+# Set temperature to 0 for strict, predictable code generation
+PARAMETER temperature 0.0

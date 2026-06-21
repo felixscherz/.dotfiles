@@ -1,0 +1,11 @@
+# Swaps to the smaller, dense 27B model (Q4 default)
+FROM qwen3.6:27b
+
+# Sets your preferred 48k context window safely
+PARAMETER num_ctx 49152
+
+# Set temperature to 0 for strict, predictable code generation
+PARAMETER temperature 0.0
+
+# Prevents runaway RAM spike on massive responses
+PARAMETER num_predict 4096
