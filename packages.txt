@@ -10,6 +10,7 @@ nvim
 tmux
 kitty
 opencode
+claude
 watson
 bin
 personal
