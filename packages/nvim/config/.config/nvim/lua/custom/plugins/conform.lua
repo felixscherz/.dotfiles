@@ -25,6 +25,8 @@ return {
 			markdown = { "prettier" },
 			bzl = { "buildifier" },
 			rust = { "rustfmt" },
+			terraform = { "terraform_fmt" },
+			["terraform-vars"] = { "terraform_fmt" },
 			json = { "prettierd", "prettier", "jq" },
 			jsonc = { "prettierd", "prettier" },
 		},

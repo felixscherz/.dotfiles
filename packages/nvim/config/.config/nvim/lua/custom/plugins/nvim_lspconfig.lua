@@ -57,6 +57,9 @@ local on_attach = function(client, bufnr)
 	end
 
 	lsp_keymaps(bufnr)
+	vim.schedule(function()
+		vim.bo[bufnr].formatexpr = "v:lua.require'conform'.formatexpr()"
+	end)
 end
 
 return {
