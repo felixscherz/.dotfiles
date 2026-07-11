@@ -3,8 +3,8 @@ tags
 **/.DS_Store
 bin/.local/share/*
 bin/.local/state/*
-watson/.config/watson/frames*
-watson/.config/watson/state*
+packages/watson/config/.config/watson/frames*
+packages/watson/config/.config/watson/state*
 bin/.local/bin/*
 bin/.local/lib
 .aider.tags.cache*
@@ -12,3 +12,5 @@ bin/.local/lib
 .aider.input.history*
 packages/karabiner/config/.config/karabiner/**
 !.config/karabiner/karabiner.json
+# finicky routing is company/customer-specific - lives in the private overlay
+packages/finicky/config/.finicky.js

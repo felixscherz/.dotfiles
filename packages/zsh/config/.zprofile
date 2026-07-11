@@ -4,6 +4,10 @@ export XDG_CONFIG_HOME=$HOME/.config
 export EDITOR="nvim"
 export MANPAGER='nvim +Man!'
 
+# Merge the private opencode config (company providers) on top of the public one,
+# only when the private overlay is present on this machine.
+[ -f "$HOME/.config/opencode/opencode.private.json" ] && export OPENCODE_CONFIG="$HOME/.config/opencode/opencode.private.json"
+
 export PATH=$(getconf PATH)
 
 

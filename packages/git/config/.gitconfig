@@ -1,0 +1,42 @@
+[user]
+	name = Felix Scherz
+	email = felixwscherz@gmail.com
+[init]
+	defaultBranch = main
+[color]
+    ui = auto
+[diff]
+    # Use better, descriptive initials (c, i, w) instead of a/b.
+    mnemonicPrefix = true
+    # Show renames/moves as such
+    renames = true
+    # When using --word-diff, assume --word-diff-regex=.
+    wordRegex = .
+    # Display submodule-related information (commit listings)
+    submodule = log
+
+    tool = nvimdiff
+[difftool "nvimdiff"]
+    cmd = nvim -d "$LOCAL" "$REMOTE"
+[core]
+    excludesFile = ~/.gitignore
+    editor = nvim
+[merge]
+    tool = nvimdiff
+[mergetool "nvimdiff"]
+    cmd = nvim -d -c "wincmd w" "$LOCAL" "$BASE" "$REMOTE" "$MERGED"
+    trustExitCode = true
+
+[rerere]
+    enabled = true
+
+[url "ssh://git@github.com/"]
+    insteadOf = https://github.com/
+
+# Company/customer-specific config (internal insteadOf URLs, work identities)
+# lives in the private overlay. Included UNCONDITIONALLY on purpose: tools that
+# clone outside the work tree - e.g. `go mod download`, which clones into
+# $GOPATH/pkg/mod/cache - would skip a `gitdir`-conditional include and miss the
+# URL rewrites. See the public-private-config skill.
+[include]
+    path = ~/.config/git/config.private

@@ -3,7 +3,6 @@
   "autoupdate": false,
   "model": "github-copilot/claude-sonnet-4.6",
   "share": "disabled",
-  "lsp": true,
   "formatter": true,
   "disabled_providers": [
     "openai",
@@ -17,75 +16,6 @@
     "atlassian*": "deny"
   },
   "provider": {
-    "exxeta": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "Exxeta",
-      "options": {
-        "baseURL": "https://ai.exxeta.info/v1",
-        "includeUsage": true
-      },
-      "models": {
-        "claude-haiku-4.5": {
-          "name": "Exxeta Claude Haiku 4.5",
-          "cost": {
-            "input": 1.0,
-            "output": 5.0
-          },
-          "limit": {
-            "input": 200000,
-            "context": 64000,
-            "output": 64000
-          }
-        },
-        "claude-sonnet-4.6": {
-          "name": "Exxeta Claude Sonnet 4.6",
-          "cost": {
-            "input": 3.3,
-            "output": 16.5
-          },
-          "limit": {
-            "input": 1000000,
-            "context": 64000,
-            "output": 64000
-          }
-        },
-        "claude-opus-4.6": {
-          "name": "Exxeta Claude Opus 4.6",
-          "cost": {
-            "input": 5.5,
-            "output": 27.5
-          },
-          "limit": {
-            "input": 1000000,
-            "context": 128000,
-            "output": 128000
-          }
-        },
-        "gpt-5-mini": {
-          "name": "Exxeta GPT-5 Mini",
-          "cost": {
-            "input": 0.15,
-            "output": 0.6
-          },
-          "limit": {
-            "input": 272000,
-            "context": 128000,
-            "output": 128000
-          }
-        },
-        "gpt-5.4": {
-          "name": "Exxeta GPT-5.4",
-          "cost": {
-            "input": 2.5,
-            "output": 15
-          },
-          "limit": {
-            "context": 200000,
-            "output": 64000
-          }
-        }
-      }
-    },
     "ollama": {
       "npm": "@ai-sdk/openai-compatible",
       "name": "Ollama (Local)",
@@ -96,11 +26,18 @@
         "gemma4:local-64k": {
           "name": "Gemma4 64k"
         },
-        "gemma4:12b-mlx-64k": {
-          "name": "Gemma4 64k (MLX)"
-        },
         "m5-qwen2.5-coder-32k": {
           "name": "M5 Qwen2.5 Coder 32k"
+        },
+        "m5-qwen3.6-48k": {
+          "name": "M5 Qwen3.6 48k"
+        },
+        "m5-gemma4-qat-48k": {
+          "name": "Gemma4-QAT 48k",
+          "cost": {
+            "input": 1000,
+            "output": 1000
+          },
         }
       }
     }
