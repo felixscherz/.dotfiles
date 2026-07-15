@@ -97,7 +97,14 @@ return {
 			{
 				"<leader>gf",
 				function()
-					require("git_grep").live_grep()
+					-- In virtual buffers (e.g. fugitive://) the buffer's directory
+					-- is not a real path, so fall back to vim's cwd to avoid a
+					-- "Failed to spawn process: ENOENT" from git.
+					local dir = vim.fn.expand("%:p:h")
+					if vim.fn.isdirectory(dir) == 0 then
+						dir = vim.loop.cwd()
+					end
+					require("git_grep").live_grep({ cwd = dir })
 				end,
 				desc = "live git grep",
 			},
