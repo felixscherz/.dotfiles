@@ -1,3 +1,4 @@
 [options]
 log_current = True
-confirm_new_tag = True
+confirm_new_tag = False
+confirm_new_project = True
