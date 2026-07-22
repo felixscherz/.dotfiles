@@ -8,7 +8,8 @@
     "openai",
     "anthropic",
     "gemini",
-    "amazon-bedrock"
+    "amazon-bedrock",
+    "google",
   ],
   "permission": {
     "github*": "deny",
@@ -16,6 +17,7 @@
     "atlassian*": "deny"
   },
   "provider": {
+    "github-copilot": {"whitelist": ["claude-sonnet-5", "claude-opus-4.8", "claude-haiku-4.5"]},
     "ollama": {
       "npm": "@ai-sdk/openai-compatible",
       "name": "Ollama (Local)",
