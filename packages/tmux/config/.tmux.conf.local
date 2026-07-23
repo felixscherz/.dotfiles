@@ -438,3 +438,5 @@ set-option -g status-interval 1
 # # /!\ do not remove the previous line
 
 bind-key S new-session
+
+bind s choose-tree -Zs -O name
