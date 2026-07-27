@@ -44,23 +44,12 @@ zstyle ':history-substring-search:highlight' found 'fg=green,bold'
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# this is where tools can store completions
+# custom completions dir (tools drop completion functions here, e.g. rctx).
+# antigen's own compinit runs before this dir is on fpath, so run compinit
+# once more here to register these. no caching gymnastics - it's ~25ms.
 fpath+=~/.zfunc
-
-# COMPLETIONS
-# Only regenerate completion dump if it's older than 24 hours
-# This avoids expensive compinit on every shell start (~200-400ms savings)
-ZSH_COMPDUMP="$HOME/.cache/zsh/zcompdump-${ZSH_VERSION}"
-mkdir -p "$HOME/.cache/zsh"
-
 autoload -Uz compinit
-if [[ -f "$ZSH_COMPDUMP" && -n "$ZSH_COMPDUMP"(Nm-24) ]]; then
-    # Dump file exists and is less than 24 hours old - skip regeneration
-    compinit -C -d "$ZSH_COMPDUMP"
-else
-    # Dump file missing or stale - regenerate
-    compinit -d "$ZSH_COMPDUMP"
-fi
+compinit
 
 # opencode
 export PATH=/Users/felixscherz/.opencode/bin:$PATH
