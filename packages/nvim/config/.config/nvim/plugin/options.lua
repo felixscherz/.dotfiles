@@ -4,7 +4,6 @@ local options = {
 	relativenumber = true,
 	hidden = true,
 	termguicolors = true,
-	clipboard = vim.opt.clipboard ^ { "unnamed", "unnamedplus" },
 	swapfile = false,
 	backup = false,
 	updatetime = 50,
