@@ -25,14 +25,19 @@
         "baseURL": "http://localhost:11434/v1"
       },
       "models": {
-        "gemma4:local-64k": {
-          "name": "Gemma4 64k"
-        },
         "m5-qwen2.5-coder-32k": {
-          "name": "M5 Qwen2.5 Coder 32k"
+          "name": "M5 Qwen2.5 Coder 32k",
+          "limit": {
+            "context": 32768,
+            "output": 8192
+          }
         },
         "m5-qwen3.6-48k": {
-          "name": "M5 Qwen3.6 48k"
+          "name": "M5 Qwen3.6 48k",
+          "limit": {
+            "context": 49152,
+            "output": 8192
+          }
         },
         "m5-gemma4-qat-48k": {
           "name": "Gemma4-QAT 48k",
@@ -40,6 +45,17 @@
             "input": 1000,
             "output": 1000
           },
+          "limit": {
+            "context": 49152,
+            "output": 8192
+          }
+        },
+        "m5-gemma4-e4b-64k": {
+          "name": "Gemma4 E4B",
+          "limit":{
+            "context": 64000,
+            "output": 8192
+          }
         }
       }
     }
