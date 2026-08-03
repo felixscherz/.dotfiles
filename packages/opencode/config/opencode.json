@@ -17,7 +17,7 @@
     "atlassian*": "deny"
   },
   "provider": {
-    "github-copilot": {"whitelist": ["claude-sonnet-5", "claude-opus-4.8", "claude-haiku-4.5"]},
+    "github-copilot": {"whitelist": ["claude-sonnet-5", "claude-opus-4.8", "claude-haiku-4.5", "kimi-k2.7-code"]},
     "ollama": {
       "npm": "@ai-sdk/openai-compatible",
       "name": "Ollama (Local)",
