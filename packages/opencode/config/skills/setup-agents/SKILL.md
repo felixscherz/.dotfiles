@@ -55,6 +55,8 @@ Offer **multi-context** - a root `CONTEXT-MAP.md` pointing to per-context `docs/
 
 If the layout's root file (`CONTEXT.md`, or `CONTEXT-MAP.md` for multi-context) does not exist yet, include seeding a minimal one (step 4) in the plan shown at the confirm step. Create it only if the user does not object.
 
+**Important**: When writing the generated `docs/agents/domain.md`, only include the layout that applies to this repo. For single-context repos, strip the multi-context file structure section entirely so the file is not cluttered with irrelevant information.
+
 ### 3. Confirm and edit
 
 Show the user a draft of:
@@ -97,9 +99,9 @@ The block:
 
 Then write the docs files using the seed templates in this skill folder as a starting point:
 
-- [issue-tracker.md](./issue-tracker.md) - local-markdown issue tracker
+- [issue-tracker.md](./issue-tracker.md) - local-markdown issue tracker (includes `features/` convention for specs and plans)
 - [triage-states.md](./triage-states.md) - triage state mapping
-- [domain.md](./domain.md) - domain doc consumer rules + layout (documents both layouts; the presence of `CONTEXT-MAP.md` at the root is what activates multi-context)
+- [domain.md](./domain.md) - domain doc consumer rules + layout (the template includes both layouts; for single-context repos, strip the multi-context section from the generated file so it only describes the layout actually in use)
 
 Seed files when confirmed:
 
@@ -130,3 +132,5 @@ This repo has multiple domain contexts. Each context has its own `CONTEXT.md`; s
 ### 5. Done
 
 Tell the user the setup is complete and that the agent skills will now read from these files: `triage` (issue tracker, triage states, domain), `to-spec` (domain docs, and where the spec goes), and `to-tickets` (issue tracker, `ready-for-agent` state, domain). Mention they can edit `docs/agents/*.md` directly later - re-running this skill is only necessary to switch trackers or start over.
+
+Also mention that `docs/agents/features/` is the home for feature-level documents (specs, plans, handoffs) - a feature can be a single markdown file or a folder with multiple files. Issues go in `docs/agents/issues/`; feature docs go in `docs/agents/features/`.

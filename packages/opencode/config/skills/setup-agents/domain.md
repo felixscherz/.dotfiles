@@ -5,9 +5,9 @@ How agents should consume this repo's domain documentation when exploring the co
 ## Before exploring, read these
 
 - **`CONTEXT.md`** at the repo root, or
-- **`CONTEXT-MAP.md`** at the repo root if it exists - it points at one `docs/<context>/CONTEXT.md` per context. Read each one relevant to the topic.
-- **`docs/adrs/`** - read ADRs that touch the area you are about to work in. In multi-context repos, also check `docs/<context>/adrs/` for context-scoped decisions.
-- **`docs/agents/`** - agent-created and agent-addressed docs (the issue-tracker, triage-state, and domain config, plus any other notes agents wrote for future agents). In multi-context repos, `docs/<context>/agents/` holds context-scoped agent docs.
+- **`CONTEXT-MAP.md`** at the repo root if it exists (multi-context repos only) - it points at one `docs/<context>/CONTEXT.md` per context. Read each one relevant to the topic.
+- **`docs/adrs/`** - read ADRs that touch the area you are about to work in.
+- **`docs/agents/`** - agent-created and agent-addressed docs (the issue-tracker, triage-state, and domain config, plus any other notes agents wrote for future agents).
 
 If any of these files don't exist, **proceed silently**. Don't flag their absence; don't suggest creating them upfront. They are created lazily when terms or decisions actually get resolved - any session may create or update `CONTEXT.md` or an ADR the moment a domain term or decision lands.
 
@@ -22,7 +22,14 @@ Single-context repo (most repos):
     ├── agents/                      ← agent-created and agent-addressed docs
     │   ├── issue-tracker.md
     │   ├── triage-states.md
-    │   └── domain.md
+    │   ├── domain.md
+    │   ├── issues/                  ← tracked issues
+    │   │   └── 01-<slug>.md
+    │   └── features/                ← feature specs, plans, and handoffs
+    │       ├── some-feature.md
+    │       └── complex-feature/
+    │           ├── spec.md
+    │           └── implementation-plan.md
     └── adrs/
         ├── 0001-<slug>.md
         └── 0002-<slug>.md
