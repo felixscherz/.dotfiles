@@ -10,6 +10,8 @@ node_modules/
 .aider.input.history*
 .aider.*
 .opencode
+.scratch/
+**/.claude/settings.local.json
 pyrightconfig.json
 .neoconf.json
 kls_database.db
