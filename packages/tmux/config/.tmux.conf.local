@@ -406,6 +406,10 @@ bind j selectp -D # switch to panel Down
 bind h selectp -L # switch to panel Left
 bind l selectp -R # switch to panel Right
 
+# seer: jump back to the pane you jumped from (mirrors nvim's C-o jumplist)
+bind C-o run-shell 'seer back'
+bind C-i run-shell 'seer next'
+
 
 set-option -s escape-time 10
 
