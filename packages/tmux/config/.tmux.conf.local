@@ -410,6 +410,8 @@ bind l selectp -R # switch to panel Right
 bind C-o run-shell 'seer back'
 bind C-i run-shell 'seer next'
 
+bind a display-popup -E -w 80% -h 80% 'seer watch'
+
 
 set-option -s escape-time 10
 
