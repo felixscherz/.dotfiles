@@ -24,41 +24,37 @@
         "gpt-5.6-luna" // cheapest
       ]
     },
-    "ollama": {
+    "lmstudio": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "Ollama (Local)",
+      "name": "LM Studio (Local)",
       "options": {
-        "baseURL": "http://localhost:11434/v1"
+        "baseURL": "http://localhost:1234/v1"
       },
       "models": {
-        "m5-qwen2.5-coder-32k": {
-          "name": "M5 Qwen2.5 Coder 32k",
-          "limit": {
-            "context": 32768,
-            "output": 8192
-          }
-        },
-        "m5-qwen3.6-48k": {
-          "name": "M5 Qwen3.6 48k",
+        "qwen/qwen3.6-27b": {
+          "name": "Qwen3.6 27b",
           "limit": {
             "context": 49152,
             "output": 8192
           }
         },
-        "m5-gemma4-qat-48k": {
-          "name": "Gemma4-QAT 48k",
-          "cost": {
-            "input": 1000,
-            "output": 1000
-          },
+        "google/gemma-4-26b-a4b-qat": {
+          "name": "Gemma4 26B A4B QAT",
           "limit": {
             "context": 49152,
             "output": 8192
           }
         },
-        "m5-gemma4-e4b-64k": {
+        "google/gemma-4-12b-qat": {
+          "name": "Gemma4 12B QAT",
+          "limit": {
+            "context": 49152,
+            "output": 8192
+          }
+        },
+        "google/gemma-4-e4b": {
           "name": "Gemma4 E4B",
-          "limit":{
+          "limit": {
             "context": 64000,
             "output": 8192
           }
