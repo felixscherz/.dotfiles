@@ -14,13 +14,23 @@
   "permission": {
     "github*": "deny",
     "grafana*": "deny",
-    "atlassian*": "deny"
+    "atlassian*": "deny",
+    "skill": {
+      "*": "allow",
+      "handoff": "deny",
+      "setup-agents": "deny",
+      "to-spec": "deny",
+      "to-tickets": "deny",
+      "batch-implement": "deny"
+    }
   },
   "provider": {
     "github-copilot": {
       "whitelist": [
         "claude-sonnet-5", // versatile
         "claude-opus-5", // powerful
+        "claude-opus-4.8", // powerful
+        "gpt-5.6-terra", // midlevel
         "gpt-5.6-luna" // cheapest
       ]
     },
