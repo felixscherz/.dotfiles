@@ -12,16 +12,17 @@ Issues for this repo live as tracked markdown files under `docs/agents/issues/` 
 - Notes and conversation history append to the bottom under a `## Notes` heading, date-prefixed, newest last
 - A resolved issue keeps its file; the `Status:` line moves to `done` or `wontfix`
 
-## Feature docs
+## Feature workspaces
 
-Feature-level documents (specs, plans, handoffs, implementation notes) live under `docs/agents/features/`. In a multi-context repo, context-scoped feature docs live under `docs/<context>/agents/features/`; system-wide features use `docs/agents/features/`.
+Each feature gets a workspace at `docs/agents/<feature>/`. In a multi-context repo, context-scoped feature workspaces live at `docs/<context>/agents/<feature>/`.
 
-A feature can be either:
+The standard files are:
 
-- A single markdown file: `docs/agents/features/<slug>.md`
-- A folder with multiple files: `docs/agents/features/<slug>/<file>.md`
+- `docs/agents/<feature>/spec.md` - the feature specification
+- `docs/agents/<feature>/ticket-01.md`, `ticket-02.md`, and so on - ordered implementation tickets
+- `docs/agents/<feature>/summary-01.md`, `summary-02.md`, and so on - implementation summaries when generated
 
-These are not issues - they are longer-lived reference documents that accompany a body of work.
+The spec and summaries are reference documents. Each `ticket-NN.md` is an issue and follows the issue format below.
 
 ## Issue file format
 
@@ -45,4 +46,4 @@ Create a new file under `docs/agents/issues/`, taking the next free number. Crea
 
 ## When a skill says "fetch the relevant ticket"
 
-Read the file at the referenced path. The user will normally pass the path or the issue number directly; a bare number `NN` resolves to `docs/agents/issues/<NN>-*.md` (glob for it).
+Read the file at the referenced path. The user will normally pass the path or issue number directly. A bare standalone issue number `NN` resolves to `docs/agents/issues/<NN>-*.md` (glob for it). Within a named feature, ticket `NN` resolves to `docs/agents/<feature>/ticket-<NN>.md`.

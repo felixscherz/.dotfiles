@@ -1,194 +1,220 @@
 ---
 name: batch-implement
-description: Generate a shell script that feeds ticket files one-by-one into opencode for sequential implementation with progress tracking. Use after /to-tickets has produced an ordered set of issue files and the user wants to batch-implement them. Triggered by "batch implement", "implement tickets", "run tickets through opencode", "generate implement script", or "create orchestration script".
+description: Generate a resumable shell script that implements ticket-NN.md files sequentially through OpenCode, Claude Code, or Pi. Defaults to OpenCode. Use after to-tickets when the user says "batch implement", "implement tickets", "run tickets through an agent", "generate implement script", or "create orchestration script".
 ---
 
 # Batch implement
 
-Generate a shell script that sequentially feeds ticket issue files into `opencode run`, one at a time, with JSON-based progress tracking so the script is idempotent and resumable.
+Generate a shell script that feeds ticket files sequentially to a fresh coding-agent invocation. Keep orchestration, prompts, progress tracking, and completion checks independent of the selected harness.
+
+Default to OpenCode. If the user asks for Claude Code or Pi, generate the script for that harness instead. If they name another harness, inspect its installed CLI and adapt the same protocol rather than assuming OpenCode flags.
 
 ## Prerequisites
 
-- Tickets must already exist as numbered issue files (produced by `to-tickets`).
-- The tickets carry `Status: ready-for-agent` and are numbered in dependency order (lower numbers first).
+- Tickets already exist as `docs/agents/<feature>/ticket-01.md`, `ticket-02.md`, and so on, normally produced by `to-tickets`.
+- The tickets carry `Status: ready-for-agent` and use `Blocked-by:` for dependencies.
+- `jq` and the selected harness executable are available.
 
 ## Process
 
-### 1. Locate the tickets
+### 1. Locate and validate the tickets
 
-Find the feature's issue directory. This is typically:
+Find the feature workspace at `docs/agents/<feature>/` (or `docs/<context>/agents/<feature>/` in a multi-context repo). Read `spec.md` and every `ticket-NN.md` in full.
 
-- `docs/agents/features/<feature>/issues/*.md` - for a feature effort
-- `docs/agents/issues/*.md` - for standalone issues
+Sort tickets by numeric suffix. Validate that every `Blocked-by:` reference exists and precedes the blocked ticket. Stop and report invalid or cyclic dependencies rather than generating an unsafe order.
 
-Read all ticket files. Sort them by their numeric prefix (e.g. `03-planning-procedures.md` sorts as 3). Respect `Blocked-by:` edges - a ticket must not appear before all tickets it depends on.
+### 2. Select and verify the harness
 
-### 2. Draft a prompt for each ticket
+Use the harness requested by the user, defaulting to OpenCode. Before writing the script, run the installed executable's `--help` and verify its current non-interactive and permission flags. Do not copy stale flags from this skill when the installed CLI disagrees.
 
-For each ticket, compose a prompt that will be passed to `opencode run`. The prompt should:
+Known invocation shapes at the time this skill was written:
 
-- Reference the ticket file with an `@`-mention so the agent reads it.
-- Instruct the agent to implement the ticket.
-- Instruct the agent to update the ticket's `Status:` to `done` once implementation is complete.
-- Instruct the agent to write a short summary of what it did to a `.md` file (see below).
-- Instruct the agent to create a commit afterwards.
-- Be concise but complete enough for the agent to work autonomously.
+| Harness | Executable | Non-interactive invocation |
+| ------- | ---------- | -------------------------- |
+| OpenCode | `opencode` | `opencode run --auto "$prompt"` |
+| Claude Code | `claude` | `claude --print --permission-mode bypassPermissions "$prompt"` |
+| Pi | `pi` | `pi --print "$prompt"` |
 
-### Summary files
+Use unattended permission modes deliberately. Tell the user which permission behavior the generated script uses. Do not silently fall back to a different harness when the requested executable is unavailable.
 
-Each ticket gets a per-ticket summary markdown so there is a durable, human-readable record of what the agent did - separate from the JSON progress tracker, which only records status. Co-locate with the feature:
+### 3. Draft one prompt per ticket
 
-- Feature effort: `docs/agents/features/<feature>/summaries/<ticket-name>-summary.md`
-- Standalone issue: `docs/agents/issues/summaries/<ticket-name>-summary.md`
+Each prompt must:
 
-Keep the ticket's numeric prefix in the filename (e.g. `01-first-ticket-summary.md`) so summaries sort in lockstep with their tickets and cannot collide across re-numbered tickets. The summary path is passed into the prompt as a literal path, not an `@`-mention - the agent creates the file, it does not read it.
+- Reference the ticket path so the harness reads the complete brief. Use the harness's supported file-reference syntax; `@<path>` works for the three known harnesses.
+- Instruct the agent to implement and verify the ticket.
+- Instruct it to update the ticket's `Status:` to `done` only after verification succeeds.
+- Instruct it to append a dated closing note describing what changed and how it was verified.
+- Instruct it to write a concise implementation summary to `docs/agents/<feature>/summary-<NN>.md`.
+- Instruct it to create a commit after completing the ticket.
+- Remind it that `spec.md` is shared context when cross-ticket design constraints matter.
 
-Default prompt template:
+Default prompt:
 
+```text
+Implement the ticket at @<ticket-path>. Read @<spec-path> for shared design constraints. Follow the agent brief and verify every acceptance criterion. When verification succeeds, set the ticket Status to "done", append a dated closing note, write a concise implementation summary to <summary-path>, and create a commit. If blocked or verification fails, leave the ticket unfinished and report the blocker.
 ```
-Implement the ticket at @<path-to-ticket>. Follow the agent brief and acceptance criteria. When done, update the ticket's Status to "done" and create a commit. Then write a short summary of what you did to <path-to-summary>.
-```
 
-The user may customize the prompt per ticket or provide an override template.
+The summary path is literal rather than an `@` reference because the agent creates it. The user may override the global template or individual prompts.
 
-### 3. Present the plan to the user
+### 4. Confirm the execution plan
 
-Show the ordered list of tickets with their proposed prompts. Ask the user to:
+Show the selected harness, unattended permission behavior, ordered tickets, blocking edges, and proposed prompts. Ask the user to confirm the order and adjust or skip tickets before writing the files.
 
-- Confirm the order is correct.
-- Adjust any prompts (add context, constraints, or skip a ticket).
+### 5. Generate the script and progress file
 
-### 4. Generate the script and progress file
+Write these files at the repo root:
 
-Write two files at the repo root:
+- `implement-<feature>.sh`
+- `progress-<feature>.json`
 
-- `implement-<feature-name>.sh` - the implementation script
-- `progress-<feature-name>.json` - the progress tracker
+The script must:
 
-The script:
+- Check for `jq`, the selected harness executable, the progress file, and every ticket before starting.
+- Prevent idle system sleep on macOS for the life of the script by starting `caffeinate -i -w $$` when available.
+- Read progress state on startup.
+- Skip tickets already marked `done`.
+- Resume from the first `not-started` or `error` ticket.
+- Mark a ticket `in-progress` immediately before invoking the harness.
+- Start a fresh harness invocation for every ticket.
+- Mark a ticket `done` only when the command exits successfully and the ticket file contains `Status: done`.
+- Mark a ticket `error` and stop when invocation or completion verification fails.
+- Be executable.
 
-- Reads progress state from the JSON file on startup.
-- Skips tickets already marked `"done"` in the progress file.
-- Starts from the first ticket that is `"not-started"` or `"error"`.
-- Updates the progress file after each ticket (success or failure).
-- On failure, marks the ticket as `"error"` and stops execution.
-- Is executable (`chmod +x`).
-
-Progress file format:
+Progress file:
 
 ```json
 {
-  "feature": "<feature-name>",
+  "feature": "<feature>",
+  "harness": "opencode",
   "tickets": [
-    {"file": "./path/to/issues/01-first-ticket.md", "status": "done"},
-    {"file": "./path/to/issues/02-second-ticket.md", "status": "not-started"},
-    {"file": "./path/to/issues/03-third-ticket.md", "status": "not-started"}
+    {"file": "./docs/agents/<feature>/ticket-01.md", "status": "not-started"},
+    {"file": "./docs/agents/<feature>/ticket-02.md", "status": "not-started"}
   ]
 }
 ```
 
-Ticket statuses in progress file: `"not-started"`, `"in-progress"`, `"done"`, `"error"`.
+Valid progress statuses are `not-started`, `in-progress`, `done`, and `error`.
 
-Script template:
+Use this structure, replacing `run_harness` with the verified invocation for the selected harness and filling the ticket and prompt arrays:
 
 ```bash
 #!/usr/bin/env bash
 set -uo pipefail
 
 # Generated by batch-implement
-# Feature: <feature-name>
-# Tickets: <count>
+# Feature: <feature>
+# Harness: <harness>
 
-PROGRESS_FILE="./progress-<feature-name>.json"
+PROGRESS_FILE="./progress-<feature>.json"
+HARNESS_BIN="opencode"
+
+if [[ "$(uname -s)" == "Darwin" ]] && command -v caffeinate >/dev/null 2>&1; then
+	caffeinate -i -w $$ &
+fi
 
 files=(
-  "./path/to/issues/01-first-ticket.md"
-  "./path/to/issues/02-second-ticket.md"
+	"./docs/agents/<feature>/ticket-01.md"
+	"./docs/agents/<feature>/ticket-02.md"
 )
 
 prompts=(
-  'Implement the ticket at @./path/to/issues/01-first-ticket.md. Follow the agent brief and acceptance criteria. When done, update the ticket'\''s Status to "done" and create a commit. Then write a short summary of what you did to ./path/to/issues/summaries/01-first-ticket-summary.md.'
-  'Implement the ticket at @./path/to/issues/02-second-ticket.md. Follow the agent brief and acceptance criteria. When done, update the ticket'\''s Status to "done" and create a commit. Then write a short summary of what you did to ./path/to/issues/summaries/02-second-ticket-summary.md.'
+	'<prompt for ticket 01>'
+	'<prompt for ticket 02>'
 )
 
+run_harness() {
+	local prompt="$1"
+	opencode run --auto "$prompt"
+}
+
 get_status() {
-    local file="$1"
-    jq -r --arg f "$file" '.tickets[] | select(.file == $f) | .status' "$PROGRESS_FILE"
+	local file="$1"
+	jq -r --arg file "$file" '.tickets[] | select(.file == $file) | .status' "$PROGRESS_FILE"
 }
 
 set_status() {
-    local file="$1"
-    local status="$2"
-    local tmp
-    tmp=$(mktemp)
-    jq --arg f "$file" --arg s "$status" \
-        '(.tickets[] | select(.file == $f)).status = $s' \
-        "$PROGRESS_FILE" > "$tmp" && mv "$tmp" "$PROGRESS_FILE"
+	local file="$1"
+	local status="$2"
+	local tmp
+	tmp=$(mktemp)
+	jq --arg file "$file" --arg status "$status" \
+		'(.tickets[] | select(.file == $file)).status = $status' \
+		"$PROGRESS_FILE" > "$tmp" && mv "$tmp" "$PROGRESS_FILE"
 }
 
 ticket_is_done() {
-    local file="$1"
-    grep -qi '^Status:.*done' "$file" 2>/dev/null
+	local file="$1"
+	grep -Eqi '^Status:[[:space:]]*done[[:space:]]*$' "$file"
 }
 
-for i in "${!files[@]}"; do
-    file="${files[$i]}"
-    prompt="${prompts[$i]}"
-    status=$(get_status "$file")
+command -v jq >/dev/null 2>&1 || { printf 'Missing dependency: jq\n' >&2; exit 1; }
+command -v "$HARNESS_BIN" >/dev/null 2>&1 || { printf 'Missing harness: %s\n' "$HARNESS_BIN" >&2; exit 1; }
+[[ -f "$PROGRESS_FILE" ]] || { printf 'Missing progress file: %s\n' "$PROGRESS_FILE" >&2; exit 1; }
 
-    if [[ "$status" == "done" ]]; then
-        echo "==> Skipping (done): $file"
-        continue
-    fi
-
-    echo "==> Implementing: $file"
-    set_status "$file" "in-progress"
-
-    if time opencode run --auto "$prompt"; then
-        # Verify the agent actually marked the ticket as done
-        if ticket_is_done "$file"; then
-            set_status "$file" "done"
-            echo "==> Completed: $file"
-        else
-            set_status "$file" "error"
-            echo "==> FAILED: $file (opencode exited 0 but ticket Status is not 'done')"
-            echo "The agent may have encountered permission errors or failed silently."
-            echo "Fix the issue and re-run this script to resume."
-            exit 1
-        fi
-    else
-        set_status "$file" "error"
-        echo "==> FAILED: $file (opencode exited non-zero)"
-        echo "Fix the issue and re-run this script to resume."
-        exit 1
-    fi
+for file in "${files[@]}"; do
+	[[ -f "$file" ]] || { printf 'Missing ticket: %s\n' "$file" >&2; exit 1; }
 done
 
-echo "==> All tickets implemented."
+for i in "${!files[@]}"; do
+	file="${files[$i]}"
+	prompt="${prompts[$i]}"
+	status=$(get_status "$file")
+
+	if [[ "$status" == "done" ]]; then
+		printf '==> Skipping (done): %s\n' "$file"
+		continue
+	fi
+
+	printf '==> Implementing: %s\n' "$file"
+	set_status "$file" "in-progress"
+
+	if time run_harness "$prompt" && ticket_is_done "$file"; then
+		set_status "$file" "done"
+		printf '==> Completed: %s\n' "$file"
+	else
+		set_status "$file" "error"
+		printf '==> Failed: %s\nFix the issue and rerun this script to resume.\n' "$file" >&2
+		exit 1
+	fi
+done
+
+printf '==> All tickets implemented.\n'
 ```
 
-### 5. Report to the user
+Harness-specific `run_harness` examples after verifying local help:
 
-After writing the files, tell the user:
+```bash
+# OpenCode
+opencode run --auto "$prompt"
 
-- The paths to both generated files.
-- How to run: `./implement-<feature-name>.sh`
-- That it is idempotent - re-running skips completed tickets and resumes from the first error or not-started ticket.
-- That each ticket's agent session starts fresh (no carried context).
-- That tickets are processed sequentially to avoid agents stepping on each other.
-- That the agent will update each ticket's `Status:` to `done` in the issue file, and write a per-ticket summary to `docs/agents/features/<feature>/summaries/<ticket-name>-summary.md` (or `docs/agents/issues/summaries/<ticket-name>-summary.md` for standalone issues).
+# Claude Code
+claude --print --permission-mode bypassPermissions "$prompt"
 
-## Customization options
+# Pi
+pi --print "$prompt"
+```
 
-The user may request:
+Use safe shell quoting when embedding prompts. Generate the JSON with valid escaping. Make the script executable with `chmod +x`.
 
-- **Prompt overrides** - a different prompt for specific tickets or a global template.
-- **Skipping tickets** - exclude specific ticket numbers from the script.
-- **Dry-run mode** - add a `--dry-run` flag that prints what would run without executing.
-- **Reset** - delete or regenerate the progress file to start over.
+### 6. Report
+
+Tell the user:
+
+- The generated script and progress paths.
+- The selected harness and permission mode.
+- How to run the script.
+- That rerunning skips completed tickets and resumes at the first error or unstarted ticket.
+- That each ticket gets a fresh agent context and tickets run sequentially.
+- That macOS idle sleep is inhibited while the script runs when `caffeinate` is available. This does not promise to keep a Mac awake with its lid closed.
+- Where ticket summaries are written.
+
+## Customization
+
+The user may request prompt overrides, skipped tickets, a dry-run flag, a regenerated progress file, a different model, or a different harness. Treat model and permission flags as harness-specific options and verify them against the installed CLI.
 
 ## Related
 
-- `to-tickets` - produces the ticket files this skill consumes.
-- `to-spec` - produces the spec that `to-tickets` decomposes.
-- `triage` - manages ticket lifecycle; tickets move to `done` after implementation.
+- `to-tickets` - produces the `ticket-NN.md` files this skill consumes.
+- `to-spec` - produces the shared `spec.md` that constrains those tickets.
+- `triage` - manages ticket lifecycle; tickets move to `done` only after implementation and verification.

@@ -1,97 +1,150 @@
 ---
 name: to-spec
-description: Turn the current conversation into a spec (PRD) and write it to the project's issue tracker - no interview, just synthesis of what you and the user have already discussed. Use when the user says "write a spec", "turn this into a spec", "spec this out", "make a PRD", or wants the current discussion captured as a spec before breaking it into tickets.
+description: Turn a technical or product discussion into an implementation-ready specification covering requirements, architecture, contracts, decisions, and verification. Use when the user says "write a spec", "turn this into a spec", "spec this out", "make a PRD", or wants the current discussion captured before breaking it into tickets.
 ---
 
 # To spec
 
-Take the current conversation and codebase understanding and produce a spec (you may know this as a PRD). Do NOT interview the user - synthesize what you already know together. If the conversation is thin, say so and ask the user to discuss the feature first rather than inventing requirements.
+Turn the current conversation and codebase understanding into a durable technical specification. Preserve the substance of technical discussions: architecture, patterns, interfaces, schemas, examples, tradeoffs, and decisions. User stories are optional supporting material, not the structure of the spec.
+
+Synthesize everything already established before asking questions. Ask only about unresolved points that materially affect behavior, architecture, scope, compatibility, migration, or verification. Do not invent decisions to make the document look complete.
 
 ## Configuration
 
 Before anything else, look for this repo's config - these tell you where the spec goes and what to read for context:
 
 - `docs/agents/domain.md` - domain doc consumer rules. Read `CONTEXT.md` (or `CONTEXT-MAP.md`) and the ADRs in the area you are touching before writing the spec. Use the glossary's vocabulary throughout.
-- `docs/agents/issue-tracker.md` - where tracked work lives and its conventions (default if absent: markdown under `docs/agents/`, feature efforts under `docs/agents/<feature>/`).
+- `docs/agents/issue-tracker.md` - where tracked work lives and its conventions (default if absent: markdown under `docs/agents/`, with a feature workspace at `docs/agents/<feature>/`).
 
 These files are written by the `setup-agents` skill. If they are missing, proceed with the defaults and mention once that `setup-agents` can scaffold them.
 
 ## Process
 
-### 1. Ground yourself in the codebase
+### 1. Gather the established material
 
-Explore the repo to understand the current state, if you haven't already during the conversation. Follow `docs/agents/domain.md`: read the relevant `CONTEXT.md`/`CONTEXT-MAP.md` and any ADRs that touch the area. Use the project's domain vocabulary throughout the spec and respect existing ADRs. If the spec would contradict a settled ADR, flag it explicitly (see `docs/agents/domain.md`) rather than silently overriding.
+Review the full relevant conversation and any prototypes, plans, examples, or documents the user referenced. Extract decisions and constraints without reducing technical details to generic product language.
 
-### 2. Sketch the testing seams
+Explore the repo to understand the current state if this has not already happened during the conversation. Follow `docs/agents/domain.md`: read the relevant `CONTEXT.md`/`CONTEXT-MAP.md` and ADRs. Search for analogous implementations and tests. Respect settled ADRs; if the proposed design contradicts one, identify the conflict instead of silently overriding it.
 
-Identify the seams at which the feature will be tested. Prefer existing seams to new ones, and use the highest seam possible - the fewer seams across the codebase, the better, and the ideal is one. If new seams are needed, propose them at the highest point you can.
+### 2. Check specification readiness
 
-Check with the user that these seams match their expectations before writing the spec.
+Determine whether the material answers the questions needed for implementation:
 
-### 3. Write the spec
+- Is the desired behavior concrete and testable, including important errors and edge cases?
+- Are component responsibilities, interfaces, and ownership boundaries sufficiently clear?
+- Are architecture-affecting decisions settled or deliberately delegated?
+- Are compatibility, persistence, rollout, and migration requirements known where relevant?
+- Are important security, performance, observability, or operational constraints known where relevant?
+- Can the behavior be verified at stable seams?
+- Can `to-tickets` decompose the work without inventing requirements or making inconsistent design decisions across tickets?
 
-Write the spec using the template below and save it to `docs/agents/<feature-slug>/spec.md` (create the feature directory - `<feature-slug>` is a short kebab-case name for the feature; in a multi-context repo use `docs/<context>/agents/<feature-slug>/spec.md`). This spec is the input `to-tickets` reads to produce the numbered, `ready-for-agent` issue files under `docs/agents/<feature-slug>/issues/`. The spec itself is a document, not a triage issue - it does not carry a `Status:` line.
+If a missing answer materially changes the implementation, ask the user one focused question at a time. Explain the consequence of the decision when useful. Do not interview for information that can be established from the codebase, and do not ask optional questions merely to fill every template section.
 
-Report the path, then tell the user they can run `to-tickets` to break the spec into vertical-slice tickets.
+If the user chooses not to resolve a material question, record it under **Open Questions**, state its impact, and mark the spec as not ready for ticketing. Non-blocking questions may remain without preventing ticketing.
+
+### 3. Define verification seams
+
+Identify the stable seams at which the behavior will be tested. Prefer existing public or high-level seams over new low-level seams. Record relevant prior art in the codebase and any manual or operational verification that automated tests cannot cover.
+
+Ask for confirmation only if the selected seam changes the public design, leaves a meaningful coverage gap, or conflicts with an expectation the user expressed.
+
+### 4. Write the spec
+
+Write the spec using the template below and save it to `docs/agents/<feature-slug>/spec.md`. Create the feature directory; `<feature-slug>` is a short kebab-case name. In a multi-context repo, use `docs/<context>/agents/<feature-slug>/spec.md`.
+
+The spec is the authoritative input to `to-tickets`, which writes `ticket-01.md`, `ticket-02.md`, and so on in the same feature directory. The spec is a document, not a triage issue, and does not carry a `Status:` line.
+
+Omit sections that truly do not apply rather than filling them with boilerplate. Retain detail when it constrains implementation.
+
+Report the path and whether the spec is ready for ticketing. If ready, tell the user they can run `to-tickets`. If not ready, list only the blocking open questions.
 
 ## Spec template
 
 ```markdown
 # <Feature Title>
 
-## Problem Statement
+## Status
 
-The problem the user is facing, from the user's perspective.
+Ready for ticketing | Draft - blocked by open questions
 
-## Solution
+## Problem and Goals
 
-The solution to the problem, from the user's perspective.
+The current problem, desired outcomes, and the users or systems affected.
 
-## User Stories
+### Non-goals
 
-A LONG, numbered list of user stories, each in the format:
+Explicit scope boundaries and adjacent work this specification does not cover.
 
-1. As an <actor>, I want a <feature>, so that <benefit>
+## Current System
 
-Example:
+Relevant existing behavior, components, interfaces, data flows, and constraints.
+Include analogous implementations and settled ADRs that shape the design.
 
-1. As a mobile bank customer, I want to see the balance on my accounts, so that I can make better informed decisions about my spending.
+## Requirements
 
-Make this list extensive - cover all aspects of the feature.
+Numbered, testable requirements covering observable behavior, errors, edge cases,
+and compatibility. Include operational or quality requirements when relevant.
 
-## Implementation Decisions
+Optional user stories may appear here when they clarify product behavior, but
+they do not replace precise requirements.
 
-Decisions that were made. This can include:
+## Proposed Design
 
-- The modules that will be built or modified
-- The interfaces of those modules that will change
-- Technical clarifications from the user
-- Architectural decisions (note any new ADR that should be recorded - see docs/agents/domain.md)
-- Schema changes
-- API contracts
-- Specific interactions
+### Architecture and Responsibilities
 
-Do NOT include specific file paths or code snippets - they go stale quickly.
+Components involved, their responsibilities, and how they collaborate.
 
-Exception: if a prototype produced a snippet that encodes a decision more precisely than prose can (a state machine, reducer, schema, or type shape), inline just the decision-rich part and note that it came from a prototype.
+### Control and Data Flow
 
-## Testing Decisions
+Important request, event, state, or data flows. Cover failure paths where they
+affect the design.
 
-- What makes a good test here (test external behavior, not implementation details)
-- Which modules will be tested, and at which seams (from step 2)
-- Prior art - similar tests already in the codebase
+### Interfaces and Contracts
 
-## Out of Scope
+API contracts, types, schemas, configuration, persistence, events, and other
+boundaries that implementations must honor.
 
-What is explicitly out of scope for this spec.
+### Migration and Compatibility
 
-## Further Notes
+Rollout, data migration, compatibility, and removal sequencing where relevant.
 
-Anything else worth recording about the feature.
+## Decisions and Rationale
+
+Decisions established during discussion, alternatives considered, and why the
+selected approach was chosen. Identify any ADR that should be created or
+superseded.
+
+## Implementation Constraints
+
+Required patterns, existing abstractions to reuse, prohibited approaches,
+sequencing constraints, and technical clarifications that tickets must retain.
+
+## Verification
+
+- Observable acceptance criteria
+- Automated test seams and relevant prior art
+- Manual, integration, migration, or operational verification where needed
+
+## Open Questions
+
+For each unresolved question, state the decision needed, its impact, and whether
+it blocks ticketing. Omit this section when there are no open questions.
 ```
+
+## Technical detail policy
+
+Use precise technical artifacts when they encode a contract better than prose:
+
+- Type and function signatures
+- API request and response examples
+- Schemas and configuration shapes
+- State machines, sequence diagrams, and pseudocode
+- Small code snippets that establish a required pattern or invariant
+
+Mark examples as normative or illustrative when ambiguity is possible. Keep only the decision-rich portion. File paths and current implementation pointers are allowed in **Current System** as evidence, but do not make transient line numbers or an exact edit recipe part of the required design.
 
 ## Related
 
-- `to-tickets` - reads this spec and decomposes it into vertical-slice `ready-for-agent` issues.
+- `to-tickets` - validates and decomposes a ready spec into `ticket-NN.md` issues in the same feature directory.
 - `setup-agents` - owns where the spec lives and which context docs to read; this skill defers to its output.
-- `triage` - manages the issue files that `to-tickets` produces from this spec.
+- `triage` - manages the ticket files that `to-tickets` produces from this spec.

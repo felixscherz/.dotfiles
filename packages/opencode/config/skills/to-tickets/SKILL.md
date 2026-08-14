@@ -1,6 +1,6 @@
 ---
 name: to-tickets
-description: Break a spec, plan, or conversation into vertical-slice tickets with explicit blocking dependencies and write them to the project's issue tracker as ready-for-agent issues. Use when the user says "break this into tickets", "make tickets", "turn the spec into issues", "slice this up", or wants a feature decomposed into agent-pickup-able work.
+description: Validate and break a spec, plan, or conversation into vertical-slice ticket-NN.md files with explicit blocking dependencies. Use when the user says "break this into tickets", "make tickets", "turn the spec into issues", "slice this up", or wants a feature decomposed into agent-pickup-able work.
 ---
 
 # To tickets
@@ -11,7 +11,7 @@ Decompose a spec, plan, or the current conversation into tracer-bullet tickets -
 
 Before anything else, look for this repo's config - these tell you where tickets go, their format, and how to talk about the domain:
 
-- `docs/agents/issue-tracker.md` - where issue files live and their format (default if absent: `docs/agents/issues/<NN>-<slug>.md`, or `docs/agents/<feature>/issues/<NN>-<slug>.md` for a feature effort). This is where the tickets are written.
+- `docs/agents/issue-tracker.md` - where issue files live and their format (default if absent: standalone issues at `docs/agents/issues/<NN>-<slug>.md`; feature tickets at `docs/agents/<feature>/ticket-<NN>.md`). This is where the tickets are written.
 - `docs/agents/triage-states.md` - the actual `Status:` string for `ready-for-agent` (default if absent: the name as-is).
 - `docs/agents/domain.md` - domain doc consumer rules. Read `CONTEXT.md`/`CONTEXT-MAP.md` and the ADRs in the area before slicing, and use the glossary's vocabulary in every ticket.
 
@@ -26,11 +26,23 @@ Read the source material:
 - A spec at `docs/agents/<feature>/spec.md` (from `to-spec`), a plan, or the current conversation. If the user references a spec or issue, read it in full.
 - If the input is only conversation and it is thin, ask the user to firm up the feature (or run `to-spec` first) rather than inventing scope.
 
-### 2. Ground yourself in the codebase
+### 2. Validate readiness
+
+Before slicing, check for:
+
+- Blocking open questions or a spec status that says it is not ready for ticketing
+- Contradictory requirements or conflicts with settled ADRs
+- Missing behavior for important errors, edge cases, migration, or compatibility
+- Acceptance criteria that are too vague to verify
+- Unsettled architecture or contracts that separate ticket agents could implement inconsistently
+
+Resolve anything that can be established from the codebase. If a material gap remains, stop and ask the user one focused question at a time, or recommend returning to `to-spec`. Do not publish tickets that require agents to invent shared requirements or architecture.
+
+### 3. Ground yourself in the codebase
 
 Explore the repo following `docs/agents/domain.md`: read the relevant `CONTEXT.md`/`CONTEXT-MAP.md` and the ADRs that touch the area. Use the project's domain vocabulary in every ticket title and body. Flag any ticket that would contradict a settled ADR (see `docs/agents/domain.md`).
 
-### 3. Draft vertical slices
+### 4. Draft vertical slices
 
 Cut the work into tickets that each slice completely through the stack - schema, API, UI, tests as applicable - not horizontally through a single layer. Each ticket should be:
 
@@ -42,7 +54,7 @@ Cut the work into tickets that each slice completely through the stack - schema,
 
 Work out the blocking edges: which tickets genuinely depend on another being done first. Record real dependencies only, not a false linear chain - sequence so that work can proceed on the frontier (any ticket whose blockers are all done). Express blocking with a `Blocked-by:` line listing the ticket numbers it depends on (omit the line when nothing blocks it).
 
-### 4. Quiz the user
+### 5. Quiz the user
 
 Before publishing, check two things with the user:
 
@@ -51,14 +63,14 @@ Before publishing, check two things with the user:
 
 Adjust, then publish.
 
-### 5. Publish
+### 6. Publish
 
-Write each ticket as a triage issue file under the feature's `issues/` directory - `docs/agents/<feature>/issues/<NN>-<slug>.md`, numbered from `01` in dependency order (blockers get lower numbers). Create the directory if needed. Each ticket uses the standard issue file format (see `docs/agents/issue-tracker.md`) with `Status:` set to `ready-for-agent`, and carries an agent brief written per the `agent-brief.md` template in the `triage` skill - that brief is the contract a future agent session works from.
+Write each ticket as a triage issue file directly in the feature directory - `docs/agents/<feature>/ticket-<NN>.md`, numbered from `01` in dependency order (blockers get lower numbers). In a multi-context repo use `docs/<context>/agents/<feature>/ticket-<NN>.md`. Each ticket uses the standard issue file format (see `docs/agents/issue-tracker.md`) with `Status:` set to `ready-for-agent`, and carries an agent brief written per the `agent-brief.md` template in the `triage` skill - that brief is the contract a future agent session works from.
 
 Ticket file:
 
 ```markdown
-# <Ticket Title>
+# Ticket <NN>: <Ticket Title>
 
 Category: enhancement
 Status: ready-for-agent

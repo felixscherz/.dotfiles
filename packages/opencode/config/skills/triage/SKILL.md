@@ -51,7 +51,7 @@ Created: 2026-07-31
 - 2026-07-31: <note>
 ```
 
-Files live at `docs/agents/issues/<NN>-<slug>.md`, numbered from `01` - next number is one above the highest existing. Issues belonging to a larger effort with its own `docs/agents/<feature>/` directory may live at `docs/agents/<feature>/issues/<NN>-<slug>.md` instead. A bare issue number `NN` resolves by globbing `docs/agents/issues/<NN>-*.md`. In a multi-context repo, issues live under `docs/<context>/agents/`. These are tracked docs - committed with the code and visible in editor autocomplete.
+Standalone issues live at `docs/agents/issues/<NN>-<slug>.md`, numbered from `01` - next number is one above the highest existing. Feature tickets live directly in the feature workspace as `docs/agents/<feature>/ticket-<NN>.md`, alongside its `spec.md`. A bare standalone issue number `NN` resolves by globbing `docs/agents/issues/<NN>-*.md`; a feature ticket number must be paired with its feature name or path. In a multi-context repo, use `docs/<context>/agents/`. These are tracked docs - committed with the code and visible in editor autocomplete.
 
 ## Invocation
 

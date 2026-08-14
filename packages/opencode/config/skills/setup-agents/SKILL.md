@@ -24,7 +24,6 @@ Look at the current repo to understand its starting state. Read whatever exists;
 - `docs/agents/` - what is already there? Does this skill's prior output already exist?
 - `docs/adrs/` and any `docs/*/adrs/` directories
 - `docs/agents/issues/` (or `docs/*/agents/issues/`) - sign that the markdown issue-tracker conventions are already in use
-- `.scratch/` - only holds throwaway scripts and logs now (see the `scratch-dir` skill), not issues or specs
 - Monorepo signals - `pnpm-workspace.yaml`, a `workspaces` field in `package.json`, `go.work`, a `[workspace]` table in `Cargo.toml`, or a populated `packages/*` or `apps/*` whose members have their own README or `src/`. Their absence means single-context, which is almost every repo.
 
 ### 2. Present findings and ask
@@ -99,7 +98,7 @@ The block:
 
 Then write the docs files using the seed templates in this skill folder as a starting point:
 
-- [issue-tracker.md](./issue-tracker.md) - local-markdown issue tracker (includes `features/` convention for specs and plans)
+- [issue-tracker.md](./issue-tracker.md) - local-markdown issue tracker (includes the `docs/agents/<feature>/` workspace convention)
 - [triage-states.md](./triage-states.md) - triage state mapping
 - [domain.md](./domain.md) - domain doc consumer rules + layout (the template includes both layouts; for single-context repos, strip the multi-context section from the generated file so it only describes the layout actually in use)
 
@@ -133,4 +132,4 @@ This repo has multiple domain contexts. Each context has its own `CONTEXT.md`; s
 
 Tell the user the setup is complete and that the agent skills will now read from these files: `triage` (issue tracker, triage states, domain), `to-spec` (domain docs, and where the spec goes), and `to-tickets` (issue tracker, `ready-for-agent` state, domain). Mention they can edit `docs/agents/*.md` directly later - re-running this skill is only necessary to switch trackers or start over.
 
-Also mention that `docs/agents/features/` is the home for feature-level documents (specs, plans, handoffs) - a feature can be a single markdown file or a folder with multiple files. Issues go in `docs/agents/issues/`; feature docs go in `docs/agents/features/`.
+Also mention that `docs/agents/<feature>/` is the workspace for a feature: `spec.md` holds the specification and `ticket-01.md`, `ticket-02.md`, and so on hold its implementation tickets. Standalone issues continue to live in `docs/agents/issues/`.
