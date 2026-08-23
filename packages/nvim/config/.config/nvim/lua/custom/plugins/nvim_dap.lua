@@ -55,6 +55,8 @@ return {
 		require("dap-python").setup("~/.virtualenvs/debugpy/bin/python")
 		require("dap-python").test_runner = "pytest"
 
+		require("dap-go").setup()
+
 		local whichkey = require("which-key")
 		whichkey.add({
 

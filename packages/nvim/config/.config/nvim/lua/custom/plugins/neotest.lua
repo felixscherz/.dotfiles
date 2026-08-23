@@ -7,6 +7,7 @@ return {
 		"nvim-neotest/neotest-plenary",
 		"codymikol/neotest-kotlin",
 		"rouge8/neotest-rust",
+		"fredrikaverpil/neotest-golang",
 	},
 	config = function()
 		require("neotest").setup({
@@ -18,6 +19,7 @@ return {
 				require("neotest-plenary"),
 				require("neotest-rust")({ args = { "--no-capture" } }),
 				require("neotest-kotlin"),
+				require("neotest-golang")({ dap_go_enabled = true }),
 			},
 			quickfix = {
 				enabled = true,
