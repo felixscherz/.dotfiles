@@ -141,7 +141,16 @@ Use precise technical artifacts when they encode a contract better than prose:
 - State machines, sequence diagrams, and pseudocode
 - Small code snippets that establish a required pattern or invariant
 
-Mark examples as normative or illustrative when ambiguity is possible. Keep only the decision-rich portion. File paths and current implementation pointers are allowed in **Current System** as evidence, but do not make transient line numbers or an exact edit recipe part of the required design.
+Mark examples as normative or illustrative when ambiguity is possible:
+
+- **Normative**: the implementation should follow it directly. Deviating breaks a
+  contract, integration, or test (API shapes, config keys, DTO signatures, error
+  mappings).
+- **Illustrative**: communicates the approach but is not meant literally. The
+  implementer may adapt it to local style as long as the required behavior and
+  ordering hold (pseudocode, composition sketches).
+
+Keep only the decision-rich portion. File paths and current implementation pointers are allowed in **Current System** as evidence, but do not make transient line numbers or an exact edit recipe part of the required design.
 
 ## Related
 
