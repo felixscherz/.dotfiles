@@ -11,7 +11,7 @@ Default to OpenCode. If the user asks for Claude Code or Pi, generate the script
 
 ## Prerequisites
 
-- Tickets already exist as `docs/agents/<feature>/ticket-01.md`, `ticket-02.md`, and so on, normally produced by `to-tickets`.
+- Tickets already exist as `.agents/features/<feature>/ticket-01.md`, `ticket-02.md`, and so on, normally produced by `to-tickets`.
 - The tickets carry `Status: ready-for-agent` and use `Blocked-by:` for dependencies.
 - `jq` and the selected harness executable are available.
 
@@ -19,7 +19,7 @@ Default to OpenCode. If the user asks for Claude Code or Pi, generate the script
 
 ### 1. Locate and validate the tickets
 
-Find the feature workspace at `docs/agents/<feature>/` (or `docs/<context>/agents/<feature>/` in a multi-context repo). Read `spec.md` and every `ticket-NN.md` in full.
+Find the feature workspace at `.agents/features/<feature>/` (or `.agents/<context>/features/<feature>/` in a multi-context repo). Read `spec.md` and every `ticket-NN.md` in full.
 
 Sort tickets by numeric suffix. Validate that every `Blocked-by:` reference exists and precedes the blocked ticket. Stop and report invalid or cyclic dependencies rather than generating an unsafe order.
 
@@ -45,7 +45,7 @@ Each prompt must:
 - Instruct the agent to implement and verify the ticket.
 - Instruct it to update the ticket's `Status:` to `done` only after verification succeeds.
 - Instruct it to append a dated closing note describing what changed and how it was verified.
-- Instruct it to write a concise implementation summary to `docs/agents/<feature>/summary-<NN>.md`.
+- Instruct it to write a concise implementation summary to `.agents/features/<feature>/summary-<NN>.md`.
 - Instruct it to create a commit after completing the ticket.
 - Remind it that `spec.md` is shared context when cross-ticket design constraints matter.
 
@@ -88,8 +88,8 @@ Progress file:
   "feature": "<feature>",
   "harness": "opencode",
   "tickets": [
-    {"file": "./docs/agents/<feature>/ticket-01.md", "status": "not-started"},
-    {"file": "./docs/agents/<feature>/ticket-02.md", "status": "not-started"}
+    {"file": "./.agents/features/<feature>/ticket-01.md", "status": "not-started"},
+    {"file": "./.agents/features/<feature>/ticket-02.md", "status": "not-started"}
   ]
 }
 ```
@@ -114,8 +114,8 @@ if [[ "$(uname -s)" == "Darwin" ]] && command -v caffeinate >/dev/null 2>&1; the
 fi
 
 files=(
-	"./docs/agents/<feature>/ticket-01.md"
-	"./docs/agents/<feature>/ticket-02.md"
+	"./.agents/features/<feature>/ticket-01.md"
+	"./.agents/features/<feature>/ticket-02.md"
 )
 
 prompts=(

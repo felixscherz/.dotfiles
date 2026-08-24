@@ -32,7 +32,8 @@
         "claude-opus-4.8", // powerful
         "gpt-5.6-sol", // powerful
         "gpt-5.6-terra", // midlevel
-        "gpt-5.6-luna" // cheapest
+        "gpt-5.6-luna", // cheapest
+        "kimi-k3" // powerful
       ]
     },
     "lmstudio": {

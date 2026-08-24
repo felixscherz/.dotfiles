@@ -7,14 +7,16 @@ description: Turn a technical or product discussion into an implementation-ready
 
 Turn the current conversation and codebase understanding into a durable technical specification. Preserve the substance of technical discussions: architecture, patterns, interfaces, schemas, examples, tradeoffs, and decisions. User stories are optional supporting material, not the structure of the spec.
 
+A spec can also be assembled from accumulated issues. Issues pile up in `.agents/issues/` as problems and requests are captured; a feature is often the right response to several of them at once. When the user points at a set of issues (or asks you to fold in everything about an area), read those issues and synthesize them into one coherent spec, then record them as the spec's source issues so their lifecycle closes when the feature ships.
+
 Synthesize everything already established before asking questions. Ask only about unresolved points that materially affect behavior, architecture, scope, compatibility, migration, or verification. Do not invent decisions to make the document look complete.
 
 ## Configuration
 
 Before anything else, look for this repo's config - these tell you where the spec goes and what to read for context:
 
-- `docs/agents/domain.md` - domain doc consumer rules. Read `CONTEXT.md` (or `CONTEXT-MAP.md`) and the ADRs in the area you are touching before writing the spec. Use the glossary's vocabulary throughout.
-- `docs/agents/issue-tracker.md` - where tracked work lives and its conventions (default if absent: markdown under `docs/agents/`, with a feature workspace at `docs/agents/<feature>/`).
+- `.agents/domain.md` - domain doc consumer rules. Read `CONTEXT.md` (or `CONTEXT-MAP.md`) and the ADRs in the area you are touching before writing the spec. Use the glossary's vocabulary throughout.
+- `.agents/issue-tracker.md` - where tracked work lives and its conventions (default if absent: markdown under `.agents/`, with a feature workspace at `.agents/features/<feature>/`).
 
 These files are written by the `setup-agents` skill. If they are missing, proceed with the defaults and mention once that `setup-agents` can scaffold them.
 
@@ -24,7 +26,9 @@ These files are written by the `setup-agents` skill. If they are missing, procee
 
 Review the full relevant conversation and any prototypes, plans, examples, or documents the user referenced. Extract decisions and constraints without reducing technical details to generic product language.
 
-Explore the repo to understand the current state if this has not already happened during the conversation. Follow `docs/agents/domain.md`: read the relevant `CONTEXT.md`/`CONTEXT-MAP.md` and ADRs. Search for analogous implementations and tests. Respect settled ADRs; if the proposed design contradicts one, identify the conflict instead of silently overriding it.
+If the feature draws on tracked issues, read each source issue in full - body and notes - from `.agents/issues/`. Treat them as raw input, not as the spec's structure: reconcile overlaps, resolve contradictions between them, and note any that turn out to be out of scope so you can leave them tracked rather than fold them in. Keep the list of issue files you actually incorporated; you will record and link them in step 4.
+
+Explore the repo to understand the current state if this has not already happened during the conversation. Follow `.agents/domain.md`: read the relevant `CONTEXT.md`/`CONTEXT-MAP.md` and ADRs. Search for analogous implementations and tests. Respect settled ADRs; if the proposed design contradicts one, identify the conflict instead of silently overriding it.
 
 ### 2. Check specification readiness
 
@@ -50,13 +54,15 @@ Ask for confirmation only if the selected seam changes the public design, leaves
 
 ### 4. Write the spec
 
-Write the spec using the template below and save it to `docs/agents/<feature-slug>/spec.md`. Create the feature directory; `<feature-slug>` is a short kebab-case name. In a multi-context repo, use `docs/<context>/agents/<feature-slug>/spec.md`.
+Write the spec using the template below and save it to `.agents/features/<feature-slug>/spec.md`. Create the feature directory; `<feature-slug>` is a short kebab-case name. In a multi-context repo, use `.agents/<context>/features/<feature-slug>/spec.md`.
 
 The spec is the authoritative input to `to-tickets`, which writes `ticket-01.md`, `ticket-02.md`, and so on in the same feature directory. The spec is a document, not a triage issue, and does not carry a `Status:` line.
 
 Omit sections that truly do not apply rather than filling them with boilerplate. Retain detail when it constrains implementation.
 
-Report the path and whether the spec is ready for ticketing. If ready, tell the user they can run `to-tickets`. If not ready, list only the blocking open questions.
+**Link the source issues.** If the spec folded in tracked issues, list them in the spec's **Source Issues** section, and append a note to each source issue file pointing at the feature - e.g. `- <YYYY-MM-DD>: folded into .agents/features/<feature-slug>/spec.md`. Do not close the source issues now: they remain open and are moved to `done` only when the feature actually ships (that is `triage`'s job as the tickets complete). If an issue you read turned out to be out of scope, leave it untouched and say so.
+
+Report the path and whether the spec is ready for ticketing. If ready, tell the user they can run `to-tickets`. If not ready, list only the blocking open questions. If source issues were folded in, name them and confirm each was linked back.
 
 ## Spec template
 
@@ -70,6 +76,12 @@ Ready for ticketing | Draft - blocked by open questions
 ## Problem and Goals
 
 The current problem, desired outcomes, and the users or systems affected.
+
+### Source Issues
+
+The tracked issues this feature addresses, each linked by path (e.g.
+`.agents/issues/03-<slug>.md`). Omit this section when the spec came only from
+conversation. These issues close to `done` when the feature ships, not now.
 
 ### Non-goals
 

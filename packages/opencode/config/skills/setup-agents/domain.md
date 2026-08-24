@@ -7,30 +7,32 @@ How agents should consume this repo's domain documentation when exploring the co
 - **`CONTEXT.md`** at the repo root, or
 - **`CONTEXT-MAP.md`** at the repo root if it exists (multi-context repos only) - it points at one `docs/<context>/CONTEXT.md` per context. Read each one relevant to the topic.
 - **`docs/adrs/`** - read ADRs that touch the area you are about to work in.
-- **`docs/agents/`** - agent-created and agent-addressed docs (the issue-tracker, triage-state, and domain config, plus any other notes agents wrote for future agents).
+- **`.agents/`** - agent-created and agent-addressed docs (the issue-tracker, triage-state, and domain config, plus any other notes agents wrote for future agents).
 
 If any of these files don't exist, **proceed silently**. Don't flag their absence; don't suggest creating them upfront. They are created lazily when terms or decisions actually get resolved - any session may create or update `CONTEXT.md` or an ADR the moment a domain term or decision lands.
 
 ## File structure
 
+Agent-created and agent-consumed docs (issues, specs, tickets, and the agent config) live under a top-level `.agents/`. Human-facing documentation - `CONTEXT.md` and the ADRs - stays in the repo's normal doc locations, because those are for people as much as agents.
+
 Single-context repo (most repos):
 
 ```
 /
-├── CONTEXT.md
+├── CONTEXT.md                       ← human + agent facing, stays put
+├── .agents/                         ← agent-created and agent-consumed docs
+│   ├── issue-tracker.md
+│   ├── triage-states.md
+│   ├── domain.md
+│   ├── issues/                      ← tracked standalone issues
+│   │   └── 01-<slug>.md
+│   └── features/                    ← one directory per feature
+│       └── <feature-name>/
+│           ├── spec.md              ← the specification (from to-spec)
+│           ├── ticket-01.md         ← ordered implementation tickets (from to-tickets)
+│           └── summary-01.md        ← implementation summaries when generated
 └── docs/
-    ├── agents/                      ← agent-created and agent-addressed docs
-    │   ├── issue-tracker.md
-    │   ├── triage-states.md
-    │   ├── domain.md
-    │   ├── issues/                  ← tracked issues
-    │   │   └── 01-<slug>.md
-    │   └── features/                ← feature specs, plans, and handoffs
-    │       ├── some-feature.md
-    │       └── complex-feature/
-    │           ├── spec.md
-    │           └── implementation-plan.md
-    └── adrs/
+    └── adrs/                        ← human-facing decision records
         ├── 0001-<slug>.md
         └── 0002-<slug>.md
 ```
@@ -40,16 +42,16 @@ Multi-context repo (presence of `CONTEXT-MAP.md` at the root):
 ```
 /
 ├── CONTEXT-MAP.md
+├── .agents/                         ← system-wide agent docs
+│   ├── ordering/                    ← context-scoped agent docs (issues, features, config)
+│   └── billing/
 └── docs/
-    ├── agents/                      ← system-wide agent docs
     ├── adrs/                        ← system-wide decisions
     ├── ordering/
     │   ├── CONTEXT.md
-    │   ├── agents/                  ← context-scoped agent docs
     │   └── adrs/                    ← context-scoped decisions
     └── billing/
         ├── CONTEXT.md
-        ├── agents/
         └── adrs/
 ```
 

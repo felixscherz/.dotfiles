@@ -1,19 +1,21 @@
 ---
 name: triage
-description: Triage issues tracked as markdown files under docs/agents - capture bugs and ideas found together during a session, categorize, verify against the codebase, and move them through triage states until done or wontfix. Use when the user says "triage", "record this issue", "track this for later", "add this to the tracker", "what needs attention", or wants to pick up a previously recorded issue.
+description: Triage issues tracked as markdown files under .agents - capture bugs and ideas found together during a session, categorize, verify against the codebase, and move them through triage states until done or wontfix. Use when the user says "triage", "record this issue", "track this for later", "add this to the tracker", "what needs attention", or wants to pick up a previously recorded issue.
 ---
 
 # Triage
 
 Move issues through a small state machine of triage states. Issues are local markdown files - things found together with the user during sessions and recorded for later, not external reports. The user is both reporter and maintainer.
 
+Triage is the front door of the agent workflow: every idea, problem, bug, or feature request enters here as an issue. Feature requests are issues too - an `enhancement`, not a separate artifact. Capturing an issue is the cheap default; it lets problems accumulate in `.agents/issues/` so that later one feature can address several of them at once (via `to-spec`). A single, already-understood request can instead go straight to a spec, but when in doubt, record the issue and move on.
+
 ## Configuration
 
 Before anything else, look for this repo's config:
 
-- `docs/agents/issue-tracker.md` - where issue files live and their conventions (default if absent: `docs/agents/issues/<NN>-<slug>.md`, format below)
-- `docs/agents/triage-states.md` - the actual `Status:` strings for the canonical states (default if absent: the canonical names as-is)
-- `docs/agents/domain.md` - domain doc consumer rules; read `CONTEXT.md` and relevant ADRs before exploring the codebase
+- `.agents/issue-tracker.md` - where issue files live and their conventions (default if absent: `.agents/issues/<NN>-<slug>.md`, format below)
+- `.agents/triage-states.md` - the actual `Status:` strings for the canonical states (default if absent: the canonical names as-is)
+- `.agents/domain.md` - domain doc consumer rules; read `CONTEXT.md` and relevant ADRs before exploring the codebase
 
 These files are written by the `setup-agents` skill. If they are missing, proceed with the defaults and mention once that `setup-agents` can scaffold them.
 
@@ -51,7 +53,7 @@ Created: 2026-07-31
 - 2026-07-31: <note>
 ```
 
-Standalone issues live at `docs/agents/issues/<NN>-<slug>.md`, numbered from `01` - next number is one above the highest existing. Feature tickets live directly in the feature workspace as `docs/agents/<feature>/ticket-<NN>.md`, alongside its `spec.md`. A bare standalone issue number `NN` resolves by globbing `docs/agents/issues/<NN>-*.md`; a feature ticket number must be paired with its feature name or path. In a multi-context repo, use `docs/<context>/agents/`. These are tracked docs - committed with the code and visible in editor autocomplete.
+Standalone issues live at `.agents/issues/<NN>-<slug>.md`, numbered from `01` - next number is one above the highest existing. Feature tickets live directly in the feature workspace as `.agents/features/<feature>/ticket-<NN>.md`, alongside its `spec.md`. A bare standalone issue number `NN` resolves by globbing `.agents/issues/<NN>-*.md`; a feature ticket number must be paired with its feature name or path. In a multi-context repo, use `.agents/<context>/`. These are tracked docs - committed with the code and visible in editor autocomplete.
 
 ## Invocation
 
@@ -88,7 +90,7 @@ Show counts and a one-line summary per item (number, title, age). Let the user p
 1. **Gather context.** Read the full issue file including notes. Explore the codebase using the project's domain glossary, respecting ADRs in the area. Run two checks against the codebase: (a) **redundancy** - search for an existing implementation of the requested behavior by domain concept, not just the issue's wording, and report where you looked. If found, it is an already-implemented `wontfix` (step 5). (b) **still valid** - for a bug, does the described broken behavior still exist?
 2. **Recommend.** Tell the user your category and state recommendation with reasoning, plus a brief codebase summary relevant to the issue. Wait for direction.
 3. **Verify the claim.** Before any grilling, check that the claim holds up. For a bug, reproduce it from the recorded steps. Report what happened: confirmed (with code path), failed, or insufficient detail (a strong `needs-info` signal). A confirmed verification makes a much stronger agent brief.
-4. **Grill (if needed).** If the issue needs fleshing out, ask the user one focused question at a time until it is specced. Append resolved points to the file's notes as decisions land. Sharpen domain terms inline - when a term or decision lands for the first time, propose adding it to `CONTEXT.md` or recording an ADR (see `docs/agents/domain.md`).
+4. **Grill (if needed).** If the issue needs fleshing out, ask the user one focused question at a time until it is specced. Append resolved points to the file's notes as decisions land. Sharpen domain terms inline - when a term or decision lands for the first time, propose adding it to `CONTEXT.md` or recording an ADR (see `.agents/domain.md`).
 5. **Apply the outcome** by editing the issue file:
    - `ready-for-agent` - write an agent brief into the file ([agent-brief.md](./agent-brief.md)).
    - `ready-for-human` - same structure as an agent brief, plus a note why it can't be delegated (judgment calls, external access, design decisions, manual testing).
