@@ -14,6 +14,26 @@ shipped or deployed.
 This skill is strictly for artifacts a human reads. It is not for any artifact
 another agent will read.
 
+## Know the audience first
+
+Before writing, be clear about who reads this. The audience shapes everything:
+what to assume they already know, which terms to spell out and which to leave
+bare, how much context to give, and the voice to use.
+
+- If the audience is stated or can be reasonably inferred from the request,
+  proceed with that reading in mind.
+- If it cannot be inferred, ask the user who the document is for before writing.
+- Match assumed knowledge to that audience. Don't over-explain terms they know,
+  and don't assume they share context you happen to have (a repo, a prior
+  conversation, an internal tool).
+
+## Run the prose through unslop
+
+This document is prose a human reads, so the writing quality is the product.
+Use the `unslop` skill on the text before you consider it done - it strips AI
+tells and adds human voice. This is not optional polish; it is part of producing
+the document.
+
 ## What this is not for
 
 - Artifacts other agents read: specs (`spec.md`), issues, tickets, and any
