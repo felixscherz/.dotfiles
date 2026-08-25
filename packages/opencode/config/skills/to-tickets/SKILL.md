@@ -1,6 +1,7 @@
 ---
 name: to-tickets
 description: Validate and break a spec, plan, or conversation into vertical-slice ticket-NN.md files with explicit blocking dependencies. Use when the user says "break this into tickets", "make tickets", "turn the spec into issues", "slice this up", or wants a feature decomposed into agent-pickup-able work.
+disable-model-invocation: true
 ---
 
 # To tickets
@@ -30,7 +31,7 @@ Read the source material:
 
 Before slicing, check for:
 
-- Blocking open questions or a spec status that says it is not ready for ticketing
+- Blocking open questions, or a feature README (`.agents/features/<feature>/README.md`) that says the spec is not ready for ticketing
 - Contradictory requirements or conflicts with settled ADRs
 - Missing behavior for important errors, edge cases, migration, or compatibility
 - Acceptance criteria that are too vague to verify
@@ -68,7 +69,7 @@ Adjust, then publish.
 
 ### 6. Publish
 
-Write each ticket as a triage issue file directly in the feature directory - `.agents/features/<feature>/ticket-<NN>.md`, numbered from `01` in dependency order (blockers get lower numbers). In a multi-context repo use `.agents/<context>/features/<feature>/ticket-<NN>.md`. Each ticket uses the standard issue file format (see `.agents/issue-tracker.md`) with `Status:` set to `ready-for-agent`, and carries an agent brief written per the `agent-brief.md` template in the `triage` skill - that brief is the contract a future agent session works from.
+Write each ticket as a triage issue file directly in the feature directory - `.agents/features/<feature>/ticket-<NN>.md`, numbered from `01` in dependency order (blockers get lower numbers). In a multi-context repo use `.agents/<context>/features/<feature>/ticket-<NN>.md`. Each ticket uses the canonical issue file format from the `triage` skill with `Status:` set to `ready-for-agent`, and carries an agent brief written per the `agent-brief.md` template in the `triage` skill - that brief is the contract a future agent session works from.
 
 Ticket file:
 
@@ -92,6 +93,8 @@ Behavioral not procedural; no file paths or line numbers.>
 
 - <YYYY-MM-DD>: sliced from .agents/features/<feature>/spec.md
 ```
+
+Update the feature README (`.agents/features/<feature>/README.md`) with the ticket list and blocking edges, and set its status to "tickets published". Create the README if `to-spec` did not.
 
 After publishing, report the feature directory and the ordered list of tickets with their blocking edges, so the user can see the frontier. `triage`'s pickup flow can then take any unblocked `ready-for-agent` ticket.
 

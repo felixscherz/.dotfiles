@@ -28,6 +28,7 @@ Single-context repo (most repos):
 │   │   └── 01-<slug>.md
 │   └── features/                    ← one directory per feature
 │       └── <feature-name>/
+│           ├── README.md            ← free-form progression doc: status, history, links
 │           ├── spec.md              ← the specification (from to-spec)
 │           ├── ticket-01.md         ← ordered implementation tickets (from to-tickets)
 │           └── summary-01.md        ← implementation summaries when generated

@@ -1,6 +1,7 @@
 ---
 name: batch-implement
 description: Generate a resumable shell script that implements ticket-NN.md files sequentially through OpenCode, Claude Code, or Pi. Defaults to OpenCode. Use after to-tickets when the user says "batch implement", "implement tickets", "run tickets through an agent", "generate implement script", or "create orchestration script".
+disable-model-invocation: true
 ---
 
 # Batch implement
@@ -63,10 +64,12 @@ Show the selected harness, unattended permission behavior, ordered tickets, bloc
 
 ### 5. Generate the script and progress file
 
-Write these files at the repo root:
+Write these files into the feature workspace, not the repo root:
 
-- `implement-<feature>.sh`
-- `progress-<feature>.json`
+- `.agents/features/<feature>/implement.sh`
+- `.agents/features/<feature>/progress.json`
+
+The script is invoked from the repo root (all paths inside it are repo-root-relative).
 
 The script must:
 
@@ -106,7 +109,7 @@ set -uo pipefail
 # Feature: <feature>
 # Harness: <harness>
 
-PROGRESS_FILE="./progress-<feature>.json"
+PROGRESS_FILE="./.agents/features/<feature>/progress.json"
 HARNESS_BIN="opencode"
 
 if [[ "$(uname -s)" == "Darwin" ]] && command -v caffeinate >/dev/null 2>&1; then
@@ -218,3 +221,4 @@ The user may request prompt overrides, skipped tickets, a dry-run flag, a regene
 - `to-tickets` - produces the `ticket-NN.md` files this skill consumes.
 - `to-spec` - produces the shared `spec.md` that constrains those tickets.
 - `triage` - manages ticket lifecycle; tickets move to `done` only after implementation and verification.
+- `catch-up` - walks the user through the implemented tickets afterwards and reviews them against the spec.

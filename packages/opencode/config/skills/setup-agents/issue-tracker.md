@@ -18,29 +18,18 @@ Each feature gets a workspace at `.agents/features/<feature>/`. In a multi-conte
 
 The standard files are:
 
+- `.agents/features/<feature>/README.md` - free-form progression doc: the feature's current status, history, and links to the other files
 - `.agents/features/<feature>/spec.md` - the feature specification
 - `.agents/features/<feature>/ticket-01.md`, `ticket-02.md`, and so on - ordered implementation tickets
 - `.agents/features/<feature>/summary-01.md`, `summary-02.md`, and so on - implementation summaries when generated
 
-The spec and summaries are reference documents. Each `ticket-NN.md` is an issue and follows the issue format below.
+The README, spec, and summaries are reference documents. Each `ticket-NN.md` is an issue and follows the canonical issue format from the `triage` skill.
 
 A feature commonly addresses several accumulated issues at once. When `to-spec` folds issues in, it lists them in the spec's **Source Issues** section and links back from each issue file. Those source issues stay open and move to `done` only when the feature ships.
 
 ## Issue file format
 
-```markdown
-# <Title>
-
-Category: bug | enhancement
-Status: needs-triage
-Created: 2026-07-31
-
-<Body: what was found, repro steps for a bug, context from the session.>
-
-## Notes
-
-- 2026-07-31: <first note>
-```
+The canonical issue file format is defined in the `triage` skill. Issues here follow it exactly; this file only records *where* issues live, not what they look like.
 
 ## When a skill says "publish to the issue tracker"
 

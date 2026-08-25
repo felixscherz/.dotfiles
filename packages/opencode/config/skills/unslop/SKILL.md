@@ -1,6 +1,6 @@
 ---
 name: unslop
-description: Cut AI tells from any writing. Must always apply.
+description: Cut AI tells from writing. Apply whenever another skill references unslop, and whenever producing communication meant for the outside - a blog post, PR description or comment, Jira/issue ticket, release notes, docs, an email, or any prose a human audience will read.
 ---
 
 # Unslop

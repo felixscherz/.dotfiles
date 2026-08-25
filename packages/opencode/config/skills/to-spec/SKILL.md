@@ -1,6 +1,7 @@
 ---
 name: to-spec
 description: Turn a technical or product discussion into an implementation-ready specification covering requirements, architecture, contracts, decisions, and verification. Use when the user says "write a spec", "turn this into a spec", "spec this out", "make a PRD", or wants the current discussion captured before breaking it into tickets.
+disable-model-invocation: true
 ---
 
 # To spec
@@ -44,7 +45,7 @@ Determine whether the material answers the questions needed for implementation:
 
 If a missing answer materially changes the implementation, ask the user one focused question at a time. Explain the consequence of the decision when useful. Do not interview for information that can be established from the codebase, and do not ask optional questions merely to fill every template section.
 
-If the user chooses not to resolve a material question, record it under **Open Questions**, state its impact, and mark the spec as not ready for ticketing. Non-blocking questions may remain without preventing ticketing.
+If the user chooses not to resolve a material question, record it under **Open Questions**, state its impact, and mark the feature as not ready for ticketing in the feature README (step 4). Non-blocking questions may remain without preventing ticketing.
 
 ### 3. Define verification seams
 
@@ -56,22 +57,20 @@ Ask for confirmation only if the selected seam changes the public design, leaves
 
 Write the spec using the template below and save it to `.agents/features/<feature-slug>/spec.md`. Create the feature directory; `<feature-slug>` is a short kebab-case name. In a multi-context repo, use `.agents/<context>/features/<feature-slug>/spec.md`.
 
-The spec is the authoritative input to `to-tickets`, which writes `ticket-01.md`, `ticket-02.md`, and so on in the same feature directory. The spec is a document, not a triage issue, and does not carry a `Status:` line.
+The spec is the authoritative input to `to-tickets`, which writes `ticket-01.md`, `ticket-02.md`, and so on in the same feature directory. The spec is a document, not a triage issue, and carries no status of its own.
+
+**Track progression in the feature README.** The feature's status lives in `.agents/features/<feature-slug>/README.md`, not in the spec. This is a free-form progression doc for the feature: create it alongside the spec with the current state ("draft - blocked by open questions" or "ready for ticketing"), the blocking questions if any, and links to the workspace files. Later stages append to it (`to-tickets` when tickets are published, implementation when the feature ships), so it reads as the feature's history at a glance.
 
 Omit sections that truly do not apply rather than filling them with boilerplate. Retain detail when it constrains implementation.
 
 **Link the source issues.** If the spec folded in tracked issues, list them in the spec's **Source Issues** section, and append a note to each source issue file pointing at the feature - e.g. `- <YYYY-MM-DD>: folded into .agents/features/<feature-slug>/spec.md`. Do not close the source issues now: they remain open and are moved to `done` only when the feature actually ships (that is `triage`'s job as the tickets complete). If an issue you read turned out to be out of scope, leave it untouched and say so.
 
-Report the path and whether the spec is ready for ticketing. If ready, tell the user they can run `to-tickets`. If not ready, list only the blocking open questions. If source issues were folded in, name them and confirm each was linked back.
+Report the spec and README paths and whether the spec is ready for ticketing. If ready, tell the user they can run `to-tickets`. If not ready, list only the blocking open questions. If source issues were folded in, name them and confirm each was linked back.
 
 ## Spec template
 
 ```markdown
 # <Feature Title>
-
-## Status
-
-Ready for ticketing | Draft - blocked by open questions
 
 ## Problem and Goals
 
@@ -169,3 +168,4 @@ Keep only the decision-rich portion. File paths and current implementation point
 - `to-tickets` - validates and decomposes a ready spec into `ticket-NN.md` issues in the same feature directory.
 - `setup-agents` - owns where the spec lives and which context docs to read; this skill defers to its output.
 - `triage` - manages the ticket files that `to-tickets` produces from this spec.
+- `catch-up` - reviews the implemented feature against this spec.

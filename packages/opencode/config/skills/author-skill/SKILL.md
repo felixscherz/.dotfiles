@@ -5,9 +5,11 @@ description: How to author, edit, or move an Agent Skill (a SKILL.md) so both op
 
 # Authoring skills for opencode and Claude Code
 
-opencode is the primary tool and the source of truth. Claude Code only reads
-`~/.claude/*`, so those paths are symlinked into opencode's config. Author skills
-so both tools find them.
+Skills target multiple harnesses - opencode and Claude Code today, possibly
+others later. Author them to be broadly compatible: a portable core every
+harness reads, plus optional harness-specific extras that others safely ignore.
+opencode is the source of truth on disk. Claude Code only reads `~/.claude/*`,
+so those paths are symlinked into opencode's config.
 
 ## Source of truth and symlink layout
 
@@ -26,12 +28,22 @@ so both tools find them.
 
 - **Layout:** one directory per skill, named in kebab-case, containing a
   `SKILL.md`: `<skills-root>/<skill-name>/SKILL.md`.
-- **Frontmatter:** YAML with only the two fields both tools read:
+- **Frontmatter:** YAML. Two fields are the portable core that every harness
+  reads - always provide them:
   - `name`: kebab-case, must match the directory name.
   - `description`: a single line, trigger-rich. Include the phrases a user would
-    actually say, so both tools surface the skill at the right moment.
-- **Do not add tool-specific frontmatter fields.** Stick to `name` + `description`
-  so neither tool chokes on the other's extensions. Put all behavior in the body.
+    actually say, so harnesses surface the skill at the right moment.
+- **Additional frontmatter fields are allowed** when a harness uses them.
+  Harnesses ignore fields they don't know, so extra fields don't break
+  compatibility. Keep behavior that matters everywhere in the body; use
+  frontmatter fields only for harness-level mechanics. Fields in use:
+  - `disable-model-invocation: true` - the skill is user-invocable only, the
+    model must not trigger it on its own (read by Claude Code).
+  - `argument-hint` - hint shown when the user invokes the skill with arguments.
+- **Invocation permissions must match across harnesses.** When a skill is meant
+  to be user-invocable only, set `disable-model-invocation: true` in the
+  frontmatter AND deny it under `permission.skill` in `opencode.json`. One
+  without the other leaves the harnesses behaving differently.
 - **Body:** portable markdown (headers, tables, lists). Reference any bundled
   files by relative path.
 
@@ -44,6 +56,8 @@ The global `AGENTS.md` rules apply to skill content too. In particular:
 
 ## After authoring
 
+- Update the skills index at `<skills-root>/README.md` - it documents how the
+  skills fit together. Add new skills to it, remove deleted ones.
 - The skills dir resolves into the dotfiles git repo, so new or edited skills
   show up as changes there. Remind the user to commit them in `~/.dotfiles`.
 - For **project-scoped** skills, use the same `SKILL.md` format inside the

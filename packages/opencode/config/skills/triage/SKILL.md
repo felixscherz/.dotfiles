@@ -39,6 +39,8 @@ Every issue file carries exactly one category and one state. Transitions: a new 
 
 ## Issue file format
 
+This is the canonical issue format. Other skills (`to-tickets`, `setup-agents`) and per-repo `.agents/issue-tracker.md` files refer here rather than restating it; if the format ever changes, change it here.
+
 ```markdown
 # <Title>
 

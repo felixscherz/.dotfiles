@@ -1,6 +1,7 @@
 ---
 name: setup-agents
 description: Configure a repo for agent workflows - scaffold the .agents issue tracker config, triage state vocabulary, and domain doc layout (CONTEXT.md, .agents/, docs/adrs/). Run once per repo before first use of the triage skill. Use when the user says "setup agents", "set up agent docs", "scaffold agent config", or asks for .agents or CONTEXT.md conventions in a repo.
+disable-model-invocation: true
 ---
 
 # Setup agents
@@ -135,6 +136,6 @@ Tell the user the setup is complete and that the agent skills will now read from
 Also explain the layout and the flow it supports. `.agents/` holds the agent-created and agent-consumed docs; human-facing docs (`CONTEXT.md`, ADRs) stay in their normal locations. Within `.agents/`:
 
 - `.agents/issues/<NN>-<slug>.md` - standalone issues, the front door. Every idea, problem, bug, or feature request is captured here first (via `triage`), where they accumulate.
-- `.agents/features/<feature>/` - a feature workspace: `spec.md` (from `to-spec`, which can fold in several accumulated issues), then `ticket-01.md`, `ticket-02.md`, and so on (from `to-tickets`).
+- `.agents/features/<feature>/` - a feature workspace: a free-form `README.md` tracking the feature's progression, `spec.md` (from `to-spec`, which can fold in several accumulated issues), then `ticket-01.md`, `ticket-02.md`, and so on (from `to-tickets`).
 
 The workflow: capture issues as they come up, let them accumulate, then `to-spec` turns one or more of them into a feature spec and `to-tickets` slices it into tickets an agent can pick up.
