@@ -20,9 +20,14 @@ setup-agents        scaffold a repo's .agents config (once per repo)
 batch-implement     generate a script that runs tickets through a harness
      |
    catch-up         walk the human through what changed; review against the spec
+     |
+ship-feature        final sign-off: verify against the spec, surface drift,
+                      close source issues, open the pull request
 ```
 
 The feature workspace `.agents/features/<feature>/` accumulates: `README.md` (free-form progression doc holding the feature's status and history), `spec.md`, `ticket-NN.md`, `summary-NN.md`, plus the generated `implement.sh` / `progress.json`. The canonical issue file format lives in the `triage` skill; everything else references it.
+
+`agents-folder-conventions` governs whether any of this enters a repo's history: in repos that have not adopted the `.agents/` structure, the workspace stays uncommitted and outward prose (PR descriptions, commit messages) must not reference its paths.
 
 **Working style** - how sessions run, independent of the pipeline:
 
@@ -35,7 +40,7 @@ The feature workspace `.agents/features/<feature>/` accumulates: `README.md` (fr
 
 ## Invocation policy
 
-Pipeline stages that create artifacts on explicit demand are user-invocable only: `setup-agents`, `to-spec`, `to-tickets`, `batch-implement`, `handoff`. This is enforced twice, and both must stay in sync: `disable-model-invocation: true` in the skill frontmatter (Claude Code) and `permission.skill` denies in `opencode.json` (opencode). Everything else may be model-invoked when its description matches.
+Pipeline stages that create artifacts on explicit demand are user-invocable only: `setup-agents`, `to-spec`, `to-tickets`, `batch-implement`, `ship-feature`, `handoff`. This is enforced twice, and both must stay in sync: `disable-model-invocation: true` in the skill frontmatter (Claude Code) and `permission.skill` denies in `opencode.json` (opencode). Everything else may be model-invoked when its description matches.
 
 ## Per-repo state the pipeline reads
 

@@ -63,7 +63,7 @@ The spec is the authoritative input to `to-tickets`, which writes `ticket-01.md`
 
 Omit sections that truly do not apply rather than filling them with boilerplate. Retain detail when it constrains implementation.
 
-**Link the source issues.** If the spec folded in tracked issues, list them in the spec's **Source Issues** section, and append a note to each source issue file pointing at the feature - e.g. `- <YYYY-MM-DD>: folded into .agents/features/<feature-slug>/spec.md`. Do not close the source issues now: they remain open and are moved to `done` only when the feature actually ships (that is `triage`'s job as the tickets complete). If an issue you read turned out to be out of scope, leave it untouched and say so.
+**Link the source issues.** If the spec folded in tracked issues, list them in the spec's **Source Issues** section, and append a note to each source issue file pointing at the feature - e.g. `- <YYYY-MM-DD>: folded into .agents/features/<feature-slug>/spec.md`. Do not close the source issues now: they remain open and are moved to `done` only when the feature actually ships (that is `ship-feature`'s job when it opens the pull request). If an issue you read turned out to be out of scope, leave it untouched and say so.
 
 Report the spec and README paths and whether the spec is ready for ticketing. If ready, tell the user they can run `to-tickets`. If not ready, list only the blocking open questions. If source issues were folded in, name them and confirm each was linked back.
 
@@ -169,3 +169,4 @@ Keep only the decision-rich portion. File paths and current implementation point
 - `setup-agents` - owns where the spec lives and which context docs to read; this skill defers to its output.
 - `triage` - manages the ticket files that `to-tickets` produces from this spec.
 - `catch-up` - reviews the implemented feature against this spec.
+- `ship-feature` - the final sign-off; closes this spec's source issues when the feature ships and feeds surviving divergences back into the spec.

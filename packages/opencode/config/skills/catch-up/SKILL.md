@@ -57,3 +57,4 @@ Without a spec, close with a plain summary of the state: what the changes add up
 - `to-spec` - produces the spec the review is gauged against.
 - `triage` - captures the findings.
 - `pair-program` - the during-the-work counterpart; this skill rebuilds the shared model after the fact.
+- `ship-feature` - the pipeline's terminal stage; it follows this skill's walkthrough loop and then closes the feature's lifecycle with a pull request.

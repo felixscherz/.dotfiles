@@ -222,3 +222,4 @@ The user may request prompt overrides, skipped tickets, a dry-run flag, a regene
 - `to-spec` - produces the shared `spec.md` that constrains those tickets.
 - `triage` - manages ticket lifecycle; tickets move to `done` only after implementation and verification.
 - `catch-up` - walks the user through the implemented tickets afterwards and reviews them against the spec.
+- `ship-feature` - the final sign-off after this skill's run completes: verifies against the spec and opens the pull request.
