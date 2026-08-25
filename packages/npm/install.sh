@@ -1,12 +1,20 @@
 #!/usr/bin/env bash
 set -e
 source "$(dirname "$0")/../../lib.sh"
-NVM_DIR="${NVM_DIR:-$HOME/.config/nvm}"
-if [[ ! -f "$NVM_DIR/nvm.sh" ]]; then
-    PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash'
+
+export FNM_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/fnm"
+
+if ! command -v fnm &>/dev/null; then
+    if is_macos; then
+        install_package fnm
+    else
+        curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir "$HOME/.local/bin" --skip-shell
+    fi
 fi
-source "$NVM_DIR/nvm.sh"
-if ! nvm ls 20.11.0 &>/dev/null; then
-    nvm install 20.11.0
-    nvm alias default 20.11.0
+
+eval "$(fnm env)"
+
+if ! fnm list | grep -q 'v24'; then
+    fnm install 24
 fi
+fnm default 24

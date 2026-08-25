@@ -31,3 +31,12 @@ unset PERSONAL
 
 addToPathFront $HOME/.local/scripts
 addToPathFront $HOME/.local/bin
+
+# fnm (Node.js version manager) must init after the zprofile.d loop so that
+# homebrew.sh has already put fnm on PATH, and so fnm's node wins precedence
+# over the brew-installed node (a bitwarden-cli dependency).
+# --use-on-cd auto-switches versions based on .node-version / .nvmrc files.
+export FNM_DIR="$XDG_CONFIG_HOME/fnm"
+if command -v fnm &>/dev/null; then
+    eval "$(fnm env --use-on-cd --shell zsh)"
+fi
