@@ -4,6 +4,7 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"aaronhallaert/advanced-git-search.nvim",
+		-- `make` must be installed: it builds the native fzf sorter below
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		"davvid/telescope-git-grep.nvim",
 		"nvim-telescope/telescope-smart-history.nvim",
@@ -18,6 +19,8 @@ return {
 			},
 		},
 		pickers = {
+			-- find_files uses `fd` when it is on PATH (faster, respects .gitignore),
+			-- falling back to `find`/`rg` otherwise. Install `fd` for best results.
 			find_files = {
 				hidden = true,
 			},

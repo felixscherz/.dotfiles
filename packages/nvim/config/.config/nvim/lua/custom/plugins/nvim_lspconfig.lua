@@ -129,8 +129,13 @@ return {
 			end
 		end
 
+		-- only keep servers whose host tool (npm/go/python3/unzip) is present, so a
+		-- fresh box neither fails to install nor tries to enable e.g. gopls without
+		-- Go. Computed once and reused for the enable loop below.
+		local available_servers = require("custom.mason_requirements").filter(servers)
+
 		require("mason-lspconfig").setup({
-			ensure_installed = servers,
+			ensure_installed = available_servers,
 			automatic_enable = false,
 		})
 
@@ -138,7 +143,7 @@ return {
 
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-		for _, server in pairs(servers) do
+		for _, server in pairs(available_servers) do
 			if server == "basedpyright" and use_ty then goto continue end
 			if server == "ty" and not use_ty then goto continue end
 

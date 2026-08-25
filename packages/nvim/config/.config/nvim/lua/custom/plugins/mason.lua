@@ -25,7 +25,9 @@ return {
     event = "VimEnter",
     config = function()
       require("mason-tool-installer").setup({
-        ensure_installed = {
+        -- filter drops packages whose host tool (npm/go/python3/unzip) is not
+        -- installed, so a fresh box doesn't get spammed with spawn errors.
+        ensure_installed = require("custom.mason_requirements").filter({
           "prettier",
           "jq",
           "yamlfmt",
@@ -35,7 +37,7 @@ return {
           "gofumpt",
           "goimports",
           "delve",
-        },
+        }),
         auto_update = false,
         run_on_start = true,
       })
