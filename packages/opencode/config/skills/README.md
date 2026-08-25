@@ -28,6 +28,7 @@ The feature workspace `.agents/features/<feature>/` accumulates: `README.md` (fr
 
 - `pair-program` (+ `DESIGN.md`) - human as navigator, agent as driver, small reviewed steps. The hands-on alternative to the pipeline; `catch-up` is its after-the-fact counterpart.
 - `unslop` - cut AI tells from outward-facing prose. Triggered by other skills referencing it, or when writing for a human audience (PR text, tickets, posts, docs).
+- `html-communication` - produce a self-contained HTML document for human communication (plans, specs, write-ups, summaries). Not for product HTML or frontend UI design.
 - `handoff` - compact a session into a handoff doc for a fresh agent (user-invoked; asks where to save).
 - `record-learnings` - route a realization to its durable home (CLAUDE.md/AGENTS.md, a skill, docs, memory).
 - `author-skill` - how to write and place skills themselves.
