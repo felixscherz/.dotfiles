@@ -28,6 +28,23 @@ install_cask() {
     fi
 }
 
+ensure_cargo() {
+    local cargo_home="${CARGO_HOME:-$HOME/.cargo}"
+
+    if ! command -v cargo &>/dev/null && [[ ! -x "$cargo_home/bin/cargo" ]]; then
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    fi
+
+    # rustup writes Cargo here, but the current install process does not reload
+    # the shell profile that rustup updates.
+    export PATH="$cargo_home/bin:$PATH"
+
+    if ! command -v cargo &>/dev/null; then
+        echo "Cargo installation failed: cargo is not available on PATH" >&2
+        return 1
+    fi
+}
+
 stow_it() {
     local pkg="$1"
     local target="${2:-$HOME}"
