@@ -76,7 +76,7 @@ Get the branch into shippable shape:
 
 - Work must be on a feature branch. If the commits landed on the default branch, create a branch for them before anything else.
 - Rebase or merge up to date with the default branch; resolve conflicts with the user. If the base moved, re-run the spec's verification afterwards - the green run from step 2 is stale once the branch is rebased, and a semantic conflict can slip through a clean rebase.
-- Sweep for leftovers: debug code, stray files, commits unrelated to the feature. Decide with the user whether the `.agents/` workspace changes ship in this PR or separately - `agents-folder-conventions` supplies the default: in repos that have not adopted the structure, the workspace stays uncommitted. `implement.sh` and `progress.json` are batch-implement scaffolding - they do not ship unless the repo tracks them deliberately.
+- Sweep for leftovers: debug code, stray files, commits unrelated to the feature. Decide with the user whether the `.agents/` workspace changes ship in this PR or separately - `agents-folder` supplies the default: in repos that have not adopted the structure, the workspace stays uncommitted. `implement.sh` and `progress.json` are batch-implement scaffolding - they do not ship unless the repo tracks them deliberately.
 
 Write the PR description per `unslop`, for the reviewer who was not in the room:
 
@@ -112,4 +112,4 @@ Creating the PR is an outward-facing action: confirm with the user before pushin
 - `triage` - captures follow-up findings and holds the source issues this skill closes.
 - `record-learnings` - receives realizations about the spec-writing process itself.
 - `unslop` - governs the PR description and all reviewer-facing prose.
-- `agents-folder-conventions` - whether workspace changes may ship, and whether the PR description may link `.agents/` paths at all.
+- `agents-folder` - whether workspace changes may ship, and whether the PR description may link `.agents/` paths at all.

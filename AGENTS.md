@@ -23,6 +23,7 @@
 
 ## Structure
 - `packages/<name>/config/` — stow source (symlinked to $HOME)
+- GNU Stow links entries from each package's `config/` directory into the target. Changes below an already-symlinked directory are available immediately; adding a new top-level entry may require rerunning `./install.sh <name>` to create its symlink.
 - `packages/<name>/install.sh` — installs dependencies + stows config
 - `lib.sh` — shared helpers (install_package, stow_it, is_macos, etc.)
 - `packages.txt` — ordered list of packages for full install
