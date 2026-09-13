@@ -50,8 +50,14 @@ dotfiles setup use the layout below.
 - **Frontmatter:** YAML. Two fields are the portable core that every harness
   reads - always provide them:
   - `name`: kebab-case, must match the directory name.
-  - `description`: a single line, trigger-rich. Include the phrases a user would
-    actually say, so harnesses surface the skill at the right moment.
+  - `description`: despite its name, treat this as a trigger or routing rule,
+    not as a conventional summary of the skill's contents. Models see it before
+    deciding whether to read the body, so it must explain the concrete
+    situations in which the skill should be loaded. Include phrases users would
+    actually say, relevant context, and useful boundaries. Sometimes a content
+    summary is the wrong description because it says what is inside without
+    giving the model enough guidance about when that content applies. Keep it
+    to a single line in the YAML.
 - **Additional frontmatter fields are allowed** when a harness uses them.
   Harnesses ignore fields they don't know, so extra fields don't break
   compatibility. Keep behavior that matters everywhere in the body; use
