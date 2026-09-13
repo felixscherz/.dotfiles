@@ -1,15 +1,34 @@
 ---
 name: author-skill
-description: How to author, edit, or move an Agent Skill (a SKILL.md) so both opencode and Claude Code discover and read it. Use whenever creating or changing a skill, or when record-learnings decides a learning belongs in a skill. Covers the shared SKILL.md format and the opencode-as-source-of-truth symlink layout.
+description: How to author, edit, or move an Agent Skill (a SKILL.md) for broad agent compatibility. Use whenever creating or changing a skill, or when record-learnings decides a learning belongs in a skill. Covers the shared SKILL.md format, project-local placement conventions, and the global opencode-as-source-of-truth symlink layout.
 ---
 
-# Authoring skills for opencode and Claude Code
+# Authoring portable agent skills
 
 Skills target multiple harnesses - opencode and Claude Code today, possibly
 others later. Author them to be broadly compatible: a portable core every
 harness reads, plus optional harness-specific extras that others safely ignore.
-opencode is the source of truth on disk. Claude Code only reads `~/.claude/*`,
-so those paths are symlinked into opencode's config.
+
+## Project-local skill location
+
+Use `.agents/skills/<name>/SKILL.md` by default for project-scoped skills. The
+`.agents/skills` location is understood by almost all agent harnesses and avoids
+making a new project-specific skill belong to a single harness.
+
+Before creating or moving a project-scoped skill, inspect the repository and
+preserve its established convention:
+
+- If the repository already has skills under `.opencode/skills`, put project
+  skills there.
+- If the repository already has skills under `.claude/skills`, put project
+  skills there.
+- If neither location contains skills, use `.agents/skills`.
+- If more than one of these locations already contains skills, follow explicit
+  repository instructions or the location used by the skill being edited. Do
+  not consolidate or move existing skills unless the user asks.
+
+These rules apply to repository-local skills. The global skills in this
+dotfiles setup use the layout below.
 
 ## Source of truth and symlink layout
 
@@ -60,9 +79,8 @@ The global `AGENTS.md` rules apply to skill content too. In particular:
   skills fit together. Add new skills to it, remove deleted ones.
 - The skills dir resolves into the dotfiles git repo, so new or edited skills
   show up as changes there. Remind the user to commit them in `~/.dotfiles`.
-- For **project-scoped** skills, use the same `SKILL.md` format inside the
-  project. If a project needs both tools to see them, mirror this symlink
-  approach for the project's skills directory.
+- For **project-scoped** skills, use the same `SKILL.md` format and follow the
+  project-local location precedence above.
 
 ## Related
 
