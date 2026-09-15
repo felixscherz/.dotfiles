@@ -19,6 +19,7 @@
       "*": "allow",
       "handoff": "deny",
       "setup-agents": "deny",
+      "setup-repository": "deny",
       "to-spec": "deny",
       "to-tickets": "deny",
       "batch-implement": "deny"

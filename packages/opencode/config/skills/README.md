@@ -22,8 +22,10 @@ batch-implement     generate a script that runs tickets through a harness
    catch-up         walk the human through what changed; review against the spec
      |
 ship-feature        final sign-off: verify against the spec, surface drift,
-                      close source issues, open the pull request
+                       close source issues, open the pull request
 ```
+
+Sibling setup skill, also run once per repo: `setup-repository` productionizes a repo for tagged releases - generated release notes, CI for format/lint/test, prek/pre-commit hooks, LICENSE, and a documented release workflow. It is independent of the pipeline and does not read `.agents/`.
 
 The feature workspace `.agents/features/<feature>/` accumulates: `README.md` (free-form progression doc holding the feature's status and history), `spec.md`, `ticket-NN.md`, `summary-NN.md`, plus the generated `implement.sh` / `progress.json`. The canonical issue file format lives in the `triage` skill; everything else references it.
 
@@ -57,7 +59,7 @@ the same in every case and does not depend on repository scaffolding.
 
 ## Invocation policy
 
-Pipeline stages that create artifacts on explicit demand are user-invocable only: `setup-agents`, `to-spec`, `to-tickets`, `batch-implement`, `ship-feature`, `handoff`. This is enforced twice, and both must stay in sync: `disable-model-invocation: true` in the skill frontmatter (Claude Code) and `permission.skill` denies in `opencode.json` (opencode). Everything else may be model-invoked when its description matches.
+Pipeline stages that create artifacts on explicit demand are user-invocable only: `setup-agents`, `setup-repository`, `to-spec`, `to-tickets`, `batch-implement`, `ship-feature`, `handoff`. This is enforced twice, and both must stay in sync: `disable-model-invocation: true` in the skill frontmatter (Claude Code) and `permission.skill` denies in `opencode.json` (opencode). Everything else may be model-invoked when its description matches.
 
 ## Per-repo state the pipeline reads
 
