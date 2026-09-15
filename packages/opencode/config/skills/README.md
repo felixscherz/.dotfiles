@@ -50,6 +50,7 @@ the same in every case and does not depend on repository scaffolding.
 **Working style** - how sessions run, independent of the pipeline:
 
 - `pair-program` (+ `DESIGN.md`) - human as navigator, agent as driver, small reviewed steps. The hands-on alternative to the pipeline; `catch-up` is its after-the-fact counterpart.
+- `worktree-isolation` - create an isolated checkout under the repository's `.worktrees/` directory and perform the requested work there.
 - `unslop` - cut AI tells from outward-facing prose. Triggered by other skills referencing it, or when writing for a human audience (PR text, tickets, posts, docs).
 - `html-communication` - produce a self-contained HTML document for human communication (plans, specs, write-ups, summaries). Not for product HTML or frontend UI design.
 - `handoff` - compact a session into a handoff doc for a fresh agent (user-invoked; asks where to save).

@@ -162,8 +162,8 @@ state.
   worktrees and record which agent owns integration.
 - A task spanning repositories uses one worktree per modified repository. Keep one canonical task workspace in the
   orchestrator's control repository and give subagents its exact path.
-- Follow repository-specific branch naming and worktree rules when present. Otherwise use a task-derived branch
-  name and a sibling worktree location that cannot collide with another active task.
+- Follow repository-specific branch naming and worktree rules when present. Otherwise apply the `worktree-isolation`
+  skill: use a task-derived branch and place its checkout below `.worktrees/` in the primary checkout.
 
 Resolve existing branches and worktrees before creating new ones. Never delete a worktree or branch merely because
 a task completed; cleanup is a separate action that requires the human's instruction or an explicitly selected

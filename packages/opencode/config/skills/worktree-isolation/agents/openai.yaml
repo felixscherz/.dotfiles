@@ -1,0 +1,4 @@
+interface:
+  display_name: "Worktree Isolation"
+  short_description: "Do repository work in an isolated worktree"
+  default_prompt: "Use $worktree-isolation to complete this task in a separate Git worktree."

@@ -12,6 +12,7 @@ node_modules/
 .aider.*
 .opencode
 .scratch/
+/.worktrees/
 **/.claude/settings.local.json
 pyrightconfig.json
 .neoconf.json
