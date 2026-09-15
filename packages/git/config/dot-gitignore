@@ -1,3 +1,4 @@
+# Named dot-gitignore so Stow --dotfiles maps it to ~/.gitignore; Stow ignores a literal .gitignore by default.
 .DS_Store
 .node_repl_history
 .envrc
@@ -15,3 +16,4 @@ node_modules/
 pyrightconfig.json
 .neoconf.json
 kls_database.db
+.agents/skills/felixws/**/*
