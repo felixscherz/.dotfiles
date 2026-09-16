@@ -35,9 +35,12 @@ return {
           "ktfmt",
           "yamllint",
           "gofumpt",
-          "goimports",
-          "delve",
-        }),
+           "goimports",
+           "delve",
+           -- JetBrains distributes time-limited IntelliJ-based Kotlin LSP builds.
+           -- Keep this server current so it does not expire between manual updates.
+           { "kotlin-lsp", auto_update = true },
+         }),
         auto_update = false,
         run_on_start = true,
       })

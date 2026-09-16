@@ -40,13 +40,14 @@ M.requires = {
 function M.filter(list)
 	local keep = {}
 	local skipped = {}
-	for _, name in ipairs(list) do
+	for _, item in ipairs(list) do
+		local name = type(item) == "table" and item[1] or item
 		local base = vim.split(name, "@")[1]
 		local dep = M.requires[base]
 		if dep and vim.fn.executable(dep) == 0 then
 			table.insert(skipped, string.format("%s (needs %s)", base, dep))
 		else
-			table.insert(keep, name)
+			table.insert(keep, item)
 		end
 	end
 	if #skipped > 0 then
