@@ -37,6 +37,11 @@ return {
 				local path = vim.fn.fnamemodify(node:get_id(), ":.")
 				vim.fn.setreg("+", path)
 			end,
+			["<leader>pa"] = function(state)
+				local node = state.tree:get_node()
+				local path = vim.fn.fnamemodify(node:get_id(), ":p")
+				vim.fn.setreg("+", path)
+			end,
 		},
 		},
 		enable_git_status = true,
