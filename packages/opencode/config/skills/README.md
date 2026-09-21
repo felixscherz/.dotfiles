@@ -56,6 +56,7 @@ the same in every case and does not depend on repository scaffolding.
 - `handoff` - compact a session into a handoff doc for a fresh agent (user-invoked; asks where to save).
 - `record-learnings` - route a realization to its durable home (CLAUDE.md/AGENTS.md, a skill, docs, memory).
 - `author-skill` - how to write and place skills themselves.
+- `workspace-layout` - resolve logical names for local repositories and documents. Its `scripts/find-workspace.sh` selects the nearest `.workspace/WORKSPACE.md` above the session's starting directory or the personal default at `~/.config/workspace-layout/WORKSPACE.md`. Other skills can use it without assuming the developer's directory layout; setup creates the mapping outside the skill directory.
 - `agents-folder` - manage personal `.agents/` content and the local-only task workspaces used by orchestrators.
 
 ## Invocation policy
