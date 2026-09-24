@@ -1,6 +1,6 @@
 ---
 name: workspace-layout
-description: Resolve local repositories, documents, and directories by logical name when another skill refers to workspace-layout or the user asks where workspace resources live. Use also to set up or update a personal or workspace-specific location mapping.
+description: Use when looking for a repository or folder outside the current working directory, when another skill refers to workspace-layout, or when the user asks where workspace resources live. Resolve local repositories, documents, and directories by logical name. Use also to set up or update a personal or workspace-specific location mapping.
 ---
 
 # Workspace layout
