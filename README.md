@@ -12,6 +12,11 @@ Install the configuration by running
 
 which will bootstrap [ansible](https://ansible.com) and install everything.
 
+Install the shared agent skills separately with `./install.sh skills`. Their
+source is `packages/skills/config/skills/`, stowed to `~/.agents/skills`.
+The installer migrates the previous Codex-owned skills link. OpenCode and
+Claude Code keep compatibility links to the same skills.
+
 
 ## building neovim from source
 

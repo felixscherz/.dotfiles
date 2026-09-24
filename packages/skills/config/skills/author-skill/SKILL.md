@@ -1,6 +1,6 @@
 ---
 name: author-skill
-description: How to author, edit, or move an Agent Skill (a SKILL.md) for broad agent compatibility. Use whenever creating or changing a skill, or when record-learnings decides a learning belongs in a skill. Covers the shared SKILL.md format, project-local placement conventions, and the global opencode-as-source-of-truth symlink layout.
+description: How to author, edit, or move an Agent Skill (a SKILL.md) for broad agent compatibility. Use whenever creating or changing a skill, or when record-learnings decides a learning belongs in a skill. Covers the shared SKILL.md format, project-local placement conventions, and the shared global .agents/skills layout.
 ---
 
 # Authoring portable agent skills
@@ -32,16 +32,15 @@ dotfiles setup use the layout below.
 
 ## Source of truth and symlink layout
 
-- opencode's global config lives in the dotfiles repo at
-  `~/.dotfiles/packages/opencode/config/`, symlinked to `~/.config/opencode/`.
-- Claude Code reads `~/.claude/*`. To keep one source of truth, those are
-  symlinks into opencode:
-  - `~/.claude/CLAUDE.md` -> `~/.config/opencode/AGENTS.md`
-  - `~/.claude/skills` -> `~/.config/opencode/skills`
-- Therefore: **author every global skill in the opencode skills dir**,
-  `~/.config/opencode/skills/<name>/SKILL.md`. Never create a skill only under
-  `~/.claude/skills`; that path is a symlink, and the real content belongs in
-  opencode/dotfiles so it is version controlled and visible to both tools.
+- Global skills live in `~/.dotfiles/packages/skills/config/skills/`.
+  The dedicated `skills` package stows them to `~/.agents/skills/`.
+- `~/.config/opencode/skills` and `~/.claude/skills` are compatibility
+  symlinks to the same version-controlled directory.
+- Author every global skill at `~/.agents/skills/<name>/SKILL.md`.
+  Keep the content in the shared skills package so all tools see the same
+  files.
+- Global instructions remain in the opencode package. Claude Code's
+  `~/.claude/CLAUDE.md` links to its `AGENTS.md`.
 
 ## Compatible SKILL.md format
 

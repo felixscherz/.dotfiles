@@ -1,6 +1,6 @@
 # Skills
 
-Global agent skills, shared across harnesses. opencode reads this directory natively; Claude Code reads it through the `~/.claude/skills` symlink. Skills aim to be compatible with a broad range of harnesses - see `author-skill` for the format and conventions.
+Global agent skills live in the dedicated `skills` package, stowed to `~/.agents/skills`. OpenCode and Claude Code also have compatibility symlinks to this directory. See `author-skill` for the shared format and conventions.
 
 This file is the index of how the skills fit together. Update it when adding or removing a skill (`author-skill` reminds you).
 

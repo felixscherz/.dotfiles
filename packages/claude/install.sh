@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 set -e
 source "$(dirname "$0")/../../lib.sh"
-# Claude Code only reads ~/.claude, but opencode is the source of truth. The
-# files under config/ are symlinks into the opencode package, so stowing them
-# into ~/.claude lets Claude see the same global AGENTS.md and skills.
+# Share global instructions from the opencode package and skills from the
+# dedicated skills package through the symlinks under config/.
 mkdir -p "$HOME/.claude"
 stow_it claude "$HOME/.claude"
