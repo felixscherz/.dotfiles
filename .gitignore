@@ -14,3 +14,5 @@ packages/karabiner/config/.config/karabiner/**
 !.config/karabiner/karabiner.json
 # finicky routing is company/customer-specific - lives in the private overlay
 packages/finicky/config/.finicky.js
+# Claude Code syncs claude.ai account skills here via the ~/.claude/skills symlink
+packages/skills/config/skills/synced/
