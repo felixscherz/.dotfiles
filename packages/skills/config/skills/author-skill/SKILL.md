@@ -80,8 +80,6 @@ The global `AGENTS.md` rules apply to skill content too. In particular:
 
 ## After authoring
 
-- Update the skills index at `<skills-root>/README.md` - it documents how the
-  skills fit together. Add new skills to it, remove deleted ones.
 - The skills dir resolves into the dotfiles git repo, so new or edited skills
   show up as changes there. Remind the user to commit them in `~/.dotfiles`.
 - For **project-scoped** skills, use the same `SKILL.md` format and follow the
