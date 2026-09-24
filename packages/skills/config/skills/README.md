@@ -31,21 +31,7 @@ The feature workspace `.agents/features/<feature>/` accumulates: `README.md` (fr
 
 `agents-folder` governs the personal `.agents/` workspace, including whether its contents enter a repo's history. In repos that have not adopted a structure, personal workspace files stay uncommitted and outward prose (PR descriptions, commit messages) must not reference their paths.
 
-**Orchestration workspace** - durable communication for long-running delegated tasks:
-
-```text
-orchestrator agent
-       |
- agents-folder      create and maintain .agents/tasks/<task-id>/
-       |
- assignments        bounded briefs for implementation, investigation, and review
-       |
- reports            concise cross-agent results and verification
-```
-
-The orchestrator does not prescribe a delivery method. The human may select a skill-backed method, describe a
-method without a skill, or leave the selection to the orchestrator. `agents-folder` keeps the coordination contract
-the same in every case and does not depend on repository scaffolding.
+**Task workspace** - `agents-folder` gives any agent a per-task folder at `.agents/tasks/<task-id>/` in the primary checkout. Agents use it for scratch files, documents for the user (summaries, plans, write-ups), handoff notes for the next agent, and shared state when several agents work on one task. Each folder has a `README.md` index; agents only edit files they created. An orchestrator uses the same folder for its assignments and reports. Task folders stay out of git history via the local exclude file.
 
 **Working style** - how sessions run, independent of the pipeline:
 
@@ -53,15 +39,14 @@ the same in every case and does not depend on repository scaffolding.
 - `worktree-isolation` - create an isolated checkout under the repository's `.worktrees/` directory and perform the requested work there.
 - `unslop` - cut AI tells from outward-facing prose. Triggered by other skills referencing it, or when writing for a human audience (PR text, tickets, posts, docs).
 - `html-communication` - produce a self-contained HTML document for human communication (plans, specs, write-ups, summaries). Not for product HTML or frontend UI design.
-- `handoff` - compact a session into a handoff doc for a fresh agent (user-invoked; asks where to save).
 - `record-learnings` - route a realization to its durable home (CLAUDE.md/AGENTS.md, a skill, docs, memory).
 - `author-skill` - how to write and place skills themselves.
 - `workspace-layout` - resolve logical names for local repositories and documents. Its `scripts/find-workspace.sh` selects the nearest `.workspace/WORKSPACE.md` above the session's starting directory or the personal default at `~/.config/workspace-layout/WORKSPACE.md`. Other skills can use it without assuming the developer's directory layout; setup creates the mapping outside the skill directory.
-- `agents-folder` - manage personal `.agents/` content and the local-only task workspaces used by orchestrators.
+- `agents-folder` - per-task workspace under `.agents/tasks/` for scratch files, user-facing documents, handoffs, and multi-agent coordination.
 
 ## Invocation policy
 
-Pipeline stages that create artifacts on explicit demand are user-invocable only: `setup-agents`, `setup-repository`, `to-spec`, `to-tickets`, `batch-implement`, `ship-feature`, `handoff`. This is enforced twice, and both must stay in sync: `disable-model-invocation: true` in the skill frontmatter (Claude Code) and `permission.skill` denies in `opencode.json` (opencode). Everything else may be model-invoked when its description matches.
+Pipeline stages that create artifacts on explicit demand are user-invocable only: `setup-agents`, `setup-repository`, `to-spec`, `to-tickets`, `batch-implement`, `ship-feature`. This is enforced twice, and both must stay in sync: `disable-model-invocation: true` in the skill frontmatter (Claude Code) and `permission.skill` denies in `opencode.json` (opencode). Everything else may be model-invoked when its description matches.
 
 ## Per-repo state the pipeline reads
 
