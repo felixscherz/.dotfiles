@@ -34,8 +34,8 @@ dotfiles setup use the layout below.
 
 - Global skills live in `~/.dotfiles/packages/skills/config/skills/`.
   The dedicated `skills` package stows them to `~/.agents/skills/`.
-- `~/.config/opencode/skills` and `~/.claude/skills` are compatibility
-  symlinks to the same version-controlled directory.
+- OpenCode and Codex read `~/.agents/skills/` directly. `~/.claude/skills`
+  is a compatibility symlink to the same version-controlled directory.
 - Author every global skill at `~/.agents/skills/<name>/SKILL.md`.
   Keep the content in the shared skills package so all tools see the same
   files.

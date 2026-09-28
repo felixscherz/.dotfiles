@@ -1,46 +1,66 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "autoupdate": false,
-  "model": "github-copilot/gpt-5.6-luna",
+  "update": "disable",
+  "model": "github-copilot/gpt-6-sol",
   "share": "disabled",
   "formatter": true,
-  "disabled_providers": [
-    "openai",
-    "anthropic",
-    "gemini",
-    "amazon-bedrock",
-    "google",
-  ],
-  "permission": {
-    "github*": "deny",
-    "grafana*": "deny",
-    "atlassian*": "deny",
-    "skill": {
-      "*": "allow",
-      "handoff": "deny",
-      "setup-agents": "deny",
-      "setup-repository": "deny",
-      "to-spec": "deny",
-      "to-tickets": "deny",
-      "batch-implement": "deny"
-    }
+  "experimental": {
+    "policies": [
+      { "action": "provider.use", "resource": "openai", "effect": "deny" },
+      { "action": "provider.use", "resource": "anthropic", "effect": "deny" },
+      { "action": "provider.use", "resource": "gemini", "effect": "deny" },
+      { "action": "provider.use", "resource": "amazon-bedrock", "effect": "deny" },
+      { "action": "provider.use", "resource": "google", "effect": "deny" }
+    ]
   },
-  "provider": {
+  "permissions": [
+    { "action": "github*", "resource": "*", "effect": "deny" },
+    { "action": "grafana*", "resource": "*", "effect": "deny" },
+    { "action": "atlassian*", "resource": "*", "effect": "deny" },
+    { "action": "skill", "resource": "*", "effect": "allow" },
+    { "action": "skill", "resource": "handoff", "effect": "deny" },
+    { "action": "skill", "resource": "setup-agents", "effect": "deny" },
+    { "action": "skill", "resource": "setup-repository", "effect": "deny" },
+    { "action": "skill", "resource": "to-spec", "effect": "deny" },
+    { "action": "skill", "resource": "to-tickets", "effect": "deny" },
+    { "action": "skill", "resource": "batch-implement", "effect": "deny" },
+    { "action": "external_directory", "resource": "~/.agents/skills/config/skills/engineering/references/*", "effect": "allow" },
+    { "action": "read", "resource": "~/.agents/skills/config/skills/engineering/references/*", "effect": "allow" }
+  ],
+  "providers": {
     "github-copilot": {
-      "whitelist": [
-        "claude-sonnet-5", // versatile
-        "claude-opus-5", // powerful
-        "claude-opus-4.8", // powerful
-        "gpt-6-sol", // powerful
-        "gpt-5.6-terra", // midlevel
-        "gpt-6-luna", // cheapest
-        "kimi-k3" // powerful
-      ]
+      // V2 has no model whitelist; disable models outside the former list.
+      // Recheck this list when Copilot adds models.
+      "models": {
+        "claude-opus-5.5": { "disabled": true },
+        "grok-4.7": { "disabled": true },
+        "gpt-6-astra": { "disabled": true },
+        "gemini-3.8-flash": { "disabled": true },
+        "claude-fable-5.1": { "disabled": true },
+        "gemini-3.7-flash": { "disabled": true },
+        "grok-4.6": { "disabled": true },
+        "mai-code-1.1-flash": { "disabled": true },
+        "gemini-3.6-flash": { "disabled": true },
+        "gpt-5.6-sol": { "disabled": true },
+        "grok-4.5": { "disabled": true },
+        "kimi-k2.7-code": { "disabled": true },
+        "claude-fable-5": { "disabled": true },
+        "claude-opus-4.8-fast": { "disabled": true },
+        "gemini-3.5-flash": { "disabled": true },
+        "gpt-5.5": { "disabled": true },
+        "claude-opus-4.7": { "disabled": true },
+        "claude-opus-4.7-fast": { "disabled": true },
+        "gpt-5.4-mini": { "disabled": true },
+        "gpt-5.4": { "disabled": true },
+        "gpt-5.3-codex": { "disabled": true },
+        "claude-haiku-4.5": { "disabled": true },
+        "gpt-5-mini": { "disabled": true }
+      }
     },
     "lmstudio": {
-      "npm": "@ai-sdk/openai-compatible",
+      "package": "aisdk:@ai-sdk/openai-compatible",
       "name": "LM Studio (Local)",
-      "options": {
+      "settings": {
         "baseURL": "http://localhost:1234/v1"
       },
       "models": {
