@@ -2,4 +2,4 @@
 set -e
 source "$(dirname "$0")/../../lib.sh"
 install_package tmux
-stow_it tmux
+"$(dirname "$0")/link.sh"

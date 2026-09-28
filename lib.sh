@@ -3,6 +3,10 @@
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# Each package's link.sh passes this to stow. unlink.sh sets it to --delete
+# so the same link.sh removes exactly the links it would create.
+STOW_ACTION="${STOW_ACTION:---stow}"
+
 is_macos() {
     [[ "$(uname -s)" == "Darwin" ]]
 }
@@ -48,7 +52,7 @@ ensure_cargo() {
 stow_it() {
     local pkg="$1"
     local target="${2:-$HOME}"
-    stow --dir="$DOTFILES_DIR/packages/$pkg" --target="$target" config
+    stow "$STOW_ACTION" --dir="$DOTFILES_DIR/packages/$pkg" --target="$target" config
 }
 
 bootstrap() {

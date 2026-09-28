@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
 set -e
 source "$(dirname "$0")/../../lib.sh"
-
-install_cask finicky
-"$(dirname "$0")/link.sh"
+stow_it nvim

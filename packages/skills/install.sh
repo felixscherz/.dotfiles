@@ -13,4 +13,4 @@ if [[ -L "$skills_link" ]]; then
             ;;
     esac
 fi
-stow_it skills "$HOME/.agents"
+"$(dirname "$0")/link.sh"

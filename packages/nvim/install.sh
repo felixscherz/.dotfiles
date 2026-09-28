@@ -30,7 +30,7 @@ fi
 ensure_cargo
 cargo install --locked tree-sitter-cli
 
-stow_it nvim
+"$(dirname "$0")/link.sh"
 
 cat <<'EOF'
 

@@ -3,4 +3,4 @@ set -e
 source "$(dirname "$0")/../../lib.sh"
 
 install_cask karabiner-elements
-stow_it karabiner
+"$(dirname "$0")/link.sh"

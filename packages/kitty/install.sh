@@ -14,4 +14,4 @@ elif is_linux; then
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n
 fi
 
-stow_it kitty
+"$(dirname "$0")/link.sh"

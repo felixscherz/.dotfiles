@@ -8,4 +8,4 @@ if is_macos; then
     brew install --cask font-jetbrains-mono-nerd-font 2>/dev/null || true
 fi
 
-stow_it ghostty
+"$(dirname "$0")/link.sh"

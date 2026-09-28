@@ -15,4 +15,4 @@ else
     echo "Antigen is already installed at $ANTIGEN_FILE. Skipping download."
 fi
 
-stow_it zsh
+"$(dirname "$0")/link.sh"

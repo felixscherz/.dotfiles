@@ -12,6 +12,11 @@ Install the configuration by running
 
 which will bootstrap [ansible](https://ansible.com) and install everything.
 
+`./link.sh` only creates the symlinks, without installing software, and
+`./unlink.sh` removes them again. Installed software is kept. Both take package
+names (`./link.sh nvim zsh`) and default to every package. To move the repo,
+run `./unlink.sh`, move it, then run `./link.sh` from the new location.
+
 Install the shared agent skills separately with `./install.sh skills`. Their
 source is `packages/skills/config/skills/`, stowed to `~/.agents/skills`.
 The installer migrates the previous Codex-owned skills link. OpenCode and
