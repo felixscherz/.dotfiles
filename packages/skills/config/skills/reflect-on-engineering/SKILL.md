@@ -45,8 +45,9 @@ you cannot tie to something that happened in the scope.
 ## Judge each finding
 
 - **General or local.** The engineering rules apply across codebases. A lesson
-  tied to one project, framework, or tool belongs in that project's `AGENTS.md`
-  or a local skill. Say where it belongs instead.
+  tied to one project belongs in that project's `AGENTS.md` or a local skill.
+  Say where it belongs instead. A language- or framework-specific lesson that
+  carries across projects belongs in `references/<language>/`.
 - **Pattern or one-off.** One session is weak evidence for a new rule. An
   explicit user preference or a repeated correction is strong evidence. Say
   how strong the evidence is.
@@ -78,7 +79,19 @@ instead of stopping at a proposal.
 
 Edit when the user explicitly asks for an update or approves specific proposed
 changes. For ambiguous requests such as "review this, it may need updates",
-propose changes and ask before editing. Follow the file convention in
-`../engineering/references/keep-engineering-up-to-date.md`, keep the index in
-`../engineering/SKILL.md` in sync, and remind the user to commit in
-`~/.dotfiles`.
+propose changes and ask before editing.
+
+- The skill lives in
+  `~/workspaces/personal/.dotfiles/packages/skills/config/skills/engineering/`.
+  Remind the user to commit changes there.
+- One rule per file in `references/`: frontmatter with `name` matching the
+  filename and a `description` stating when it applies, an H1 title, a short
+  framing paragraph, and a few bullets.
+- A rule with supporting files, such as a script, gets its own folder named
+  after the rule, holding `<rule>.md` and those files.
+- Language- or framework-specific rules go in `references/<language>/`. They
+  may be longer and include examples, but must not restate the general rules
+  they build on. Keep their examples consistent with the general rules, since
+  an agent copies the example before it reads the prose.
+- Keep the index in `../engineering/SKILL.md` in sync when adding, renaming,
+  or removing a file.

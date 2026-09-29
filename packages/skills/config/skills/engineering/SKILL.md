@@ -27,8 +27,7 @@ Each reference holds one rule, and the index says when it applies. Read a
 reference in full before applying it. In your reply, name each rule you
 applied and the decision it changed.
 
-- **World building** (`references/world-building.md`). At the start of a task,
-  and whenever requirements change or are added.
+- **World building** (`references/world-building.md`). At the start of a task.
 - **Feature map** (`references/feature-map.md`). At the start of a task,
   when looking for where a feature lives, and after adding, moving, renaming,
   or removing a feature.
@@ -63,7 +62,7 @@ applied and the decision it changed.
 ## Maintaining this skill
 
 - **Keep engineering up to date** (`references/keep-engineering-up-to-date.md`).
-  A rule here proves wrong, outdated, or missing, or the user asks to update
-  this skill.
+  A rule here proves wrong, outdated, ambiguous, or missing, or you would have
+  changed the skill to get a better result.
 - For a structured retrospective on how well these rules served a session,
   use the `reflect-on-engineering` skill.

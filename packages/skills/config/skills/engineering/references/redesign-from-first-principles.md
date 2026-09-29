@@ -14,7 +14,6 @@ had been there from the start.
   concept. A missing concept usually shows up as a condition.
 - When a requirement or a drift changes the model, change the model first, then
   migrate the code to it. Don't keep the old shape alive beside the new one.
-- Don't shy away from broad migrations when the model needs them. Clean up
-  what the new model makes obsolete.
-- When the redesign reaches well beyond the task, propose it with the old and
-  new model side by side and let the user decide.
+- Don't shy away from broad migrations when the model needs them, and clean up
+  what the new model makes obsolete. When the migration reaches beyond the
+  task, propose it with the old and new model side by side before starting.

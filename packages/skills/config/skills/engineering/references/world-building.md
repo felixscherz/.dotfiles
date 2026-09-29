@@ -1,6 +1,6 @@
 ---
 name: world-building
-description: Apply at the start of a task and whenever requirements change or are added. Understand the model of the problem before diving into the code.
+description: Apply at the start of a task. Understand the model of the problem before diving into the code.
 ---
 
 # World building
@@ -13,9 +13,8 @@ available.
 
 - Before changing code, understand the problem, the domain, and how the parts
   you are about to touch work together.
-- When requirements change or are added, ask what they change in the model
-  first, then carry that change into the code.
 - While reading code, check whether it still supports the model or has drifted
-  from it. Name any drift you find.
+  from it. Name any drift you find. Changing the model to resolve it is
+  covered by `redesign-from-first-principles.md`.
 - Code matters because it is how the model exists. When code and model
   disagree, decide which one is wrong before fixing either.

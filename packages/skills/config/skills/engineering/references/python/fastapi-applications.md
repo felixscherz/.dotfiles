@@ -33,13 +33,22 @@ class BookingId:
     value: str
 
 
+class InvalidGuestError(Exception): ...
+
+
+@dataclass(frozen=True)
+class GuestName:
+    value: str
+
+    def __post_init__(self) -> None:
+        if not self.value.strip():
+            raise InvalidGuestError("Guest name is required")
+
+
 @dataclass(frozen=True)
 class Booking:
     id: BookingId
-    guest: str
-
-
-class InvalidGuestError(Exception): ...
+    guest: GuestName
 
 
 class BookingRepository(Protocol):
@@ -51,9 +60,7 @@ class ReserveBookingId(Protocol):
 
 
 class BookingService:
-    def create(self, booking_id: BookingId, guest: str) -> Booking:
-        if not guest.strip():
-            raise InvalidGuestError("Guest name is required")
+    def create(self, booking_id: BookingId, guest: GuestName) -> Booking:
         return Booking(id=booking_id, guest=guest)
 
 
@@ -65,7 +72,7 @@ class CreateBooking:
         self._reserve_id = reserve_id
         self._bookings = bookings
 
-    async def execute(self, guest: str) -> Booking:
+    async def execute(self, guest: GuestName) -> Booking:
         booking = self._bookings.create(await self._reserve_id(), guest)
         await self._repository.save(booking)
         return booking
@@ -90,7 +97,7 @@ from typing import Annotated, cast
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from pydantic import BaseModel
 
-# Import CreateBooking, InvalidGuestError, and Container from their respective modules.
+# Import CreateBooking, GuestName, InvalidGuestError, and Container from their respective modules.
 router = APIRouter(prefix="/bookings")
 
 
@@ -117,10 +124,11 @@ async def create_booking(
     create_booking: Annotated[CreateBooking, Depends(get_create_booking)],
 ) -> BookingResponse:
     try:
-        booking = await create_booking.execute(request.guest)
+        guest = GuestName(request.guest)
     except InvalidGuestError as exc:
         raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=str(exc)) from exc
-    return BookingResponse(id=booking.id.value, guest=booking.guest)
+    booking = await create_booking.execute(guest)
+    return BookingResponse(id=booking.id.value, guest=booking.guest.value)
 ```
 
 For route tests, override `get_create_booking` through `app.dependency_overrides` and check the HTTP contract without
