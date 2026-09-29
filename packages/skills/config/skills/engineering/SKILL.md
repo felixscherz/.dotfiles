@@ -1,6 +1,6 @@
 ---
 name: engineering
-description: Use for any non-trivial code change - features, bug fixes, refactors, writing or changing tests, designing types, modules, or APIs. Also when the user asks to follow my engineering principles.
+description: Use for any non-trivial code change - features, bug fixes, refactors, writing or changing tests, designing types, modules, or APIs, and shipping the change through a pull request. Also when the user asks to follow my engineering principles.
 ---
 
 # Engineering
@@ -56,6 +56,9 @@ applied and the decision it changed.
 - **Never make the same mistake twice** (`references/never-make-the-same-mistake-twice.md`).
   After finding a bug, misusing a third-party API, or discovering a wrong
   assumption about an external service or constraint.
+- **Ship changes** (`references/ship-changes.md`). A change is done and needs
+  to be committed, pushed, and integrated through a pull request, or a PR
+  description needs writing or updating.
 
 ## Maintaining this skill
 
