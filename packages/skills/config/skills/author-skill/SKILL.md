@@ -1,92 +1,56 @@
 ---
 name: author-skill
-description: How to author, edit, or move an Agent Skill (a SKILL.md) for broad agent compatibility. Use whenever creating or changing a skill, or when record-learnings decides a learning belongs in a skill. Covers the shared SKILL.md format, project-local placement conventions, and the shared global .agents/skills layout.
+description: How to author, edit, or move an Agent Skill (a SKILL.md) for broad agent compatibility. Use whenever creating or changing a skill, or when record-learnings decides a learning belongs in a skill. Covers where global and project-local skills live, the shared SKILL.md format, and harness-specific settings such as disabling auto-invocation.
 ---
 
 # Authoring portable agent skills
 
-Skills target multiple harnesses - opencode and Claude Code today, possibly
-others later. Author them to be broadly compatible: a portable core every
-harness reads, plus optional harness-specific extras that others safely ignore.
+Skills serve several harnesses (Claude Code, opencode, Codex, possibly more).
+Two goals:
 
-## Project-local skill location
+1. Every harness reads skills from the same place, so there is one copy.
+2. Harness-level behavior (like auto-invocation) is configured for each
+   harness's own convention, so all harnesses behave the same.
 
-Use `.agents/skills/<name>/SKILL.md` by default for project-scoped skills. The
-`.agents/skills` location is understood by almost all agent harnesses and avoids
-making a new project-specific skill belong to a single harness.
+## Global or project-local
 
-Before creating or moving a project-scoped skill, inspect the repository and
-preserve its established convention:
+- **Global** - useful across repositories (personal workflow, general
+  practices). Author it in `~/workspaces/personal/.dotfiles/packages/skills/config/skills/<name>/SKILL.md`.
+  The `skills` package stows this to `~/.agents/skills/`, which opencode and
+  Codex read directly; `~/.claude/skills` is a symlink to the same directory.
+  Remind the user to commit the change in the dotfiles repo.
+- **Project-local** - specific to one repository's code, tooling, or
+  conventions. Default to `.agents/skills/<name>/SKILL.md`, which most
+  harnesses read. If the repo already keeps skills in `.claude/skills` or
+  `.opencode/skills`, follow that instead. Do not move existing skills unless
+  asked.
 
-- If the repository already has skills under `.opencode/skills`, put project
-  skills there.
-- If the repository already has skills under `.claude/skills`, put project
-  skills there.
-- If neither location contains skills, use `.agents/skills`.
-- If more than one of these locations already contains skills, follow explicit
-  repository instructions or the location used by the skill being edited. Do
-  not consolidate or move existing skills unless the user asks.
+When unsure, ask which one the user wants.
 
-These rules apply to repository-local skills. The global skills in this
-dotfiles setup use the layout below.
+## SKILL.md format
 
-## Source of truth and symlink layout
+- One kebab-case directory per skill containing `SKILL.md`.
+- Frontmatter core that every harness reads:
+  - `name`: must match the directory name.
+  - `description`: a single-line routing rule, not a summary. The model sees
+    it before deciding to load the body, so state the concrete situations,
+    phrases users would say, and boundaries.
+- Body: portable markdown. Reference bundled files by relative path.
+- Harnesses ignore unknown frontmatter fields, so harness-specific fields are
+  safe to add.
 
-- Global skills live in `~/.dotfiles/packages/skills/config/skills/`.
-  The dedicated `skills` package stows them to `~/.agents/skills/`.
-- OpenCode and Codex read `~/.agents/skills/` directly. `~/.claude/skills`
-  is a compatibility symlink to the same version-controlled directory.
-- Author every global skill at `~/.agents/skills/<name>/SKILL.md`.
-  Keep the content in the shared skills package so all tools see the same
-  files.
-- Global instructions remain in the opencode package. Claude Code's
-  `~/.claude/CLAUDE.md` links to its `AGENTS.md`.
+## Harness conventions
 
-## Compatible SKILL.md format
+When a skill must be user-invoked only, disable model invocation for every
+harness:
 
-- **Layout:** one directory per skill, named in kebab-case, containing a
-  `SKILL.md`: `<skills-root>/<skill-name>/SKILL.md`.
-- **Frontmatter:** YAML. Two fields are the portable core that every harness
-  reads - always provide them:
-  - `name`: kebab-case, must match the directory name.
-  - `description`: despite its name, treat this as a trigger or routing rule,
-    not as a conventional summary of the skill's contents. Models see it before
-    deciding whether to read the body, so it must explain the concrete
-    situations in which the skill should be loaded. Include phrases users would
-    actually say, relevant context, and useful boundaries. Sometimes a content
-    summary is the wrong description because it says what is inside without
-    giving the model enough guidance about when that content applies. Keep it
-    to a single line in the YAML.
-- **Additional frontmatter fields are allowed** when a harness uses them.
-  Harnesses ignore fields they don't know, so extra fields don't break
-  compatibility. Keep behavior that matters everywhere in the body; use
-  frontmatter fields only for harness-level mechanics. Fields in use:
-  - `disable-model-invocation: true` - the skill is user-invocable only, the
-    model must not trigger it on its own (read by Claude Code).
-  - `argument-hint` - hint shown when the user invokes the skill with arguments.
-- **Invocation permissions must match across harnesses.** When a skill is meant
-  to be user-invocable only, set `disable-model-invocation: true` in the
-  frontmatter AND deny it under `permission.skill` in `opencode.json`. One
-  without the other leaves the harnesses behaving differently.
-- **Body:** portable markdown (headers, tables, lists). Reference any bundled
-  files by relative path.
+```yaml
+disable-model-invocation: true   # Claude Code
+metadata:
+  opencode/autoinvoke: false     # opencode
+```
 
-## Honor the global instructions
-
-The global `AGENTS.md` rules apply to skill content too. In particular:
-
-- Never use the em dash character (U+2014); use a plain dash "-".
-- Do not give much weight to development cost when making recommendations.
-
-## After authoring
-
-- The skills dir resolves into the dotfiles git repo, so new or edited skills
-  show up as changes there. Remind the user to commit them in `~/.dotfiles`.
-- For **project-scoped** skills, use the same `SKILL.md` format and follow the
-  project-local location precedence above.
-
-## Related
-
-- `record-learnings` decides *whether* a learning becomes a skill (vs a
-  CLAUDE.md/AGENTS.md rule, docs, or memory); this skill governs *how* to write
-  the skill once that decision is made.
+Setting only one leaves the harnesses behaving differently. The same applies to
+any other harness-level setting: check how each harness expresses it and set
+all of them. `argument-hint` (Claude Code) shows a hint when the user passes
+arguments.
