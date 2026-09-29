@@ -24,8 +24,8 @@ apply in full.
 ## Principles
 
 Each reference holds one rule, and the index says when it applies. Read a
-reference in full before applying it. In your reply, name each rule you
-applied and the decision it changed.
+reference in full before applying it. Do not list the rules you applied in
+your reply unless the user asks.
 
 - **World building** (`references/world-building.md`). At the start of a task.
 - **Feature map** (`references/feature-map.md`). At the start of a task,
