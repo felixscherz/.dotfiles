@@ -55,6 +55,10 @@ your reply unless the user asks.
 - **Never make the same mistake twice** (`references/never-make-the-same-mistake-twice.md`).
   After finding a bug, misusing a third-party API, or discovering a wrong
   assumption about an external service or constraint.
+- **Don't break production** (`references/dont-break-production.md`). A
+  change alters behavior that callers, users, or other systems can observe,
+  including invisible semantics like durability, retries, ordering, or
+  error handling where the interface stays the same.
 - **Ship changes** (`references/ship-changes.md`). A change is done and needs
   to be committed, pushed, and integrated through a pull request, or a PR
   description needs writing or updating.
