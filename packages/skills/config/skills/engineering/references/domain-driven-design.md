@@ -20,10 +20,12 @@ not only entities.
   Adapters translate at the edges.
 - Group things that must change together into an aggregate, and change them
   only through one entry point that enforces the invariants.
-- Orchestrate in use cases. One use case per user intent, named after it
-  (`CancelOrder`). It loads, calls domain logic, persists, and owns the
-  transaction. Entry points (routes, CLI commands, jobs) call exactly one use
-  case. Use cases do not call other use cases, and domain services do not call
-  each other.
+- Orchestrate multi-step intents in use cases named after the intent
+  (`CancelOrder`). A use case loads inputs, calls focused domain behavior,
+  persists results, and owns the transaction boundary. Entry points delegate
+  to one application operation rather than coordinating several services.
+  Do not add a pass-through use case when one focused operation already
+  handles the intent. Use cases do not call other use cases, and domain
+  services do not orchestrate other services.
 - Draw bounded contexts where the same word means different things. A
   "customer" in billing and in support may be two models, not one.

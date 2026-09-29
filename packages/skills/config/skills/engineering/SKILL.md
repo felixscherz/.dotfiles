@@ -62,3 +62,5 @@ applied and the decision it changed.
 - **Keep engineering up to date** (`references/keep-engineering-up-to-date.md`).
   A rule here proves wrong, outdated, or missing, or the user asks to update
   this skill.
+- For a structured retrospective on how well these rules served a session,
+  use the `reflect-on-engineering` skill.

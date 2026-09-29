@@ -5,18 +5,23 @@ description: Apply when designing or changing a Python FastAPI application, espe
 
 # FastAPI applications
 
-Use these patterns where the project does not already have a suitable convention. Organize code by domain or feature; do not require an `api/model/control` package split. The important boundary is between domain behavior, transport, and infrastructure, not the directory names.
+Use these patterns where the project does not already have a suitable convention. Organize code by domain or feature;
+do not require a particular directory layout. The important distinction is between adapters, use cases, focused domain
+behavior, and infrastructure, not the directory names.
 
 ## Keep the domain independent
 
-- Express domain concepts with the domain's vocabulary. Use immutable value objects for meaningful IDs and constrained values, and plain Python entities and services for business behavior. Keep FastAPI, `Depends`, Pydantic transport DTOs, HTTP exceptions, database documents, and framework state out of domain code.
-- A service implements a use case and coordinates the work needed for it. Put decisions and invariants there or in domain objects, not in the route. Services may do I/O through injected ports without depending on the framework.
+- Express domain concepts with the domain's vocabulary. Use immutable value objects for meaningful IDs and constrained values, and plain Python entities and services for business behavior. Keep FastAPI, `Depends`, Pydantic transport DTOs, HTTP exceptions, database documents, and framework state out of domain code and use cases.
+- Put cross-domain sequencing, failure policy, and transaction ownership in a use case named for the intent. Keep focused rules and invariants in domain objects or services. A service should not acquire several other services simply because an entry point needs a workflow; see `../domain-driven-design.md`. Do not wrap every simple operation in a pass-through use case.
 - Convert primitives and DTOs to domain types at input boundaries, and convert domain results to response DTOs at output boundaries. Map persistence shapes separately; an HTTP schema or database document need not become the domain model.
-- Raise domain-specific failures from services. Translate them to status codes and response shapes at the HTTP boundary. Keep async I/O async; do not block the event loop.
+- Raise domain or use-case failures without HTTP dependencies. Translate them to status codes and response shapes at the HTTP boundary. Keep async I/O async; do not block the event loop.
 
 ## Inject ports through narrow Protocols
 
-Define each port close to the service that needs it, with only the operations that service uses. Type service constructors against those ports, not against concrete repositories or HTTP clients. A port can represent a repository, an external lookup, an event publisher, or a callable operation. Concrete implementations live at infrastructure boundaries and are supplied by the application container.
+Define each port close to the use case or service that consumes it, with only the operations that consumer needs. Type
+constructors against those ports rather than concrete repositories, other full-service interfaces, or HTTP clients. A
+port can represent a repository, an external lookup, an event publisher, or a callable operation. The application
+container supplies concrete implementations.
 
 ```python
 from dataclasses import dataclass
@@ -34,6 +39,9 @@ class Booking:
     guest: str
 
 
+class InvalidGuestError(Exception): ...
+
+
 class BookingRepository(Protocol):
     async def save(self, booking: Booking) -> None: ...
 
@@ -43,29 +51,46 @@ class ReserveBookingId(Protocol):
 
 
 class BookingService:
-    def __init__(self, repository: BookingRepository, reserve_id: ReserveBookingId) -> None:
+    def create(self, booking_id: BookingId, guest: str) -> Booking:
+        if not guest.strip():
+            raise InvalidGuestError("Guest name is required")
+        return Booking(id=booking_id, guest=guest)
+
+
+class CreateBooking:
+    def __init__(
+        self, repository: BookingRepository, reserve_id: ReserveBookingId, bookings: BookingService
+    ) -> None:
         self._repository = repository
         self._reserve_id = reserve_id
+        self._bookings = bookings
 
-    async def create(self, guest: str) -> Booking:
-        booking = Booking(id=await self._reserve_id(), guest=guest)
+    async def execute(self, guest: str) -> Booking:
+        booking = self._bookings.create(await self._reserve_id(), guest)
         await self._repository.save(booking)
         return booking
 ```
 
-Use real implementations at runtime and small fakes or stubs in service tests. Protocols describe capabilities; they do not require inheritance or a general-purpose DI framework.
+Use real implementations at runtime and small fakes or stubs in use-case tests. Protocols describe capabilities; they
+do not require inheritance or a general-purpose DI framework. If a workflow spans several writes or external effects,
+decide what commits together and what happens on partial failure before moving it. Extraction alone does not make a
+workflow atomic.
 
 ## Make HTTP handlers adapters
 
-Use `Annotated[Service, Depends(provider)]` for dependencies in handler signatures. A provider obtains the service from the application container; it should not construct a repository or recreate the service for each request. Keep handlers focused on parsing, domain conversion, invoking the service, error translation, and response mapping.
+Use `Annotated[UseCase, Depends(provider)]` for a handler implementing a use case. The provider obtains it from the
+application container rather than constructing repositories or workflows per request. Keep handlers focused on parsing,
+domain conversion, invoking one use case, error translation, and response mapping. Two routes for the same intent can
+call the same use case with different domain inputs; neither route should coordinate several services. Existing simple
+operations need not be wrapped solely to satisfy a naming convention.
 
 ```python
 from typing import Annotated, cast
 
-from fastapi import APIRouter, Depends, Request, status
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 from pydantic import BaseModel
 
-# Import BookingService and Container from their respective modules.
+# Import CreateBooking, InvalidGuestError, and Container from their respective modules.
 router = APIRouter(prefix="/bookings")
 
 
@@ -82,26 +107,37 @@ def get_container(request: Request) -> Container:
     return cast(Container, request.app.state.container)
 
 
-def get_booking_service(container: Annotated[Container, Depends(get_container)]) -> BookingService:
-    return container.booking_service
+def get_create_booking(container: Annotated[Container, Depends(get_container)]) -> CreateBooking:
+    return container.create_booking
 
 
 @router.post("", status_code=status.HTTP_201_CREATED)
 async def create_booking(
     request: CreateBookingRequest,
-    service: Annotated[BookingService, Depends(get_booking_service)],
+    create_booking: Annotated[CreateBooking, Depends(get_create_booking)],
 ) -> BookingResponse:
-    booking = await service.create(request.guest)
+    try:
+        booking = await create_booking.execute(request.guest)
+    except InvalidGuestError as exc:
+        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=str(exc)) from exc
     return BookingResponse(id=booking.id.value, guest=booking.guest)
 ```
 
-For tests of a route, override `get_booking_service` through `app.dependency_overrides` and check the HTTP contract without starting real infrastructure. Test service behavior separately with fakes implementing its ports.
+For route tests, override `get_create_booking` through `app.dependency_overrides` and check the HTTP contract without
+starting real infrastructure. Test the use case through `execute()` with fakes for its ports. Test focused domain
+behavior without involving FastAPI.
 
 ## Compose once at the application boundary
 
-Keep construction in a single composition root, for example a `Container` with `@cached_property` providers for shared settings, clients, repositories, and services. Providers make the dependency graph explicit: a service receives concrete adapters for its Protocol ports. Share a container per app/process, not per request; don't use process-scoped instances for mutable request-specific state. Use local imports in providers only when needed to break import cycles.
+Keep construction in a single composition root, for example a `Container` with `@cached_property` providers for shared
+settings, clients, repositories, services, and use cases. Providers make the dependency graph explicit. Share a
+container per app/process, not per request; do not use process-scoped instances for mutable request-specific state. Use
+local imports in providers only when needed to break import cycles.
 
-Construct the container at bootstrap (or in the app factory), attach it to `app.state`, and use FastAPI lifespan for starting and stopping resources such as database clients, message consumers, and background work. Non-HTTP entry points (workers, CLI, message handlers) use the same composition root directly, not FastAPI dependency resolution. Allow a container to be supplied to the app factory in tests. Keep FastAPI `Depends` and `Request` out of the container and services.
+Construct the container at bootstrap (or in the app factory), attach it to `app.state`, and use FastAPI lifespan for
+starting and stopping resources such as database clients, message consumers, and background work. Non-HTTP entry points
+use the same composition root directly, not FastAPI dependency resolution. Allow a container to be supplied to the app
+factory in tests. Keep FastAPI `Depends` and `Request` out of the container, use cases, and services.
 
 ```python
 from collections.abc import AsyncIterator
@@ -125,7 +161,11 @@ class Container:
 
     @cached_property
     def booking_service(self) -> BookingService:
-        return BookingService(self.booking_repository, self.reserve_booking_id)
+        return BookingService()
+
+    @cached_property
+    def create_booking(self) -> CreateBooking:
+        return CreateBooking(self.booking_repository, self.reserve_booking_id, self.booking_service)
 
 
 @asynccontextmanager
