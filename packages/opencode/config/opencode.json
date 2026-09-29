@@ -25,7 +25,9 @@
     { "action": "skill", "resource": "to-tickets", "effect": "deny" },
     { "action": "skill", "resource": "batch-implement", "effect": "deny" },
     { "action": "external_directory", "resource": "~/.agents/skills/config/skills/engineering/references/*", "effect": "allow" },
-    { "action": "read", "resource": "~/.agents/skills/config/skills/engineering/references/*", "effect": "allow" }
+    { "action": "read", "resource": "~/.agents/skills/config/skills/engineering/references/*", "effect": "allow" },
+    { "action": "external_directory", "resource": "~/workspaces/personal/.dotfiles/packages/skills/config/skills/engineering/*", "effect": "allow" },
+    { "action": "read", "resource": "~/workspaces/personal/.dotfiles/packages/skills/config/skills/engineering/*", "effect": "allow" }
   ],
   "providers": {
     "github-copilot": {
