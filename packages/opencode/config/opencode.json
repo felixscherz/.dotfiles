@@ -32,6 +32,16 @@
     { "action": "read", "resource": "~/workspaces/personal/.dotfiles/packages/skills/config/skills/*", "effect": "allow" }
   ],
   "providers": {
+    "exxeta": {
+      "name": "Exxeta",
+      "package": "aisdk:@ai-sdk/openai-compatible",
+      "settings": {
+        "baseURL": "https://ai.exxeta.info/v1",
+        "includeUsage": true,
+        "litellm": true,
+        "apiKey": "{env:EXXETA_LITELLM_API_KEY}"
+      }
+    },
     "lmstudio": {
       "package": "aisdk:@ai-sdk/openai-compatible",
       "name": "LM Studio (Local)",
