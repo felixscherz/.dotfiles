@@ -1,6 +1,6 @@
 ---
 name: benchmarking-the-harness
-description: Framework for testing how a change to an agent's environment (a skill, instruction file, memory, settings) affects its behavior, using blinded controlled experiments. Use when the user wants to benchmark or compare skill variants, run a benchmark-<situation> skill, design an arena, write a new benchmark, or asks whether a skill change is actually better.
+description: Framework for testing how a change to an agent's environment (a skill, instruction file, memory, settings) affects its behavior, using blinded controlled experiments. Use when the user wants to benchmark or compare skill variants, run a benchmark-<slug> skill, design an arena, or asks whether a skill change is actually better.
 disable-model-invocation: true
 metadata:
   opencode/autoinvoke: false
@@ -13,15 +13,17 @@ hold everything constant except the change, hide from the agents that they
 are being measured, and judge the outcomes blind.
 
 This skill defines the vocabulary, the method, and the contract that
-`benchmark-<situation>` skills fulfil. The situations themselves live in those
-skills, not here.
+`benchmark-<slug>` skills fulfil. The benchmarks themselves are captured from
+real day-to-day engineering work and live in those skills, not here.
 
 ## Primitives
 
 Use these terms when designing, running, and reporting benchmarks.
 
-- **Benchmark** - a stored, reusable situation: fixture, task, rubric.
-  Provided by a `benchmark-<situation>` skill.
+- **Benchmark** - a piece of real engineering work, captured for reuse:
+  fixture, task, rubric. Provided by a `benchmark-<slug>` skill.
+- **Collection** - all benchmarks together: the work the environment should
+  handle well.
 - **Fixture** - the starting state a candidate works in: project files, git
   history, planted context.
 - **Task** - the prompt, worded exactly as a user would type it.
@@ -50,7 +52,7 @@ Use these terms when designing, running, and reporting benchmarks.
 - **Leak** - any signal that reveals the evaluation, the variant, or other
   trials to a candidate. A leak invalidates the trial.
 - **Judge** - an agent that scores all trials against the rubric in one pass,
-  seeing labels only.
+  from their traces and outputs, seeing labels only.
 - **Trace** - a trial's transcript: the ground truth for what the candidate
   did, as opposed to what it claims.
 - **Verdict** - the judge's per-trial, per-criterion scores.
@@ -64,8 +66,8 @@ should have the user's global setup, the manifest includes a `global` layer
 that copies it in. Layers are copied when the arena starts, so later edits to
 the source do not change a running or repeated arena.
 
-When copying any layer, always strip `benchmarking-the-harness` and every
-`benchmark-*` skill.
+When copying any layer, always strip `benchmarking-the-harness`,
+`create-benchmark`, and every `benchmark-*` skill.
 
 The harness must read its environment only from the sandbox, never from the
 user's home configuration. How to achieve that is harness specific and not
@@ -89,13 +91,16 @@ Judge:
 
 - May know it is judging, sees trials by label only, never the variant or
   model.
+- Traces reveal the environment (loaded skills, instruction files). Redact
+  those parts before handing traces to the judge.
 - Scores every trial of the arena in a single pass on one scale.
 
 ## Running an arena
 
 1. **Frame.** Name the variable under test, the control, the constants, and
    the number of trials per variant. State which result would promote the
-   variant.
+   variant. To assess a variant across the collection, run one arena per
+   benchmark with the same variants and constants.
 2. **Build.** Per trial: create the sandbox, materialize the fixture, apply
    the manifest, assign a label. Record the key.
 3. **Check for leaks.** Inspect every sandbox and the task against the
@@ -105,7 +110,8 @@ Judge:
    subagents as candidates: they inherit the coordinator's context.
 5. **Collect.** Per label: the output (sandbox diff and final reply) and the
    trace.
-6. **Judge.** Spawn one judge with the rubric and all outputs by label.
+6. **Judge.** Spawn one judge with the rubric, the reference, and all
+   redacted traces and outputs by label.
 7. **Unblind and analyze.** Apply the key, aggregate scores per variant.
    Check the benchmark's trace expectations against the traces. Read every
    output yourself; if you disagree with the judge, suspect the rubric first.
@@ -117,15 +123,18 @@ manifests, constants, key, verdict, traces, finding.
 
 ## Benchmark contract
 
-A `benchmark-<situation>` skill contains:
+A `benchmark-<slug>` skill contains:
 
 ```
-benchmark-<situation>/
-  SKILL.md    # the situation, and which kinds of variants it separates well
-  fixture/    # the starting state, or a setup script that creates it
-  task.md     # the prompt as a user would type it
-  rubric.md   # judge-only criteria, optional trace expectations
+benchmark-<slug>/
+  SKILL.md         # what the work is, where it came from, how to set it up
+  fixture/         # the starting state, or a setup script that creates it
+  task.md          # the prompt as a user would type it
+  rubric.md        # criteria for the judge; trace expectations for the coordinator only
+  reference.patch  # judge-only: the accepted solution
 ```
+
+To create a new benchmark, use the `create-benchmark` skill.
 
 `SKILL.md` may name layers the benchmark requires (e.g. `global`). Trace
 expectations are observable facts, such as "read the engineering skill before
@@ -135,4 +144,5 @@ editing code".
 
 Variable under test, control, constants, trials per variant, rubric, verdict
 per variant, trace observations, your own reading where it differs from the
-judge, finding.
+judge, finding. Across the collection, report per benchmark: a variant that
+improves some benchmarks and regresses others is not a plain win.
