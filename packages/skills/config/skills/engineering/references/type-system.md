@@ -15,6 +15,11 @@ language offers instead of cramming everything into primitives.
 - Replace primitives that carry meaning. An enum or literal over a magic
   string, a dedicated type over a bare `str` or `int` for an ID or a unit, a
   typed model over a `dict`.
+- Use the domain types the codebase already has in every signature you touch.
+  When a type exists for a value, never pass the bare primitive instead.
+- Never loosen an existing type to fit an edge case, such as making a required
+  field optional or widening it to a primitive. That changes the model and
+  needs the user's go-ahead (see `redesign-from-first-principles.md`).
 - Parse external data into typed values at the boundary. Inside, trust the
   types instead of re-checking.
 - Scale the effort to the code's expected lifespan. Core domain logic and

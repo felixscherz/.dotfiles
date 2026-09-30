@@ -18,3 +18,4 @@ had been there from the start.
 - Don't shy away from broad migrations when the model needs them, and clean up
   what the new model makes obsolete. When the migration reaches beyond the
   task, propose it with the old and new model side by side before starting.
+  Deliver it in steps (see `deliver-in-small-steps.md`).

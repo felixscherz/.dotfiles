@@ -41,6 +41,9 @@ your reply unless the user asks.
 - **Redesign from first principles** (`references/redesign-from-first-principles.md`).
   Requirements change or are added, a drift is found, or you are about to add
   a special case for an edge case.
+- **Deliver in small steps** (`references/deliver-in-small-steps.md`). Deciding
+  how much to build for a request, when a fix suggests a larger redesign, or
+  planning work that spans several changes.
 - **Program design** (`references/program-design.md`). Designing a new module,
   API, or model, deciding where code lives, or code that is hard to test.
 - **Type system** (`references/type-system.md`). Designing types, signatures, or
@@ -48,6 +51,9 @@ your reply unless the user asks.
   meaning.
 - **FastAPI applications** (`references/python/fastapi-applications.md`). Designing
   or changing FastAPI routes, dependencies, domain boundaries, or app wiring.
+- **Lifecycle hygiene** (`references/lifecycle-hygiene.md`). Writing or
+  changing a long-running service or worker: startup, shutdown, background
+  tasks, consumers, readiness probes, or dependencies that can go away.
 - **Test-driven design** (`references/test-driven-design.md`). Before
   implementing a feature or fixing a bug.
 - **Test behavior** (`references/test-behavior.md`). Writing, changing, naming,
