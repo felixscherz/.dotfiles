@@ -4,13 +4,15 @@
   "model": "github-copilot/gpt-6-sol",
   "share": "disabled",
   "formatter": true,
+  "plugins": ["opencode-plugin-litellm@latest"],
   "experimental": {
     "policies": [
       { "action": "provider.use", "resource": "openai", "effect": "deny" },
       { "action": "provider.use", "resource": "anthropic", "effect": "deny" },
       { "action": "provider.use", "resource": "gemini", "effect": "deny" },
       { "action": "provider.use", "resource": "amazon-bedrock", "effect": "deny" },
-      { "action": "provider.use", "resource": "google", "effect": "deny" }
+      { "action": "provider.use", "resource": "google", "effect": "deny" },
+      { "action": "provider.use", "resource": "opencode-go", "effect": "deny" }
     ]
   },
   "permissions": [
@@ -24,8 +26,8 @@
     { "action": "skill", "resource": "to-spec", "effect": "deny" },
     { "action": "skill", "resource": "to-tickets", "effect": "deny" },
     { "action": "skill", "resource": "batch-implement", "effect": "deny" },
-    { "action": "external_directory", "resource": "~/.agents/skills/config/skills/engineering/references/*", "effect": "allow" },
-    { "action": "read", "resource": "~/.agents/skills/config/skills/engineering/references/*", "effect": "allow" },
+    { "action": "external_directory", "resource": "~/.agents/skills/engineering/references/*", "effect": "allow" },
+    { "action": "read", "resource": "~/.agents/skills/engineering/references/*", "effect": "allow" },
     { "action": "external_directory", "resource": "~/workspaces/personal/.dotfiles/packages/skills/config/skills/*", "effect": "allow" },
     { "action": "read", "resource": "~/workspaces/personal/.dotfiles/packages/skills/config/skills/*", "effect": "allow" }
   ],
