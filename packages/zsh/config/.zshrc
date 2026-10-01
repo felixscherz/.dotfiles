@@ -47,9 +47,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # custom completions dir (tools drop completion functions here, e.g. rctx).
 # antigen's own compinit runs before this dir is on fpath, so run compinit
 # once more here to register these. no caching gymnastics - it's ~25ms.
-fpath+=~/.zfunc
-autoload -Uz compinit
-compinit
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
 
 # opencode
 export PATH=/Users/felixscherz/.opencode/bin:$PATH
@@ -59,3 +57,4 @@ unsetopt autocd
 
 # Added by sonarqube-cli installer
 export PATH="$HOME/.local/share/sonarqube-cli/bin:$PATH"
+
