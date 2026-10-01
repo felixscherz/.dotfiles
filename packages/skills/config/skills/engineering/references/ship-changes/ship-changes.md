@@ -48,15 +48,39 @@ question easy to answer.
 - When feedback or new commits change the scope, update the description so it
   still matches the diff.
 
+
 ## The PR description
 
-If the repository has its own template (`.github/pull_request_template.md` or
-similar), use it, but make sure it covers the three sections below. Otherwise
-use the template at the end of this file.
+The description is read by humans: the reviewer, and later anyone digging
+through history to find out why the code looks the way it does. Write for a
+person who has not seen the work in progress and wants to understand the
+change quickly. Apply the `unslop` skill to it.
 
-The description exists to let the reviewer verify two things: that the change
-achieves its goal, and that it does so the way they would want. Write for a
-reviewer who has not seen the work in progress.
+### Follow the project's conventions first
+
+Before writing, find out how the project describes PRs:
+
+- A repository template (`.github/pull_request_template.md`,
+  `.github/PULL_REQUEST_TEMPLATE/`, `.gitlab/merge_request_templates/`, or
+  similar). If one exists, fill it in.
+- Recent merged PRs (`gh pr list --state merged --limit 10`, then
+  `gh pr view <n>`). Their length, structure, and tone are the convention even
+  when no template is checked in.
+- Contribution guides (`CONTRIBUTING.md`, `AGENTS.md`).
+
+Use `pull_request_template.md` next to this file only when the project has no
+convention of its own. Do not force it onto a project that does things
+differently, and do not bolt its sections onto a repository template. Within
+the project's format, still cover what the reader needs (see below), worded
+the way that format expects.
+
+Scale the description to the change. A one-line fix needs a sentence or two,
+not three headed sections.
+
+### What the reader needs
+
+The reader wants to verify two things: that the change achieves its goal, and
+that it does so the way they would want.
 
 - **Lead with motivation.** The problem, goal, or request that led to the
   change. This is the part that matters most and gets lost most often. If you
@@ -67,6 +91,9 @@ reviewer who has not seen the work in progress.
   new dependency, a convention broken. State the alternative and why it lost.
   These are where "do I like this" gets decided, so do not bury them in the
   diff.
+- **Call out behavior changes.** When existing tests had to change, say which
+  ones and what behavior changed. A reviewer will treat a changed test as a
+  possible regression until told otherwise.
 - **Flag uncertainty.** Say where you are unsure or want the reviewer's
   judgement.
 - **Make verification concrete.** Commands to run, setup needed, expected
@@ -75,38 +102,5 @@ reviewer who has not seen the work in progress.
 - **Guide the reading order.** Point to where the core of the change lives,
   most important first, and mark what is mechanical (renames, moves,
   generated code) so the reviewer can skim it.
-- Keep it short and plain. No filler, no restating the diff line by line.
-
-### Template
-
-```markdown
-## What changed and why
-
-<!--
-A few sentences. Lead with the motivation: the problem, goal, or request that
-led to this change. Then say what was changed to address it. A reviewer who
-only reads this section should know what the PR is trying to achieve and be
-able to judge whether the diff achieves it. Call out decisions the reviewer
-might disagree with and the alternatives considered. Link the issue or ticket
-if one exists, but do not rely on the link alone.
--->
-
-## How to test
-
-<!--
-The test strategy. Which automated tests cover the change (new, changed, or
-existing), and how to verify it manually if that matters: commands to run,
-setup needed, expected result. If tests or CI were removed or weakened, say so
-here and explain why.
--->
-
-## Useful code paths
-
-<!--
-Where a reviewer should start. List the files or folders that carry the core
-of the change, most important first, with a short note on each. Point out
-anything mechanical (renames, generated code, moved files) that can be skimmed.
--->
-
-- `path/to/file` - why it matters
-```
+- Keep it short and plain. No filler, no restating the diff line by line, no
+  agent workflow details the reader does not care about.

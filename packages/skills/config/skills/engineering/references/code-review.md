@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: Review a pull request or set of code changes, and write PR descriptions that make review possible. Use when the user says "review this PR", "code review", "look over these changes", "review my branch", gives a PR number or URL to review, or when creating a pull request or writing/updating a PR description.
+description: Apply when reviewing a pull request or a set of code changes, your own or someone else's - "review this PR", "code review", "look over these changes", "review my branch", or a PR number or URL to review.
 ---
 
 # Code review
@@ -15,22 +15,10 @@ reviewer can only check that code looks reasonable, not that it does what it
 was supposed to do. So intent comes first, and the review output restates the
 change in the reviewer's own words so the author can catch a mismatch.
 
-## Writing a PR description
+Writing the PR description is part of shipping, not reviewing. See
+`ship-changes/ship-changes.md`.
 
-When creating a PR, fill in `pull_request_template.md` (next to this file). If
-the repository has its own template (`.github/pull_request_template.md` or
-similar), use that one instead, but make sure the three things below are
-covered somewhere in it:
-
-- **What changed and why** - motivation first, then the change. Brief.
-- **How to test** - the test strategy.
-- **Useful code paths** - where a reviewer should start reading.
-
-The motivation is the part that matters most and gets lost most often. If you
-do not know why the change was made, ask the user before opening the PR rather
-than inventing a reason. Apply the `unslop` skill to the description.
-
-## Review workflow
+## Workflow
 
 ### 1. Gather the material
 
@@ -45,8 +33,9 @@ the context of what it touches.
 ### 2. Establish the intent
 
 Before judging any code, write down in one or two sentences what the change is
-trying to achieve and why. Check the PR description for the three sections
-above.
+trying to achieve and why. The PR description should say so (see
+`ship-changes/ship-changes.md` for what a good one covers), but do not reject a
+description for following the project's own format instead of that template.
 
 If the motivation is missing or too vague to review against, stop and discuss
 it with the user before reviewing. Do not silently guess. The PR may be the
@@ -117,7 +106,29 @@ endpoints):
 An unclear name, a better name that is clearly available, or a name that does
 not align with the model is a **blocker**. Suggest the alternative.
 
-### 6. Changes to tests and CI
+### 6. Changes to existing tests
+
+New tests describe new behavior. A changed existing test means the behavior
+it pinned down has changed, or the test was bent to make the build pass.
+Either way it deserves extra attention, because it is where a regression
+shows up in the diff while the rest of the change looks fine.
+
+For every existing test whose assertions, inputs, expected values, fixtures,
+snapshots, or golden files changed:
+
+- Name the behavior the test pinned before and what it pins now.
+- Check that the behavior change is part of the stated intent. A behavior
+  change the description does not mention is an open question at least.
+- Check who else relies on the old behavior: callers, users, other services,
+  stored data (see `dont-break-production.md`). An intended change can still
+  break someone.
+- Confirm with the user that the behavior change is acceptable when it is
+  observable outside the codebase.
+
+A test that only moved, was renamed, or was rewritten against a new internal
+API while asserting the same behavior is a refactor. Say so and move on.
+
+### 7. Removed or weakened verification
 
 Treat any removal or weakening of verification as suspicious until justified.
 Enumerate every instance explicitly, for example:
@@ -136,12 +147,13 @@ question is whether the change to verification follows from the intended
 change to behavior, or whether it was made to get a red build green. If no
 justification exists, it is a **blocker**.
 
-### 7. Classify findings
+### 8. Classify findings
 
 - **Blocker** - must be resolved before merging. This includes: the change does
   not achieve its intent, broken invariants, correctness or security bugs,
-  data loss risk, naming problems as defined above, unjustified test or CI
-  removal, and missing or unconfirmable intent.
+  data loss risk, naming problems as defined above, an unexplained behavior
+  change in an existing test, unjustified test or CI removal, and missing or
+  unconfirmable intent.
 - **Non-blocker** - worth raising, fine to merge without. Suggestions, style,
   small refactors, follow-up ideas, questions that do not affect correctness.
 
@@ -169,6 +181,11 @@ was inferred rather than stated.>
 
 <Which areas got deep scrutiny and which got a lighter pass, and why, based
 on blast radius and longevity.>
+
+## Behavior changes
+
+<Each existing test whose expectations changed: the old behavior, the new
+behavior, and whether the intent covers it.>
 
 ## Blockers
 

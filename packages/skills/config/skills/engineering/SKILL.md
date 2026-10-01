@@ -1,6 +1,6 @@
 ---
 name: engineering
-description: Use for any non-trivial code change - features, bug fixes, refactors, writing or changing tests, designing types, modules, or APIs, and shipping the change through a pull request. Also when the user asks to follow my engineering principles.
+description: Use for any non-trivial code change - features, bug fixes, refactors, writing or changing tests, designing types, modules, or APIs, shipping the change through a pull request, and reviewing a pull request or code changes ("review this PR", "code review", "review my branch", a PR number or URL). Also when the user asks to follow my engineering principles.
 ---
 
 # Engineering
@@ -65,9 +65,11 @@ your reply unless the user asks.
   change alters behavior that callers, users, or other systems can observe,
   including invisible semantics like durability, retries, ordering, or
   error handling where the interface stays the same.
-- **Ship changes** (`references/ship-changes.md`). A change is done and needs
-  to be committed, pushed, and integrated through a pull request, or a PR
-  description needs writing or updating.
+- **Ship changes** (`references/ship-changes/ship-changes.md`). A change is
+  done and needs to be committed, pushed, and integrated through a pull
+  request, or a PR description needs writing or updating.
+- **Code review** (`references/code-review.md`). Reviewing a pull request or a
+  set of code changes, your own or someone else's.
 
 ## Maintaining this skill
 

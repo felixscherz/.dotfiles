@@ -54,7 +54,7 @@ you cannot tie to something that happened in the scope.
 - **Sharpen, remove, or add.** Prefer sharpening or removing a rule over adding
   one. A rule that never changes a decision is a candidate for removal.
 - **Right skill.** Some findings belong in another skill, such as
-  `code-review` or `pair-program`, or in the global `AGENTS.md`. Name the
+  `pair-program`, or in the global `AGENTS.md`. Name the
   target.
 
 ## Report

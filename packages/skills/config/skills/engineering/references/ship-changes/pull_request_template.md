@@ -4,8 +4,9 @@
 A few sentences. Lead with the motivation: the problem, goal, or request that
 led to this change. Then say what was changed to address it. A reviewer who
 only reads this section should know what the PR is trying to achieve and be
-able to judge whether the diff achieves it. Link the issue or ticket if one
-exists, but do not rely on the link alone.
+able to judge whether the diff achieves it. Call out decisions the reviewer
+might disagree with and the alternatives considered. Link the issue or ticket
+if one exists, but do not rely on the link alone.
 -->
 
 ## How to test
@@ -13,8 +14,8 @@ exists, but do not rely on the link alone.
 <!--
 The test strategy. Which automated tests cover the change (new, changed, or
 existing), and how to verify it manually if that matters: commands to run,
-setup needed, expected result. If tests or CI were removed or weakened, say so
-here and explain why.
+setup needed, expected result. If existing tests changed, say what behavior
+changed. If tests or CI were removed or weakened, say so here and explain why.
 -->
 
 ## Useful code paths
