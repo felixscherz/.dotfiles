@@ -17,6 +17,10 @@ language offers instead of cramming everything into primitives.
   typed model over a `dict`.
 - Use the domain types the codebase already has in every signature you touch.
   When a type exists for a value, never pass the bare primitive instead.
+- Make accepted keyword names visible to callers. Prefer explicit parameters
+  over `**kwargs` when the set of keys is small. When `**kwargs` is warranted,
+  type its keys and values with `Unpack[TypedDict]` rather than a value type
+  alone, so callers can see which keys are required or optional.
 - Never loosen an existing type to fit an edge case, such as making a required
   field optional or widening it to a primitive. That changes the model and
   needs the user's go-ahead (see `redesign-from-first-principles.md`).
