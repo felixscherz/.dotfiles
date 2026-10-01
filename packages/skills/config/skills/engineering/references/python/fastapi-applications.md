@@ -11,10 +11,17 @@ behavior, and infrastructure, not the directory names.
 
 ## Keep the domain independent
 
-- Express domain concepts with the domain's vocabulary. Use immutable value objects for meaningful IDs and constrained values, and plain Python entities and services for business behavior. Keep FastAPI, `Depends`, Pydantic transport DTOs, HTTP exceptions, database documents, and framework state out of domain code and use cases.
-- Put cross-domain sequencing, failure policy, and transaction ownership in a use case named for the intent. Keep focused rules and invariants in domain objects or services. A service should not acquire several other services simply because an entry point needs a workflow; see `../domain-driven-design.md`. Do not wrap every simple operation in a pass-through use case.
-- Convert primitives and DTOs to domain types at input boundaries, and convert domain results to response DTOs at output boundaries. Map persistence shapes separately; an HTTP schema or database document need not become the domain model.
-- Raise domain or use-case failures without HTTP dependencies. Translate them to status codes and response shapes at the HTTP boundary. Keep async I/O async; do not block the event loop.
+- Express domain concepts with the domain's vocabulary. Use immutable value objects for meaningful IDs and constrained
+  values, and plain Python entities and services for business behavior. Keep FastAPI, `Depends`, Pydantic transport
+  DTOs, HTTP exceptions, database documents, and framework state out of domain code and use cases.
+- Put cross-domain sequencing, failure policy, and transaction ownership in a use case named for the intent. Keep
+  focused rules and invariants in domain objects or services. A service should not acquire several other services simply
+  because an entry point needs a workflow; see `../domain-driven-design.md`. Do not wrap every simple operation in a
+  pass-through use case.
+- Convert primitives and DTOs to domain types at input boundaries, and convert domain results to response DTOs at output
+  boundaries. Map persistence shapes separately; an HTTP schema or database document need not become the domain model.
+- Raise domain or use-case failures without HTTP dependencies. Translate them to status codes and response shapes at the
+  HTTP boundary. Keep async I/O async; do not block the event loop.
 
 ## Inject ports through narrow Protocols
 
@@ -193,4 +200,6 @@ def create_app(container: Container) -> FastAPI:
     return app
 ```
 
-The infrastructure adapter classes in this sketch are application-specific; construct `Container` with configured infrastructure at startup. Cache long-lived dependencies deliberately; manage request/transaction-scoped dependencies separately. Check the existing project's OpenAPI contract and test conventions when changing routes or DTOs.
+The infrastructure adapter classes in this sketch are application-specific; construct `Container` with configured
+infrastructure at startup. Cache long-lived dependencies deliberately; manage request/transaction-scoped dependencies
+separately. Check the existing project's OpenAPI contract and test conventions when changing routes or DTOs.
