@@ -49,8 +49,9 @@ your reply unless the user asks.
 - **Type system** (`references/type-system.md`). Designing types, signatures, or
   data shapes, or reaching for a plain string, dict, or bool that carries
   meaning.
-- **FastAPI applications** (`references/python/fastapi-applications.md`). Designing
-  or changing FastAPI routes, dependencies, domain boundaries, or app wiring.
+- **Python** (`references/python/INDEX.md`). Writing or changing Python code.
+  The index lists the Python references and when each applies; read only the
+  ones the task needs.
 - **Lifecycle hygiene** (`references/lifecycle-hygiene.md`). Writing or
   changing a long-running service or worker: startup, shutdown, background
   tasks, consumers, readiness probes, or dependencies that can go away.
@@ -73,8 +74,10 @@ your reply unless the user asks.
 
 ## Maintaining this skill
 
-- **Keep engineering up to date** (`references/keep-engineering-up-to-date.md`).
-  A rule here proves wrong, outdated, ambiguous, or missing, or you would have
-  changed the skill to get a better result.
-- For a structured retrospective on how well these rules served a session,
-  use the `reflect-on-engineering` skill.
+These rules are a living draft, not a finished standard. Be critical of them.
+When one gets in the way, leads to a worse result, misses a situation, or
+contradicts another rule or the codebase, say so at the end of your reply. The
+user decides when the skill changes: never edit it unprompted. Changes go
+through the `reflect-on-engineering` skill
+(`../reflect-on-engineering/SKILL.md`), which also holds the conventions for
+editing this skill.

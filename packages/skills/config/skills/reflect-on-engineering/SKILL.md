@@ -38,6 +38,9 @@ missing rule. Then walk through the work and note:
   `SKILL.md` or the rule's `description`.
 - **Friction.** A rule that was ambiguous, contradicted another rule or the
   codebase, or pushed toward a worse result.
+- **Flags.** Problems with a rule that the agent already raised during the
+  work, as the engineering skill asks it to. Treat each as a finding to
+  verify, not as settled.
 
 Quote or point to the concrete moment for each note. Do not report a finding
 you cannot tie to something that happened in the scope.
@@ -93,5 +96,13 @@ propose changes and ask before editing.
   may be longer and include examples, but must not restate the general rules
   they build on. Keep their examples consistent with the general rules, since
   an agent copies the example before it reads the prose.
-- Keep the index in `../engineering/SKILL.md` in sync when adding, renaming,
-  or removing a file.
+- Each `references/<language>/` folder has an `INDEX.md`: an H1 title, a short
+  framing paragraph, and one bullet per reference with its name, its path
+  relative to the folder, and when it applies, in the same format as the index
+  in `../engineering/SKILL.md`. `INDEX.md` has no frontmatter.
+- `../engineering/SKILL.md` links to a language folder's `INDEX.md` with one
+  bullet that says when to open it, never to the individual references inside.
+  This keeps the top-level index short and language-neutral.
+- Keep the indexes in sync when adding, renaming, or removing a file: the
+  folder's `INDEX.md` for language references, `../engineering/SKILL.md` for
+  everything else.
