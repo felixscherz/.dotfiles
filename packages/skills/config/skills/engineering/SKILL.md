@@ -57,6 +57,8 @@ your reply unless the user asks.
   tasks, consumers, readiness probes, or dependencies that can go away.
 - **Test-driven design** (`references/test-driven-design.md`). Before
   implementing a feature or fixing a bug.
+- **Find the root cause** (`references/find-the-root-cause.md`). When debugging
+  a failure or investigating a bug, before choosing a fix.
 - **Test behavior** (`references/test-behavior.md`). Writing, changing, naming,
   or keeping a test, or about to reach for a mock or patch.
 - **Never make the same mistake twice** (`references/never-make-the-same-mistake-twice.md`).
