@@ -21,11 +21,14 @@ language offers instead of cramming everything into primitives.
   over `**kwargs` when the set of keys is small. When `**kwargs` is warranted,
   type its keys and values with `Unpack[TypedDict]` rather than a value type
   alone, so callers can see which keys are required or optional.
-- Avoid `dict[str, Any]` whenever anything is known about the shape. It tells
-  the reader and the type checker almost nothing. Known keys call for a
-  `TypedDict` or a model, uniform values for a precise value type such as
-  `dict[UserId, Balance]`, and arbitrary JSON for a recursive `JsonValue` alias.
-  Keep `dict[str, Any]` for data that is genuinely opaque to the code at hand.
+- Avoid `Any` and `object` whenever anything is known about the value. Both
+  tell the reader and the type checker almost nothing. Reach for a union, a
+  protocol, or a type variable instead. The same goes for containers: avoid
+  `dict[str, Any]` when the shape is known. Known keys call for a `TypedDict`
+  or a model, uniform values for a precise value type such as
+  `dict[UserId, Balance]`, and arbitrary JSON for a recursive `JsonValue`
+  alias. Keep `Any` and `object` for values that are genuinely opaque to the
+  code at hand.
 - Never loosen an existing type to fit an edge case, such as making a required
   field optional or widening it to a primitive. That changes the model and
   needs the user's go-ahead (see `redesign-from-first-principles.md`).
