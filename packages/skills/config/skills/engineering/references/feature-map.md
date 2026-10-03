@@ -1,6 +1,6 @@
 ---
 name: feature-map
-description: Apply at the start of a task in a codebase, when looking for where a feature lives, and after adding, moving, renaming, or removing a feature.
+description: Apply when the feature map is missing or points to the wrong place, or a task adds, moves, renames, or removes a feature.
 ---
 
 # Feature map

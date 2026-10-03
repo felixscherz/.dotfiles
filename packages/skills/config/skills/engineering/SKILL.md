@@ -21,20 +21,41 @@ apply in full.
   problem for the task, propose the change with the reason and let the user
   decide.
 
+## Start of a task
+
+A codebase is a representation of a model, an abstraction of the real world.
+The model does not have to mirror reality, it has to serve the problem. Think
+in terms of the model first, then the code. Starting deep in the code risks
+missing a wrong model, or chasing a local optimization when a global one is
+available.
+
+- Before changing code, understand the problem, the domain, and how the parts
+  you are about to touch work together.
+- While reading code, check whether it still supports the model or has drifted
+  from it. Name any drift you find. When code and model disagree, decide which
+  one is wrong before fixing either.
+- Read the feature map at `.felixws/FEATURE_MAP.md` in the repository root
+  before exploring the code. It is globally git-ignored, so read it by path.
+- Find the workspace map with
+  `references/workspace-map/find-workspace-map.sh <starting directory>`. It
+  prints the map's path, or exits 1 when there is none. Read the map when the
+  task may need context from outside the current repository.
+
 ## Principles
 
 Each reference holds one rule, and the index says when it applies. Read a
-reference in full before applying it. Do not list the rules you applied in
-your reply unless the user asks.
+reference when its trigger fires, not before: do not read ahead for phases you
+have not reached, and do not batch-read references up front. Read a reference
+in full before applying it. Do not list the rules you applied in your reply
+unless the user asks.
 
-- **World building** (`references/world-building.md`). At the start of a task.
-- **Feature map** (`references/feature-map.md`). At the start of a task,
-  when looking for where a feature lives, and after adding, moving, renaming,
-  or removing a feature.
-- **Workspace map** (`references/workspace-map/workspace-map.md`). At the
-  start of a task, when a task needs a repository, document, or directory
-  outside the current working directory, and after a mapped resource is added,
-  moved, or removed.
+- **Feature map** (`references/feature-map.md`). The feature map is missing
+  or points to the wrong place, or a task adds, moves, renames, or removes a
+  feature.
+- **Workspace map** (`references/workspace-map/workspace-map.md`). The
+  workspace map is missing or invalid, a task needs a repository, document, or
+  directory outside the current working directory, or a mapped resource is
+  added, moved, or removed.
 - **Domain-driven design** (`references/domain-driven-design.md`). Naming or
   modelling domain concepts, adding a process that spans several services, or
   domain logic scattered across layers.

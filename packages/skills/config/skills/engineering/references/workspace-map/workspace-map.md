@@ -1,6 +1,6 @@
 ---
 name: workspace-map
-description: Apply at the start of a task, when a task needs a repository, document, or directory outside the current working directory, and after a mapped resource is added, moved, or removed.
+description: Apply when the workspace map is missing or invalid, a task needs a repository, document, or directory outside the current working directory, or a mapped resource is added, moved, or removed.
 ---
 
 # Workspace map
