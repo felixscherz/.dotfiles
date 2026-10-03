@@ -1,8 +1,3 @@
----
-name: lifecycle-hygiene
-description: Apply when writing or changing a long-running service or worker - startup, shutdown, background tasks, consumers, health and readiness probes, or handling of dependencies such as databases and message brokers that can go away.
----
-
 # Lifecycle hygiene
 
 A long-running service fails in ways a request handler does not. A background

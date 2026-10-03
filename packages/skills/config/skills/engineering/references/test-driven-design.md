@@ -1,8 +1,3 @@
----
-name: test-driven-design
-description: Apply before implementing a feature or fixing a bug. Decide how to verify the result and write that check first.
----
-
 # Test-driven design
 
 Start every feature and bug fix with how you will verify it is done. For a

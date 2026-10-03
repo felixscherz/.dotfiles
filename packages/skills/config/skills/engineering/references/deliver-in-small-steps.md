@@ -1,8 +1,3 @@
----
-name: deliver-in-small-steps
-description: Apply when deciding how much to build for a request, when a fix or feature suggests a larger redesign, or when planning work that spans several changes.
----
-
 # Deliver in small steps
 
 The user wants their immediate problem solved first and the larger design

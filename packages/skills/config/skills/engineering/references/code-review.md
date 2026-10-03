@@ -1,8 +1,3 @@
----
-name: code-review
-description: Apply when reviewing a pull request or a set of code changes, your own or someone else's - "review this PR", "code review", "look over these changes", "review my branch", or a PR number or URL to review.
----
-
 # Code review
 
 A review has two jobs:

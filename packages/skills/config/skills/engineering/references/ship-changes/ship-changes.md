@@ -1,8 +1,3 @@
----
-name: ship-changes
-description: Apply when a change is done and needs to be integrated - committing, pushing, opening a pull request, or writing a PR description.
----
-
 # Ship changes
 
 A change is not done until it is integrated. Shipping means getting it past

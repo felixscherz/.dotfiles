@@ -1,8 +1,3 @@
----
-name: find-the-root-cause
-description: Apply when debugging a bug or investigating a failure. Trace the symptom through its inputs and state to the cause before choosing a fix.
----
-
 # Find the root cause
 
 Do not mistake the place where an error becomes visible for the place where it began. A guard that changes a crash into

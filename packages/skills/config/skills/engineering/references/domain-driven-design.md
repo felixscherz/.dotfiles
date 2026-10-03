@@ -1,8 +1,3 @@
----
-name: domain-driven-design
-description: Apply when naming or modelling domain concepts in code, adding a feature or process that spans several services, or when domain logic is scattered across layers.
----
-
 # Domain-driven design
 
 DDD gives the user and the agent a shared language. When code uses the

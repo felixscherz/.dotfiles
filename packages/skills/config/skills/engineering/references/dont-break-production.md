@@ -1,8 +1,3 @@
----
-name: dont-break-production
-description: Apply when a change alters behavior that callers, users, or other systems can observe - an API, schema, CLI, config, event, or file format, or less visible semantics like durability, ordering, retries, timeouts, idempotency, error handling, defaults, or performance.
----
-
 # Don't break production
 
 Code is judged by how it is used, not by how its interface looks. A change

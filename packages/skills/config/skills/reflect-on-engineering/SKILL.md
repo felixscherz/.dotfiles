@@ -35,7 +35,7 @@ missing rule. Then walk through the work and note:
   written, tested, reviewed, or discussed that no rule captures.
 - **Triggering.** A rule that should have been loaded but was not, or one that
   was loaded without applying. Both point at the "when" text in the index in
-  `SKILL.md` or the rule's `description`.
+  `SKILL.md`.
 - **Friction.** A rule that was ambiguous, contradicted another rule or the
   codebase, or pushed toward a worse result.
 - **Flags.** Problems with a rule that the agent already raised during the
@@ -87,9 +87,9 @@ propose changes and ask before editing.
 - The skill lives in
   `~/workspaces/personal/.dotfiles/packages/skills/config/skills/engineering/`.
   Remind the user to commit changes there.
-- One rule per file in `references/`: frontmatter with `name` matching the
-  filename and a `description` stating when it applies, an H1 title, a short
-  framing paragraph, and a few bullets.
+- One rule per file in `references/`: an H1 title, a short framing paragraph,
+  and a few bullets. No frontmatter: when a rule applies is stated once, in
+  its index entry, since references are only reached through an index.
 - A rule with supporting files, such as a script, gets its own folder named
   after the rule, holding `<rule>.md` and those files.
 - Language- or framework-specific rules go in `references/<language>/`. They
@@ -99,7 +99,7 @@ propose changes and ask before editing.
 - Each `references/<language>/` folder has an `INDEX.md`: an H1 title, a short
   framing paragraph, and one bullet per reference with its name, its path
   relative to the folder, and when it applies, in the same format as the index
-  in `../engineering/SKILL.md`. `INDEX.md` has no frontmatter.
+  in `../engineering/SKILL.md`.
 - `../engineering/SKILL.md` links to a language folder's `INDEX.md` with one
   bullet that says when to open it, never to the individual references inside.
   This keeps the top-level index short and language-neutral.

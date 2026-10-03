@@ -1,8 +1,3 @@
----
-name: never-make-the-same-mistake-twice
-description: Apply after finding a bug, misusing a third-party API, or discovering a wrong assumption about an external service or constraint. Ask whether a check can stop it happening again.
----
-
 # Never make the same mistake twice
 
 A codebase should get harder to break with every mistake found in it. When

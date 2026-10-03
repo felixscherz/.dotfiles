@@ -1,8 +1,3 @@
----
-name: type-system
-description: Apply when designing types, signatures, or data shapes, or when reaching for a plain string, dict, or bool to carry something with meaning.
----
-
 # Type system
 
 Types do two jobs. They verify, turning a class of errors into lint or compile

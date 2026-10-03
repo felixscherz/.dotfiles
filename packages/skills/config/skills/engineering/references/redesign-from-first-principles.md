@@ -1,8 +1,3 @@
----
-name: redesign-from-first-principles
-description: Apply when requirements change or are added, when a drift between code and model is found, or when you are about to add a special-case condition for an edge case.
----
-
 # Redesign from first principles
 
 A special case for a new requirement is easy to add, but each one makes the

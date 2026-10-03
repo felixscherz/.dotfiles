@@ -1,8 +1,3 @@
----
-name: fastapi-applications
-description: Apply when designing or changing a Python FastAPI application, especially its domain boundaries, routes, dependency injection, request and response models, or application wiring.
----
-
 # FastAPI applications
 
 Use these patterns where the project does not already have a suitable convention. Organize code by domain or feature;

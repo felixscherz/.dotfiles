@@ -1,8 +1,3 @@
----
-name: test-behavior
-description: Apply when writing, changing, naming, or keeping a test, and whenever you are about to reach for a mock or patch.
----
-
 # Test behavior
 
 The best tests are examples of someone using the code. They call the public

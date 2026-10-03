@@ -1,8 +1,3 @@
----
-name: workspace-map
-description: Apply when the workspace map is missing or invalid, a task needs a repository, document, or directory outside the current working directory, or a mapped resource is added, moved, or removed.
----
-
 # Workspace map
 
 Work often spans several repositories, and the context a task needs may live

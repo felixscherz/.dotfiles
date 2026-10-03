@@ -1,8 +1,3 @@
----
-name: feature-map
-description: Apply when the feature map is missing or points to the wrong place, or a task adds, moves, renames, or removes a feature.
----
-
 # Feature map
 
 A feature map lists every observable feature of a system, named in the

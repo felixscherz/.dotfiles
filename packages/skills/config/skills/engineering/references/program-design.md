@@ -1,8 +1,3 @@
----
-name: program-design
-description: Apply when designing a new module, API, or model, deciding where code lives in a codebase, or when code turns out hard to test.
----
-
 # Program design
 
 Structure a codebase so its parts can be used, and therefore tested, on their
