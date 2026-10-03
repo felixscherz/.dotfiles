@@ -50,7 +50,14 @@ metadata:
   opencode/autoinvoke: false     # opencode
 ```
 
-Setting only one leaves the harnesses behaving differently. The same applies to
+Codex does not read this from the frontmatter. It needs a separate `agents/openai.yaml` in the skill directory:
+
+```yaml
+policy:
+  allow_implicit_invocation: false
+```
+
+Setting only some of them leaves the harnesses behaving differently. The same applies to
 any other harness-level setting: check how each harness expresses it and set
 all of them. `argument-hint` (Claude Code) shows a hint when the user passes
 arguments.
