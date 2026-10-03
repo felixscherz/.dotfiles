@@ -17,3 +17,5 @@ the first user of an API, and code that is awkward to test is awkward to use.
   behind it can change freely.
 - When designing an API or model, write the calling code, a test or an
   example, before the implementation.
+- Names matter. A good name carries enough meaning for a reader to not have to
+  dive into the implementation in order to understand the code.
