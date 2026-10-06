@@ -22,6 +22,10 @@ or tickets, and CI status. For GitHub PRs, `gh pr view <n>`, `gh pr diff <n>`,
 `gh pr checks <n>` and `gh pr view <n> --comments` cover most of it. For a
 local branch, diff against the merge base with the target branch.
 
+When the branch name, commits, or notes reference an issue, read the issue and
+its discussion, including maintainer comments. They often settle behavior the
+diff must match.
+
 Read surrounding code, not just the diff. A change is only understandable in
 the context of what it touches.
 

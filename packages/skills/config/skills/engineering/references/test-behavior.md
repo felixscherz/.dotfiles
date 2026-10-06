@@ -8,6 +8,10 @@ seams (see `program-design.md`).
 - Test through the public API. When a test reaches into internals, ask whether
   it sits at the right level, or whether the behavior is better tested from
   further out, maybe without calling this code directly.
+- When moving responsibility between components, verify the behavior through
+  the entry point that currently invokes it. A direct test of the replacement
+  component does not prove the application uses it. Start from fresh state
+  where existing resources could otherwise hide missing initialization.
 - Avoid mocks and patches. At a real external boundary (a third-party API, the
   clock), pass in a fake through a seam instead of patching. When no seam
   exists, push back and revisit the design instead of patching around it.

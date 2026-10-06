@@ -7,8 +7,9 @@ codebase. It lives at `.felixws/FEATURE_MAP.md` in the repository root. That
 directory is personal and globally git-ignored, so read it by path; search
 tools that respect `.gitignore` will skip it.
 
-- Read the map before exploring the code. When it is missing, offer to build
-  it with the user instead of building it alone.
+- Read the map before exploring the code. A missing map never blocks a task:
+  explore the code as usual, and do not offer to build one or ask about it.
+  The user asks for a map when they want one.
 - Build it together. Propose the features and their names, and let the user
   correct them. The user knows the domain language, and the map is only
   useful if both sides use the same names (see `domain-driven-design.md`).

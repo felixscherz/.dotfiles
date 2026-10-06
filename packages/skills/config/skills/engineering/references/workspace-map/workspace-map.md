@@ -15,8 +15,11 @@ read it by path; search tools that respect `.gitignore` will skip it.
   a bad argument. `~/.felixws/WORKSPACE_MAP.md` acts as the personal default
   for anything under the home directory.
 - Use only the map the script selects. A nearer map replaces a more distant
-  one in full; do not merge them or fall back when an entry is missing. When
-  it is missing or invalid, offer to build or repair it with the user.
+  one in full; do not merge them or fall back when an entry is missing.
+- A missing or invalid map never blocks a task: continue without it, and do
+  not offer to build or repair one or ask about it. When a map is invalid,
+  name the problem once in the final reply. The user asks for a map when
+  they want one.
 - Resolve relative paths against the map's workspace root, the parent of
   `.felixws/`, and expand a leading `~/`. Check the target exists and matches
   its kind. When a resource is unmapped or has moved, ask for its location

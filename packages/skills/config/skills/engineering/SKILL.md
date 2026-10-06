@@ -36,10 +36,12 @@ available.
   one is wrong before fixing either.
 - Read the feature map at `.felixws/FEATURE_MAP.md` in the repository root
   before exploring the code. It is globally git-ignored, so read it by path.
+  When there is none, explore the code as usual and do not mention it.
 - Find the workspace map with
   `references/workspace-map/find-workspace-map.sh <starting directory>`. It
   prints the map's path, or exits 1 when there is none. Read the map when the
-  task may need context from outside the current repository.
+  task may need context from outside the current repository. When there is
+  none, continue without it and do not mention it.
 
 ## Principles
 
@@ -49,13 +51,13 @@ have not reached, and do not batch-read references up front. Read a reference
 in full before applying it. Do not list the rules you applied in your reply
 unless the user asks.
 
-- **Feature map** (`references/feature-map.md`). The feature map is missing
-  or points to the wrong place, or a task adds, moves, renames, or removes a
-  feature.
-- **Workspace map** (`references/workspace-map/workspace-map.md`). The
-  workspace map is missing or invalid, a task needs a repository, document, or
-  directory outside the current working directory, or a mapped resource is
-  added, moved, or removed.
+- **Feature map** (`references/feature-map.md`). The user asks to build a
+  feature map, the map points to the wrong place, or a task adds, moves,
+  renames, or removes a feature in a repository that has one.
+- **Workspace map** (`references/workspace-map/workspace-map.md`). The user
+  asks to build or repair the workspace map, a task needs a repository,
+  document, or directory outside the current working directory, or a mapped
+  resource is added, moved, or removed.
 - **Domain-driven design** (`references/domain-driven-design.md`). Naming or
   modelling domain concepts, adding a process that spans several services, or
   domain logic scattered across layers.
