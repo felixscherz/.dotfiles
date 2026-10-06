@@ -37,7 +37,15 @@ closed issue. A good candidate:
 - is completable in one session from the repository alone,
 - has a result the user has judged (reviewed, merged, corrected),
 - does not need live systems: production data, secrets, deployed services,
-  or a human in the loop.
+  or a human in the loop,
+- does not depend on tool versions that drift (e.g. tests that call an
+  installed CLI whose output changed since).
+
+Prefer work where a plausible fix passes the tests but fails in reality,
+e.g. a unit test that checks a generated string while the real tool rejects
+it. Such work separates good engineering from lucky guessing. Work where
+every reasonable attempt produces the same working result rarely separates
+variants.
 
 Gather, before writing any file:
 
@@ -73,7 +81,12 @@ The fixture is the repository at the base commit.
   note in `SKILL.md` anything the setup needs (toolchain versions, services).
 - **Blind it.** A real repository is naturally blind, but check that nothing
   in it refers to this capture. Name the sandbox directory after the
-  repository.
+  repository, and write that name to `fixture/repo-name` (one line); the
+  arena scripts read it.
+- **Make the behavior observable.** The fixture must be able to show the
+  behavior the task changes. If two outcomes the rubric distinguishes look
+  identical in the sandbox (e.g. every view prints "nothing configured"),
+  add the data or config that makes them differ.
 - **Verify it.** Run the setup into a scratch directory. Confirm HEAD is the
   base commit, no later history is reachable, and the project builds and
   tests run as they did at the time.
@@ -90,6 +103,15 @@ The fixture is the repository at the base commit.
   not.
 - Never add hints the original request did not contain, about the solution
   or about what the rubric looks at.
+- A trial is one independent headless session: nobody answers questions,
+  and a question or a confirmation request ends the trial without work.
+  Adapt the prompt so it reads as a request to do the work start to finish.
+  Drop invitations to stop and confirm ("Is it clear?", "Let me know before
+  you start"). When the original session needed follow-up turns, fold the
+  user's answers into the prompt, in the user's words, as if said up front.
+  Keep genuine ambiguity in the request: the candidate should resolve it by
+  stating an assumption and proceeding, which the rubric can grade.
+- Record every change to the original prompt in `SKILL.md` under Notes.
 
 ## 5. Write the rubric and reference
 
@@ -111,6 +133,17 @@ the reference. There are no automated checks.
 - **Anchor every criterion** with what a full, partial, and failing result
   looks like, concrete to this work: file names, the behavior, the specific
   mistakes seen in review. A judge with vague criteria scores on style.
+- **Anchor on outcomes, not a list of solutions.** "Every target passed to
+  the tool works for this input" holds for approaches you did not think of;
+  a list of approved fixes marks down a valid one that is not on it.
+- **Check anchors against the real system.** Every claim an anchor makes
+  about what works or fails (an API call, a CLI target, a config value) is
+  checked once by running it, and the check is noted in the rubric. The
+  judge follows anchors literally, so a wrong anchor scores a broken fix as
+  full.
+- **Cover every plausible reading.** When the prompt is ambiguous, write
+  anchors for each reading a reasonable candidate could take, not only the
+  one the user meant.
 - **Variant-neutral.** Describe good outcomes, never "followed skill X". The
   benchmark must be able to show that a variant made things worse.
 - **Trace expectations** (optional, separate section) are facts about the
@@ -144,8 +177,11 @@ benchmark-<slug>/
   rubric.md
   fixture/
     setup.sh
+    repo-name       # sandbox directory name, e.g. seer
     repo.bundle     # if restoring from a bundle
   reference.patch
+  agents/
+    openai.yaml     # Codex: disable implicit invocation
 ```
 
 ## 7. Validate
@@ -156,8 +192,8 @@ benchmark-<slug>/
    words from the blinding rules used in their meta sense.
 2. **Dry run.** Run one trial per `benchmarking-the-harness` with the user's
    current environment. The benchmark is ready when the candidate could
-   work on the task without getting stuck on the fixture, and a judge's
-   scores follow the rubric anchors. If
+   work on the task without getting stuck on the fixture or stopping to ask
+   the user, and a judge's scores follow the rubric anchors. If
    the judge's scores disagree with your own reading, fix the anchors.
 
 Record the dry run in the agents folder (see the `agents-folder` skill).

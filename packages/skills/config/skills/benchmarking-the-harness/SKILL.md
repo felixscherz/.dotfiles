@@ -69,10 +69,16 @@ the source do not change a running or repeated arena.
 When copying any layer, always strip `benchmarking-the-harness`,
 `create-benchmark`, and every `benchmark-*` skill.
 
+Also strip anything that is not the user's own environment but would leak,
+e.g. Claude Code's `synced` skill folder, which carries eval tooling. When
+a layer removes a skill, also remove instruction lines that point to it
+(e.g. "load the `engineering` skill" in `AGENTS.md`), so the control is the
+environment without that skill, not one with a dangling reference.
+
 The harness must read its environment only from the sandbox, never from the
-user's home configuration. How to achieve that is harness specific and not
-settled yet. Verify it from the trace of a first trial before trusting the
-results.
+user's home configuration. For opencode see "Running candidates with
+opencode" below. Verify it from the trace of a first trial before trusting
+the results.
 
 ## Blinding
 
@@ -108,18 +114,163 @@ Judge:
 4. **Run.** Launch every trial as a fresh headless harness process in its
    sandbox, with the same constants and the same task. Never use in-session
    subagents as candidates: they inherit the coordinator's context.
-5. **Collect.** Per label: the output (sandbox diff and final reply) and the
-   trace.
-6. **Judge.** Spawn one judge with the rubric, the reference, and all
-   redacted traces and outputs by label.
-7. **Unblind and analyze.** Apply the key, aggregate scores per variant.
-   Check the benchmark's trace expectations against the traces. Read every
-   output yourself; if you disagree with the judge, suspect the rubric first.
-8. **Report** the finding. Too few trials or a noisy spread is inconclusive,
+5. **Collect.** Per label: the output (sandbox diff and final reply), the
+   trace, and the wall time. Time is a cost to report next to the scores.
+6. **Verify outcomes yourself.** Before trusting any verdict, check each
+   result against the real system: build it, run the binary, reproduce
+   against the real dependency. Tests passing is not enough; a candidate's
+   unit test can confirm a fix the real tool rejects.
+7. **Judge.** Spawn one judge with the rubric, the reference, and all
+   redacted traces and outputs by label (see "Redacting traces").
+8. **Unblind and analyze.** Apply the key, aggregate scores per variant.
+   Check the benchmark's trace expectations against the traces. Compare the
+   verdict with your own verification; where they disagree, suspect the
+   rubric first. When you change the rubric, archive the old verdict and
+   rejudge every trial of that benchmark in one pass.
+9. **Report** the finding. Too few trials or a noisy spread is inconclusive,
    not a win.
 
-Keep the arena record outside every sandbox (use the `agents-folder` skill):
-manifests, constants, key, verdict, traces, finding.
+Before the full arena, run a **pilot** of one trial per variant per
+benchmark. It tests the setup, not the variant: isolation holds, the model
+resolves, candidates work to the end without stopping, the judge follows the
+anchors. A pilot can also surface a real finding about the variant, e.g. a
+skill that makes the agent stop and ask where it should work; record it as
+a result, not only as a setup problem.
+
+Copy the layers once per arena and reuse them. Adding trials later is fine
+as long as layers and constants are unchanged; all trials of a benchmark are
+then judged together.
+
+## Redacting traces
+
+- Drop tool calls that touch the environment (skill loads, reads of skill
+  or instruction files, commands that name a skill or reference file)
+  without leaving a marker: a count of markers reveals the variant.
+- Check tool outputs as well as inputs; a directory listing can expose the
+  skill tree.
+- Rewrite phrases in the candidate's prose that name environment concepts
+  (e.g. "checking the feature map").
+- Strip the trace expectations section from the rubric the judge gets.
+- After rendering, grep every trace for skill names, reference file names
+  and environment paths, and fix the renderer on any hit.
+
+Keep the arena record outside every sandbox: manifests, constants, key,
+verdict, traces, finding. Ask the user where it lives; benchmarks built from
+private code have a private home, and the record goes next to them (e.g.
+`<benchmarks>/.arena/<date>-<variable>/`).
+
+## Running candidates with opencode
+
+opencode in headless mode is the default harness: cheap models (e.g.
+`github-copilot/gpt-6-luna`) for both candidates and judge, and an
+environment that can be pointed at a sandbox. Checked with opencode 2.0.
+
+### Isolation
+
+- **Use a fresh `HOME` per trial.** `OPENCODE_CONFIG_DIR` alone does not
+  isolate: `~/.config/opencode` still loads, and skills are discovered
+  under `$HOME` (`~/.agents/skills`, `~/.claude/skills`). Set `HOME`,
+  `XDG_CONFIG_HOME`, `XDG_DATA_HOME`, `XDG_STATE_HOME` and
+  `XDG_CACHE_HOME` into the sandbox, and `OPENCODE_CONFIG_DIR` to
+  `<home>/.config/opencode`. Data, db, logs and cache then all live in the
+  sandbox, and each trial gets its own session db, so trials share no
+  history and stay out of the user's.
+- **Always pass `--standalone`.** By default `opencode run` hands the work
+  to the background service, which runs with the user's environment and
+  ignores the per-trial one. Debug subcommands have no `--standalone` and
+  either answer from the service or, under a fresh `HOME`, spawn a new
+  service and hang; do not rely on them to check isolation.
+- **Keep toolchains working.** A fresh `HOME` hides toolchains installed
+  under it. Pass e.g. `CARGO_HOME` and `RUSTUP_HOME` pointing at the real
+  ones; Go and uv caches can start empty.
+- **Layer contents.** The manifest copies skills to
+  `<home>/.agents/skills` and the user's `opencode.json`, `AGENTS.md` and
+  `agents/` to `<home>/.config/opencode`, resolving symlinks so later
+  edits do not reach a running arena. Add a minimal `<home>/.gitconfig`
+  with the user's name and email.
+- **Verify** from the sandbox log
+  (`<home>/.local/share/opencode/log/opencode.log`): the watched skill
+  paths are all under the sandbox, and the first trace shows which skills
+  loaded.
+
+### Credentials
+
+- opencode 2 keeps credentials in the `credential` table of
+  `opencode.db`, not in `auth.json`; copying `auth.json` does nothing.
+- Never copy credentials out of the user's own db. Have the user log in
+  once into an arena-only seed directory, with a separate token they can
+  revoke:
+  `HOME=<seed> XDG_DATA_HOME=<seed>/.local/share XDG_CONFIG_HOME=<seed>/.config opencode auth login`.
+  Agents cannot run this; the user runs it (in Claude Code, `! <command>`).
+- Start each sandbox from a consistent copy of the seed db, including its
+  WAL: `sqlite3 <seed>/.local/share/opencode/opencode.db ".backup '<home>/.local/share/opencode/opencode.db'"`.
+- Keep the seed inside the arena record, never in a public repository, and
+  never print a credential table or config file with secrets; select
+  labels and integration ids only.
+
+### Scripts
+
+`scripts/` implements all of the above. The arena directory holds:
+
+```
+<arena>/
+  layers/<layer>/{skills,config}  # one directory per variant
+  seed/                           # arena-only login (user creates it)
+  redact.tsv                      # optional: regex<TAB>replacement for giveaway phrases
+  key.tsv                         # label, benchmark, layer, sandbox (coordinator only)
+  runs/<label>/                   # events.jsonl, diff.patch, opencode.db, seconds, stderr.log
+  verdict-<benchmark>.json
+  archive/                        # superseded verdicts
+```
+
+- `scripts/global-layer.sh <arena>/layers/<name>` snapshots the user's
+  skills and opencode config into a layer, stripping benchmarking skills and
+  `synced`. Edit the copy to build a variant (e.g. remove a skill and the
+  instruction line pointing to it).
+- `scripts/run-arena.sh <arena> <trials> <benchmark-dir>...` runs every
+  benchmark x layer x trial in parallel via `scripts/run-trial.sh`. Run it
+  again to add trials. `MODEL` overrides the default
+  `github-copilot/gpt-6-luna`.
+- `scripts/run-judge.sh <arena> <benchmark-dir>` renders redacted traces
+  with `scripts/render-trace.py` and judges all trials of the benchmark in
+  one pass in an empty environment. `JUDGE_MODEL` overrides the model.
+- A benchmark names its sandbox directory in `fixture/repo-name`.
+
+### Running a trial
+
+- `--auto` approves every tool call. A fresh `HOME` does not confine the
+  candidate; it can still reach the whole filesystem as the user. Get the
+  user's explicit consent before launching `--auto` trials.
+- A candidate that asks a question (the `question` tool) or asks for
+  confirmation in text ends the trial: nobody answers. Write tasks that
+  call for the whole job (see `create-benchmark`), and treat a trial that
+  stopped to ask as a result to grade, not a harness failure.
+- Put sandboxes under a path a user might pick, e.g.
+  `/tmp/agent-runs/<random-hex>/{home,<repo>}`, never under the record.
+  Labels and the key stay in the record only. Trials may run in parallel;
+  sibling sandboxes are visible to each other, which the judge can flag
+  from the traces if it ever matters.
+- Before the run, commit the sandbox's starting state into a git dir in
+  the record (`git --git-dir=<record>/pre.git --work-tree=<repo> add -A`),
+  so the diff afterwards includes untracked files and leaves the sandbox's
+  own history untouched.
+- Collect per label: `events.jsonl` (the trace), the diff, the sandbox
+  `opencode.db`, stderr and wall time.
+
+The judge runs the same way, in an empty environment (no user skills or
+instructions), so the user's skills do not shape the grading.
+
+### Quirks
+
+- A startup request can stall for about 5 minutes before the session
+  starts; it affects all parallel trials alike and then proceeds. Check the
+  sandbox log before assuming a hang.
+- A judge can hang at startup with no output; kill it and rerun.
+- The exit code says little: a cancelled web search exits 1 after the work
+  is done. Judge whether a trial finished from its final reply and diff.
+- macOS has no `timeout`; use `perl -e 'alarm 120; exec @ARGV' <command>`.
+- Run `man` with `MANPAGER=cat` or not at all; a pager blocks a headless
+  shell.
 
 ## Benchmark contract
 
@@ -128,7 +279,7 @@ A `benchmark-<slug>` skill contains:
 ```
 benchmark-<slug>/
   SKILL.md         # what the work is, where it came from, how to set it up
-  fixture/         # the starting state, or a setup script that creates it
+  fixture/         # setup.sh and repo-name (sandbox directory name)
   task.md          # the prompt as a user would type it
   rubric.md        # criteria for the judge; trace expectations for the coordinator only
   reference.patch  # judge-only: the accepted solution
