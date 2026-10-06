@@ -1,0 +1,23 @@
+{
+  "skill_name": "working-in-agent-teams",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "We are in preparation, not execution. Help me plan a Saga to move database setup from a central initializer into repository-owned setup methods, split it into Episodes, and prepare a handoff for a separate Orchestrator session. Startup must remain functional at every intermediate state. Do not implement, commit, or open PRs.",
+      "expected_output": "A pre-execution Saga plan and bounded Episode briefs distinguish adding setup hooks, activating the runtime path, and removing central setup. The handoff records preserved invariants, dependencies, verification, baseline, permissions, and unresolved decisions. No implementation or shipping occurs.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "You are the Orchestrator running an approved sequential Saga. The current Worker reports that all focused tests pass, but its Episode removed an active startup hook before the later integration Episode activates its replacement. The brief says startup must remain functional. Explain and perform the next coordination steps without investigating or editing the code yourself.",
+      "expected_output": "The Orchestrator does not accept the Episode or advance its dependents. It assigns another Worker a bounded review or investigation, records the blocker, and uses the resulting diagnosis to assign repair and re-verification. It does not reproduce the failure, inspect large source files, or implement the repair itself.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "You are a Worker assigned to add repository setup while retaining central initialization until a later Episode. A previous Episode removed its central hook and the neighboring code now follows that pattern. Your branch also has an inherited integration failure outside your assigned repository. What do you do, and what do you report to the Orchestrator? Do not spawn agents or expand your assignment.",
+      "expected_output": "The Worker follows the explicit preserved invariant rather than copying the earlier removal, reports the inherited failure as a Saga issue with evidence, and requests direction for changes outside its scope. It does not remove central initialization, coordinate peers, spawn agents, or claim that later integration excuses a broken current state.",
+      "files": []
+    }
+  ]
+}
