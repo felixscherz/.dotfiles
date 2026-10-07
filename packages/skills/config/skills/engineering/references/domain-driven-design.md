@@ -8,6 +8,12 @@ not only entities.
 
 - Name everything in the domain's own words, down to functions and methods.
   When code and domain use different words for one thing, align them.
+- Keep one name per concept. Reuse the term the codebase and the user already
+  use instead of inventing a synonym (`item`, `record`, `row` for an entry).
+  When a concept is renamed, rename it everywhere in the same change; never
+  keep two names in parallel. Where the project keeps a glossary, it is the
+  source of truth, and a change that introduces or renames a concept updates
+  it in the same commit.
 - Give each domain concept its own type. A value object for things defined by
   their value (an email, a money amount), an entity for things with identity
   and a lifecycle.

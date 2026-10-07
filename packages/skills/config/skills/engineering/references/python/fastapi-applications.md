@@ -1,8 +1,18 @@
 # FastAPI applications
 
-Use these patterns where the project does not already have a suitable convention. Organize code by domain or feature;
-do not require a particular directory layout. The important distinction is between adapters, use cases, focused domain
-behavior, and infrastructure, not the directory names.
+Use these patterns where the project does not already have a suitable convention. The important distinction is
+between adapters, use cases, focused domain behavior, and infrastructure, not the directory names. Any layout works that
+gives each of them one obvious place (see `../program-design.md`). One example, with a top-level package per layer and
+domain code grouped by capability:
+
+```text
+src/<package>/
+|-- domain/<capability>/   values, entities, errors, ports, services
+|-- usecases/              one module per intent, plus shared workflow errors
+|-- infrastructure/        repositories, clients, system adapters (clock, IDs)
+|-- wiring/                the composition root
+`-- app/                   settings, logging, lifecycle, HTTP routes and error translation
+```
 
 ## Keep the domain independent
 
@@ -80,7 +90,7 @@ class CreateBooking:
         return booking
 ```
 
-Use real implementations at runtime and small fakes or stubs in use-case tests. Protocols describe capabilities; they
+Use real implementations at runtime and fakes in use-case tests (see `../test-behavior.md`). Protocols describe capabilities; they
 do not require inheritance or a general-purpose DI framework. If a workflow spans several writes or external effects,
 decide what commits together and what happens on partial failure before moving it. Extraction alone does not make a
 workflow atomic.
@@ -96,7 +106,8 @@ operations need not be wrapped solely to satisfy a naming convention.
 ```python
 from typing import Annotated, cast
 
-from fastapi import APIRouter, Depends, HTTPException, Request, status
+from fastapi import APIRouter, Depends, FastAPI, Request, status
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 # Import CreateBooking, GuestName, InvalidGuestError, and Container from their respective modules.
@@ -125,13 +136,24 @@ async def create_booking(
     request: CreateBookingRequest,
     create_booking: Annotated[CreateBooking, Depends(get_create_booking)],
 ) -> BookingResponse:
-    try:
-        guest = GuestName(request.guest)
-    except InvalidGuestError as exc:
-        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=str(exc)) from exc
-    booking = await create_booking.execute(guest)
+    booking = await create_booking.execute(GuestName(request.guest))
     return BookingResponse(id=booking.id.value, guest=booking.guest.value)
+
+
+async def invalid_guest(request: Request, exc: Exception) -> JSONResponse:
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content={"code": "invalid_guest", "message": str(exc)},
+    )
+
+
+def register_exception_handlers(app: FastAPI) -> None:
+    app.add_exception_handler(InvalidGuestError, invalid_guest)
 ```
+
+Register error translation once at the application boundary rather than catching domain errors in each route, so every
+route maps the same failure to the same status and a stable error shape. Expected domain failures need no stack trace;
+unexpected ones return a generic 500 and are logged once at the boundary.
 
 For route tests, override `get_create_booking` through `app.dependency_overrides` and check the HTTP contract without
 starting real infrastructure. Test the use case through `execute()` with fakes for its ports. Test focused domain
@@ -191,6 +213,7 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
 def create_app(container: Container) -> FastAPI:
     app = FastAPI(lifespan=lifespan)
     app.state.container = container
+    register_exception_handlers(app)
     app.include_router(router)
     return app
 ```

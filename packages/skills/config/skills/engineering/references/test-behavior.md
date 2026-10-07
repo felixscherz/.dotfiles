@@ -15,6 +15,17 @@ seams (see `program-design.md`).
 - Avoid mocks and patches. At a real external boundary (a third-party API, the
   clock), pass in a fake through a seam instead of patching. When no seam
   exists, push back and revisit the design instead of patching around it.
+- A fake is a small, working implementation of the same interface as the real
+  dependency, such as an in-memory repository or a settable clock. A mock
+  asserts which calls happened; a fake lets the test assert on outcomes, so
+  the test survives refactoring and fails when behavior breaks. Share fakes
+  across tests instead of redefining them per test, and let the type checker
+  verify they fit the interface.
+- Keep fakes honest. Run one contract test suite per interface against its
+  fake and every real implementation, so a fake cannot drift from the
+  behavior it stands in for.
+- Patching is acceptable only for process-level state that has no seam, such
+  as environment variables in tests of configuration loading.
 - Name a test after the behavior it checks. A failing test's name alone
   should say which behavior broke.
 
