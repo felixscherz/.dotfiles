@@ -144,8 +144,12 @@ return {
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 		for _, server in pairs(available_servers) do
-			if server == "basedpyright" and use_ty then goto continue end
-			if server == "ty" and not use_ty then goto continue end
+			if server == "basedpyright" and use_ty then
+				goto continue
+			end
+			if server == "ty" and not use_ty then
+				goto continue
+			end
 
 			opts = {
 				on_attach = on_attach,

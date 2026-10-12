@@ -57,4 +57,3 @@ unsetopt autocd
 
 # Added by sonarqube-cli installer
 export PATH="$HOME/.local/share/sonarqube-cli/bin:$PATH"
-

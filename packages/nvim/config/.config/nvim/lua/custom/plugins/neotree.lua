@@ -25,24 +25,24 @@ return {
 						show_path = "absolute", -- "none", "relative", "absolute"
 					},
 				},
-			["c"] = {
-				"copy",
-				-- some commands may take optional config options, see `:h neo-tree-mappings` for details
-				config = {
-					show_path = "absolute", -- "none", "relative", "absolute"
+				["c"] = {
+					"copy",
+					-- some commands may take optional config options, see `:h neo-tree-mappings` for details
+					config = {
+						show_path = "absolute", -- "none", "relative", "absolute"
+					},
 				},
+				["<leader>pc"] = function(state)
+					local node = state.tree:get_node()
+					local path = vim.fn.fnamemodify(node:get_id(), ":.")
+					vim.fn.setreg("+", path)
+				end,
+				["<leader>pa"] = function(state)
+					local node = state.tree:get_node()
+					local path = vim.fn.fnamemodify(node:get_id(), ":p")
+					vim.fn.setreg("+", path)
+				end,
 			},
-			["<leader>pc"] = function(state)
-				local node = state.tree:get_node()
-				local path = vim.fn.fnamemodify(node:get_id(), ":.")
-				vim.fn.setreg("+", path)
-			end,
-			["<leader>pa"] = function(state)
-				local node = state.tree:get_node()
-				local path = vim.fn.fnamemodify(node:get_id(), ":p")
-				vim.fn.setreg("+", path)
-			end,
-		},
 		},
 		enable_git_status = true,
 		git_status_async = true,

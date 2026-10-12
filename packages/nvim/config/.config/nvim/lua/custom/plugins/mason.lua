@@ -19,31 +19,31 @@ return {
 		},
 	}, -- simple to use language server installer
 	{ "williamboman/mason-lspconfig.nvim" },
-  {
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-    dependencies = { "williamboman/mason.nvim" },
-    event = "VimEnter",
-    config = function()
-      require("mason-tool-installer").setup({
-        -- filter drops packages whose host tool (npm/go/python3/unzip) is not
-        -- installed, so a fresh box doesn't get spammed with spawn errors.
-        ensure_installed = require("custom.mason_requirements").filter({
-          "prettier",
-          "jq",
-          "yamlfmt",
-          "stylua",
-          "ktfmt",
-          "yamllint",
-          "gofumpt",
-           "goimports",
-           "delve",
-           -- JetBrains distributes time-limited IntelliJ-based Kotlin LSP builds.
-           -- Keep this server current so it does not expire between manual updates.
-           { "kotlin-lsp", auto_update = true },
-         }),
-        auto_update = false,
-        run_on_start = true,
-      })
-    end,
-  },
+	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		dependencies = { "williamboman/mason.nvim" },
+		event = "VimEnter",
+		config = function()
+			require("mason-tool-installer").setup({
+				-- filter drops packages whose host tool (npm/go/python3/unzip) is not
+				-- installed, so a fresh box doesn't get spammed with spawn errors.
+				ensure_installed = require("custom.mason_requirements").filter({
+					"prettier",
+					"jq",
+					"yamlfmt",
+					"stylua",
+					"ktfmt",
+					"yamllint",
+					"gofumpt",
+					"goimports",
+					"delve",
+					-- JetBrains distributes time-limited IntelliJ-based Kotlin LSP builds.
+					-- Keep this server current so it does not expire between manual updates.
+					{ "kotlin-lsp", auto_update = true },
+				}),
+				auto_update = false,
+				run_on_start = true,
+			})
+		end,
+	},
 }
