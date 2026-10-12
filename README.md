@@ -17,10 +17,9 @@ which will bootstrap [ansible](https://ansible.com) and install everything.
 names (`./link.sh nvim zsh`) and default to every package. To move the repo,
 run `./unlink.sh`, move it, then run `./link.sh` from the new location.
 
-Install the shared agent skills separately with `./install.sh skills`. Their
-source is `packages/skills/config/skills/`, stowed to `~/.agents/skills`.
-The installer migrates the previous Codex-owned skills link. OpenCode and
-Claude Code keep compatibility links to the same skills.
+Agent skills live in their own repository,
+[felixscherz/skills](https://github.com/felixscherz/skills). Install them after
+the dotfiles, following that repository's README.
 
 
 ## building neovim from source

@@ -29,8 +29,8 @@
     { "action": "skill", "resource": "batch-implement", "effect": "deny" },
     { "action": "external_directory", "resource": "~/.agents/skills/engineering/references/*", "effect": "allow" },
     { "action": "read", "resource": "~/.agents/skills/engineering/references/*", "effect": "allow" },
-    { "action": "external_directory", "resource": "~/workspaces/personal/.dotfiles/packages/skills/config/skills/*", "effect": "allow" },
-    { "action": "read", "resource": "~/workspaces/personal/.dotfiles/packages/skills/config/skills/*", "effect": "allow" }
+    { "action": "external_directory", "resource": "~/workspaces/personal/skills/skills/*", "effect": "allow" },
+    { "action": "read", "resource": "~/workspaces/personal/skills/skills/*", "effect": "allow" }
   ],
   "providers": {
     "exxeta": {

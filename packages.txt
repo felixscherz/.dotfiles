@@ -9,9 +9,7 @@ precommit
 nvim
 tmux
 kitty
-skills
 opencode
-codex
 claude
 watson
 bin
