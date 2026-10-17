@@ -5,7 +5,14 @@
   "subagent_depth": 2,
   "share": "disabled",
   "formatter": true,
-  "plugins": ["opencode-plugin-litellm@latest"],
+  "plugins": ["opencode-plugin-litellm@latest", "@mohak34/opencode-notifier@1.0.0"],
+  "mcp": {
+    "chrome-devtools": {
+      "type": "local",
+      "command": ["npx", "-y", "chrome-devtools-mcp@latest"],
+      "enabled": false
+    }
+  },
   "experimental": {
     "policies": [
       { "action": "provider.use", "resource": "openai", "effect": "deny" },
@@ -27,8 +34,8 @@
     { "action": "skill", "resource": "to-spec", "effect": "deny" },
     { "action": "skill", "resource": "to-tickets", "effect": "deny" },
     { "action": "skill", "resource": "batch-implement", "effect": "deny" },
-    { "action": "external_directory", "resource": "~/.agents/skills/engineering/references/*", "effect": "allow" },
-    { "action": "read", "resource": "~/.agents/skills/engineering/references/*", "effect": "allow" },
+    { "action": "external_directory", "resource": "~/.agents/skills/*", "effect": "allow" },
+    { "action": "read", "resource": "~/.agents/skills/*", "effect": "allow" },
     { "action": "external_directory", "resource": "~/workspaces/personal/skills/skills/*", "effect": "allow" },
     { "action": "read", "resource": "~/workspaces/personal/skills/skills/*", "effect": "allow" }
   ],
