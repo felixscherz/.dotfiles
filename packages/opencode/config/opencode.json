@@ -5,7 +5,11 @@
   "subagent_depth": 2,
   "share": "disabled",
   "formatter": true,
-  "plugins": ["opencode-plugin-litellm@latest", "@mohak34/opencode-notifier@1.0.0"],
+  "plugins": [
+    "opencode-plugin-litellm@latest",
+    "@mohak34/opencode-notifier@1.0.0",
+    { "package": "/Users/felixscherz/workspaces/personal/opencode-glass" }
+  ],
   "mcp": {
     "chrome-devtools": {
       "type": "local",
