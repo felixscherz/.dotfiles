@@ -412,6 +412,9 @@ bind C-i run-shell 'seer next'
 
 bind a display-popup -E -w 80% -h 80% 'seer watch'
 
+# tmux 3.8 added tree-mode-border-style (default: grey), which tokyo-night-tmux doesn't set yet
+set -g tree-mode-border-style "fg=#7aa2f7"
+
 
 set-option -s escape-time 10
 
