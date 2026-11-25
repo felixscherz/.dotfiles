@@ -414,6 +414,8 @@ bind a display-popup -E -w 80% -h 80% 'seer watch'
 
 # tmux 3.8 added tree-mode-border-style (default: grey), which tokyo-night-tmux doesn't set yet
 set -g tree-mode-border-style "fg=#7aa2f7"
+# tmux 3.8 maps theme colours to fixed X11 colours (yellowgreen, gray90, ...); use the terminal's ANSI palette instead
+set -s theme terminal
 
 
 set-option -s escape-time 10
