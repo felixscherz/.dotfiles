@@ -1,3 +1,4 @@
 {
-  "showSessionTitle": true
+  "showSessionTitle": true,
+  "notificationTitle": "{sessionTitle} ({projectName})"
 }
