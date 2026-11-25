@@ -1,20 +1,23 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "update": "disable",
-  "model": "github-copilot/gpt-6-sol",
-  "subagent_depth": 2,
+  "model": "github-copilot/gpt-6.1-terra#low",
   "share": "disabled",
   "formatter": true,
   "plugins": [
     "opencode-plugin-litellm@latest",
     "@mohak34/opencode-notifier@1.0.0",
-    { "package": "/Users/felixscherz/workspaces/personal/opencode-glass" }
+    { "package": "/Users/felixscherz/workspaces/personal/opencode-glass" },
+    { "package": "/Users/felixscherz/workspaces/personal/opencode-toggle-mcps" }
   ],
   "mcp": {
+    "servers": {
     "chrome-devtools": {
       "type": "local",
       "command": ["npx", "-y", "chrome-devtools-mcp@latest"],
-      "enabled": false
+      "disabled": true
+    }
+
     }
   },
   "experimental": {
